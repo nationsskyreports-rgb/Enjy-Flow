@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
+<!-- saved from url=(0097)https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html -->
+<html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Align By Enjy — Yoga Instructor</title>
   <meta name="description" content="Align by Enjy — Balance. Heal. Transform. يوجا متخصصة">
-<meta name="theme-color" content="#2D4A3E">
-<link rel="manifest" href="manifest.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Align by Enjy">
-<link rel="apple-touch-icon" href="icon-192.png">  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="theme-color" content="#2D4A3E">
+  <link rel="manifest" href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Align by Enjy">
+  <link rel="apple-touch-icon" href="./Align By Enjy — Yoga Instructor_files/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link href="./Align By Enjy — Yoga Instructor_files/css2" rel="stylesheet">
+  <link rel="stylesheet" href="./Align By Enjy — Yoga Instructor_files/all.min.css">
   <style>
     :root {
       --bg: #FAF6F0;
@@ -64,7 +65,7 @@
     .hamburger.active span:nth-child(2){opacity:0}
     .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
-    .mobile-menu{position:fixed;top:0;right:-100%;width:80%;max-width:360px;height:100vh;background:var(--card);z-index:1001;padding:80px 32px 32px;transition:right .4s cubic-bezier(.4,0,.2,1);box-shadow:var(--shadow-lg)}
+    .mobile-menu{position:fixed;top:0;right:-100%;width:80%;max-width:360px;height:100vh;background:var(--card);z-index:1001;padding:80px 32px 32px;transition:right .4s cubic-bezier(.4,0,.2,1);box-shadow:var(--shadow-lg);overflow-y:auto}
     .mobile-menu.open{right:0}
     .mobile-menu a{display:block;padding:16px 0;font-size:1.1rem;font-weight:500;color:var(--fg);border-bottom:1px solid var(--border);transition:color .3s}
     .mobile-menu a:hover{color:var(--accent)}
@@ -122,6 +123,33 @@
     .program-meta span{display:flex;align-items:center;gap:6px}
     .program-meta i{color:var(--accent);font-size:.75rem}
 
+    /* ── RETREATS SECTION ── */
+    .retreats{padding:100px 0;background:var(--primary);position:relative;overflow:hidden}
+    .retreats::before{content:'';position:absolute;top:-30%;right:-10%;width:600px;height:600px;background:rgba(200,149,108,.08);border-radius:50%;filter:blur(80px)}
+    .retreats .section-label{color:var(--accent-light)}
+    .retreats .section-title{color:#fff}
+    .retreats .section-desc{color:rgba(255,255,255,.7)}
+    .retreat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1)}
+    .retreat-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.1);border-color:rgba(200,149,108,.4)}
+    .retreat-card-img{height:220px;overflow:hidden;position:relative}
+    .retreat-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+    .retreat-card:hover .retreat-card-img img{transform:scale(1.06)}
+    .retreat-badge{position:absolute;top:16px;right:16px;background:var(--accent);color:#fff;padding:5px 14px;border-radius:50px;font-size:.75rem;font-weight:700}
+    .retreat-card-body{padding:24px}
+    .retreat-card-body h3{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:8px}
+    .retreat-card-body p{font-size:.88rem;color:rgba(255,255,255,.65);margin-bottom:16px;line-height:1.7}
+    .retreat-meta{display:flex;gap:16px;font-size:.8rem;color:rgba(255,255,255,.6);flex-wrap:wrap;margin-bottom:20px}
+    .retreat-meta span{display:flex;align-items:center;gap:6px}
+    .retreat-meta i{color:var(--accent-light)}
+    .retreat-price{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+    .retreat-price .price{font-size:1.4rem;font-weight:800;color:var(--accent-light)}
+    .retreat-price .price span{font-size:.8rem;font-weight:400;opacity:.7}
+    .btn-retreat{background:var(--accent);color:#fff;padding:10px 22px;border-radius:var(--radius-sm);font-size:.88rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .3s}
+    .btn-retreat:hover{background:var(--accent-light);transform:translateY(-1px)}
+    .retreats-coming{text-align:center;padding:60px 20px;color:rgba(255,255,255,.5)}
+    .retreats-coming i{font-size:3rem;margin-bottom:16px;display:block;opacity:.4}
+    .retreats-coming p{font-size:1rem}
+
     .testimonials{padding:100px 0}
     .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
     .testimonial-card{background:var(--card);border-radius:var(--radius-lg);padding:32px;border:1px solid var(--border);transition:all .3s;position:relative}
@@ -149,9 +177,22 @@
     .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(45,74,62,.1)}
     .form-group textarea{resize:vertical;min-height:80px}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form-hint{font-size:.78rem;color:var(--fg-muted);margin-top:4px;display:flex;align-items:center;gap:5px}
+    .form-hint i{color:var(--accent);font-size:.75rem}
     .btn-submit{width:100%;background:var(--primary);color:#fff;padding:14px;border-radius:var(--radius-sm);font-size:.95rem;font-weight:600;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
     .btn-submit:hover{background:var(--primary-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,74,62,.25)}
     .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+    /* ── INSTAPAY SUCCESS BOX ── */
+    .instapay-box{display:none;background:linear-gradient(135deg,#2D4A3E,#1A3028);border-radius:var(--radius-md);padding:28px;margin-top:20px;color:#fff;text-align:center}
+    .instapay-box.show{display:block;animation:fiu .5s ease both}
+    .instapay-box .ip-icon{width:64px;height:64px;background:rgba(200,149,108,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.6rem;color:var(--accent-light)}
+    .instapay-box h4{font-family:'DM Sans',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:8px}
+    .instapay-box p{font-size:.88rem;color:rgba(255,255,255,.75);margin-bottom:16px}
+    .instapay-number{background:rgba(255,255,255,.1);border:1px solid rgba(200,149,108,.3);border-radius:var(--radius-sm);padding:14px 20px;font-size:1.2rem;font-weight:800;color:var(--accent-light);letter-spacing:2px;margin-bottom:8px;display:inline-block;width:100%;text-align:center}
+    .instapay-name{font-size:.82rem;color:rgba(255,255,255,.6);margin-bottom:16px}
+    .instapay-note{background:rgba(200,149,108,.1);border-radius:var(--radius-sm);padding:12px 16px;font-size:.8rem;color:rgba(255,255,255,.7);text-align:right;line-height:1.6}
+    .instapay-note strong{color:var(--accent-light)}
 
     .about{padding:100px 0}
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
@@ -192,7 +233,15 @@
     .reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.4,0,.2,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
 
-    @media(max-width:968px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}.hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}.hero-text{margin:0 auto 36px}.hero-actions{justify-content:center}.hero-stats{justify-content:center}.hero-visual{max-width:400px;margin:0 auto}.hero-float-card.card-1{left:-10px}.hero-float-card.card-2{right:-10px}.booking-grid,.about-grid{grid-template-columns:1fr;gap:40px}.about-img{max-width:400px;margin:0 auto}}
+    @media(max-width:968px){
+      .nav-links,.nav-cta{display:none}.hamburger{display:flex}
+      .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+      .hero-text{margin:0 auto 36px}.hero-actions{justify-content:center}.hero-stats{justify-content:center}
+      .hero-visual{max-width:400px;margin:0 auto}
+      .hero-float-card.card-1{left:-10px}.hero-float-card.card-2{right:-10px}
+      .booking-grid,.about-grid{grid-template-columns:1fr;gap:40px}
+      .about-img{max-width:400px;margin:0 auto}
+    }
     @media(max-width:480px){.hero-stats{gap:24px}.form-row{grid-template-columns:1fr}}
   </style>
 </head>
@@ -202,28 +251,30 @@
 
   <nav id="navbar">
     <div class="nav-inner">
-      <a href="#hero" class="logo">
+      <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#hero" class="logo">
         <i class="fa-solid fa-spa" style="color:#C4973B;font-size:1.3rem"></i>
         <div style="line-height:1">Align by Enjy<span style="display:block;font-size:.6rem;color:#C4973B;letter-spacing:2px;text-transform:uppercase;margin-top:4px">Balance. Heal. Transform.</span></div>
       </a>
       <ul class="nav-links">
-        <li><a href="#programs">الكلاسات</a></li>
-        <li><a href="#about">عنّي</a></li>
-        <li><a href="#testimonials">الآراء</a></li>
-        <li><a href="#booking">حجز</a></li>
+        <li><a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#programs">الكلاسات</a></li>
+        <li><a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#retreats">الريتريتس</a></li>
+        <li><a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#about">عنّي</a></li>
+        <li><a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#testimonials">الآراء</a></li>
+        <li><a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#booking">حجز</a></li>
       </ul>
-      <a href="#booking" class="nav-cta">احجز جلسة</a>
+      <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#booking" class="nav-cta">احجز جلسة</a>
       <button class="hamburger" id="hamburger" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
   <div class="mobile-overlay" id="mobileOverlay"></div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#hero">الرئيسية</a>
-    <a href="#programs">الكلاسات</a>
-    <a href="#about">عنّي</a>
-    <a href="#testimonials">الآراء</a>
-    <a href="#booking">حجز جلسة</a>
+    <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#hero">الرئيسية</a>
+    <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#programs">الكلاسات</a>
+    <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#retreats">الريتريتس</a>
+    <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#about">عنّي</a>
+    <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#testimonials">الآراء</a>
+    <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#booking">حجز جلسة</a>
   </div>
 
   <section class="hero" id="hero">
@@ -233,8 +284,8 @@
         <h1>اكتشفي <span class="highlight">توازنك</span> مع اليوجا</h1>
         <p class="hero-text">رحلة تحوّلية نحو التوازن الجسدي والذهني. جلسات يوجا مخصصة تناسب مستواكِ وأهدافكِ في مساحة آمنة وداعمة.</p>
         <div class="hero-actions">
-          <a href="#booking" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> ابدأي رحلتك</a>
-          <a href="#programs" class="btn-outline"><i class="fa-solid fa-play"></i> تعرفي على الكلاسات</a>
+          <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#booking" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> ابدأي رحلتك</a>
+          <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#programs" class="btn-outline"><i class="fa-solid fa-play"></i> تعرفي على الكلاسات</a>
         </div>
         <div class="hero-stats">
           <div class="stat-item"><h3 id="statStudents">0</h3><p>متدربة سعيدة</p></div>
@@ -243,19 +294,20 @@
         </div>
       </div>
       <div class="hero-visual">
-        <div class="hero-img-wrapper"><img src="hero.jpg" alt="إنجي في وضع التأمل" loading="eager" onerror="this.src='https://picsum.photos/seed/yogahero/600/750'"></div>
+        <div class="hero-img-wrapper"><img src="hero.jpg" alt="إنجي في وضع التأمل" loading="eager" onerror="this.src=&#39;https://picsum.photos/seed/yogahero/600/750&#39;"></div>
         <div class="hero-float-card card-1"><div class="fc-icon"><i class="fa-solid fa-heart-pulse"></i></div><div class="fc-text"><strong>مرونة أفضل</strong>تحسّن ملحوظ خلال 4 أسابيع</div></div>
         <div class="hero-float-card card-2"><div class="fc-icon"><i class="fa-solid fa-leaf"></i></div><div class="fc-text"><strong>تأمل يومي</strong>15 دقيقة توازن ذهني</div></div>
       </div>
     </div>
   </section>
 
+  <!-- PROGRAMS -->
   <section class="programs" id="programs">
     <div class="container">
       <div class="reveal"><span class="section-label">الكلاسات</span><h2 class="section-title">اختاري كلاسكِ المناسب</h2><p class="section-desc">كل كلاس مصمم بعناية ليناسب احتياجاتكِ المختلفة. اختاري واحد واحجزي مكانكِ.</p></div>
       <div class="programs-grid">
         <div class="program-card reveal">
-          <div class="program-card-img"><img src="https://picsum.photos/seed/powerclass/500/350" alt="Power Yoga"><span class="program-level">Ladies Only</span></div>
+          <div class="program-card-img"><img src="./Align By Enjy — Yoga Instructor_files/1067-500x350.jpg" alt="Power Yoga"><span class="program-level">Ladies Only</span></div>
           <div class="program-card-body">
             <h3>Power Yoga</h3>
             <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot" style="font-size:.75rem"></i> Royal Hills Clubhouse</p>
@@ -265,7 +317,7 @@
           </div>
         </div>
         <div class="program-card reveal">
-          <div class="program-card-img"><img src="https://picsum.photos/seed/diabetesclass/500/350" alt="Yoga for Diabetes"><span class="program-level">متخصصة</span></div>
+          <div class="program-card-img"><img src="./Align By Enjy — Yoga Instructor_files/612-500x350.jpg" alt="Yoga for Diabetes"><span class="program-level">متخصصة</span></div>
           <div class="program-card-body">
             <h3>Yoga for Diabetes</h3>
             <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot" style="font-size:.75rem"></i> Royal Hills</p>
@@ -275,7 +327,7 @@
           </div>
         </div>
         <div class="program-card reveal">
-          <div class="program-card-img"><img src="https://picsum.photos/seed/gentleclass/500/350" alt="Gentle Yoga"><span class="program-level">جميع المستويات</span></div>
+          <div class="program-card-img"><img src="./Align By Enjy — Yoga Instructor_files/816-500x350.jpg" alt="Gentle Yoga"><span class="program-level">جميع المستويات</span></div>
           <div class="program-card-body">
             <h3>Gentle Yoga</h3>
             <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot" style="font-size:.75rem"></i> Pyramids Heights</p>
@@ -288,32 +340,55 @@
     </div>
   </section>
 
-  <section class="testimonials" id="testimonials">
+  <!-- RETREATS -->
+  <section class="retreats" id="retreats">
     <div class="container">
-      <div class="reveal"><span class="section-label">تجارب حقيقية</span><h2 class="section-title">ماذا تقول متدرباتنا</h2><p class="section-desc">قصص تحوّل حقيقية من متدربات غيّرت اليوجا حياتهن.</p></div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card reveal"><div class="tq">"</div><div class="tstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>الـ Power Yoga غيّرت لي شكل جسمي بالكامل في شهرين. إنجي بتشجعكِ وتدفعكِ تطلعي من منطقة الراحة.</p><div class="ta"><img src="https://picsum.photos/seed/nora24/100/100" alt="نورة"><div><div class="tan">نورة العتيبي</div><div class="tar">Power Yoga</div></div></div></div>
-        <div class="testimonial-card reveal"><div class="tq">"</div><div class="tstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>كلاس السكري غيّر مستوى السكر عندي بشكل ملحوظ. الدكتور لاحظ الفرق وأنا استمرت لأنه فعلاً بيفرق.</p><div class="ta"><img src="https://picsum.photos/seed/sara90/100/100" alt="سارة"><div><div class="tan">سارة أحمد</div><div class="tar">Yoga for Diabetes</div></div></div></div>
-        <div class="testimonial-card reveal"><div class="tq">"</div><div class="tstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>الـ Gentle Yoga كانت بدايتي وخلاص دلوقتي بقيت أقدر أعمل حاجات ما كنتش متخيلها. شكراً إنجي.</p><div class="ta"><img src="https://picsum.photos/seed/layla57/100/100" alt="ليلى"><div><div class="tan">ليلى حسن</div><div class="tar">Gentle Yoga</div></div></div></div>
+      <div class="reveal" style="text-align:center">
+        <span class="section-label">رحلات اليوجا</span>
+        <h2 class="section-title">الريتريتس</h2>
+        <p class="section-desc" style="margin:0 auto 48px">تجربة روحانية كاملة بعيداً عن ضجيج الحياة. أيام من اليوجا والتأمل في أجمل الوجهات.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-img reveal"><img src="https://picsum.photos/seed/enjyteacher/600/800" alt="إنجي عبد المنعم"><div class="about-exp"><div class="num">8+</div><div class="label">سنوات خبرة</div></div></div>
-        <div class="about-content reveal">
-          <span class="section-label">عنّي</span>
-          <h2 class="section-title">إنجي عبد المنعم</h2>
-          <p>بدأت رحلتي مع اليوجا عام 2016 في ريشيكيش بالهند، حيث حصلت على شهادة RYT-500 من Yoga Alliance. منذ ذلك الحين، درّبت أكثر من 500 متدربة. أؤمن أن اليوجا ليست مجرد تمارين جسدية، بل هي أسلوب حياة يغيّر العلاقة مع الجسد والذهن.</p>
-          <div class="about-certs"><span class="cert-badge"><i class="fa-solid fa-certificate"></i> RYT-500</span><span class="cert-badge"><i class="fa-solid fa-certificate"></i> براناياما متقدم</span><span class="cert-badge"><i class="fa-solid fa-certificate"></i> يوجا طبية</span><span class="cert-badge"><i class="fa-solid fa-certificate"></i> ميوفاسيل</span></div>
-          <a href="#booking" class="btn-primary"><i class="fa-solid fa-hand-holding-heart"></i> احجزي معي جلسة تجريبية</a>
+      <div id="retreatsList">
+        <!-- تُحمّل من Firebase تلقائياً -->
+        <div class="retreats-coming reveal">
+          <i class="fa-solid fa-mountain-sun"></i>
+          <p>رحلات الريتريت القادمة ستُعلَن قريباً!</p>
+          <p style="font-size:.82rem;margin-top:8px;opacity:.6">سجّلي اهتمامكِ وسنتواصل معكِ عند الإعلان</p>
+          <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#booking" class="btn-retreat" style="display:inline-flex;margin-top:20px"><i class="fa-solid fa-bell"></i> أبلغيني عند الإطلاق</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="reveal"><span class="section-label">تجارب حقيقية</span><h2 class="section-title">ماذا تقول متدرباتنا</h2><p class="section-desc">قصص تحوّل حقيقية من متدربات غيّرت اليوجا حياتهن.</p></div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal"><div class="tq">"</div><div class="tstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>الـ Power Yoga غيّرت لي شكل جسمي بالكامل في شهرين. إنجي بتشجعكِ وتدفعكِ تطلعي من منطقة الراحة.</p><div class="ta"><img src="./Align By Enjy — Yoga Instructor_files/167-100x100.jpg" alt="نورة"><div><div class="tan">نورة العتيبي</div><div class="tar">Power Yoga</div></div></div></div>
+        <div class="testimonial-card reveal"><div class="tq">"</div><div class="tstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>كلاس السكري غيّر مستوى السكر عندي بشكل ملحوظ. الدكتور لاحظ الفرق وأنا استمرت لأنه فعلاً بيفرق.</p><div class="ta"><img src="./Align By Enjy — Yoga Instructor_files/387-100x100.jpg" alt="سارة"><div><div class="tan">سارة أحمد</div><div class="tar">Yoga for Diabetes</div></div></div></div>
+        <div class="testimonial-card reveal"><div class="tq">"</div><div class="tstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>الـ Gentle Yoga كانت بدايتي وخلاص دلوقتي بقيت أقدر أعمل حاجات ما كنتش متخيلها. شكراً إنجي.</p><div class="ta"><img src="./Align By Enjy — Yoga Instructor_files/937-100x100.jpg" alt="ليلى"><div><div class="tan">ليلى حسن</div><div class="tar">Gentle Yoga</div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img reveal"><img src="./Align By Enjy — Yoga Instructor_files/1029-600x800.jpg" alt="إنجي عبد المنعم"><div class="about-exp"><div class="num">8+</div><div class="label">سنوات خبرة</div></div></div>
+        <div class="about-content reveal">
+          <span class="section-label">عنّي</span>
+          <h2 class="section-title">إنجي عبد المنعم</h2>
+          <p>بدأت رحلتي مع اليوجا عام 2016 في ريشيكيش بالهند، حيث حصلت على شهادة RYT-500 من Yoga Alliance. منذ ذلك الحين، درّبت أكثر من 500 متدربة. أؤمن أن اليوجا ليست مجرد تمارين جسدية، بل هي أسلوب حياة يغيّر العلاقة مع الجسد والذهن.</p>
+          <div class="about-certs"><span class="cert-badge"><i class="fa-solid fa-certificate"></i> RYT-500</span><span class="cert-badge"><i class="fa-solid fa-certificate"></i> براناياما متقدم</span><span class="cert-badge"><i class="fa-solid fa-certificate"></i> يوجا طبية</span><span class="cert-badge"><i class="fa-solid fa-certificate"></i> ميوفاسيل</span></div>
+          <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#booking" class="btn-primary"><i class="fa-solid fa-hand-holding-heart"></i> احجزي معي جلسة تجريبية</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
   <section class="booking" id="booking">
     <div class="container">
       <div class="reveal"><span class="section-label">احجز الآن</span><h2 class="section-title">ابدأي رحلتك اليوم</h2><p class="section-desc">املئي النموذج وسنتواصل معكِ خلال 24 ساعة لترتيب أول جلسة.</p></div>
@@ -325,21 +400,58 @@
             <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-user-check"></i></div><div class="perk-text"><h4>اهتمام شخصي</h4><p>جلسات فردية أو مجموعات صغيرة لا تتجاوز 6 متدربات</p></div></div>
             <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-shield-heart"></i></div><div class="perk-text"><h4>أمان ومرونة</h4><p>تعديل الوضعيات حسب قدراتكِ الجسدية بأمان تام</p></div></div>
             <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-gift"></i></div><div class="perk-text"><h4>جلسة تجريبية مجانية</h4><p>أول جلسة مجانية لتقييم مستواكِ وتحديد البرنامج المناسب</p></div></div>
-            <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-video"></i></div><div class="perk-text"><h4>أونلاين وحضوري</h4><p>اختاري بين الحضور في الاستوديو أو الانضمام عن بُعد</p></div></div>
+            <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-mobile-screen"></i></div><div class="perk-text"><h4>دفع سهل عبر InstaPay</h4><p>سددي رسوم الكلاسات بكل سهولة عبر InstaPay</p></div></div>
           </div>
         </div>
         <div class="booking-form">
-          <div class="form-row"><div class="form-group"><label>الاسم الأول</label><input type="text" id="fname" placeholder="مثال: نورة" required></div><div class="form-group"><label>الاسم الأخير</label><input type="text" id="lname" placeholder="مثال: العتيبي" required></div></div>
-          <div class="form-row"><div class="form-group"><label>رقم الجوال</label><input type="tel" id="phone" placeholder="01XXXXXXXX" required dir="ltr"></div><div class="form-group"><label>البريد الإلكتروني</label><input type="email" id="email" placeholder="name@example.com" required dir="ltr"></div></div>
-          <div class="form-group"><label>الكلاس المفضل</label><select id="program" required><option value="" disabled selected>اختاري الكلاس</option><option value="power">Power Yoga</option><option value="diabetes">Yoga for Diabetes</option><option value="gentle">Gentle Yoga</option></select></div>
-          <div class="form-group"><label>مستواكِ الحالي في اليوجا</label><select id="level" required><option value="" disabled selected>اختاري المستوى</option><option value="beginner">مبتدئة تماماً</option><option value="some">تمارستها قليلاً</option><option value="intermediate">متوسطة</option><option value="advanced">متقدمة</option></select></div>
-          <div class="form-group"><label>ملاحظات إضافية (اختياري)</label><textarea id="notes" placeholder="أي إصابات أو ظروف صحية نراعيها..."></textarea></div>
-          <button type="button" class="btn-submit" id="submitBtn" onclick="submitBooking()"><i class="fa-solid fa-paper-plane"></i> إرسال طلب الحجز</button>
+          <div id="bookingFormSection">
+            <div class="form-row"><div class="form-group"><label>الاسم الأول</label><input type="text" id="fname" placeholder="مثال: نورة" required=""></div><div class="form-group"><label>الاسم الأخير</label><input type="text" id="lname" placeholder="مثال: العتيبي" required=""></div></div>
+            <div class="form-row"><div class="form-group"><label>رقم الجوال</label><input type="tel" id="phone" placeholder="01XXXXXXXX" required="" dir="ltr"></div><div class="form-group"><label>البريد الإلكتروني</label><input type="email" id="email" placeholder="name@example.com" required="" dir="ltr"></div></div>
+            <div class="form-group"><label>الكلاس المفضل</label><select id="program" required="">
+              <option value="" disabled="" selected="">اختاري الكلاس</option>
+              <option value="power">Power Yoga — 400 ج (جلسة)</option>
+              <option value="diabetes">Yoga for Diabetes — 400 ج (جلسة)</option>
+              <option value="gentle">Gentle Yoga — 350 ج (جلسة)</option>
+              <option value="retreats">الريتريتس</option>
+            </select></div>
+            <div class="form-group"><label>مستواكِ الحالي في اليوجا</label><select id="level" required="">
+              <option value="" disabled="" selected="">اختاري المستوى</option>
+              <option value="beginner">مبتدئة تماماً</option>
+              <option value="some">تمارستها قليلاً</option>
+              <option value="intermediate">متوسطة</option>
+              <option value="advanced">متقدمة</option>
+            </select></div>
+            <div class="form-group">
+              <label><i class="fa-regular fa-calendar" style="color:var(--accent);margin-left:5px"></i>التاريخ المفضل للجلسة الأولى</label>
+              <input type="date" id="sessionDate" min="2026-03-30">
+              <p class="form-hint"><i class="fa-solid fa-circle-info"></i> هذا تاريخ مقترح وسنتواصل معكِ لتأكيده</p>
+            </div>
+            <div class="form-group"><label>ملاحظات إضافية (اختياري)</label><textarea id="notes" placeholder="أي إصابات أو ظروف صحية نراعيها..."></textarea></div>
+            <button type="button" class="btn-submit" id="submitBtn" onclick="submitBooking()"><i class="fa-solid fa-paper-plane"></i> إرسال طلب الحجز</button>
+          </div>
+
+          <!-- InstaPay Box — تظهر بعد الإرسال -->
+          <div class="instapay-box" id="instapayBox">
+            <div class="ip-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <h4>أرسلي المبلغ عبر InstaPay</h4>
+            <p>تم استلام طلبكِ بنجاح! لتأكيد حجزكِ، يرجى تحويل رسوم الكلاس على الرقم التالي:</p>
+            <div class="instapay-number">01063751653</div>
+            <div class="instapay-name">إنجي عبد المنعم — Align by Enjy</div>
+            <div class="instapay-note">
+              <strong>بعد التحويل:</strong> أرسلي صورة الإيصال على واتساب 
+              <a href="https://wa.me/201063751653" target="_blank" style="color:var(--accent-light);text-decoration:underline">01063751653</a>
+              مع ذكر اسمكِ واسم الكلاس. سنؤكد حجزكِ خلال ساعات.
+            </div>
+            <a href="https://wa.me/201063751653" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;background:#25D366;color:#fff;padding:12px 24px;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem">
+              <i class="fa-brands fa-whatsapp"></i> إرسال الإيصال على واتساب
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section class="contact" id="contact">
     <div class="container">
       <div class="reveal" style="text-align:center"><span class="section-label">تواصلي معنا</span><h2 class="section-title">نحن هنا لمساعدتكِ</h2><p class="section-desc" style="margin:0 auto 48px">لا تترددي في التواصل لأي استفسار عن الكلاسات أو المواعيد.</p></div>
@@ -353,8 +465,8 @@
   </section>
 
   <footer>
-    <div class="social-links"><a href="#" aria-label="إنستغرام"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="تيك توك"><i class="fa-brands fa-tiktok"></i></a><a href="#" aria-label="يوتيوب"><i class="fa-brands fa-youtube"></i></a></div>
-    <p>جميع الحقوق محفوظة لـ Align by Enjy &copy; 2026</p>
+    <div class="social-links"><a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#" aria-label="إنستغرام"><i class="fa-brands fa-instagram"></i></a><a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#" aria-label="تيك توك"><i class="fa-brands fa-tiktok"></i></a><a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html#" aria-label="يوتيوب"><i class="fa-brands fa-youtube"></i></a></div>
+    <p>جميع الحقوق محفوظة لـ Align by Enjy © 2026</p>
   </footer>
 
   <div class="toast-container" id="toastContainer"></div>
@@ -362,7 +474,7 @@
   <!-- Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+    import { getDatabase, ref, push, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyB7xZSiGqTh4ncnHcvFBx8ufwPudpEEl50",
@@ -377,6 +489,40 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
+    // ── Load retreats from Firebase ──
+    onValue(ref(db, 'retreats'), (snapshot) => {
+      const data = snapshot.val();
+      if (!data) return;
+      const retreats = Object.entries(data).map(([k, v]) => ({ ...v, _key: k }));
+      if (retreats.length > 0) renderRetreats(retreats);
+    });
+
+    function renderRetreats(list) {
+      const el = document.getElementById('retreatsList');
+      el.innerHTML = `<div class="programs-grid">` + list.map(r => `
+        <div class="retreat-card reveal">
+          <div class="retreat-card-img">
+            <img src="https://picsum.photos/seed/retreat${r._key}/600/400" alt="${r.name}" onerror="this.src='https://picsum.photos/seed/yoga${r._key}/600/400'">
+            <span class="retreat-badge"><i class="fa-solid fa-mountain-sun"></i> ريتريت</span>
+          </div>
+          <div class="retreat-card-body">
+            <h3>${r.name||'ريتريت اليوجا'}</h3>
+            <p>${r.description||'تجربة روحانية فريدة مع اليوجا والتأمل في مكان أحلامكِ.'}</p>
+            <div class="retreat-meta">
+              ${r.location?`<span><i class="fa-solid fa-location-dot"></i>${r.location}</span>`:''}
+              ${r.dateRange?`<span><i class="fa-regular fa-calendar"></i>${r.dateRange}</span>`:''}
+              ${r.duration?`<span><i class="fa-regular fa-clock"></i>${r.duration}</span>`:''}
+              ${r.capacity?`<span><i class="fa-solid fa-users"></i>${r.capacity} مكان</span>`:''}
+            </div>
+            <div class="retreat-price">
+              <div class="price">${r.price?Number(r.price).toLocaleString('ar-EG')+' ج':'تواصلي معنا'} <span>/ للفرد</span></div>
+              <a href="#booking" onclick="document.getElementById('program').value='retreats'" class="btn-retreat"><i class="fa-solid fa-calendar-check"></i> احجزي</a>
+            </div>
+          </div>
+        </div>`).join('') + `</div>`;
+      document.querySelectorAll('.retreat-card.reveal').forEach(el => rObs.observe(el));
+    }
+
     window.submitBooking = async function() {
       const fname = document.getElementById('fname').value.trim();
       const lname = document.getElementById('lname').value.trim();
@@ -384,6 +530,7 @@
       const email = document.getElementById('email').value.trim();
       const program = document.getElementById('program').value;
       const level = document.getElementById('level').value;
+      const sessionDate = document.getElementById('sessionDate').value;
       const notes = document.getElementById('notes').value.trim();
 
       if (!fname || !lname || !phone || !email || !program || !level) {
@@ -406,19 +553,21 @@
       try {
         await push(ref(db, 'bookings'), {
           fname, lname, phone, email, program, level, notes,
+          sessionDate: sessionDate || '',
           status: 'new',
+          paymentStatus: 'pending',
+          paymentMethod: 'instapay',
           date: new Date().toISOString().slice(0, 10),
           createdAt: serverTimestamp()
         });
 
-        showToast(`شكراً ${fname}! تم إرسال طلبك بنجاح ✓`, 'fa-circle-check');
-        ['fname','lname','phone','email','notes'].forEach(id => document.getElementById(id).value = '');
-        document.getElementById('program').selectedIndex = 0;
-        document.getElementById('level').selectedIndex = 0;
+        // إخفاء الفورم وإظهار معلومات InstaPay
+        document.getElementById('bookingFormSection').style.display = 'none';
+        document.getElementById('instapayBox').classList.add('show');
+        showToast(`شكراً ${fname}! تم إرسال طلبكِ بنجاح ✓`, 'fa-circle-check');
       } catch (err) {
         console.error(err);
         showToast('حدث خطأ، يرجى المحاولة مرة أخرى', 'fa-triangle-exclamation', true);
-      } finally {
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> إرسال طلب الحجز';
       }
@@ -426,6 +575,9 @@
   </script>
 
   <script>
+    // تعيين الحد الأدنى لتاريخ الجلسة (اليوم)
+    document.getElementById('sessionDate').min = new Date().toISOString().slice(0,10);
+
     function showToast(m, i='fa-circle-info', isError=false) {
       const c = document.getElementById('toastContainer');
       const t = document.createElement('div');
@@ -466,44 +618,132 @@
       a.addEventListener('click', function(e) { const t=document.querySelector(this.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});} });
     });
   </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>
-<!-- PWA Install Banner -->
-<div id="installBanner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:#2D4A3E;color:#fff;padding:16px 24px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.3);display:flex;align-items:center;gap:16px;max-width:340px;width:90%">
-  <img src="icon-192.png" style="width:48px;height:48px;border-radius:10px">
-  <div style="flex:1">
-    <div style="font-weight:700;font-size:.95rem">Align by Enjy</div>
-    <div style="font-size:.78rem;opacity:.8">حمّلي التطبيق على هاتفك!</div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+
+  <!-- PWA Install Banner -->
+  <div id="installBanner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:#2D4A3E;color:#fff;padding:16px 24px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.3);display:flex;align-items:center;gap:16px;max-width:340px;width:90%">
+    <img src="./Align By Enjy — Yoga Instructor_files/icon-192.png" style="width: 48px; height: 48px; border-radius: 10px; display: none;" onerror="this.style.display=&#39;none&#39;">
+    <div style="flex:1">
+      <div style="font-weight:700;font-size:.95rem">Align by Enjy</div>
+      <div style="font-size:.78rem;opacity:.8">حمّلي التطبيق على هاتفك!</div>
+    </div>
+    <button id="installBtn" style="background:#C8956C;color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:700;cursor:pointer;font-size:.85rem">تحميل</button>
+    <button id="closeBanner" style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;opacity:.7">✕</button>
   </div>
-  <button id="installBtn" style="background:#C8956C;color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:700;cursor:pointer;font-size:.85rem">تحميل</button>
-  <button id="closeBanner" style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;opacity:.7">✕</button>
-</div>
 
-<script>
-  let deferredPrompt;
-  const banner = document.getElementById('installBanner');
-  const installBtn = document.getElementById('installBtn');
-  const closeBanner = document.getElementById('closeBanner');
+  <script>
+    let deferredPrompt;
+    const banner = document.getElementById('installBanner');
+    const installBtn = document.getElementById('installBtn');
+    const closeBanner = document.getElementById('closeBanner');
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    setTimeout(() => { banner.style.display = 'flex'; }, 3000);
-  });
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      setTimeout(() => { banner.style.display = 'flex'; }, 3000);
+    });
 
-  installBtn.addEventListener('click', async () => {
-    banner.style.display = 'none';
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    deferredPrompt = null;
-  });
+    installBtn.addEventListener('click', async () => {
+      banner.style.display = 'none';
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+    });
 
-  closeBanner.addEventListener('click', () => {
-    banner.style.display = 'none';
-  });
-</script>
-</body>
-</html>
+    closeBanner.addEventListener('click', () => {
+      banner.style.display = 'none';
+    });
+  </script>
+<script src="./Align By Enjy — Yoga Instructor_files/replit-pill.global.js.download" data-repl-id="9fee56cd-cff5-4cf0-ba6e-faa37abd1609"></script>
+
+<div id="replit-pill-host"><template shadowrootmode="closed"><style>
+        #replit-pill {
+          position: fixed;
+          bottom: 48px;
+          right: 48px;
+          border-radius: 120px;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+          font-size: 12px;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          z-index: 1000000;
+          white-space: nowrap;
+          cursor: pointer;
+          overflow: hidden;
+          background-color: rgba(0, 0, 0, 0.4);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          color: #f0f2f6;
+          box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.05), 1px 1px 1px 0px rgba(255, 255, 255, 0.1);
+          transition: transform 0.2s ease;
+        }
+        #replit-pill:hover {
+          transform: scale(1.05);
+        }
+        #replit-pill .shimmer {
+          position: absolute;
+          inset: 0;
+          transform: translateX(-100%);
+          transition: transform 0.7s ease-in-out;
+          background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+          pointer-events: none;
+        }
+        #replit-pill:hover .shimmer {
+          transform: translateX(100%);
+        }
+        #replit-pill .badge-content {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        #replit-pill .replit-logo {
+          color: #f0f2f6;
+        }
+        #replit-pill .replit-text {
+          font-weight: 500;
+          line-height: 20px;
+          color: #f0f2f6;
+        }
+        #replit-pill .close-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2px;
+          flex: 0 0 auto;
+          border-radius: 64px;
+          width: 12px;
+          height: 12px;
+          min-width: 0;
+          cursor: pointer;
+          border: none;
+          box-sizing: border-box;
+          background-color: transparent;
+          transition: background-color 0.2s ease;
+        }
+        #replit-pill .close-button:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        #replit-pill .close-button:focus-visible {
+          outline: 1px solid #e6e9ef;
+          outline-offset: 1px;
+        }
+        #replit-pill .close-icon {
+          width: 8px;
+          height: 8px;
+          color: #e6e9ef;
+        }
+      </style><div id="replit-pill"><div class="shimmer"></div><div class="badge-content"><svg width="10.67" height="16" viewBox="0 0 50 75" fill="none" class="replit-logo">
+        <path d="M25 19.995C25 20.0375 25 20.0575 25 20.085C25.015 21.34 25.5475 22.6275 26.425 23.525C26.445 23.545 26.4475 23.5475 26.45 23.55C26.485 23.585 26.5025 23.6025 26.54 23.6375C27.4225 24.485 28.6775 25.005 29.9025 25.03C29.9525 25.03 29.9975 25.03 30.0825 25.03H42C44.8 25.03 46.2 25.03 47.27 25.575C48.21 26.055 48.975 26.82 49.455 27.76C50 28.83 50 30.23 50 33.03V42.03C50 44.83 50 46.23 49.455 47.3C48.975 48.24 48.21 49.005 47.27 49.485C46.2 50.03 44.8 50.03 42 50.03H29.9275C28.6425 50.0325 27.3225 50.58 26.4125 51.485C26.4075 51.49 26.4775 51.42 26.45 51.4475C26.445 51.4525 26.4425 51.4525 26.4225 51.475C25.545 52.3725 25.0125 53.6575 24.9975 54.9125C24.9975 54.94 24.9975 54.9625 24.9975 55.0025V67.0575C24.9975 69.8575 24.9975 71.2575 24.4525 72.3275C23.9725 73.2675 23.2075 74.0325 22.2675 74.5125C21.1975 75.0575 19.7975 75.0575 16.9975 75.0575H7.9975C5.1975 75.0575 3.7975 75.0575 2.7275 74.5125C1.7875 74.0325 1.0225 73.2675 0.542498 72.3275C-0.00250244 71.2575 -0.00250244 69.8575 -0.00250244 67.0575V58.0575C-0.00250244 55.2575 -0.00250244 53.8575 0.542498 52.7875C1.0225 51.8475 1.7875 51.0825 2.7275 50.6025C3.7975 50.0575 5.1975 50.0575 7.9975 50.0575H19.7225C19.9 50.0575 19.9875 50.0575 20.08 50.055C21.2475 50.0125 22.4375 49.52 23.295 48.7225C23.3625 48.66 23.4125 48.61 23.5125 48.51C23.55 48.4725 23.5675 48.455 23.6025 48.42C24.455 47.5325 24.9725 46.2825 24.9975 45.0525C24.9975 45.0025 24.9975 44.96 24.9975 44.875V30.12C24.9975 30.0325 24.9975 29.99 24.9975 29.94C24.9725 28.71 24.455 27.46 23.6025 26.575C23.5675 26.54 23.55 26.52 23.5125 26.4825C23.475 26.445 23.4575 26.4275 23.42 26.3925C22.5325 25.54 21.2825 25.0225 20.0525 24.9975C20.0025 24.9975 19.96 24.9975 19.875 24.9975H7.9975C5.1975 24.9975 3.7975 24.9975 2.7275 24.4525C1.7875 23.9725 1.0225 23.2075 0.542498 22.2675C-0.00250244 21.1975 -0.00250244 19.7975 -0.00250244 16.9975V7.9975C-2.44146e-06 5.2 -2.44379e-06 3.8 0.544998 2.73C1.025 1.79 1.79 1.025 2.73 0.545C3.8 0 5.2 0 8 0H17C19.8 0 21.2 0 22.27 0.545C23.21 1.025 23.975 1.79 24.455 2.73C25 3.8 25 5.2 25 8V19.995Z" fill="currentColor"></path>
+      </svg><div class="replit-text">Made with Replit</div></div><button class="close-button" aria-label="Close"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="close-icon">
+        <path d="M18 6 6 18"></path>
+        <path d="m6 6 12 12"></path>
+      </svg></button></div></template></div></body></html>
