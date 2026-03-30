@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Align Admin">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com/">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="./Align by Enjy — لوحة الإدارة_files/css2" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
@@ -232,11 +232,10 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     <div class="login-logo"><i class="fa-solid fa-spa"></i><span>Align by Enjy</span></div>
     <h2>لوحة الإدارة</h2>
     <p>تسجيل الدخول للمتابعة</p>
-    <div class="lf-group"><label>اسم المستخدم</label><input type="text" id="loginUser" placeholder="admin" autocomplete="username"></div>
+    <div class="lf-group"><label>البريد الإلكتروني</label><input type="email" id="loginUser" placeholder="email@example.com" autocomplete="email" dir="ltr"></div>
     <div class="lf-group"><label>كلمة المرور</label><input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"></div>
     <button class="btn-login" onclick="doLogin()"><i class="fa-solid fa-right-to-bracket"></i> دخول</button>
     <div class="login-err" id="loginErr"></div>
-    <p style="font-size:.72rem;color:var(--text-faint);text-align:center;margin-top:16px">admin / align2026</p>
   </div>
 </div>
 
@@ -471,6 +470,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getDatabase, ref, push, onValue, update, remove, serverTimestamp, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyB7xZSiGqTh4ncnHcvFBx8ufwPudpEEl50",
@@ -484,6 +484,25 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
+  const auth = getAuth(app);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('appLayout').style.display = 'flex';
+      renderClasses();
+    } else {
+      document.getElementById('loginScreen').classList.remove('hidden');
+      document.getElementById('appLayout').style.display = 'none';
+    }
+  });
+
+  window.fbSignIn = async (email, password) => {
+    await signInWithEmailAndPassword(auth, email, password);
+  };
+  window.fbSignOut = async () => {
+    await signOut(auth);
+  };
 
   // ── Bookings ──
   window._fbRef = ref(db, 'bookings');
@@ -617,24 +636,27 @@ function updateBadge() {
 }
 
 // ── LOGIN ──
-function doLogin() {
-  const u = document.getElementById('loginUser').value.trim();
-  const p = document.getElementById('loginPass').value.trim();
+async function doLogin() {
+  const email = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value.trim();
   const err = document.getElementById('loginErr');
-  if (u === 'admin' && p === 'align2026') {
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('appLayout').style.display = 'flex';
-    renderClasses();
-  } else {
-    err.textContent = 'اسم المستخدم أو كلمة المرور غلط';
+  const btn = document.querySelector('.btn-login');
+  if (!email || !pass) { err.textContent = 'يرجى ملء جميع الحقول'; return; }
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الدخول...';
+  btn.disabled = true;
+  try {
+    await window.fbSignIn(email, pass);
+  } catch(e) {
+    err.textContent = 'البريد الإلكتروني أو كلمة المرور غلط';
     setTimeout(() => err.textContent = '', 3000);
+    btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> دخول';
+    btn.disabled = false;
   }
 }
 document.getElementById('loginPass').addEventListener('keydown', e => e.key === 'Enter' && doLogin());
 document.getElementById('loginUser').addEventListener('keydown', e => e.key === 'Enter' && doLogin());
-function logout() {
-  document.getElementById('loginScreen').classList.remove('hidden');
-  document.getElementById('appLayout').style.display = 'none';
+async function logout() {
+  await window.fbSignOut();
 }
 
 // ── NAV ──
@@ -1211,8 +1233,4 @@ function showToast(msg, type='info', icon='fa-info-circle') {
 }
 </script>
 
-
-<button class="close-button" aria-label="Close"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="close-icon">
-        <path d="M18 6 6 18"></path>
-        <path d="m6 6 12 12"></path>
-      </svg></button></div></template></div></body></html>
+</body></html>
