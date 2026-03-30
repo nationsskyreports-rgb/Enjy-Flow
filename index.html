@@ -1,1236 +1,661 @@
 <!DOCTYPE html>
 
 <html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Align By Enjy — Yoga Instructor</title>
+  <meta name="description" content="Align by Enjy — Balance. Heal. Transform. يوجا متخصصة">
+  <meta name="theme-color" content="#2D4A3E">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Align by Enjy">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #FAF6F0;
+      --bg-deep: #F0EAE0;
+      --fg: #1A1A1A;
+      --fg-muted: #6B6358;
+      --primary: #2D4A3E;
+      --primary-light: #3D6555;
+      --accent: #C8956C;
+      --accent-light: #E0B892;
+      --card: #FFFFFF;
+      --border: #E8E0D8;
+      --glass: rgba(255,255,255,0.7);
+      --shadow-sm: 0 2px 8px rgba(45,74,62,0.06);
+      --shadow-md: 0 8px 30px rgba(45,74,62,0.1);
+      --shadow-lg: 0 20px 60px rgba(45,74,62,0.15);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--fg);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.3}
+    a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    button{cursor:pointer;border:none;background:none;font-family:inherit}
+    input,textarea,select{font-family:inherit}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Align by Enjy — لوحة الإدارة</title>
-<link rel="manifest" href="manifest-admin.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Align Admin">
-<link rel="apple-touch-icon" href="icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link href="./Align by Enjy — لوحة الإدارة_files/css2" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-:root {
-  --bg: #0F1A16; --bg2: #162019; --bg3: #1C2A22; --card: #1E2D24; --card2: #253322;
-  --border: rgba(255,255,255,0.07); --primary: #3D8C6A; --primary-light: #4EAD84;
-  --accent: #C8956C; --accent-light: #E0B892; --green: #4CAF7D; --red: #E05A5A;
-  --yellow: #F0B429; --blue: #5B8FF9; --purple: #A78BFA; --text: #EEE8DF; --text-muted: #8A9E90;
-  --text-faint: #4A6352; --shadow: 0 8px 32px rgba(0,0,0,0.4);
-  --radius: 14px; --radius-sm: 8px; --sidebar-w: 260px;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{font-size:16px;scroll-behavior:smooth}
-body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
-h1,h2,h3,h4{font-family:'Playfair Display',serif}
-a{text-decoration:none;color:inherit}
-button{cursor:pointer;border:none;background:none;font-family:inherit}
-input,select,textarea{font-family:inherit}
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:var(--text-faint);border-radius:10px}
+    .bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .bg-orbs .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.3;animation:orbFloat 20s ease-in-out infinite}
+    .bg-orbs .orb:nth-child(1){width:400px;height:400px;background:var(--accent-light);top:-100px;right:-100px}
+    .bg-orbs .orb:nth-child(2){width:300px;height:300px;background:#A8C5B8;bottom:10%;left:-50px;animation-delay:-7s;animation-duration:25s}
+    .bg-orbs .orb:nth-child(3){width:250px;height:250px;background:var(--accent);top:50%;right:30%;animation-delay:-14s;animation-duration:30s;opacity:.15}
+    @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(30px,-40px) scale(1.1)}50%{transform:translate(-20px,20px) scale(.95)}75%{transform:translate(40px,30px) scale(1.05)}}
 
-#loginScreen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s,visibility .5s}
-#loginScreen.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.login-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 32px;width:100%;max-width:400px;box-shadow:0 32px 80px rgba(0,0,0,0.6);animation:loginIn .6s cubic-bezier(.4,0,.2,1) both;margin:16px}
-@keyframes loginIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
-.login-logo i{font-size:1.8rem;color:var(--accent)}
-.login-logo span{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--text)}
-.login-box h2{font-size:1.3rem;color:var(--text);margin-bottom:4px}
-.login-box p{font-size:.85rem;color:var(--text-muted);margin-bottom:24px}
-.lf-group{margin-bottom:16px}
-.lf-group label{display:block;font-size:.82rem;color:var(--text-muted);margin-bottom:6px;font-weight:600;letter-spacing:.5px}
-.lf-group input{width:100%;padding:12px 16px;background:var(--bg3);border:1.5px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.92rem;transition:border-color .3s;outline:none}
-.lf-group input:focus{border-color:var(--primary)}
-.btn-login{width:100%;padding:13px;background:var(--primary);color:#fff;border-radius:var(--radius-sm);font-size:.95rem;font-weight:700;margin-top:8px;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn-login:hover{background:var(--primary-light)}
-.login-err{color:var(--red);font-size:.82rem;margin-top:10px;text-align:center;min-height:20px}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 24px;transition:all .4s cubic-bezier(.4,0,.2,1)}
+    nav.scrolled{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:10px 24px}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:8px}
+    .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+    .nav-links a{font-size:.9rem;font-weight:500;color:var(--fg-muted);transition:color .3s;position:relative}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;right:0;width:0;height:2px;background:var(--accent);transition:width .3s;border-radius:2px}
+    .nav-links a:hover{color:var(--primary)}.nav-links a:hover::after{width:100%}
+    .nav-cta{background:var(--primary);color:#fff;padding:10px 24px;border-radius:var(--radius-sm);font-size:.88rem;font-weight:600;transition:all .3s}
+    .nav-cta:hover{background:var(--primary-light);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+    .hamburger{display:none;flex-direction:column;gap:5px;padding:4px}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--primary);border-radius:2px;transition:all .3s}
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .hamburger.active span:nth-child(2){opacity:0}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
-.layout{display:flex;min-height:100vh}
+    .mobile-menu{position:fixed;top:0;right:-100%;width:80%;max-width:360px;height:100vh;background:var(--card);z-index:1001;padding:80px 32px 32px;transition:right .4s cubic-bezier(.4,0,.2,1);box-shadow:var(--shadow-lg);overflow-y:auto}
+    .mobile-menu.open{right:0}
+    .mobile-menu a{display:block;padding:16px 0;font-size:1.1rem;font-weight:500;color:var(--fg);border-bottom:1px solid var(--border);transition:color .3s}
+    .mobile-menu a:hover{color:var(--accent)}
+    .mobile-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s}
+    .mobile-overlay.active{opacity:1;pointer-events:all}
 
-.sidebar{width:var(--sidebar-w);background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;z-index:200;transition:transform .35s cubic-bezier(.4,0,.2,1);transform:translateX(100%)}
-.sidebar.open{transform:translateX(0)}
-.sidebar-head{padding:24px 20px 18px;border-bottom:1px solid var(--border)}
-.sidebar-logo{display:flex;align-items:center;gap:10px}
-.sidebar-logo i{font-size:1.4rem;color:var(--accent)}
-.sidebar-logo .name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700}
-.sidebar-logo .sub{font-size:.6rem;color:var(--accent);letter-spacing:2px;text-transform:uppercase;display:block}
-.sidebar-nav{flex:1;padding:16px 12px;overflow-y:auto}
-.nav-section{margin-bottom:20px}
-.nav-section-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);padding:0 12px;margin-bottom:8px}
-.nav-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;transition:all .25s;font-size:.9rem;font-weight:500;color:var(--text-muted);position:relative}
-.nav-item:hover{background:var(--bg3);color:var(--text)}
-.nav-item.active{background:linear-gradient(135deg,rgba(61,140,106,.25),rgba(61,140,106,.1));color:var(--primary-light)}
-.nav-item.active::before{content:'';position:absolute;right:0;top:20%;bottom:20%;width:3px;background:var(--primary-light);border-radius:3px}
-.nav-item i{width:20px;text-align:center;font-size:.9rem}
-.nav-badge{margin-right:auto;background:var(--accent);color:#fff;font-size:.65rem;padding:2px 7px;border-radius:50px;font-weight:700}
-.sidebar-foot{padding:16px 16px 24px;border-top:1px solid var(--border)}
-.admin-profile{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px}
-.ap-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;color:#fff;flex-shrink:0}
-.ap-name{font-size:.85rem;font-weight:600}
-.ap-role{font-size:.72rem;color:var(--text-muted)}
-.ap-out{margin-right:auto;color:var(--text-faint);font-size:.85rem;transition:color .2s;padding:6px}
-.ap-out:hover{color:var(--red)}
+    section{position:relative;z-index:1}
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    .section-label{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+    .section-label::before{content:'';width:24px;height:2px;background:var(--accent);border-radius:2px}
+    .section-title{font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--primary);margin-bottom:16px}
+    .section-desc{font-size:1.05rem;color:var(--fg-muted);max-width:560px;margin-bottom:48px}
 
-#sidebarOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:199;opacity:0;visibility:hidden;transition:all .3s}
-#sidebarOverlay.active{opacity:1;visibility:visible}
+    .hero{min-height:100vh;display:flex;align-items:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+    .hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .hero-content{z-index:2}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,149,108,.12);color:var(--accent);padding:8px 18px;border-radius:50px;font-size:.82rem;font-weight:600;margin-bottom:24px;animation:fiu .8s ease both}
+    .hero-badge i{font-size:.7rem}
+    .hero h1{font-size:clamp(2.8rem,5.5vw,4.2rem);font-weight:800;color:var(--primary);margin-bottom:20px;animation:fiu .8s .1s ease both}
+    .hero h1 .highlight{color:var(--accent);position:relative}
+    .hero h1 .highlight::after{content:'';position:absolute;bottom:4px;right:0;width:100%;height:12px;background:rgba(200,149,108,.2);border-radius:6px;z-index:-1}
+    .hero-text{font-size:1.15rem;color:var(--fg-muted);margin-bottom:36px;max-width:480px;animation:fiu .8s .2s ease both}
+    .hero-actions{display:flex;gap:16px;flex-wrap:wrap;animation:fiu .8s .3s ease both}
+    .btn-primary{background:var(--primary);color:#fff;padding:14px 32px;border-radius:var(--radius-sm);font-size:.95rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .3s}
+    .btn-primary:hover{background:var(--primary-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,74,62,.25)}
+    .btn-outline{border:2px solid var(--border);color:var(--fg);padding:12px 28px;border-radius:var(--radius-sm);font-size:.95rem;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:all .3s}
+    .btn-outline:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px)}
+    .hero-stats{display:flex;gap:40px;margin-top:48px;animation:fiu .8s .4s ease both}
+    .stat-item h3{font-size:2rem;font-weight:800;color:var(--primary)}
+    .stat-item p{font-size:.82rem;color:var(--fg-muted);margin-top:2px}
+    .hero-visual{position:relative;z-index:2;animation:fiu .8s .3s ease both}
+    .hero-img-wrapper{position:relative;border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:4/5;box-shadow:var(--shadow-lg)}
+    .hero-img-wrapper img{width:100%;height:100%;object-fit:cover}
+    .hero-img-wrapper::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(45,74,62,.3) 100%)}
+    .hero-float-card{position:absolute;background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.5);border-radius:var(--radius-md);padding:16px 20px;box-shadow:var(--shadow-md);animation:fl 4s ease-in-out infinite}
+    .hero-float-card.card-1{bottom:12%;left:16px;animation-delay:-1s}
+    .hero-float-card.card-2{top:12%;right:16px;animation-delay:-3s}
+    .fc-icon{width:40px;height:40px;background:rgba(200,149,108,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1rem;margin-bottom:8px}
+    .fc-text{font-size:.78rem;color:var(--fg-muted)}.fc-text strong{display:block;color:var(--fg);font-size:.88rem}
+    @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    @keyframes fiu{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
-.main{margin-right:0;flex:1;display:flex;flex-direction:column;min-height:100vh;width:100%}
-.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;height:58px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
-.page-title{font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);flex:1;text-align:center}
-.topbar-right{display:flex;align-items:center;gap:8px}
-.topbar-btn{width:38px;height:38px;border-radius:10px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all .2s;font-size:.85rem}
-.topbar-btn:hover{border-color:var(--primary);color:var(--primary-light)}
-.mob-toggle{display:flex}
-.content{padding:16px;flex:1}
+    .programs{padding:100px 0}
+    .programs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+    .program-card{background:var(--card);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);transition:all .4s cubic-bezier(.4,0,.2,1)}
+    .program-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:transparent}
+    .program-card-img{height:200px;overflow:hidden;position:relative}
+    .program-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+    .program-card:hover .program-card-img img{transform:scale(1.08)}
+    .program-level{position:absolute;top:16px;right:16px;background:var(--glass);backdrop-filter:blur(10px);padding:4px 12px;border-radius:50px;font-size:.72rem;font-weight:600;color:var(--primary)}
+    .program-card-body{padding:24px}
+    .program-card-body h3{font-size:1.25rem;font-weight:700;color:var(--primary);margin-bottom:8px}
+    .program-card-body p{font-size:.9rem;color:var(--fg-muted);margin-bottom:16px;line-height:1.6}
+    .program-meta{display:flex;align-items:center;gap:16px;font-size:.8rem;color:var(--fg-muted);padding-top:16px;border-top:1px solid var(--border);flex-wrap:wrap}
+    .program-meta span{display:flex;align-items:center;gap:6px}
+    .program-meta i{color:var(--accent);font-size:.75rem}
 
-.page{display:none;animation:pageIn .3s ease both}
-.page.active{display:block}
-@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    /* ── RETREATS SECTION ── */
+    .retreats{padding:100px 0;background:var(--primary);position:relative;overflow:hidden}
+    .retreats::before{content:'';position:absolute;top:-30%;right:-10%;width:600px;height:600px;background:rgba(200,149,108,.08);border-radius:50%;filter:blur(80px)}
+    .retreats .section-label{color:var(--accent-light)}
+    .retreats .section-title{color:#fff}
+    .retreats .section-desc{color:rgba(255,255,255,.7)}
+    .retreat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1)}
+    .retreat-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.1);border-color:rgba(200,149,108,.4)}
+    .retreat-card-img{height:220px;overflow:hidden;position:relative}
+    .retreat-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+    .retreat-card:hover .retreat-card-img img{transform:scale(1.06)}
+    .retreat-badge{position:absolute;top:16px;right:16px;background:var(--accent);color:#fff;padding:5px 14px;border-radius:50px;font-size:.75rem;font-weight:700}
+    .retreat-card-body{padding:24px}
+    .retreat-card-body h3{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:8px}
+    .retreat-card-body p{font-size:.88rem;color:rgba(255,255,255,.65);margin-bottom:16px;line-height:1.7}
+    .retreat-meta{display:flex;gap:16px;font-size:.8rem;color:rgba(255,255,255,.6);flex-wrap:wrap;margin-bottom:20px}
+    .retreat-meta span{display:flex;align-items:center;gap:6px}
+    .retreat-meta i{color:var(--accent-light)}
+    .retreat-price{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+    .retreat-price .price{font-size:1.4rem;font-weight:800;color:var(--accent-light)}
+    .retreat-price .price span{font-size:.8rem;font-weight:400;opacity:.7}
+    .btn-retreat{background:var(--accent);color:#fff;padding:10px 22px;border-radius:var(--radius-sm);font-size:.88rem;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all .3s}
+    .btn-retreat:hover{background:var(--accent-light);transform:translateY(-1px)}
+    .retreats-coming{text-align:center;padding:60px 20px;color:rgba(255,255,255,.5)}
+    .retreats-coming i{font-size:3rem;margin-bottom:16px;display:block;opacity:.4}
+    .retreats-coming p{font-size:1rem}
 
-.stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 14px;position:relative;overflow:hidden}
-.stat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:12px}
-.stat-card h3{font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:2px}
-.stat-card p{font-size:.75rem;color:var(--text-muted)}
+    .testimonials{padding:100px 0}
+    .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+    .testimonial-card{background:var(--card);border-radius:var(--radius-lg);padding:32px;border:1px solid var(--border);transition:all .3s;position:relative}
+    .testimonial-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px)}
+    .tq{position:absolute;top:20px;left:24px;font-size:3rem;color:var(--accent-light);opacity:.4;font-family:'Playfair Display',serif;line-height:1}
+    .testimonial-card p{font-size:.95rem;color:var(--fg-muted);margin-bottom:20px;position:relative;z-index:1;line-height:1.8}
+    .ta{display:flex;align-items:center;gap:12px}
+    .ta img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--accent-light)}
+    .tan{font-weight:600;font-size:.9rem;color:var(--fg)}.tar{font-size:.78rem;color:var(--fg-muted)}
+    .tstars{color:var(--accent);font-size:.75rem;margin-bottom:16px;display:flex;gap:2px}
 
-.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
-.section-head h2{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700}
-.section-head p{font-size:.78rem;color:var(--text-muted);margin-top:2px}
+    .booking{padding:100px 0;background:var(--bg-deep)}
+    .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+    .booking-info h3{font-size:1.6rem;color:var(--primary);margin-bottom:16px}
+    .booking-info p{color:var(--fg-muted);margin-bottom:32px}
+    .booking-perks{display:flex;flex-direction:column;gap:20px}
+    .perk-item{display:flex;align-items:flex-start;gap:14px}
+    .perk-icon{width:44px;height:44px;background:rgba(45,74,62,.08);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--primary);flex-shrink:0}
+    .perk-text h4{font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;margin-bottom:2px}
+    .perk-text p{font-size:.82rem;margin-bottom:0}
+    .booking-form{background:var(--card);border-radius:var(--radius-lg);padding:36px;border:1px solid var(--border);box-shadow:var(--shadow-md)}
+    .form-group{margin-bottom:20px}
+    .form-group label{display:block;font-size:.85rem;font-weight:600;color:var(--fg);margin-bottom:6px}
+    .form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.9rem;background:var(--bg);color:var(--fg);transition:border-color .3s,box-shadow .3s;outline:none}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(45,74,62,.1)}
+    .form-group textarea{resize:vertical;min-height:80px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form-hint{font-size:.78rem;color:var(--fg-muted);margin-top:4px;display:flex;align-items:center;gap:5px}
+    .form-hint i{color:var(--accent);font-size:.75rem}
+    .btn-submit{width:100%;background:var(--primary);color:#fff;padding:14px;border-radius:var(--radius-sm);font-size:.95rem;font-weight:600;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+    .btn-submit:hover{background:var(--primary-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,74,62,.25)}
+    .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
 
-.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:520px}
-thead th{background:var(--card2);padding:12px 14px;font-size:.75rem;font-weight:700;color:var(--text-muted);text-align:right;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
-tbody td{padding:12px 14px;font-size:.85rem;border-top:1px solid var(--border);vertical-align:middle}
-tbody tr:hover{background:rgba(255,255,255,.02)}
+    /* ── INSTAPAY SUCCESS BOX ── */
+    .instapay-box{display:none;background:linear-gradient(135deg,#2D4A3E,#1A3028);border-radius:var(--radius-md);padding:28px;margin-top:20px;color:#fff;text-align:center}
+    .instapay-box.show{display:block;animation:fiu .5s ease both}
+    .instapay-box .ip-icon{width:64px;height:64px;background:rgba(200,149,108,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.6rem;color:var(--accent-light)}
+    .instapay-box h4{font-family:'DM Sans',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:8px}
+    .instapay-box p{font-size:.88rem;color:rgba(255,255,255,.75);margin-bottom:16px}
+    .instapay-number{background:rgba(255,255,255,.1);border:1px solid rgba(200,149,108,.3);border-radius:var(--radius-sm);padding:14px 20px;font-size:1.2rem;font-weight:800;color:var(--accent-light);letter-spacing:2px;margin-bottom:8px;display:inline-block;width:100%;text-align:center}
+    .instapay-name{font-size:.82rem;color:rgba(255,255,255,.6);margin-bottom:16px}
+    .instapay-note{background:rgba(200,149,108,.1);border-radius:var(--radius-sm);padding:12px 16px;font-size:.8rem;color:rgba(255,255,255,.7);text-align:right;line-height:1.6}
+    .instapay-note strong{color:var(--accent-light)}
 
-.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:50px;font-size:.72rem;font-weight:600}
-.badge.green{background:rgba(76,175,125,.15);color:var(--green)}
-.badge.yellow{background:rgba(240,180,41,.12);color:var(--yellow)}
-.badge.red{background:rgba(224,90,90,.12);color:var(--red)}
-.badge.blue{background:rgba(91,143,249,.12);color:var(--blue)}
-.badge.purple{background:rgba(167,139,250,.12);color:var(--purple)}
-.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
+    .about{padding:100px 0}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .about-img{border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:3/4;position:relative}
+    .about-img img{width:100%;height:100%;object-fit:cover}
+    .about-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 50%,rgba(45,74,62,.15) 100%)}
+    .about-exp{position:absolute;bottom:24px;right:24px;background:var(--glass);backdrop-filter:blur(16px);border-radius:var(--radius-md);padding:20px 24px;text-align:center;z-index:2}
+    .about-exp .num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:800;color:var(--accent);line-height:1}
+    .about-exp .label{font-size:.78rem;color:var(--fg-muted);margin-top:4px}
+    .about-content .section-label{margin-bottom:12px}.about-content .section-title{margin-bottom:20px}
+    .about-content>p{color:var(--fg-muted);margin-bottom:28px;font-size:1.02rem}
+    .about-certs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+    .cert-badge{background:rgba(45,74,62,.06);color:var(--primary);padding:8px 16px;border-radius:50px;font-size:.8rem;font-weight:500;display:flex;align-items:center;gap:6px}
+    .cert-badge i{color:var(--accent);font-size:.7rem}
 
-.action-btns{display:flex;align-items:center;gap:5px}
-.act-btn{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.78rem;transition:all .2s;border:1px solid var(--border);color:var(--text-muted)}
-.act-btn:hover.edit{background:rgba(91,143,249,.15);color:var(--blue);border-color:rgba(91,143,249,.3)}
-.act-btn:hover.del{background:rgba(224,90,90,.15);color:var(--red);border-color:rgba(224,90,90,.3)}
-.act-btn:hover.view{background:rgba(76,175,125,.15);color:var(--green);border-color:rgba(76,175,125,.3)}
-.act-btn:hover.wa{background:rgba(37,211,102,.15);color:#25D366;border-color:rgba(37,211,102,.3)}
-.act-btn:hover.credit{background:rgba(167,139,250,.15);color:var(--purple);border-color:rgba(167,139,250,.3)}
+    .contact{padding:100px 0;background:var(--primary);color:#fff;position:relative;overflow:hidden}
+    .contact::before{content:'';position:absolute;top:-50%;left:-20%;width:500px;height:500px;background:rgba(200,149,108,.1);border-radius:50%;filter:blur(80px)}
+    .contact .section-label{color:var(--accent-light)}.contact .section-title{color:#fff}.contact .section-desc{color:rgba(255,255,255,.7)}
+    .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;margin-top:48px}
+    .contact-item{text-align:center;padding:32px 20px;background:rgba(255,255,255,.06);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,.08);transition:all .3s}
+    .contact-item:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)}
+    .contact-item i{font-size:1.4rem;color:var(--accent-light);margin-bottom:16px;display:block}
+    .contact-item h4{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;margin-bottom:6px}
+    .contact-item p{font-size:.82rem;color:rgba(255,255,255,.6)}
 
-.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--radius-sm);font-size:.82rem;font-weight:600;transition:all .2s}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--primary-light)}
-.btn-ghost{background:var(--bg3);color:var(--text-muted);border:1px solid var(--border)}
-.btn-ghost:hover{border-color:var(--primary);color:var(--primary-light)}
-.btn-danger{background:rgba(224,90,90,.15);color:var(--red);border:1px solid rgba(224,90,90,.3)}
-.btn-danger:hover{background:rgba(224,90,90,.25)}
+    footer{padding:40px 0;background:#1A2E26;color:rgba(255,255,255,.5);text-align:center;font-size:.82rem;position:relative;z-index:1}
+    footer .social-links{display:flex;justify-content:center;gap:16px;margin-bottom:16px}
+    footer .social-links a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);transition:all .3s}
+    footer .social-links a:hover{background:var(--accent);color:#fff;transform:translateY(-2px)}
 
-.filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.search-box{position:relative;flex:1;min-width:160px}
-.search-box i{position:absolute;top:50%;transform:translateY(-50%);right:10px;color:var(--text-faint);font-size:.82rem}
-.search-box input{width:100%;padding:8px 32px 8px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.85rem;outline:none}
-.search-box input:focus{border-color:var(--primary)}
-.filter-bar select{padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.82rem;outline:none;cursor:pointer;max-width:140px}
+    .toast-container{position:fixed;top:80px;left:50%;transform:translateX(-50%);z-index:2000;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+    .toast{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 24px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;font-size:.9rem;font-weight:500;animation:ti .4s ease,to .4s 2.6s ease forwards;pointer-events:all}
+    .toast i{color:var(--primary);font-size:1.1rem}
+    .toast.error i{color:#E05A5A}
+    @keyframes ti{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes to{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-20px)}}
 
-.classes-grid{display:grid;grid-template-columns:1fr;gap:14px}
-.class-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
-.cc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
-.cc-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.cc-name{font-size:1rem;font-weight:700;margin-bottom:4px}
-.cc-loc{font-size:.75rem;color:var(--text-muted);display:flex;align-items:center;gap:5px;margin-bottom:10px}
-.cc-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
-.cc-stat{text-align:center}
-.cc-stat .val{font-size:1rem;font-weight:700;color:var(--text)}
-.cc-stat .lbl{font-size:.68rem;color:var(--text-muted)}
-.progress-bar{height:5px;background:var(--bg3);border-radius:5px;margin-top:8px;overflow:hidden}
-.progress-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+    .reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.4,0,.2,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
 
-.dash-grid{display:flex;flex-direction:column;gap:16px;margin-bottom:20px}
-.chart-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
-.chart-card h3{font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:16px}
-.metric-list{display:flex;flex-direction:column;gap:8px}
-.metric-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm)}
-.metric-item .m-label{font-size:.82rem;color:var(--text-muted);display:flex;align-items:center;gap:8px}
-.metric-item .m-label i{color:var(--accent);width:14px;text-align:center}
-.metric-item .m-val{font-size:.88rem;font-weight:700}
-
-.form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:.78rem;color:var(--text-muted);margin-bottom:5px;font-weight:600}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 13px;background:var(--bg3);border:1.5px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.87rem;transition:border-color .3s;outline:none}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary)}
-.form-group textarea{resize:vertical;min-height:70px}
-.form-group input[type="date"]{color-scheme:dark}
-.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.form-hint{font-size:.72rem;color:var(--text-faint);margin-top:4px}
-
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;opacity:0;visibility:hidden;transition:all .3s;backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;padding:0}
-.modal-overlay.open{opacity:1;visibility:visible}
-.modal{background:var(--card);border:1px solid var(--border);border-radius:20px 20px 0 0;padding:24px 20px;width:100%;max-width:100%;box-shadow:0 -20px 60px rgba(0,0,0,.5);transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto}
-.modal-overlay.open .modal{transform:translateY(0)}
-.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.modal-head h2{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700}
-.modal-close{width:32px;height:32px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;color:var(--text-muted)}
-.modal-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
-
-.toast-container{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:90%;max-width:320px}
-.toast{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:.85rem;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);animation:tin .3s ease,tout .3s 2.7s ease forwards;pointer-events:all}
-.toast i{font-size:1rem}
-.toast.success{border-color:rgba(76,175,125,.3)}.toast.success i{color:var(--green)}
-.toast.error{border-color:rgba(224,90,90,.3)}.toast.error i{color:var(--red)}
-@keyframes tin{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes tout{from{opacity:1}to{opacity:0}}
-
-.loading-row td{text-align:center;padding:40px;color:var(--text-muted)}
-.spinner{display:inline-block;width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:8px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.empty-state{text-align:center;padding:40px 20px;color:var(--text-muted)}
-.empty-state i{font-size:2.5rem;margin-bottom:12px;opacity:.3;display:block}
-
-/* ── CREDITS BOX ── */
-.credits-box{background:var(--bg3);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--border);margin-bottom:12px}
-.credits-box .cb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.credits-box .cb-num{font-size:1.8rem;font-weight:800;color:var(--primary-light);line-height:1}
-.credits-box .cb-lbl{font-size:.72rem;color:var(--text-muted);margin-top:2px}
-.credits-box .cb-expiry{font-size:.72rem;color:var(--text-faint)}
-.credits-box .cb-expiry.expired{color:var(--red)}
-.credits-box .cb-expiry.soon{color:var(--yellow)}
-.attend-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--radius-sm);font-size:.78rem;font-weight:700;background:rgba(76,175,125,.15);color:var(--green);border:1px solid rgba(76,175,125,.3);cursor:pointer;transition:all .2s}
-.attend-btn:hover{background:rgba(76,175,125,.25)}
-
-/* ── PAYMENT BADGE ── */
-.pay-paid{color:var(--green);font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;gap:4px}
-.pay-pending{color:var(--yellow);font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;gap:4px}
-
-/* ── INSTAPAY INFO ── */
-.instapay-info{background:rgba(91,143,249,.08);border:1px solid rgba(91,143,249,.2);border-radius:var(--radius-sm);padding:12px 14px;font-size:.82rem;color:var(--text-muted);margin-top:8px;display:flex;align-items:flex-start;gap:10px}
-.instapay-info i{color:var(--blue);margin-top:2px;flex-shrink:0}
-
-@media(min-width:900px){
-  .sidebar{transform:translateX(0)}
-  .main{margin-right:var(--sidebar-w)}
-  .content{padding:28px}
-  .stats-row{grid-template-columns:repeat(4,1fr);gap:16px}
-  .classes-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
-  .dash-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
-  .modal-overlay{align-items:center;padding:24px}
-  .modal{border-radius:20px;max-width:540px;max-height:85vh}
-  .toast-container{left:24px;transform:none;width:auto;max-width:300px}
-  .mob-toggle{display:none!important}
-}
-</style>
+    @media(max-width:968px){
+      .nav-links,.nav-cta{display:none}.hamburger{display:flex}
+      .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+      .hero-text{margin:0 auto 36px}.hero-actions{justify-content:center}.hero-stats{justify-content:center}
+      .hero-visual{max-width:400px;margin:0 auto}
+      .hero-float-card.card-1{left:-10px}.hero-float-card.card-2{right:-10px}
+      .booking-grid,.about-grid{grid-template-columns:1fr;gap:40px}
+      .about-img{max-width:400px;margin:0 auto}
+    }
+    @media(max-width:480px){.hero-stats{gap:24px}.form-row{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="loginScreen">
-  <div class="login-box">
-    <div class="login-logo"><i class="fa-solid fa-spa"></i><span>Align by Enjy</span></div>
-    <h2>لوحة الإدارة</h2>
-    <p>تسجيل الدخول للمتابعة</p>
-    <div class="lf-group"><label>البريد الإلكتروني</label><input type="email" id="loginUser" placeholder="email@example.com" autocomplete="email" dir="ltr"></div>
-    <div class="lf-group"><label>كلمة المرور</label><input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"></div>
-    <button class="btn-login" onclick="doLogin()"><i class="fa-solid fa-right-to-bracket"></i> دخول</button>
-    <div class="login-err" id="loginErr"></div>
+  <div class="bg-orbs" aria-hidden="true"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">
+        <i class="fa-solid fa-spa" style="color:#C4973B;font-size:1.3rem"></i>
+        <div style="line-height:1">Align by Enjy<span style="display:block;font-size:.6rem;color:#C4973B;letter-spacing:2px;text-transform:uppercase;margin-top:4px">Balance. Heal. Transform.</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#programs">الكلاسات</a></li>
+        <li><a href="#retreats">الريتريتس</a></li>
+        <li><a href="#about">عنّي</a></li>
+        <li><a href="#testimonials">الآراء</a></li>
+        <li><a href="#booking">حجز</a></li>
+      </ul>
+      <a href="#booking" class="nav-cta">احجز جلسة</a>
+      <button class="hamburger" id="hamburger" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#hero">الرئيسية</a>
+    <a href="#programs">الكلاسات</a>
+    <a href="#retreats">الريتريتس</a>
+    <a href="#about">عنّي</a>
+    <a href="#testimonials">الآراء</a>
+    <a href="#booking">حجز جلسة</a>
   </div>
-</div>
 
-<div id="sidebarOverlay" onclick="closeSidebar()"></div>
-
-<div class="layout" id="appLayout" style="display:none">
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-head">
-      <div class="sidebar-logo"><i class="fa-solid fa-spa"></i><div><span class="name">Align by Enjy</span><span class="sub">Admin Dashboard</span></div></div>
-    </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section">
-        <div class="nav-section-label">الرئيسية</div>
-        <div class="nav-item active" onclick="goPage(&#39;dashboard&#39;,this)"><i class="fa-solid fa-chart-pie"></i> نظرة عامة</div>
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge"><i class="fa-solid fa-circle-check"></i> معتمدة دولياً في اليوجا</div>
+        <h1>اكتشفي <span class="highlight">توازنك</span> مع اليوجا</h1>
+        <p class="hero-text">رحلة تحوّلية نحو التوازن الجسدي والذهني. جلسات يوجا مخصصة تناسب مستواكِ وأهدافكِ في مساحة آمنة وداعمة.</p>
+        <div class="hero-actions">
+          <a href="#booking" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> ابدأي رحلتك</a>
+          <a href="#programs" class="btn-outline"><i class="fa-solid fa-play"></i> تعرفي على الكلاسات</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><h3 id="statStudents">0</h3><p>متدربة سعيدة</p></div>
+          <div class="stat-item"><h3 id="statYears">0</h3><p>سنوات خبرة</p></div>
+          <div class="stat-item"><h3 id="statSessions">0</h3><p>جلسة مكتملة</p></div>
+        </div>
       </div>
-      <div class="nav-section">
-        <div class="nav-section-label">إدارة</div>
-        <div class="nav-item" onclick="goPage(&#39;bookings&#39;,this)"><i class="fa-solid fa-calendar-check"></i> الحجوزات<span class="nav-badge" id="newBadge">3</span></div>
-        <div class="nav-item" onclick="goPage(&#39;classes&#39;,this)"><i class="fa-solid fa-dumbbell"></i> الكلاسات والأسعار</div>
-        <div class="nav-item" onclick="goPage(&#39;retreats&#39;,this)"><i class="fa-solid fa-mountain-sun"></i> الريتريتس</div>
-        <div class="nav-item" onclick="goPage(&#39;students&#39;,this)"><i class="fa-solid fa-users"></i> المتدربات والرصيد</div>
-      </div>
-      <div class="nav-section">
-        <div class="nav-section-label">تقارير</div>
-        <div class="nav-item" onclick="goPage(&#39;stats&#39;,this)"><i class="fa-solid fa-chart-line"></i> الإحصائيات</div>
-      </div>
-    </nav>
-    <div class="sidebar-foot">
-      <div class="admin-profile">
-        <div class="ap-av">إ</div>
-        <div><div class="ap-name">إنجي عبد المنعم</div><div class="ap-role">مديرة الموقع</div></div>
-        <button class="ap-out" title="خروج" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+      <div class="hero-visual">
+        <div class="hero-img-wrapper"><img src="hero.jpg" alt="إنجي في وضع التأمل" loading="eager" onerror="this.src=&#39;https://picsum.photos/seed/yogahero/600/750&#39;"></div>
+        <div class="hero-float-card card-1"><div class="fc-icon"><i class="fa-solid fa-heart-pulse"></i></div><div class="fc-text"><strong>مرونة أفضل</strong>تحسّن ملحوظ خلال 4 أسابيع</div></div>
+        <div class="hero-float-card card-2"><div class="fc-icon"><i class="fa-solid fa-leaf"></i></div><div class="fc-text"><strong>تأمل يومي</strong>15 دقيقة توازن ذهني</div></div>
       </div>
     </div>
-  </aside>
+  </section>
 
-  <div class="main">
-    <div class="topbar">
-      <button class="topbar-btn mob-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
-      <span class="page-title" id="pageTitle">نظرة عامة</span>
-      <div class="topbar-right">
-        <button class="topbar-btn" id="syncBtn" title="مزامنة"><i class="fa-solid fa-rotate-right"></i></button>
-        <a href="index.html" target="_blank" class="topbar-btn" title="فتح الموقع"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      </div>
-    </div>
-
-    <div class="content">
-
-      <!-- DASHBOARD -->
-      <div class="page active" id="page-dashboard">
-        <div class="stats-row">
-          <div class="stat-card">
-            <div class="stat-icon" style="background:rgba(61,140,106,.15);color:var(--green)"><i class="fa-solid fa-users"></i></div>
-            <h3 id="sc1">3</h3><p>متدربة فريدة</p>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:rgba(200,149,108,.15);color:var(--accent)"><i class="fa-solid fa-calendar-check"></i></div>
-            <h3 id="sc2">3</h3><p>إجمالي الحجوزات</p>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:rgba(91,143,249,.15);color:var(--blue)"><i class="fa-solid fa-clock-rotate-left"></i></div>
-            <h3 id="sc3">3</h3><p>حجوزات جديدة</p>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:rgba(240,180,41,.12);color:var(--yellow)"><i class="fa-solid fa-star"></i></div>
-            <h3>4.9</h3><p>متوسط التقييم</p>
+  <!-- PROGRAMS -->
+  <section class="programs" id="programs">
+    <div class="container">
+      <div class="reveal"><span class="section-label">الكلاسات</span><h2 class="section-title">اختاري كلاسكِ المناسب</h2><p class="section-desc">كل كلاس مصمم بعناية ليناسب احتياجاتكِ المختلفة. اختاري واحد واحجزي مكانكِ.</p></div>
+      <div class="programs-grid">
+        <div class="program-card reveal">
+          <div class="program-card-img"><img src="https://picsum.photos/seed/powerclass/500/350" alt="Power Yoga"><span class="program-level">Ladies Only</span></div>
+          <div class="program-card-body">
+            <h3>Power Yoga</h3>
+            <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot" style="font-size:.75rem"></i> Royal Hills Clubhouse</p>
+            <p style="margin-bottom:14px">تحدي جسدي مكثف يبني القوة والمرونة. تدفق سريع بين الوضعيات مع تنفس متزامن.</p>
+            <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar" style="font-size:.75rem"></i> الأحد والأربعاء — 11 صباحاً</div>
+            <div class="program-meta"><span><i class="fa-solid fa-ticket"></i> جلسة: 400 ج.م</span><span><i class="fa-solid fa-layer-group"></i> 4 كلاسات: 1,500</span><span><i class="fa-solid fa-boxes-stacked"></i> 8 كلاسات: 2,800</span></div>
           </div>
         </div>
+        <div class="program-card reveal">
+          <div class="program-card-img"><img src="https://picsum.photos/seed/diabetesclass/500/350" alt="Yoga for Diabetes"><span class="program-level">متخصصة</span></div>
+          <div class="program-card-body">
+            <h3>Yoga for Diabetes</h3>
+            <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot" style="font-size:.75rem"></i> Royal Hills</p>
+            <p style="margin-bottom:14px">تمارين يوجا متخصصة تساعد في تنظيم السكر والغدة الدرقية. جلسات هادئة مع تنفس موجّه.</p>
+            <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar" style="font-size:.75rem"></i> الاثنين والأربعاء — 7:30 مساءً</div>
+            <div class="program-meta"><span><i class="fa-solid fa-ticket"></i> جلسة: 400 ج.م</span><span><i class="fa-solid fa-layer-group"></i> 4 كلاسات: 1,500</span></div>
+          </div>
+        </div>
+        <div class="program-card reveal">
+          <div class="program-card-img"><img src="https://picsum.photos/seed/gentleclass/500/350" alt="Gentle Yoga"><span class="program-level">جميع المستويات</span></div>
+          <div class="program-card-body">
+            <h3>Gentle Yoga</h3>
+            <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot" style="font-size:.75rem"></i> Pyramids Heights</p>
+            <p style="margin-bottom:14px">يوجا ناعمة ولطيفة مثالية للمبتدئات. تركيز على الاسترخاء والمرونة البسيطة.</p>
+            <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar" style="font-size:.75rem"></i> الموعد سيتم تحديده قريباً</div>
+            <div class="program-meta"><span><i class="fa-solid fa-ticket"></i> جلسة: 350 ج.م</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="dash-grid">
-          <div>
-            <div class="section-head">
-              <div><h2>آخر الحجوزات</h2><p>الحجوزات الواردة من الموقع</p></div>
-              <button class="btn btn-ghost" onclick="goPage(&#39;bookings&#39;,null)"><i class="fa-solid fa-arrow-left"></i> الكل</button>
+  <!-- RETREATS -->
+  <section class="retreats" id="retreats">
+    <div class="container">
+      <div class="reveal" style="text-align:center">
+        <span class="section-label">رحلات اليوجا</span>
+        <h2 class="section-title">الريتريتس</h2>
+        <p class="section-desc" style="margin:0 auto 48px">تجربة روحانية كاملة بعيداً عن ضجيج الحياة. أيام من اليوجا والتأمل في أجمل الوجهات.</p>
+      </div>
+      <div id="retreatsList">
+        <!-- تُحمّل من Firebase تلقائياً -->
+        <div class="retreats-coming reveal">
+          <i class="fa-solid fa-mountain-sun"></i>
+          <p>رحلات الريتريت القادمة ستُعلَن قريباً!</p>
+          <p style="font-size:.82rem;margin-top:8px;opacity:.6">سجّلي اهتمامكِ وسنتواصل معكِ عند الإعلان</p>
+          <a href="#booking" class="btn-retreat" style="display:inline-flex;margin-top:20px"><i class="fa-solid fa-bell"></i> أبلغيني عند الإطلاق</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="reveal"><span class="section-label">تجارب حقيقية</span><h2 class="section-title">ماذا تقول متدرباتنا</h2><p class="section-desc">قصص تحوّل حقيقية من متدربات غيّرت اليوجا حياتهن.</p></div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal"><div class="tq">"</div><div class="tstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>الـ Power Yoga غيّرت لي شكل جسمي بالكامل في شهرين. إنجي بتشجعكِ وتدفعكِ تطلعي من منطقة الراحة.</p><div class="ta"><img src="https://picsum.photos/seed/nora24/100/100" alt="نورة"><div><div class="tan">نورة العتيبي</div><div class="tar">Power Yoga</div></div></div></div>
+        <div class="testimonial-card reveal"><div class="tq">"</div><div class="tstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>كلاس السكري غيّر مستوى السكر عندي بشكل ملحوظ. الدكتور لاحظ الفرق وأنا استمرت لأنه فعلاً بيفرق.</p><div class="ta"><img src="https://picsum.photos/seed/sara90/100/100" alt="سارة"><div><div class="tan">سارة أحمد</div><div class="tar">Yoga for Diabetes</div></div></div></div>
+        <div class="testimonial-card reveal"><div class="tq">"</div><div class="tstars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>الـ Gentle Yoga كانت بدايتي وخلاص دلوقتي بقيت أقدر أعمل حاجات ما كنتش متخيلها. شكراً إنجي.</p><div class="ta"><img src="https://picsum.photos/seed/layla57/100/100" alt="ليلى"><div><div class="tan">ليلى حسن</div><div class="tar">Gentle Yoga</div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img reveal"><img src="https://picsum.photos/seed/enjyteacher/600/800" alt="إنجي عبد المنعم"><div class="about-exp"><div class="num">8+</div><div class="label">سنوات خبرة</div></div></div>
+        <div class="about-content reveal">
+          <span class="section-label">عنّي</span>
+          <h2 class="section-title">إنجي عبد المنعم</h2>
+          <p>بدأت رحلتي مع اليوجا عام 2016 في ريشيكيش بالهند، حيث حصلت على شهادة RYT-500 من Yoga Alliance. منذ ذلك الحين، درّبت أكثر من 500 متدربة. أؤمن أن اليوجا ليست مجرد تمارين جسدية، بل هي أسلوب حياة يغيّر العلاقة مع الجسد والذهن.</p>
+          <div class="about-certs"><span class="cert-badge"><i class="fa-solid fa-certificate"></i> RYT-500</span><span class="cert-badge"><i class="fa-solid fa-certificate"></i> براناياما متقدم</span><span class="cert-badge"><i class="fa-solid fa-certificate"></i> يوجا طبية</span><span class="cert-badge"><i class="fa-solid fa-certificate"></i> ميوفاسيل</span></div>
+          <a href="#booking" class="btn-primary"><i class="fa-solid fa-hand-holding-heart"></i> احجزي معي جلسة تجريبية</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking" id="booking">
+    <div class="container">
+      <div class="reveal"><span class="section-label">احجز الآن</span><h2 class="section-title">ابدأي رحلتك اليوم</h2><p class="section-desc">املئي النموذج وسنتواصل معكِ خلال 24 ساعة لترتيب أول جلسة.</p></div>
+      <div class="booking-grid reveal">
+        <div class="booking-info">
+          <h3>لماذا تختارين Align by Enjy؟</h3>
+          <p>كل جلسة مصممة خصيصاً لاحتياجاتكِ مع اهتمام شخصي كامل.</p>
+          <div class="booking-perks">
+            <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-user-check"></i></div><div class="perk-text"><h4>اهتمام شخصي</h4><p>جلسات فردية أو مجموعات صغيرة لا تتجاوز 6 متدربات</p></div></div>
+            <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-shield-heart"></i></div><div class="perk-text"><h4>أمان ومرونة</h4><p>تعديل الوضعيات حسب قدراتكِ الجسدية بأمان تام</p></div></div>
+            <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-gift"></i></div><div class="perk-text"><h4>جلسة تجريبية مجانية</h4><p>أول جلسة مجانية لتقييم مستواكِ وتحديد البرنامج المناسب</p></div></div>
+            <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-mobile-screen"></i></div><div class="perk-text"><h4>دفع سهل عبر InstaPay</h4><p>سددي رسوم الكلاسات بكل سهولة عبر InstaPay</p></div></div>
+          </div>
+        </div>
+        <div class="booking-form">
+          <div id="bookingFormSection">
+            <div class="form-row"><div class="form-group"><label>الاسم الأول</label><input type="text" id="fname" placeholder="مثال: نورة" required=""></div><div class="form-group"><label>الاسم الأخير</label><input type="text" id="lname" placeholder="مثال: العتيبي" required=""></div></div>
+            <div class="form-row"><div class="form-group"><label>رقم الجوال</label><input type="tel" id="phone" placeholder="01XXXXXXXX" required="" dir="ltr"></div><div class="form-group"><label>البريد الإلكتروني</label><input type="email" id="email" placeholder="name@example.com" required="" dir="ltr"></div></div>
+            <div class="form-group"><label>الكلاس المفضل</label><select id="program" required="">
+              <option value="" disabled="" selected="">اختاري الكلاس</option>
+              <option value="power">Power Yoga — 400 ج (جلسة)</option>
+              <option value="diabetes">Yoga for Diabetes — 400 ج (جلسة)</option>
+              <option value="gentle">Gentle Yoga — 350 ج (جلسة)</option>
+              <option value="retreats">الريتريتس</option>
+            </select></div>
+            <div class="form-group"><label>مستواكِ الحالي في اليوجا</label><select id="level" required="">
+              <option value="" disabled="" selected="">اختاري المستوى</option>
+              <option value="beginner">مبتدئة تماماً</option>
+              <option value="some">تمارستها قليلاً</option>
+              <option value="intermediate">متوسطة</option>
+              <option value="advanced">متقدمة</option>
+            </select></div>
+            <div class="form-group">
+              <label><i class="fa-regular fa-calendar" style="color:var(--accent);margin-left:5px"></i>التاريخ المفضل للجلسة الأولى</label>
+              <input type="date" id="sessionDate" min="2026-03-30">
+              <p class="form-hint"><i class="fa-solid fa-circle-info"></i> هذا تاريخ مقترح وسنتواصل معكِ لتأكيده</p>
             </div>
-            <div class="table-wrap">
-              <table><thead><tr><th>الاسم</th><th>الكلاس</th><th>تاريخ الجلسة</th><th>الدفع</th><th>الحالة</th><th></th></tr></thead>
-              <tbody id="dashBookings"><tr>
-      <td><strong>Hayam Gebril</strong></td>
-      <td style="font-size:.8rem">Gentle Yoga</td>
-      <td style="font-size:.75rem;color:var(--text-muted)">2026-03-30</td>
-      <td><span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span></td>
-      <td><span class="badge blue">جديد</span></td>
-      <td><div class="action-btns">
-        <button class="act-btn view" onclick="quickStatus(&#39;-OozzEqek4SAJ7p-KHAD&#39;,&#39;confirmed&#39;)" title="تأكيد"><i class="fa-solid fa-check"></i></button>
-        <button class="act-btn wa" onclick="waContact(&#39;01017698881&#39;,&#39;Hayam&#39;)" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-      </div></td>
-    </tr><tr>
-      <td><strong>Hoda Elsorogy</strong></td>
-      <td style="font-size:.8rem">Gentle Yoga</td>
-      <td style="font-size:.75rem;color:var(--text-muted)">2026-03-30</td>
-      <td><span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span></td>
-      <td><span class="badge blue">جديد</span></td>
-      <td><div class="action-btns">
-        <button class="act-btn view" onclick="quickStatus(&#39;-Oozm95YF-0RW9cGUR2l&#39;,&#39;confirmed&#39;)" title="تأكيد"><i class="fa-solid fa-check"></i></button>
-        <button class="act-btn wa" onclick="waContact(&#39;01006067700&#39;,&#39;Hoda&#39;)" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-      </div></td>
-    </tr><tr>
-      <td><strong>Enjy Gebril</strong></td>
-      <td style="font-size:.8rem">Power Yoga</td>
-      <td style="font-size:.75rem;color:var(--text-muted)">2026-03-30</td>
-      <td><span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span></td>
-      <td><span class="badge blue">جديد</span></td>
-      <td><div class="action-btns">
-        <button class="act-btn view" onclick="quickStatus(&#39;-Oozaw01qLuv6lkx1mrb&#39;,&#39;confirmed&#39;)" title="تأكيد"><i class="fa-solid fa-check"></i></button>
-        <button class="act-btn wa" onclick="waContact(&#39;01063751653&#39;,&#39;Enjy&#39;)" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-      </div></td>
-    </tr></tbody></table>
+            <div class="form-group"><label>ملاحظات إضافية (اختياري)</label><textarea id="notes" placeholder="أي إصابات أو ظروف صحية نراعيها..."></textarea></div>
+            <button type="button" class="btn-submit" id="submitBtn" onclick="submitBooking()"><i class="fa-solid fa-paper-plane"></i> إرسال طلب الحجز</button>
+          </div>
+
+          <!-- InstaPay Box — تظهر بعد الإرسال -->
+          <div class="instapay-box" id="instapayBox">
+            <div class="ip-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <h4>أرسلي المبلغ عبر InstaPay</h4>
+            <p>تم استلام طلبكِ بنجاح! لتأكيد حجزكِ، يرجى تحويل رسوم الكلاس على الرقم التالي:</p>
+            <div class="instapay-number">01063751653</div>
+            <div class="instapay-name">إنجي عبد المنعم — Align by Enjy</div>
+            <div class="instapay-note">
+              <strong>بعد التحويل:</strong> أرسلي صورة الإيصال على واتساب 
+              <a href="https://wa.me/201063751653" target="_blank" style="color:var(--accent-light);text-decoration:underline">01063751653</a>
+              مع ذكر اسمكِ واسم الكلاس. سنؤكد حجزكِ خلال ساعات.
             </div>
-          </div>
-          <div>
-            <div class="section-head"><div><h2>توزيع الكلاسات</h2></div></div>
-            <div class="chart-card"><div class="metric-list" id="classDistMetrics">
-    <div class="metric-item">
-      <span class="m-label"><i class="fa-solid fa-circle" style="color:var(--green)"></i>Power Yoga</span>
-      <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:60px;height:5px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:var(--green);width:33%;border-radius:6px"></div></div>
-        <span class="m-val">1</span>
-      </div>
-    </div>
-    <div class="metric-item">
-      <span class="m-label"><i class="fa-solid fa-circle" style="color:var(--blue)"></i>Gentle Yoga</span>
-      <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:60px;height:5px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:var(--blue);width:67%;border-radius:6px"></div></div>
-        <span class="m-val">2</span>
-      </div>
-    </div></div></div>
+            <a href="https://wa.me/201063751653" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;background:#25D366;color:#fff;padding:12px 24px;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem">
+              <i class="fa-brands fa-whatsapp"></i> إرسال الإيصال على واتساب
+            </a>
           </div>
         </div>
-
-        <div class="section-head"><div><h2>إجراءات سريعة</h2></div></div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="openModal(&#39;addBooking&#39;)"><i class="fa-solid fa-plus"></i> إضافة حجز</button>
-          <button class="btn btn-ghost" onclick="goPage(&#39;classes&#39;,null)"><i class="fa-solid fa-dumbbell"></i> الكلاسات</button>
-          <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i> تصدير</button>
-        </div>
       </div>
-
-      <!-- BOOKINGS -->
-      <div class="page" id="page-bookings">
-        <div class="filter-bar">
-          <div class="search-box"><i class="fa-solid fa-search"></i><input type="text" placeholder="بحث..." oninput="filterBookings()" id="bookSearch"></div>
-          <select onchange="filterBookings()" id="bookFilter">
-            <option value="">كل الكلاسات</option>
-            <option value="power">Power Yoga</option>
-            <option value="diabetes">Yoga for Diabetes</option>
-            <option value="gentle">Gentle Yoga</option>
-            <option value="retreats">الريتريتس</option>
-          </select>
-          <select onchange="filterBookings()" id="statusFilter">
-            <option value="">كل الحالات</option>
-            <option value="new">جديد</option>
-            <option value="confirmed">مؤكد</option>
-            <option value="done">مكتمل</option>
-            <option value="cancelled">ملغي</option>
-          </select>
-          <select onchange="filterBookings()" id="payFilter">
-            <option value="">كل المدفوعات</option>
-            <option value="paid">مدفوع</option>
-            <option value="pending">معلق</option>
-          </select>
-          <button class="btn btn-primary" onclick="openModal(&#39;addBooking&#39;)"><i class="fa-solid fa-plus"></i></button>
-          <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i></button>
-        </div>
-        <div class="table-wrap">
-          <table><thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاس</th><th>تاريخ الجلسة</th><th>الدفع</th><th>الحالة</th><th></th></tr></thead>
-          <tbody id="bookingsTable"><tr class="loading-row"><td colspan="8"><div class="spinner"></div><br>جاري التحميل...</td></tr></tbody></table>
-        </div>
-        <div id="bookEmpty" class="empty-state" style="display:none"><i class="fa-solid fa-calendar-xmark"></i><p>لا توجد حجوزات</p></div>
-      </div>
-
-      <!-- CLASSES -->
-      <div class="page" id="page-classes">
-        <div class="section-head">
-          <div><h2>إدارة الكلاسات والأسعار</h2></div>
-          <button class="btn btn-primary" onclick="openModal(&#39;addClass&#39;)"><i class="fa-solid fa-plus"></i> جديد</button>
-        </div>
-        <div class="classes-grid" id="classesGrid"></div>
-      </div>
-
-      <!-- RETREATS -->
-      <div class="page" id="page-retreats">
-        <div class="section-head">
-          <div><h2>إدارة الريتريتس</h2><p>رحلات اليوجا والتأمل</p></div>
-          <button class="btn btn-primary" onclick="openModal(&#39;addRetreat&#39;)"><i class="fa-solid fa-plus"></i> إضافة ريتريت</button>
-        </div>
-        <div class="classes-grid" id="retreatsGrid"></div>
-      </div>
-
-      <!-- STUDENTS -->
-      <div class="page" id="page-students">
-        <div class="filter-bar">
-          <div class="search-box"><i class="fa-solid fa-search"></i><input type="text" placeholder="بحث..." oninput="filterStudents(this.value)"></div>
-          <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i> تصدير</button>
-        </div>
-        <div class="table-wrap">
-          <table><thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاسات</th><th>الرصيد المتبقي</th><th>انتهاء الصلاحية</th><th>عدد الحضور</th><th></th></tr></thead>
-          <tbody id="studentsTable"></tbody></table>
-        </div>
-      </div>
-
-      <!-- STATS -->
-      <div class="page" id="page-stats">
-        <div class="stats-row" style="margin-bottom:20px">
-          <div class="stat-card"><div class="stat-icon" style="background:rgba(61,140,106,.15);color:var(--green)"><i class="fa-solid fa-users"></i></div><h3 id="st1">—</h3><p>إجمالي المتدربات</p></div>
-          <div class="stat-card"><div class="stat-icon" style="background:rgba(200,149,108,.15);color:var(--accent)"><i class="fa-solid fa-calendar-check"></i></div><h3 id="st2">—</h3><p>إجمالي الحجوزات</p></div>
-          <div class="stat-card"><div class="stat-icon" style="background:rgba(91,143,249,.15);color:var(--blue)"><i class="fa-solid fa-clock-rotate-left"></i></div><h3 id="st3">—</h3><p>حجوزات جديدة</p></div>
-          <div class="stat-card"><div class="stat-icon" style="background:rgba(76,175,125,.15);color:var(--green)"><i class="fa-solid fa-circle-check"></i></div><h3 id="st4">—</h3><p>حجوزات مؤكدة</p></div>
-        </div>
-        <div class="chart-card">
-          <h3 style="margin-bottom:14px">توزيع الكلاسات</h3>
-          <div class="metric-list" id="statsDistList"></div>
-        </div>
-      </div>
-
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <div class="modal-head"><h2 id="modalTitle">عنوان</h2><button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button></div>
-    <div id="modalBody"></div>
-    <div class="modal-foot" id="modalFoot"></div>
-  </div>
-</div>
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="reveal" style="text-align:center"><span class="section-label">تواصلي معنا</span><h2 class="section-title">نحن هنا لمساعدتكِ</h2><p class="section-desc" style="margin:0 auto 48px">لا تترددي في التواصل لأي استفسار عن الكلاسات أو المواعيد.</p></div>
+      <div class="contact-grid reveal">
+        <a href="https://maps.google.com/?q=Pyramids+Heights+Residences+6th+October" target="_blank" class="contact-item"><i class="fa-solid fa-location-dot"></i><h4>الموقع</h4><p>Pyramids Heights Residences | 6th of October</p></a>
+        <a href="/cdn-cgi/l/email-protection#50153e3a29313234353c3d3f3e353d10373d31393c7e333f3d" class="contact-item"><i class="fa-solid fa-envelope"></i><h4>بريد إلكتروني</h4><p dir="ltr"><span class="__cf_email__" data-cfemail="5e1b3034273f3c3a3b323331303b331e39333f3732703d3133">[email&#160;protected]</span></p></a>
+        <a href="https://wa.me/201063751653" target="_blank" class="contact-item"><i class="fa-brands fa-whatsapp"></i><h4>واتساب</h4><p dir="ltr">01063751653</p></a>
+        <a href="tel:+201063751653" class="contact-item"><i class="fa-solid fa-phone"></i><h4>اتصال</h4><p dir="ltr">01063751653</p></a>
+      </div>
+    </div>
+  </section>
 
-<div class="toast-container" id="toastContainer"></div>
+  <footer>
+    <div class="social-links"><a href="#" aria-label="إنستغرام"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="تيك توك"><i class="fa-brands fa-tiktok"></i></a><a href="#" aria-label="يوتيوب"><i class="fa-brands fa-youtube"></i></a></div>
+    <p>جميع الحقوق محفوظة لـ Align by Enjy © 2026</p>
+  </footer>
 
-<!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, push, onValue, update, remove, serverTimestamp, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  <div class="toast-container" id="toastContainer"></div>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyB7xZSiGqTh4ncnHcvFBx8ufwPudpEEl50",
-    authDomain: "align-by-enjy.firebaseapp.com",
-    databaseURL: "https://align-by-enjy-default-rtdb.firebaseio.com",
-    projectId: "align-by-enjy",
-    storageBucket: "align-by-enjy.firebasestorage.app",
-    messagingSenderId: "355777857468",
-    appId: "1:355777857468:web:20b15a19f526db02578db9"
-  };
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  const auth = getAuth(app);
+    const firebaseConfig = {
+      apiKey: "AIzaSyB7xZSiGqTh4ncnHcvFBx8ufwPudpEEl50",
+      authDomain: "align-by-enjy.firebaseapp.com",
+      databaseURL: "https://align-by-enjy-default-rtdb.firebaseio.com",
+      projectId: "align-by-enjy",
+      storageBucket: "align-by-enjy.firebasestorage.app",
+      messagingSenderId: "355777857468",
+      appId: "1:355777857468:web:20b15a19f526db02578db9"
+    };
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      document.getElementById('loginScreen').classList.add('hidden');
-      document.getElementById('appLayout').style.display = 'flex';
-      renderClasses();
-    } else {
-      document.getElementById('loginScreen').classList.remove('hidden');
-      document.getElementById('appLayout').style.display = 'none';
-    }
-  });
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
 
-  window.fbSignIn = async (email, password) => {
-    await signInWithEmailAndPassword(auth, email, password);
-  };
-  window.fbSignOut = async () => {
-    await signOut(auth);
-  };
-
-  // ── Bookings ──
-  window._fbRef = ref(db, 'bookings');
-  onValue(window._fbRef, (snapshot) => {
-    const data = snapshot.val();
-    window.bookings = [];
-    if (data) {
-      Object.entries(data).forEach(([key, val]) => {
-        window.bookings.push({ ...val, _key: key });
-      });
-      window.bookings.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-    }
-    window.onBookingsLoaded();
-  });
-
-  // ── Credits ──
-  onValue(ref(db, 'credits'), (snapshot) => {
-    window.creditsData = snapshot.val() || {};
-    window.onCreditsLoaded && window.onCreditsLoaded();
-  });
-
-  // ── Retreats ──
-  onValue(ref(db, 'retreats'), (snapshot) => {
-    window.retreatsData = [];
-    const data = snapshot.val();
-    if (data) {
-      Object.entries(data).forEach(([key, val]) => {
-        window.retreatsData.push({ ...val, _key: key });
-      });
-    }
-    if (document.querySelector('#page-retreats.active')) renderRetreats();
-  });
-
-  window.fbAddBooking = async (data) => {
-    await push(ref(db, 'bookings'), { ...data, createdAt: serverTimestamp() });
-  };
-  window.fbUpdateStatus = async (key, status) => {
-    await update(ref(db, `bookings/${key}`), { status });
-  };
-  window.fbUpdatePayment = async (key, paymentStatus, paymentRef) => {
-    await update(ref(db, `bookings/${key}`), { paymentStatus, paymentRef: paymentRef || '' });
-  };
-  window.fbDeleteBooking = async (key) => {
-    await remove(ref(db, `bookings/${key}`));
-  };
-
-  // ── Credits functions ──
-  window.fbSetCredits = async (phone, credits, expiry) => {
-    const key = phone.replace(/[^0-9]/g, '');
-    const existing = window.creditsData[key] || { totalAttended: 0 };
-    await update(ref(db, `credits/${key}`), {
-      credits: Number(credits),
-      expiry: expiry,
-      totalAttended: existing.totalAttended || 0,
-      phone: phone
+    // ── Load retreats from Firebase ──
+    onValue(ref(db, 'retreats'), (snapshot) => {
+      const data = snapshot.val();
+      if (!data) return;
+      const retreats = Object.entries(data).map(([k, v]) => ({ ...v, _key: k }));
+      if (retreats.length > 0) renderRetreats(retreats);
     });
-  };
-  window.fbMarkAttendance = async (phone) => {
-    const key = phone.replace(/[^0-9]/g, '');
-    const existing = window.creditsData[key] || { credits: 0, totalAttended: 0 };
-    if ((existing.credits || 0) <= 0) return false;
-    await update(ref(db, `credits/${key}`), {
-      credits: (existing.credits || 0) - 1,
-      totalAttended: (existing.totalAttended || 0) + 1
-    });
-    return true;
-  };
 
-  // ── Retreats functions ──
-  window.fbAddRetreat = async (data) => {
-    await push(ref(db, 'retreats'), { ...data, createdAt: serverTimestamp() });
-  };
-  window.fbUpdateRetreat = async (key, data) => {
-    await update(ref(db, `retreats/${key}`), data);
-  };
-  window.fbDeleteRetreat = async (key) => {
-    await remove(ref(db, `retreats/${key}`));
-  };
-
-  document.getElementById('syncBtn').addEventListener('click', () => {
-    showToast('البيانات محدّثة في الوقت الفعلي ✓', 'success', 'fa-check-circle');
-  });
-  window.addEventListener('beforeunload', (e) => {
-    e.preventDefault();
-    e.returnValue = '';
-  });
-</script>
-
-<script>
-window.bookings = [];
-window.creditsData = {};
-window.retreatsData = [];
-
-let classes = [
-  {id:1,name:'Power Yoga',location:'Royal Hills Clubhouse',schedule:'الأحد والأربعاء — 11 صباحاً',price1:400,price4:1500,price8:2800,capacity:6,enrolled:5,color:'#3D8C6A',icon:'fa-fire'},
-  {id:2,name:'Yoga for Diabetes',location:'Royal Hills',schedule:'الاثنين والأربعاء — 7:30 مساءً',price1:400,price4:1500,price8:null,capacity:6,enrolled:4,color:'#C8956C',icon:'fa-heart-pulse'},
-  {id:3,name:'Gentle Yoga',location:'Pyramids Heights',schedule:'يتم تحديد الموعد قريباً',price1:350,price4:null,price8:null,capacity:8,enrolled:2,color:'#5B8FF9',icon:'fa-leaf'},
-];
-
-const programMap = {power:'Power Yoga',diabetes:'Yoga for Diabetes',gentle:'Gentle Yoga',retreats:'الريتريتس'};
-const levelMap = {beginner:'مبتدئة',some:'ممارست قليلاً',intermediate:'متوسطة',advanced:'متقدمة'};
-const statusMap = {new:'جديد',confirmed:'مؤكد',done:'مكتمل',cancelled:'ملغي'};
-const statusBadge = {new:'blue',confirmed:'green',done:'green',cancelled:'red'};
-
-window.onBookingsLoaded = function() {
-  updateBadge();
-  const currentPage = document.querySelector('.page.active')?.id?.replace('page-','');
-  if (currentPage === 'dashboard') renderDashboard();
-  else if (currentPage === 'bookings') renderBookings(window.bookings);
-  else if (currentPage === 'students') renderStudents(buildStudents());
-  else if (currentPage === 'stats') renderStats();
-  updateDashStats();
-};
-
-window.onCreditsLoaded = function() {
-  const currentPage = document.querySelector('.page.active')?.id?.replace('page-','');
-  if (currentPage === 'students') renderStudents(buildStudents());
-};
-
-function updateDashStats() {
-  const b = window.bookings;
-  const uniquePhones = new Set(b.map(x => x.phone)).size;
-  document.getElementById('sc1').textContent = uniquePhones || '0';
-  document.getElementById('sc2').textContent = b.length || '0';
-  document.getElementById('sc3').textContent = b.filter(x => x.status === 'new').length || '0';
-}
-
-function updateBadge() {
-  const n = window.bookings.filter(x => x.status === 'new').length;
-  document.getElementById('newBadge').textContent = n > 0 ? n : '';
-}
-
-// ── LOGIN ──
-async function doLogin() {
-  const email = document.getElementById('loginUser').value.trim();
-  const pass = document.getElementById('loginPass').value.trim();
-  const err = document.getElementById('loginErr');
-  const btn = document.querySelector('.btn-login');
-  if (!email || !pass) { err.textContent = 'يرجى ملء جميع الحقول'; return; }
-  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الدخول...';
-  btn.disabled = true;
-  try {
-    await window.fbSignIn(email, pass);
-  } catch(e) {
-    err.textContent = 'البريد الإلكتروني أو كلمة المرور غلط';
-    setTimeout(() => err.textContent = '', 3000);
-    btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> دخول';
-    btn.disabled = false;
-  }
-}
-document.getElementById('loginPass').addEventListener('keydown', e => e.key === 'Enter' && doLogin());
-document.getElementById('loginUser').addEventListener('keydown', e => e.key === 'Enter' && doLogin());
-async function logout() {
-  await window.fbSignOut();
-}
-
-// ── NAV ──
-const pageTitles = {dashboard:'نظرة عامة',bookings:'الحجوزات',classes:'الكلاسات',retreats:'الريتريتس',students:'المتدربات والرصيد',stats:'الإحصائيات'};
-function goPage(id, el) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  if (el) el.classList.add('active');
-  document.getElementById('pageTitle').textContent = pageTitles[id] || '';
-  closeSidebar();
-  if (id === 'dashboard') { renderDashboard(); updateDashStats(); }
-  else if (id === 'bookings') renderBookings(window.bookings);
-  else if (id === 'classes') renderClasses();
-  else if (id === 'retreats') renderRetreats();
-  else if (id === 'students') renderStudents(buildStudents());
-  else if (id === 'stats') renderStats();
-}
-function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('active')}
-function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('active')}
-
-// ── DASHBOARD ──
-function renderDashboard() {
-  const b = window.bookings;
-  const recent = b.slice(0, 5);
-  const tb = document.getElementById('dashBookings');
-  if (!recent.length) {
-    tb.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:24px">لا توجد حجوزات بعد</td></tr>';
-  } else {
-    tb.innerHTML = recent.map(b => `<tr>
-      <td><strong>${b.fname} ${b.lname}</strong></td>
-      <td style="font-size:.8rem">${programMap[b.program]||b.program}</td>
-      <td style="font-size:.75rem;color:var(--text-muted)">${b.sessionDate||b.date||'—'}</td>
-      <td>${b.paymentStatus==='paid'?`<span class="pay-paid"><i class="fa-solid fa-check-circle"></i>مدفوع</span>`:`<span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span>`}</td>
-      <td><span class="badge ${statusBadge[b.status]||'blue'}">${statusMap[b.status]||b.status}</span></td>
-      <td><div class="action-btns">
-        <button class="act-btn view" onclick="quickStatus('${b._key}','confirmed')" title="تأكيد"><i class="fa-solid fa-check"></i></button>
-        <button class="act-btn wa" onclick="waContact('${b.phone}','${b.fname}')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-      </div></td>
-    </tr>`).join('');
-  }
-
-  const counts = {power:0,diabetes:0,gentle:0,retreats:0};
-  b.forEach(x => { if(counts[x.program]!==undefined) counts[x.program]++; });
-  const total = b.length || 1;
-  document.getElementById('classDistMetrics').innerHTML = Object.entries(counts).filter(([,v])=>v>0).map(([k,v]) => `
-    <div class="metric-item">
-      <span class="m-label"><i class="fa-solid fa-circle" style="color:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':k==='retreats'?'var(--purple)':'var(--blue)'}"></i>${programMap[k]}</span>
-      <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:60px;height:5px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':k==='retreats'?'var(--purple)':'var(--blue)'};width:${Math.round(v/total*100)}%;border-radius:6px"></div></div>
-        <span class="m-val">${v}</span>
-      </div>
-    </div>`).join('') || '<div style="text-align:center;color:var(--text-muted);padding:12px">لا توجد بيانات</div>';
-}
-
-// ── BOOKINGS ──
-function renderBookings(list) {
-  const tb = document.getElementById('bookingsTable');
-  const empty = document.getElementById('bookEmpty');
-  if (!list.length) { tb.innerHTML=''; empty.style.display='block'; return; }
-  empty.style.display = 'none';
-  tb.innerHTML = list.map((b, i) => `<tr>
-    <td style="color:var(--text-muted);font-size:.75rem">${i+1}</td>
-    <td><strong style="font-size:.85rem">${b.fname} ${b.lname}</strong></td>
-    <td dir="ltr" style="color:var(--text-muted);font-size:.78rem">${b.phone}</td>
-    <td style="font-size:.78rem">${programMap[b.program]||b.program}</td>
-    <td style="font-size:.75rem;color:var(--text-muted)">${b.sessionDate||b.date||'—'}</td>
-    <td>
-      ${b.paymentStatus==='paid'
-        ? `<span class="pay-paid"><i class="fa-solid fa-check-circle"></i>مدفوع</span>`
-        : `<button class="btn" style="font-size:.7rem;padding:3px 8px;background:rgba(240,180,41,.1);color:var(--yellow);border:1px solid rgba(240,180,41,.3)" onclick="openPaymentModal('${b._key}','${b.fname} ${b.lname}')"><i class="fa-solid fa-mobile-screen"></i> InstaPay</button>`}
-    </td>
-    <td>
-      <select onchange="changeStatus('${b._key}',this.value)" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:3px 6px;font-size:.75rem;outline:none;font-family:inherit">
-        ${['new','confirmed','done','cancelled'].map(s=>`<option value="${s}"${b.status===s?' selected':''}>${statusMap[s]}</option>`).join('')}
-      </select>
-    </td>
-    <td><div class="action-btns">
-      <button class="act-btn view" onclick="viewBooking('${b._key}')" title="عرض"><i class="fa-solid fa-eye"></i></button>
-      <button class="act-btn wa" onclick="waContact('${b.phone}','${b.fname}')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-      <button class="act-btn del" onclick="deleteBooking('${b._key}')" title="حذف"><i class="fa-solid fa-trash"></i></button>
-    </div></td>
-  </tr>`).join('');
-}
-
-function filterBookings() {
-  const q = (document.getElementById('bookSearch').value||'').toLowerCase();
-  const prog = document.getElementById('bookFilter').value;
-  const stat = document.getElementById('statusFilter').value;
-  const pay = document.getElementById('payFilter').value;
-  renderBookings(window.bookings.filter(b => {
-    const name = (b.fname+' '+b.lname+b.phone).toLowerCase();
-    const matchPay = !pay || (pay === 'paid' ? b.paymentStatus === 'paid' : b.paymentStatus !== 'paid');
-    return (!q||name.includes(q))&&(!prog||b.program===prog)&&(!stat||b.status===stat)&&matchPay;
-  }));
-}
-
-async function changeStatus(key, val) {
-  try {
-    await window.fbUpdateStatus(key, val);
-    const b = window.bookings.find(x => x._key === key);
-    showToast(`تم تحديث حالة ${b?.fname||''}`, 'success', 'fa-check-circle');
-  } catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
-}
-
-async function quickStatus(key, val) {
-  await window.fbUpdateStatus(key, val);
-  showToast('تم التأكيد', 'success', 'fa-check-circle');
-}
-
-async function deleteBooking(key) {
-  if (!confirm('هل أنت متأكدة من حذف هذا الحجز؟')) return;
-  try { await window.fbDeleteBooking(key); showToast('تم حذف الحجز', 'error', 'fa-trash'); }
-  catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
-}
-
-function viewBooking(key) {
-  const b = window.bookings.find(x => x._key === key);
-  if (!b) return;
-  openModal('viewBooking', b);
-}
-
-function openPaymentModal(key, name) {
-  openModal('confirmPayment', { _key: key, displayName: name });
-}
-
-function waContact(phone, name) {
-  const msg = encodeURIComponent(`مرحباً ${name}! أنا إنجي من Align by Enjy. بخصوص حجزكِ...`);
-  window.open(`https://wa.me/2${phone}?text=${msg}`, '_blank');
-}
-
-// ── CLASSES ──
-function renderClasses() {
-  document.getElementById('classesGrid').innerHTML = classes.map(c => `
-    <div class="class-card">
-      <div class="cc-top">
-        <div class="cc-icon" style="background:${c.color}22;color:${c.color}"><i class="fa-solid ${c.icon}"></i></div>
-        <button class="btn btn-ghost" style="font-size:.75rem;padding:5px 10px" onclick="editClass(${c.id})"><i class="fa-solid fa-pen"></i> تعديل</button>
-      </div>
-      <div class="cc-name">${c.name}</div>
-      <div class="cc-loc"><i class="fa-solid fa-location-dot"></i>${c.location}</div>
-      <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:8px"><i class="fa-regular fa-calendar" style="margin-left:4px"></i>${c.schedule}</div>
-      <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:5px">الحضور: ${c.enrolled}/${c.capacity}</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:${Math.round(c.enrolled/c.capacity*100)}%"></div></div>
-      <div class="cc-row">
-        <div class="cc-stat"><div class="val">${c.price1} ج</div><div class="lbl">جلسة واحدة</div></div>
-        ${c.price4?`<div class="cc-stat"><div class="val">${c.price4} ج</div><div class="lbl">4 كلاسات</div></div>`:''}
-        ${c.price8?`<div class="cc-stat"><div class="val">${c.price8} ج</div><div class="lbl">8 كلاسات</div></div>`:''}
-      </div>
-    </div>`).join('');
-}
-
-function editClass(id) { openModal('editClass', classes.find(x => x.id===id)); }
-
-// ── RETREATS ──
-function renderRetreats() {
-  const grid = document.getElementById('retreatsGrid');
-  if (!window.retreatsData.length) {
-    grid.innerHTML = `<div class="empty-state"><i class="fa-solid fa-mountain-sun"></i><p>لا توجد ريتريتس بعد. أضيفي أول ريتريت!</p></div>`;
-    return;
-  }
-  grid.innerHTML = window.retreatsData.map(r => `
-    <div class="class-card">
-      <div class="cc-top">
-        <div class="cc-icon" style="background:rgba(167,139,250,.15);color:var(--purple)"><i class="fa-solid fa-mountain-sun"></i></div>
-        <div class="action-btns">
-          <button class="act-btn edit" onclick="editRetreat('${r._key}')" title="تعديل"><i class="fa-solid fa-pen"></i></button>
-          <button class="act-btn del" onclick="deleteRetreat('${r._key}')" title="حذف"><i class="fa-solid fa-trash"></i></button>
-        </div>
-      </div>
-      <div class="cc-name">${r.name||'—'}</div>
-      <div class="cc-loc"><i class="fa-solid fa-location-dot"></i>${r.location||'—'}</div>
-      <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:6px"><i class="fa-regular fa-calendar" style="margin-left:4px"></i>${r.dateRange||'—'}</div>
-      ${r.description?`<div style="font-size:.78rem;color:var(--text-muted);margin-bottom:10px">${r.description}</div>`:''}
-      <div class="cc-row">
-        <div class="cc-stat"><div class="val">${r.price||'—'} ج</div><div class="lbl">سعر الريتريت</div></div>
-        <div class="cc-stat"><div class="val">${r.capacity||'—'}</div><div class="lbl">أماكن متاحة</div></div>
-        <div class="cc-stat"><div class="val">${r.duration||'—'}</div><div class="lbl">المدة</div></div>
-      </div>
-    </div>`).join('');
-}
-
-async function deleteRetreat(key) {
-  if (!confirm('حذف الريتريت؟')) return;
-  try { await window.fbDeleteRetreat(key); showToast('تم الحذف', 'error', 'fa-trash'); }
-  catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
-}
-
-function editRetreat(key) {
-  const r = window.retreatsData.find(x => x._key === key);
-  if (r) openModal('editRetreat', r);
-}
-
-// ── STUDENTS + CREDITS ──
-function buildStudents() {
-  const map = {};
-  window.bookings.forEach(b => {
-    const k = b.phone;
-    if (!map[k]) map[k] = {name:b.fname+' '+b.lname, phone:b.phone, classes:[], sessions:0, lastDate:b.sessionDate||b.date||''};
-    if (!map[k].classes.includes(programMap[b.program])) map[k].classes.push(programMap[b.program]);
-    map[k].sessions++;
-    const bDate = b.sessionDate || b.date || '';
-    if (bDate > map[k].lastDate) map[k].lastDate = bDate;
-  });
-  return Object.values(map);
-}
-
-function renderStudents(list) {
-  const tb = document.getElementById('studentsTable');
-  if (!list.length) { tb.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:40px">لا توجد بيانات بعد</td></tr>'; return; }
-  const today = new Date().toISOString().slice(0,10);
-  tb.innerHTML = list.map((s,i) => {
-    const key = s.phone.replace(/[^0-9]/g,'');
-    const cr = window.creditsData[key] || {};
-    const credits = cr.credits !== undefined ? cr.credits : '—';
-    const expiry = cr.expiry || '—';
-    const attended = cr.totalAttended || 0;
-    let expiryClass = '';
-    if (cr.expiry) {
-      const diff = (new Date(cr.expiry) - new Date(today)) / (1000*60*60*24);
-      if (diff < 0) expiryClass = 'style="color:var(--red)"';
-      else if (diff <= 14) expiryClass = 'style="color:var(--yellow)"';
-    }
-    return `<tr>
-      <td style="color:var(--text-muted)">${i+1}</td>
-      <td><strong style="font-size:.85rem">${s.name}</strong></td>
-      <td dir="ltr" style="font-size:.78rem;color:var(--text-muted)">${s.phone}</td>
-      <td>${s.classes.map(c=>`<span class="badge blue" style="margin-left:3px;font-size:.65rem">${c}</span>`).join('')}</td>
-      <td style="text-align:center">
-        ${typeof credits === 'number'
-          ? `<strong style="color:${credits>0?'var(--green)':'var(--red)'};font-size:1rem">${credits}</strong>`
-          : `<span style="color:var(--text-faint)">—</span>`}
-      </td>
-      <td ${expiryClass} style="font-size:.78rem;text-align:center">${expiry}</td>
-      <td style="text-align:center"><strong>${attended}</strong></td>
-      <td>
-        <div class="action-btns">
-          <button class="act-btn credit" onclick="openCreditsModal('${s.phone}','${s.name}')" title="إدارة الرصيد"><i class="fa-solid fa-coins"></i></button>
-          ${typeof credits === 'number' && credits > 0
-            ? `<button class="act-btn view" onclick="markAttendance('${s.phone}','${s.name.split(' ')[0]}')" title="تسجيل حضور"><i class="fa-solid fa-user-check"></i></button>`
-            : ''}
-          <button class="act-btn wa" onclick="waContact('${s.phone}','${s.name.split(' ')[0]}')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-        </div>
-      </td>
-    </tr>`;
-  }).join('');
-}
-
-function filterStudents(q) {
-  renderStudents(buildStudents().filter(s => (s.name+s.phone).toLowerCase().includes(q.toLowerCase())));
-}
-
-function openCreditsModal(phone, name) {
-  openModal('manageCredits', { phone, name });
-}
-
-async function markAttendance(phone, firstName) {
-  try {
-    const ok = await window.fbMarkAttendance(phone);
-    if (ok) showToast(`✓ تم تسجيل حضور ${firstName}، تم خصم جلسة من رصيدها`, 'success', 'fa-user-check');
-    else showToast(`رصيد ${firstName} صفر، لا يمكن تسجيل الحضور`, 'error', 'fa-triangle-exclamation');
-  } catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
-}
-
-// ── STATS ──
-function renderStats() {
-  const b = window.bookings;
-  const uniquePhones = new Set(b.map(x => x.phone)).size;
-  document.getElementById('st1').textContent = uniquePhones;
-  document.getElementById('st2').textContent = b.length;
-  document.getElementById('st3').textContent = b.filter(x=>x.status==='new').length;
-  document.getElementById('st4').textContent = b.filter(x=>x.status==='confirmed').length;
-  const counts = {power:0,diabetes:0,gentle:0,retreats:0};
-  b.forEach(x => { if(counts[x.program]!==undefined) counts[x.program]++; });
-  const total = b.length || 1;
-  document.getElementById('statsDistList').innerHTML = Object.entries(counts).map(([k,v]) => `
-    <div class="metric-item">
-      <span class="m-label"><i class="fa-solid fa-circle" style="color:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':k==='retreats'?'var(--purple)':'var(--blue)'}"></i>${programMap[k]}</span>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="width:100px;height:7px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':k==='retreats'?'var(--purple)':'var(--blue)'};width:${Math.round(v/total*100)}%;border-radius:6px"></div></div>
-        <span class="m-val">${v} (${Math.round(v/total*100)}%)</span>
-      </div>
-    </div>`).join('');
-}
-
-// ── EXPORT ──
-function exportCSV() {
-  const rows = [['#','الاسم','الجوال','الإيميل','الكلاس','المستوى','تاريخ الجلسة','الدفع','الحالة'],
-    ...window.bookings.map((b,i) => [i+1,`${b.fname} ${b.lname}`,b.phone,b.email||'',programMap[b.program]||b.program,levelMap[b.level]||b.level||'',b.sessionDate||b.date||'',b.paymentStatus==='paid'?'مدفوع':'معلق',statusMap[b.status]||b.status])];
-  const csv = rows.map(r => r.join(',')).join('\n');
-  const a = document.createElement('a'); a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv); a.download='bookings.csv'; a.click();
-  showToast('تم تصدير البيانات','success','fa-file-export');
-}
-
-// ── MODALS ──
-function openModal(type, data) {
-  const title = document.getElementById('modalTitle');
-  const body = document.getElementById('modalBody');
-  const foot = document.getElementById('modalFoot');
-
-  if (type === 'addBooking') {
-    title.textContent = 'إضافة حجز جديد';
-    body.innerHTML = `
-      <div class="form-row2"><div class="form-group"><label>الاسم الأول</label><input id="mfname" type="text" placeholder="نورة"></div><div class="form-group"><label>الاسم الأخير</label><input id="mlname" type="text" placeholder="العتيبي"></div></div>
-      <div class="form-row2"><div class="form-group"><label>الجوال</label><input id="mphone" type="tel" dir="ltr" placeholder="01XXXXXXXXX"></div><div class="form-group"><label>الإيميل</label><input id="memail" type="email" dir="ltr" placeholder="email@example.com"></div></div>
-      <div class="form-row2">
-        <div class="form-group"><label>الكلاس</label><select id="mprogram">
-          <option value="power">Power Yoga</option>
-          <option value="diabetes">Yoga for Diabetes</option>
-          <option value="gentle">Gentle Yoga</option>
-          <option value="retreats">الريتريتس</option>
-        </select></div>
-        <div class="form-group"><label>المستوى</label><select id="mlevel">
-          <option value="beginner">مبتدئة</option>
-          <option value="some">ممارست قليلاً</option>
-          <option value="intermediate">متوسطة</option>
-          <option value="advanced">متقدمة</option>
-        </select></div>
-      </div>
-      <div class="form-row2">
-        <div class="form-group"><label>تاريخ الجلسة</label><input id="msessiondate" type="date"></div>
-        <div class="form-group"><label>طريقة الدفع</label><select id="mpaymethod">
-          <option value="instapay">InstaPay</option>
-          <option value="cash">كاش</option>
-          <option value="other">أخرى</option>
-        </select></div>
-      </div>
-      <div class="form-group"><label>حالة الدفع</label><select id="mpaystatus">
-        <option value="pending">معلق (لم يدفع بعد)</option>
-        <option value="paid">مدفوع ✓</option>
-      </select></div>
-      <div class="form-group"><label>ملاحظات</label><textarea id="mnotes" placeholder="أي ملاحظات..."></textarea></div>`;
-    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveAddBooking()"><i class="fa-solid fa-plus"></i> إضافة</button>`;
-  }
-  else if (type === 'viewBooking' && data) {
-    title.textContent = 'تفاصيل الحجز';
-    body.innerHTML = `
-      <div class="metric-list">
-        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-user"></i> الاسم</span><span class="m-val">${data.fname} ${data.lname}</span></div>
-        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-phone"></i> الجوال</span><span class="m-val" dir="ltr">${data.phone}</span></div>
-        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-envelope"></i> الإيميل</span><span class="m-val" dir="ltr">${data.email||'—'}</span></div>
-        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-dumbbell"></i> الكلاس</span><span class="m-val">${programMap[data.program]||data.program}</span></div>
-        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-signal"></i> المستوى</span><span class="m-val">${levelMap[data.level]||data.level||'—'}</span></div>
-        <div class="metric-item"><span class="m-label"><i class="fa-regular fa-calendar"></i> تاريخ الجلسة</span><span class="m-val">${data.sessionDate||data.date||'—'}</span></div>
-        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-mobile-screen"></i> طريقة الدفع</span><span class="m-val">${data.paymentMethod==='instapay'?'InstaPay':data.paymentMethod==='cash'?'كاش':data.paymentMethod||'—'}</span></div>
-        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-circle-dollar-to-slot"></i> حالة الدفع</span><span class="m-val">${data.paymentStatus==='paid'?`<span class="pay-paid"><i class="fa-solid fa-check-circle"></i>مدفوع</span>`:`<span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span>`}</span></div>
-        ${data.paymentRef?`<div class="metric-item"><span class="m-label"><i class="fa-solid fa-hashtag"></i> مرجع الدفع</span><span class="m-val" dir="ltr">${data.paymentRef}</span></div>`:''}
-        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-info-circle"></i> الحالة</span><span class="m-val"><span class="badge ${statusBadge[data.status]}">${statusMap[data.status]}</span></span></div>
-        ${data.notes?`<div class="metric-item"><span class="m-label"><i class="fa-solid fa-note-sticky"></i> ملاحظات</span><span class="m-val">${data.notes}</span></div>`:''}
-      </div>`;
-    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إغلاق</button><button class="btn btn-primary" onclick="waContact('${data.phone}','${data.fname}');closeModal()"><i class="fa-brands fa-whatsapp"></i> تواصل</button>`;
-  }
-  else if (type === 'confirmPayment' && data) {
-    title.textContent = 'تأكيد دفع InstaPay';
-    body.innerHTML = `
-      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">تأكيد استلام مدفوعات <strong>${data.displayName}</strong> عبر InstaPay</p>
-      <div class="form-group"><label>رقم مرجع التحويل (اختياري)</label><input id="payRef" type="text" dir="ltr" placeholder="مثال: 12345678"></div>
-      <div class="instapay-info"><i class="fa-solid fa-circle-info"></i><div>بعد التأكيد سيتغير وضع الدفع إلى "مدفوع" ولن يظهر زر InstaPay مرة أخرى.</div></div>`;
-    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="confirmPayment('${data._key}')"><i class="fa-solid fa-check"></i> تأكيد الاستلام</button>`;
-  }
-  else if (type === 'manageCredits' && data) {
-    const key = data.phone.replace(/[^0-9]/g,'');
-    const cr = window.creditsData[key] || {};
-    const today = new Date().toISOString().slice(0,10);
-    title.textContent = `رصيد: ${data.name}`;
-    body.innerHTML = `
-      ${cr.credits !== undefined ? `
-        <div class="credits-box">
-          <div class="cb-head">
-            <div><div class="cb-num">${cr.credits}</div><div class="cb-lbl">كلاسات متبقية</div></div>
-            <div style="text-align:left">
-              <div style="font-size:.78rem;color:var(--text-muted)">إجمالي الحضور</div>
-              <div style="font-size:1.4rem;font-weight:800;color:var(--accent)">${cr.totalAttended||0}</div>
+    function renderRetreats(list) {
+      const el = document.getElementById('retreatsList');
+      el.innerHTML = `<div class="programs-grid">` + list.map(r => `
+        <div class="retreat-card reveal">
+          <div class="retreat-card-img">
+            <img src="https://picsum.photos/seed/retreat${r._key}/600/400" alt="${r.name}" onerror="this.src='https://picsum.photos/seed/yoga${r._key}/600/400'">
+            <span class="retreat-badge"><i class="fa-solid fa-mountain-sun"></i> ريتريت</span>
+          </div>
+          <div class="retreat-card-body">
+            <h3>${r.name||'ريتريت اليوجا'}</h3>
+            <p>${r.description||'تجربة روحانية فريدة مع اليوجا والتأمل في مكان أحلامكِ.'}</p>
+            <div class="retreat-meta">
+              ${r.location?`<span><i class="fa-solid fa-location-dot"></i>${r.location}</span>`:''}
+              ${r.dateRange?`<span><i class="fa-regular fa-calendar"></i>${r.dateRange}</span>`:''}
+              ${r.duration?`<span><i class="fa-regular fa-clock"></i>${r.duration}</span>`:''}
+              ${r.capacity?`<span><i class="fa-solid fa-users"></i>${r.capacity} مكان</span>`:''}
+            </div>
+            <div class="retreat-price">
+              <div class="price">${r.price?Number(r.price).toLocaleString('ar-EG')+' ج':'تواصلي معنا'} <span>/ للفرد</span></div>
+              <a href="#booking" onclick="document.getElementById('program').value='retreats'" class="btn-retreat"><i class="fa-solid fa-calendar-check"></i> احجزي</a>
             </div>
           </div>
-          <div class="cb-expiry ${cr.expiry && cr.expiry < today ? 'expired' : cr.expiry && (new Date(cr.expiry)-new Date(today))/(1000*60*60*24)<=14 ? 'soon' : ''}">
-            <i class="fa-regular fa-calendar"></i> انتهاء الصلاحية: ${cr.expiry||'—'}
-            ${cr.expiry && cr.expiry < today ? ' (منتهي!)' : ''}
-          </div>
-        </div>` : `<p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">لا يوجد رصيد مسجل لهذه المتدربة. أضيفي رصيد جديد:</p>`}
-      <div class="form-row2">
-        <div class="form-group"><label>عدد الكلاسات (الرصيد الجديد)</label><input id="crCredits" type="number" placeholder="4" min="1" max="50"></div>
-        <div class="form-group"><label>تاريخ انتهاء الصلاحية</label><input id="crExpiry" type="date" value="${cr.expiry||''}"></div>
-      </div>
-      <p class="form-hint">* سيتم استبدال الرصيد الحالي بالرصيد الجديد. إذا أردتِ الإضافة، اجمعي الأرقام يدوياً.</p>`;
-    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button>
-      ${cr.credits > 0 ? `<button class="attend-btn" onclick="markAttendance('${data.phone}','${data.name.split(' ')[0]}');closeModal()"><i class="fa-solid fa-user-check"></i> تسجيل حضور الآن</button>` : ''}
-      <button class="btn btn-primary" onclick="saveCredits('${data.phone}')"><i class="fa-solid fa-floppy-disk"></i> حفظ الرصيد</button>`;
-  }
-  else if (type === 'editClass' && data) {
-    title.textContent = 'تعديل: ' + data.name;
-    body.innerHTML = `
-      <div class="form-group"><label>اسم الكلاس</label><input id="ecname" type="text" value="${data.name}"></div>
-      <div class="form-group"><label>الموقع</label><input id="ecloc" type="text" value="${data.location}"></div>
-      <div class="form-group"><label>المواعيد</label><input id="ecsched" type="text" value="${data.schedule}"></div>
-      <div class="form-row2">
-        <div class="form-group"><label>سعر الجلسة</label><input id="ecp1" type="number" value="${data.price1}"></div>
-        <div class="form-group"><label>سعر 4 كلاسات</label><input id="ecp4" type="number" value="${data.price4||''}"></div>
-      </div>
-      <div class="form-row2">
-        <div class="form-group"><label>سعر 8 كلاسات</label><input id="ecp8" type="number" value="${data.price8||''}"></div>
-        <div class="form-group"><label>السعة القصوى</label><input id="eccap" type="number" value="${data.capacity}"></div>
-      </div>`;
-    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveEditClass(${data.id})"><i class="fa-solid fa-floppy-disk"></i> حفظ</button>`;
-  }
-  else if (type === 'addClass') {
-    title.textContent = 'إضافة كلاس جديد';
-    body.innerHTML = `
-      <div class="form-group"><label>اسم الكلاس</label><input id="ecname" type="text" placeholder="Morning Flow"></div>
-      <div class="form-group"><label>الموقع</label><input id="ecloc" type="text"></div>
-      <div class="form-group"><label>المواعيد</label><input id="ecsched" type="text"></div>
-      <div class="form-row2">
-        <div class="form-group"><label>سعر الجلسة</label><input id="ecp1" type="number" placeholder="400"></div>
-        <div class="form-group"><label>سعر 4 كلاسات</label><input id="ecp4" type="number"></div>
-      </div>
-      <div class="form-row2">
-        <div class="form-group"><label>سعر 8 كلاسات</label><input id="ecp8" type="number"></div>
-        <div class="form-group"><label>السعة القصوى</label><input id="eccap" type="number" placeholder="6"></div>
-      </div>`;
-    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveNewClass()"><i class="fa-solid fa-plus"></i> إضافة</button>`;
-  }
-  else if (type === 'addRetreat') {
-    title.textContent = 'إضافة ريتريت جديد';
-    body.innerHTML = `
-      <div class="form-group"><label>اسم الريتريت</label><input id="rtname" type="text" placeholder="Bali Yoga Retreat 2026"></div>
-      <div class="form-group"><label>الموقع</label><input id="rtloc" type="text" placeholder="بالي — إندونيسيا"></div>
-      <div class="form-row2">
-        <div class="form-group"><label>تاريخ البدء</label><input id="rtstart" type="date"></div>
-        <div class="form-group"><label>تاريخ الانتهاء</label><input id="rtend" type="date"></div>
-      </div>
-      <div class="form-row2">
-        <div class="form-group"><label>السعر (جنيه)</label><input id="rtprice" type="number" placeholder="15000"></div>
-        <div class="form-group"><label>عدد الأماكن</label><input id="rtcap" type="number" placeholder="10"></div>
-      </div>
-      <div class="form-group"><label>المدة</label><input id="rtdur" type="text" placeholder="7 أيام"></div>
-      <div class="form-group"><label>الوصف</label><textarea id="rtdesc" placeholder="وصف مختصر عن الريتريت..."></textarea></div>`;
-    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveNewRetreat()"><i class="fa-solid fa-plus"></i> إضافة</button>`;
-  }
-  else if (type === 'editRetreat' && data) {
-    title.textContent = 'تعديل: ' + (data.name||'الريتريت');
-    const [startDate, endDate] = (data.dateRange||'').split(' — ');
-    body.innerHTML = `
-      <div class="form-group"><label>اسم الريتريت</label><input id="rtname" type="text" value="${data.name||''}"></div>
-      <div class="form-group"><label>الموقع</label><input id="rtloc" type="text" value="${data.location||''}"></div>
-      <div class="form-row2">
-        <div class="form-group"><label>تاريخ البدء</label><input id="rtstart" type="date" value="${startDate||''}"></div>
-        <div class="form-group"><label>تاريخ الانتهاء</label><input id="rtend" type="date" value="${endDate||''}"></div>
-      </div>
-      <div class="form-row2">
-        <div class="form-group"><label>السعر (جنيه)</label><input id="rtprice" type="number" value="${data.price||''}"></div>
-        <div class="form-group"><label>عدد الأماكن</label><input id="rtcap" type="number" value="${data.capacity||''}"></div>
-      </div>
-      <div class="form-group"><label>المدة</label><input id="rtdur" type="text" value="${data.duration||''}"></div>
-      <div class="form-group"><label>الوصف</label><textarea id="rtdesc">${data.description||''}</textarea></div>`;
-    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveEditRetreat('${data._key}')"><i class="fa-solid fa-floppy-disk"></i> حفظ</button>`;
-  }
+        </div>`).join('') + `</div>`;
+      document.querySelectorAll('.retreat-card.reveal').forEach(el => rObs.observe(el));
+    }
 
-  document.getElementById('modalOverlay').classList.add('open');
-}
+    window.submitBooking = async function() {
+      const fname = document.getElementById('fname').value.trim();
+      const lname = document.getElementById('lname').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const program = document.getElementById('program').value;
+      const level = document.getElementById('level').value;
+      const sessionDate = document.getElementById('sessionDate').value;
+      const notes = document.getElementById('notes').value.trim();
 
-function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
-function closeModalOutside(e) { if(e.target===document.getElementById('modalOverlay')) closeModal(); }
+      if (!fname || !lname || !phone || !email || !program || !level) {
+        showToast('يرجى ملء جميع الحقول المطلوبة', 'fa-triangle-exclamation', true);
+        return;
+      }
+      if (!/^\d{10,11}$/.test(phone.replace(/\s/g, ''))) {
+        showToast('يرجى إدخال رقم جوال صحيح', 'fa-triangle-exclamation', true);
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast('يرجى إدخال بريد إلكتروني صحيح', 'fa-triangle-exclamation', true);
+        return;
+      }
 
-async function saveAddBooking() {
-  const fn=document.getElementById('mfname').value.trim();
-  const ph=document.getElementById('mphone').value.trim();
-  if(!fn||!ph){showToast('يرجى ملء الاسم والجوال','error','fa-triangle-exclamation');return;}
-  try {
-    await window.fbAddBooking({
-      fname:fn,
-      lname:document.getElementById('mlname').value.trim(),
-      phone:ph,
-      email:document.getElementById('memail').value.trim(),
-      program:document.getElementById('mprogram').value,
-      level:document.getElementById('mlevel').value,
-      notes:document.getElementById('mnotes').value.trim(),
-      sessionDate:document.getElementById('msessiondate').value||new Date().toISOString().slice(0,10),
-      date:new Date().toISOString().slice(0,10),
-      paymentMethod:document.getElementById('mpaymethod').value,
-      paymentStatus:document.getElementById('mpaystatus').value,
-      status:'new'
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال...';
+
+      try {
+        await push(ref(db, 'bookings'), {
+          fname, lname, phone, email, program, level, notes,
+          sessionDate: sessionDate || '',
+          status: 'new',
+          paymentStatus: 'pending',
+          paymentMethod: 'instapay',
+          date: new Date().toISOString().slice(0, 10),
+          createdAt: serverTimestamp()
+        });
+
+        // إخفاء الفورم وإظهار معلومات InstaPay
+        document.getElementById('bookingFormSection').style.display = 'none';
+        document.getElementById('instapayBox').classList.add('show');
+        showToast(`شكراً ${fname}! تم إرسال طلبكِ بنجاح ✓`, 'fa-circle-check');
+      } catch (err) {
+        console.error(err);
+        showToast('حدث خطأ، يرجى المحاولة مرة أخرى', 'fa-triangle-exclamation', true);
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> إرسال طلب الحجز';
+      }
+    };
+  </script>
+
+  <script>
+    // تعيين الحد الأدنى لتاريخ الجلسة (اليوم)
+    document.getElementById('sessionDate').min = new Date().toISOString().slice(0,10);
+
+    function showToast(m, i='fa-circle-info', isError=false) {
+      const c = document.getElementById('toastContainer');
+      const t = document.createElement('div');
+      t.className = 'toast' + (isError ? ' error' : '');
+      t.innerHTML = `<i class="fa-solid ${i}"></i> ${m}`;
+      c.appendChild(t);
+      setTimeout(() => t.remove(), 3200);
+    }
+
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
+
+    const hamburger = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu'), mo = document.getElementById('mobileOverlay');
+    function toggleM() {
+      const o = mm.classList.contains('open');
+      hamburger.classList.toggle('active'); mm.classList.toggle('open'); mo.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', !o); document.body.style.overflow = o ? '' : 'hidden';
+    }
+    hamburger.addEventListener('click', toggleM); mo.addEventListener('click', toggleM);
+    mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if(mm.classList.contains('open')) toggleM(); }));
+
+    const rObs = new IntersectionObserver(es => {
+      es.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); rObs.unobserve(e.target); } });
+    }, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
+
+    function animC(el, t, d=2000) {
+      let s=0; const t0=performance.now();
+      function u(now) { const p=Math.min((now-t0)/d,1); el.textContent=Math.round((1-Math.pow(1-p,3))*t)+'+'; if(p<1)requestAnimationFrame(u); }
+      requestAnimationFrame(u);
+    }
+    const sObs = new IntersectionObserver(es => {
+      es.forEach(e => { if(e.isIntersecting) { animC(document.getElementById('statStudents'),500); animC(document.getElementById('statYears'),8); animC(document.getElementById('statSessions'),1200); sObs.unobserve(e.target); } });
+    }, {threshold:.5});
+    sObs.observe(document.querySelector('.hero-stats'));
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) { const t=document.querySelector(this.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});} });
     });
-    closeModal();
-    showToast(`تم إضافة حجز ${fn} بنجاح`,'success','fa-check-circle');
-  } catch(e) { showToast('حدث خطأ','error','fa-triangle-exclamation'); }
-}
+  </script>
 
-async function confirmPayment(key) {
-  const ref = document.getElementById('payRef')?.value?.trim() || '';
-  try {
-    await window.fbUpdatePayment(key, 'paid', ref);
-    closeModal();
-    showToast('تم تأكيد استلام الدفع ✓', 'success', 'fa-check-circle');
-  } catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
-}
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
 
-async function saveCredits(phone) {
-  const credits = document.getElementById('crCredits').value;
-  const expiry = document.getElementById('crExpiry').value;
-  if (!credits) { showToast('يرجى إدخال عدد الكلاسات', 'error', 'fa-triangle-exclamation'); return; }
-  if (!expiry) { showToast('يرجى إدخال تاريخ انتهاء الصلاحية', 'error', 'fa-triangle-exclamation'); return; }
-  try {
-    await window.fbSetCredits(phone, credits, expiry);
-    closeModal();
-    showToast('تم حفظ الرصيد بنجاح ✓', 'success', 'fa-coins');
-  } catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
-}
+  <!-- PWA Install Banner -->
+  <div id="installBanner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:#2D4A3E;color:#fff;padding:16px 24px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.3);display:flex;align-items:center;gap:16px;max-width:340px;width:90%">
+    <img src="icon-192.png" style="width: 48px; height: 48px; border-radius: 10px; display: none;" onerror="this.style.display=&#39;none&#39;">
+    <div style="flex:1">
+      <div style="font-weight:700;font-size:.95rem">Align by Enjy</div>
+      <div style="font-size:.78rem;opacity:.8">حمّلي التطبيق على هاتفك!</div>
+    </div>
+    <button id="installBtn" style="background:#C8956C;color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:700;cursor:pointer;font-size:.85rem">تحميل</button>
+    <button id="closeBanner" style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;opacity:.7">✕</button>
+  </div>
 
-function saveEditClass(id) {
-  const c=classes.find(x=>x.id===id);if(!c)return;
-  c.name=document.getElementById('ecname').value||c.name;
-  c.location=document.getElementById('ecloc').value||c.location;
-  c.schedule=document.getElementById('ecsched').value||c.schedule;
-  c.price1=+document.getElementById('ecp1').value||c.price1;
-  c.price4=+document.getElementById('ecp4').value||null;
-  c.price8=+document.getElementById('ecp8').value||null;
-  c.capacity=+document.getElementById('eccap').value||c.capacity;
-  closeModal();renderClasses();showToast('تم تحديث الكلاس','success','fa-check-circle');
-}
+  <script>
+    let deferredPrompt;
+    const banner = document.getElementById('installBanner');
+    const installBtn = document.getElementById('installBtn');
+    const closeBanner = document.getElementById('closeBanner');
 
-function saveNewClass() {
-  const name=document.getElementById('ecname').value.trim();
-  if(!name){showToast('يرجى كتابة اسم الكلاس','error','fa-triangle-exclamation');return;}
-  classes.push({id:Date.now(),name,location:document.getElementById('ecloc').value,schedule:document.getElementById('ecsched').value,price1:+document.getElementById('ecp1').value||0,price4:+document.getElementById('ecp4').value||null,price8:+document.getElementById('ecp8').value||null,capacity:+document.getElementById('eccap').value||6,enrolled:0,color:'#3D8C6A',icon:'fa-spa'});
-  closeModal();renderClasses();showToast('تم إضافة الكلاس','success','fa-plus');
-}
-
-async function saveNewRetreat() {
-  const name = document.getElementById('rtname').value.trim();
-  if (!name) { showToast('يرجى كتابة اسم الريتريت','error','fa-triangle-exclamation'); return; }
-  const start = document.getElementById('rtstart').value;
-  const end = document.getElementById('rtend').value;
-  try {
-    await window.fbAddRetreat({
-      name,
-      location: document.getElementById('rtloc').value,
-      dateRange: start && end ? `${start} — ${end}` : start||end||'يتم تحديده قريباً',
-      price: +document.getElementById('rtprice').value || 0,
-      capacity: +document.getElementById('rtcap').value || 10,
-      duration: document.getElementById('rtdur').value,
-      description: document.getElementById('rtdesc').value
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      setTimeout(() => { banner.style.display = 'flex'; }, 3000);
     });
-    closeModal();
-    showToast('تم إضافة الريتريت بنجاح','success','fa-mountain-sun');
-  } catch(e) { showToast('حدث خطأ','error','fa-triangle-exclamation'); }
-}
 
-async function saveEditRetreat(key) {
-  const name = document.getElementById('rtname').value.trim();
-  if (!name) { showToast('يرجى كتابة اسم الريتريت','error','fa-triangle-exclamation'); return; }
-  const start = document.getElementById('rtstart').value;
-  const end = document.getElementById('rtend').value;
-  try {
-    await window.fbUpdateRetreat(key, {
-      name,
-      location: document.getElementById('rtloc').value,
-      dateRange: start && end ? `${start} — ${end}` : start||end||'يتم تحديده قريباً',
-      price: +document.getElementById('rtprice').value || 0,
-      capacity: +document.getElementById('rtcap').value || 10,
-      duration: document.getElementById('rtdur').value,
-      description: document.getElementById('rtdesc').value
+    installBtn.addEventListener('click', async () => {
+      banner.style.display = 'none';
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
     });
-    closeModal();
-    showToast('تم تحديث الريتريت','success','fa-check-circle');
-  } catch(e) { showToast('حدث خطأ','error','fa-triangle-exclamation'); }
-}
 
-function showToast(msg, type='info', icon='fa-info-circle') {
-  const c=document.getElementById('toastContainer');
-  const t=document.createElement('div');
-  t.className=`toast ${type}`;
-  t.innerHTML=`<i class="fa-solid ${icon}"></i> ${msg}`;
-  c.appendChild(t);setTimeout(()=>t.remove(),3500);
-}
-</script>
-
-</body></html>
+    closeBanner.addEventListener('click', () => {
+      banner.style.display = 'none';
+    });
+  </script>
