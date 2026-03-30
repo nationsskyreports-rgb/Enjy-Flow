@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0097)https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/admin.html -->
+<html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Align by Enjy — لوحة الإدارة</title>
-<link rel="manifest" href="manifest-admin.json">
+<link rel="manifest" href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/manifest-admin.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Align Admin">
-<link rel="apple-touch-icon" href="icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="apple-touch-icon" href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./Align by Enjy — لوحة الإدارة_files/css2" rel="stylesheet">
+<link rel="stylesheet" href="./Align by Enjy — لوحة الإدارة_files/all.min.css">
 <style>
 :root {
   --bg: #0F1A16; --bg2: #162019; --bg3: #1C2A22; --card: #1E2D24; --card2: #253322;
   --border: rgba(255,255,255,0.07); --primary: #3D8C6A; --primary-light: #4EAD84;
   --accent: #C8956C; --accent-light: #E0B892; --green: #4CAF7D; --red: #E05A5A;
-  --yellow: #F0B429; --blue: #5B8FF9; --text: #EEE8DF; --text-muted: #8A9E90;
+  --yellow: #F0B429; --blue: #5B8FF9; --purple: #A78BFA; --text: #EEE8DF; --text-muted: #8A9E90;
   --text-faint: #4A6352; --shadow: 0 8px 32px rgba(0,0,0,0.4);
   --radius: 14px; --radius-sm: 8px; --sidebar-w: 260px;
 }
@@ -31,7 +31,6 @@ input,select,textarea{font-family:inherit}
 ::-webkit-scrollbar-track{background:var(--bg2)}
 ::-webkit-scrollbar-thumb{background:var(--text-faint);border-radius:10px}
 
-/* ── LOGIN ── */
 #loginScreen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s,visibility .5s}
 #loginScreen.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .login-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 32px;width:100%;max-width:400px;box-shadow:0 32px 80px rgba(0,0,0,0.6);animation:loginIn .6s cubic-bezier(.4,0,.2,1) both;margin:16px}
@@ -49,10 +48,8 @@ input,select,textarea{font-family:inherit}
 .btn-login:hover{background:var(--primary-light)}
 .login-err{color:var(--red);font-size:.82rem;margin-top:10px;text-align:center;min-height:20px}
 
-/* ── LAYOUT ── */
 .layout{display:flex;min-height:100vh}
 
-/* ── SIDEBAR ── */
 .sidebar{width:var(--sidebar-w);background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;z-index:200;transition:transform .35s cubic-bezier(.4,0,.2,1);transform:translateX(100%)}
 .sidebar.open{transform:translateX(0)}
 .sidebar-head{padding:24px 20px 18px;border-bottom:1px solid var(--border)}
@@ -77,11 +74,9 @@ input,select,textarea{font-family:inherit}
 .ap-out{margin-right:auto;color:var(--text-faint);font-size:.85rem;transition:color .2s;padding:6px}
 .ap-out:hover{color:var(--red)}
 
-/* ── OVERLAY ── */
 #sidebarOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:199;opacity:0;visibility:hidden;transition:all .3s}
 #sidebarOverlay.active{opacity:1;visibility:visible}
 
-/* ── MAIN ── */
 .main{margin-right:0;flex:1;display:flex;flex-direction:column;min-height:100vh;width:100%}
 .topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;height:58px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
 .page-title{font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);flex:1;text-align:center}
@@ -91,62 +86,57 @@ input,select,textarea{font-family:inherit}
 .mob-toggle{display:flex}
 .content{padding:16px;flex:1}
 
-/* ── PAGES ── */
 .page{display:none;animation:pageIn .3s ease both}
 .page.active{display:block}
 @keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── STATS ── */
 .stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 14px;position:relative;overflow:hidden}
 .stat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:12px}
 .stat-card h3{font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:2px}
 .stat-card p{font-size:.75rem;color:var(--text-muted)}
 
-/* ── SECTION HEAD ── */
 .section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
 .section-head h2{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700}
 .section-head p{font-size:.78rem;color:var(--text-muted);margin-top:2px}
 
-/* ── TABLE ── */
 .table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:480px}
+table{width:100%;border-collapse:collapse;min-width:520px}
 thead th{background:var(--card2);padding:12px 14px;font-size:.75rem;font-weight:700;color:var(--text-muted);text-align:right;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
 tbody td{padding:12px 14px;font-size:.85rem;border-top:1px solid var(--border);vertical-align:middle}
 tbody tr:hover{background:rgba(255,255,255,.02)}
 
-/* ── BADGES ── */
 .badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:50px;font-size:.72rem;font-weight:600}
 .badge.green{background:rgba(76,175,125,.15);color:var(--green)}
 .badge.yellow{background:rgba(240,180,41,.12);color:var(--yellow)}
 .badge.red{background:rgba(224,90,90,.12);color:var(--red)}
 .badge.blue{background:rgba(91,143,249,.12);color:var(--blue)}
+.badge.purple{background:rgba(167,139,250,.12);color:var(--purple)}
 .badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
 
-/* ── ACTIONS ── */
 .action-btns{display:flex;align-items:center;gap:5px}
 .act-btn{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.78rem;transition:all .2s;border:1px solid var(--border);color:var(--text-muted)}
 .act-btn:hover.edit{background:rgba(91,143,249,.15);color:var(--blue);border-color:rgba(91,143,249,.3)}
 .act-btn:hover.del{background:rgba(224,90,90,.15);color:var(--red);border-color:rgba(224,90,90,.3)}
 .act-btn:hover.view{background:rgba(76,175,125,.15);color:var(--green);border-color:rgba(76,175,125,.3)}
 .act-btn:hover.wa{background:rgba(37,211,102,.15);color:#25D366;border-color:rgba(37,211,102,.3)}
+.act-btn:hover.credit{background:rgba(167,139,250,.15);color:var(--purple);border-color:rgba(167,139,250,.3)}
 
-/* ── BUTTONS ── */
 .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--radius-sm);font-size:.82rem;font-weight:600;transition:all .2s}
 .btn-primary{background:var(--primary);color:#fff}
 .btn-primary:hover{background:var(--primary-light)}
 .btn-ghost{background:var(--bg3);color:var(--text-muted);border:1px solid var(--border)}
 .btn-ghost:hover{border-color:var(--primary);color:var(--primary-light)}
+.btn-danger{background:rgba(224,90,90,.15);color:var(--red);border:1px solid rgba(224,90,90,.3)}
+.btn-danger:hover{background:rgba(224,90,90,.25)}
 
-/* ── FILTER BAR ── */
 .filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .search-box{position:relative;flex:1;min-width:160px}
 .search-box i{position:absolute;top:50%;transform:translateY(-50%);right:10px;color:var(--text-faint);font-size:.82rem}
 .search-box input{width:100%;padding:8px 32px 8px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.85rem;outline:none}
 .search-box input:focus{border-color:var(--primary)}
-.filter-bar select{padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.82rem;outline:none;cursor:pointer;max-width:130px}
+.filter-bar select{padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.82rem;outline:none;cursor:pointer;max-width:140px}
 
-/* ── CLASSES GRID ── */
 .classes-grid{display:grid;grid-template-columns:1fr;gap:14px}
 .class-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
 .cc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
@@ -160,10 +150,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 .progress-bar{height:5px;background:var(--bg3);border-radius:5px;margin-top:8px;overflow:hidden}
 .progress-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
 
-/* ── DASH GRID ── */
 .dash-grid{display:flex;flex-direction:column;gap:16px;margin-bottom:20px}
-
-/* ── CHART CARD ── */
 .chart-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
 .chart-card h3{font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:16px}
 .metric-list{display:flex;flex-direction:column;gap:8px}
@@ -172,15 +159,15 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 .metric-item .m-label i{color:var(--accent);width:14px;text-align:center}
 .metric-item .m-val{font-size:.88rem;font-weight:700}
 
-/* ── FORM ── */
 .form-group{margin-bottom:14px}
 .form-group label{display:block;font-size:.78rem;color:var(--text-muted);margin-bottom:5px;font-weight:600}
 .form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 13px;background:var(--bg3);border:1.5px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.87rem;transition:border-color .3s;outline:none}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary)}
 .form-group textarea{resize:vertical;min-height:70px}
+.form-group input[type="date"]{color-scheme:dark}
 .form-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-hint{font-size:.72rem;color:var(--text-faint);margin-top:4px}
 
-/* ── MODAL ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;opacity:0;visibility:hidden;transition:all .3s;backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;padding:0}
 .modal-overlay.open{opacity:1;visibility:visible}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:20px 20px 0 0;padding:24px 20px;width:100%;max-width:100%;box-shadow:0 -20px 60px rgba(0,0,0,.5);transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto}
@@ -190,7 +177,6 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 .modal-close{width:32px;height:32px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;color:var(--text-muted)}
 .modal-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
 
-/* ── TOAST ── */
 .toast-container{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:90%;max-width:320px}
 .toast{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:.85rem;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);animation:tin .3s ease,tout .3s 2.7s ease forwards;pointer-events:all}
 .toast i{font-size:1rem}
@@ -199,14 +185,31 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 @keyframes tin{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes tout{from{opacity:1}to{opacity:0}}
 
-/* ── SPINNER ── */
 .loading-row td{text-align:center;padding:40px;color:var(--text-muted)}
 .spinner{display:inline-block;width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .empty-state{text-align:center;padding:40px 20px;color:var(--text-muted)}
 .empty-state i{font-size:2.5rem;margin-bottom:12px;opacity:.3;display:block}
 
-/* ── DESKTOP ── */
+/* ── CREDITS BOX ── */
+.credits-box{background:var(--bg3);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--border);margin-bottom:12px}
+.credits-box .cb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.credits-box .cb-num{font-size:1.8rem;font-weight:800;color:var(--primary-light);line-height:1}
+.credits-box .cb-lbl{font-size:.72rem;color:var(--text-muted);margin-top:2px}
+.credits-box .cb-expiry{font-size:.72rem;color:var(--text-faint)}
+.credits-box .cb-expiry.expired{color:var(--red)}
+.credits-box .cb-expiry.soon{color:var(--yellow)}
+.attend-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--radius-sm);font-size:.78rem;font-weight:700;background:rgba(76,175,125,.15);color:var(--green);border:1px solid rgba(76,175,125,.3);cursor:pointer;transition:all .2s}
+.attend-btn:hover{background:rgba(76,175,125,.25)}
+
+/* ── PAYMENT BADGE ── */
+.pay-paid{color:var(--green);font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+.pay-pending{color:var(--yellow);font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+
+/* ── INSTAPAY INFO ── */
+.instapay-info{background:rgba(91,143,249,.08);border:1px solid rgba(91,143,249,.2);border-radius:var(--radius-sm);padding:12px 14px;font-size:.82rem;color:var(--text-muted);margin-top:8px;display:flex;align-items:flex-start;gap:10px}
+.instapay-info i{color:var(--blue);margin-top:2px;flex-shrink:0}
+
 @media(min-width:900px){
   .sidebar{transform:translateX(0)}
   .main{margin-right:var(--sidebar-w)}
@@ -215,7 +218,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
   .classes-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
   .dash-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
   .modal-overlay{align-items:center;padding:24px}
-  .modal{border-radius:20px;max-width:520px;max-height:85vh}
+  .modal{border-radius:20px;max-width:540px;max-height:85vh}
   .toast-container{left:24px;transform:none;width:auto;max-width:300px}
   .mob-toggle{display:none!important}
 }
@@ -247,17 +250,18 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     <nav class="sidebar-nav">
       <div class="nav-section">
         <div class="nav-section-label">الرئيسية</div>
-        <div class="nav-item active" onclick="goPage('dashboard',this)"><i class="fa-solid fa-chart-pie"></i> نظرة عامة</div>
+        <div class="nav-item active" onclick="goPage(&#39;dashboard&#39;,this)"><i class="fa-solid fa-chart-pie"></i> نظرة عامة</div>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">إدارة</div>
-        <div class="nav-item" onclick="goPage('bookings',this)"><i class="fa-solid fa-calendar-check"></i> الحجوزات<span class="nav-badge" id="newBadge"></span></div>
-        <div class="nav-item" onclick="goPage('classes',this)"><i class="fa-solid fa-dumbbell"></i> الكلاسات والأسعار</div>
-        <div class="nav-item" onclick="goPage('students',this)"><i class="fa-solid fa-users"></i> المتدربات</div>
+        <div class="nav-item" onclick="goPage(&#39;bookings&#39;,this)"><i class="fa-solid fa-calendar-check"></i> الحجوزات<span class="nav-badge" id="newBadge">3</span></div>
+        <div class="nav-item" onclick="goPage(&#39;classes&#39;,this)"><i class="fa-solid fa-dumbbell"></i> الكلاسات والأسعار</div>
+        <div class="nav-item" onclick="goPage(&#39;retreats&#39;,this)"><i class="fa-solid fa-mountain-sun"></i> الريتريتس</div>
+        <div class="nav-item" onclick="goPage(&#39;students&#39;,this)"><i class="fa-solid fa-users"></i> المتدربات والرصيد</div>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">تقارير</div>
-        <div class="nav-item" onclick="goPage('stats',this)"><i class="fa-solid fa-chart-line"></i> الإحصائيات</div>
+        <div class="nav-item" onclick="goPage(&#39;stats&#39;,this)"><i class="fa-solid fa-chart-line"></i> الإحصائيات</div>
       </div>
     </nav>
     <div class="sidebar-foot">
@@ -275,7 +279,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
       <span class="page-title" id="pageTitle">نظرة عامة</span>
       <div class="topbar-right">
         <button class="topbar-btn" id="syncBtn" title="مزامنة"><i class="fa-solid fa-rotate-right"></i></button>
-        <a href="index.html" target="_blank" class="topbar-btn" title="فتح الموقع"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        <a href="https://9fee56cd-cff5-4cf0-ba6e-faa37abd1609-00-3m3acvpekr459.worf.replit.dev/__mockup/index.html" target="_blank" class="topbar-btn" title="فتح الموقع"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       </div>
     </div>
 
@@ -286,15 +290,15 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
         <div class="stats-row">
           <div class="stat-card">
             <div class="stat-icon" style="background:rgba(61,140,106,.15);color:var(--green)"><i class="fa-solid fa-users"></i></div>
-            <h3 id="sc1">—</h3><p>متدربة فريدة</p>
+            <h3 id="sc1">3</h3><p>متدربة فريدة</p>
           </div>
           <div class="stat-card">
             <div class="stat-icon" style="background:rgba(200,149,108,.15);color:var(--accent)"><i class="fa-solid fa-calendar-check"></i></div>
-            <h3 id="sc2">—</h3><p>إجمالي الحجوزات</p>
+            <h3 id="sc2">3</h3><p>إجمالي الحجوزات</p>
           </div>
           <div class="stat-card">
             <div class="stat-icon" style="background:rgba(91,143,249,.15);color:var(--blue)"><i class="fa-solid fa-clock-rotate-left"></i></div>
-            <h3 id="sc3">—</h3><p>حجوزات جديدة</p>
+            <h3 id="sc3">3</h3><p>حجوزات جديدة</p>
           </div>
           <div class="stat-card">
             <div class="stat-icon" style="background:rgba(240,180,41,.12);color:var(--yellow)"><i class="fa-solid fa-star"></i></div>
@@ -306,23 +310,67 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
           <div>
             <div class="section-head">
               <div><h2>آخر الحجوزات</h2><p>الحجوزات الواردة من الموقع</p></div>
-              <button class="btn btn-ghost" onclick="goPage('bookings',null)"><i class="fa-solid fa-arrow-left"></i> الكل</button>
+              <button class="btn btn-ghost" onclick="goPage(&#39;bookings&#39;,null)"><i class="fa-solid fa-arrow-left"></i> الكل</button>
             </div>
             <div class="table-wrap">
-              <table><thead><tr><th>الاسم</th><th>الكلاس</th><th>الحالة</th><th></th></tr></thead>
-              <tbody id="dashBookings"><tr class="loading-row"><td colspan="4"><div class="spinner"></div><br>جاري التحميل...</td></tr></tbody></table>
+              <table><thead><tr><th>الاسم</th><th>الكلاس</th><th>تاريخ الجلسة</th><th>الدفع</th><th>الحالة</th><th></th></tr></thead>
+              <tbody id="dashBookings"><tr>
+      <td><strong>Hayam Gebril</strong></td>
+      <td style="font-size:.8rem">Gentle Yoga</td>
+      <td style="font-size:.75rem;color:var(--text-muted)">2026-03-30</td>
+      <td><span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span></td>
+      <td><span class="badge blue">جديد</span></td>
+      <td><div class="action-btns">
+        <button class="act-btn view" onclick="quickStatus(&#39;-OozzEqek4SAJ7p-KHAD&#39;,&#39;confirmed&#39;)" title="تأكيد"><i class="fa-solid fa-check"></i></button>
+        <button class="act-btn wa" onclick="waContact(&#39;01017698881&#39;,&#39;Hayam&#39;)" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
+      </div></td>
+    </tr><tr>
+      <td><strong>Hoda Elsorogy</strong></td>
+      <td style="font-size:.8rem">Gentle Yoga</td>
+      <td style="font-size:.75rem;color:var(--text-muted)">2026-03-30</td>
+      <td><span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span></td>
+      <td><span class="badge blue">جديد</span></td>
+      <td><div class="action-btns">
+        <button class="act-btn view" onclick="quickStatus(&#39;-Oozm95YF-0RW9cGUR2l&#39;,&#39;confirmed&#39;)" title="تأكيد"><i class="fa-solid fa-check"></i></button>
+        <button class="act-btn wa" onclick="waContact(&#39;01006067700&#39;,&#39;Hoda&#39;)" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
+      </div></td>
+    </tr><tr>
+      <td><strong>Enjy Gebril</strong></td>
+      <td style="font-size:.8rem">Power Yoga</td>
+      <td style="font-size:.75rem;color:var(--text-muted)">2026-03-30</td>
+      <td><span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span></td>
+      <td><span class="badge blue">جديد</span></td>
+      <td><div class="action-btns">
+        <button class="act-btn view" onclick="quickStatus(&#39;-Oozaw01qLuv6lkx1mrb&#39;,&#39;confirmed&#39;)" title="تأكيد"><i class="fa-solid fa-check"></i></button>
+        <button class="act-btn wa" onclick="waContact(&#39;01063751653&#39;,&#39;Enjy&#39;)" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
+      </div></td>
+    </tr></tbody></table>
             </div>
           </div>
           <div>
             <div class="section-head"><div><h2>توزيع الكلاسات</h2></div></div>
-            <div class="chart-card"><div class="metric-list" id="classDistMetrics"><div style="text-align:center;color:var(--text-muted);padding:20px">جاري التحميل...</div></div></div>
+            <div class="chart-card"><div class="metric-list" id="classDistMetrics">
+    <div class="metric-item">
+      <span class="m-label"><i class="fa-solid fa-circle" style="color:var(--green)"></i>Power Yoga</span>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:60px;height:5px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:var(--green);width:33%;border-radius:6px"></div></div>
+        <span class="m-val">1</span>
+      </div>
+    </div>
+    <div class="metric-item">
+      <span class="m-label"><i class="fa-solid fa-circle" style="color:var(--blue)"></i>Gentle Yoga</span>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:60px;height:5px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:var(--blue);width:67%;border-radius:6px"></div></div>
+        <span class="m-val">2</span>
+      </div>
+    </div></div></div>
           </div>
         </div>
 
         <div class="section-head"><div><h2>إجراءات سريعة</h2></div></div>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="openModal('addBooking')"><i class="fa-solid fa-plus"></i> إضافة حجز</button>
-          <button class="btn btn-ghost" onclick="goPage('classes',null)"><i class="fa-solid fa-dumbbell"></i> الكلاسات</button>
+          <button class="btn btn-primary" onclick="openModal(&#39;addBooking&#39;)"><i class="fa-solid fa-plus"></i> إضافة حجز</button>
+          <button class="btn btn-ghost" onclick="goPage(&#39;classes&#39;,null)"><i class="fa-solid fa-dumbbell"></i> الكلاسات</button>
           <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i> تصدير</button>
         </div>
       </div>
@@ -331,14 +379,31 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
       <div class="page" id="page-bookings">
         <div class="filter-bar">
           <div class="search-box"><i class="fa-solid fa-search"></i><input type="text" placeholder="بحث..." oninput="filterBookings()" id="bookSearch"></div>
-          <select onchange="filterBookings()" id="bookFilter"><option value="">كل الكلاسات</option><option value="power">Power Yoga</option><option value="diabetes">Yoga for Diabetes</option><option value="gentle">Gentle Yoga</option></select>
-          <select onchange="filterBookings()" id="statusFilter"><option value="">كل الحالات</option><option value="new">جديد</option><option value="confirmed">مؤكد</option><option value="done">مكتمل</option><option value="cancelled">ملغي</option></select>
-          <button class="btn btn-primary" onclick="openModal('addBooking')"><i class="fa-solid fa-plus"></i></button>
+          <select onchange="filterBookings()" id="bookFilter">
+            <option value="">كل الكلاسات</option>
+            <option value="power">Power Yoga</option>
+            <option value="diabetes">Yoga for Diabetes</option>
+            <option value="gentle">Gentle Yoga</option>
+            <option value="retreats">الريتريتس</option>
+          </select>
+          <select onchange="filterBookings()" id="statusFilter">
+            <option value="">كل الحالات</option>
+            <option value="new">جديد</option>
+            <option value="confirmed">مؤكد</option>
+            <option value="done">مكتمل</option>
+            <option value="cancelled">ملغي</option>
+          </select>
+          <select onchange="filterBookings()" id="payFilter">
+            <option value="">كل المدفوعات</option>
+            <option value="paid">مدفوع</option>
+            <option value="pending">معلق</option>
+          </select>
+          <button class="btn btn-primary" onclick="openModal(&#39;addBooking&#39;)"><i class="fa-solid fa-plus"></i></button>
           <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i></button>
         </div>
         <div class="table-wrap">
-          <table><thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاس</th><th>الحالة</th><th>التاريخ</th><th></th></tr></thead>
-          <tbody id="bookingsTable"><tr class="loading-row"><td colspan="7"><div class="spinner"></div><br>جاري التحميل...</td></tr></tbody></table>
+          <table><thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاس</th><th>تاريخ الجلسة</th><th>الدفع</th><th>الحالة</th><th></th></tr></thead>
+          <tbody id="bookingsTable"><tr class="loading-row"><td colspan="8"><div class="spinner"></div><br>جاري التحميل...</td></tr></tbody></table>
         </div>
         <div id="bookEmpty" class="empty-state" style="display:none"><i class="fa-solid fa-calendar-xmark"></i><p>لا توجد حجوزات</p></div>
       </div>
@@ -347,9 +412,18 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
       <div class="page" id="page-classes">
         <div class="section-head">
           <div><h2>إدارة الكلاسات والأسعار</h2></div>
-          <button class="btn btn-primary" onclick="openModal('addClass')"><i class="fa-solid fa-plus"></i> جديد</button>
+          <button class="btn btn-primary" onclick="openModal(&#39;addClass&#39;)"><i class="fa-solid fa-plus"></i> جديد</button>
         </div>
         <div class="classes-grid" id="classesGrid"></div>
+      </div>
+
+      <!-- RETREATS -->
+      <div class="page" id="page-retreats">
+        <div class="section-head">
+          <div><h2>إدارة الريتريتس</h2><p>رحلات اليوجا والتأمل</p></div>
+          <button class="btn btn-primary" onclick="openModal(&#39;addRetreat&#39;)"><i class="fa-solid fa-plus"></i> إضافة ريتريت</button>
+        </div>
+        <div class="classes-grid" id="retreatsGrid"></div>
       </div>
 
       <!-- STUDENTS -->
@@ -359,7 +433,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
           <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i> تصدير</button>
         </div>
         <div class="table-wrap">
-          <table><thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاسات</th><th>حجوزات</th><th></th></tr></thead>
+          <table><thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاسات</th><th>الرصيد المتبقي</th><th>انتهاء الصلاحية</th><th>عدد الحضور</th><th></th></tr></thead>
           <tbody id="studentsTable"></tbody></table>
         </div>
       </div>
@@ -396,7 +470,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 <!-- Firebase SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, push, onValue, update, remove, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  import { getDatabase, ref, push, onValue, update, remove, serverTimestamp, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyB7xZSiGqTh4ncnHcvFBx8ufwPudpEEl50",
@@ -411,6 +485,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
+  // ── Bookings ──
   window._fbRef = ref(db, 'bookings');
   onValue(window._fbRef, (snapshot) => {
     const data = snapshot.val();
@@ -424,34 +499,91 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     window.onBookingsLoaded();
   });
 
+  // ── Credits ──
+  onValue(ref(db, 'credits'), (snapshot) => {
+    window.creditsData = snapshot.val() || {};
+    window.onCreditsLoaded && window.onCreditsLoaded();
+  });
+
+  // ── Retreats ──
+  onValue(ref(db, 'retreats'), (snapshot) => {
+    window.retreatsData = [];
+    const data = snapshot.val();
+    if (data) {
+      Object.entries(data).forEach(([key, val]) => {
+        window.retreatsData.push({ ...val, _key: key });
+      });
+    }
+    if (document.querySelector('#page-retreats.active')) renderRetreats();
+  });
+
   window.fbAddBooking = async (data) => {
     await push(ref(db, 'bookings'), { ...data, createdAt: serverTimestamp() });
   };
   window.fbUpdateStatus = async (key, status) => {
     await update(ref(db, `bookings/${key}`), { status });
   };
+  window.fbUpdatePayment = async (key, paymentStatus, paymentRef) => {
+    await update(ref(db, `bookings/${key}`), { paymentStatus, paymentRef: paymentRef || '' });
+  };
   window.fbDeleteBooking = async (key) => {
     await remove(ref(db, `bookings/${key}`));
+  };
+
+  // ── Credits functions ──
+  window.fbSetCredits = async (phone, credits, expiry) => {
+    const key = phone.replace(/[^0-9]/g, '');
+    const existing = window.creditsData[key] || { totalAttended: 0 };
+    await update(ref(db, `credits/${key}`), {
+      credits: Number(credits),
+      expiry: expiry,
+      totalAttended: existing.totalAttended || 0,
+      phone: phone
+    });
+  };
+  window.fbMarkAttendance = async (phone) => {
+    const key = phone.replace(/[^0-9]/g, '');
+    const existing = window.creditsData[key] || { credits: 0, totalAttended: 0 };
+    if ((existing.credits || 0) <= 0) return false;
+    await update(ref(db, `credits/${key}`), {
+      credits: (existing.credits || 0) - 1,
+      totalAttended: (existing.totalAttended || 0) + 1
+    });
+    return true;
+  };
+
+  // ── Retreats functions ──
+  window.fbAddRetreat = async (data) => {
+    await push(ref(db, 'retreats'), { ...data, createdAt: serverTimestamp() });
+  };
+  window.fbUpdateRetreat = async (key, data) => {
+    await update(ref(db, `retreats/${key}`), data);
+  };
+  window.fbDeleteRetreat = async (key) => {
+    await remove(ref(db, `retreats/${key}`));
   };
 
   document.getElementById('syncBtn').addEventListener('click', () => {
     showToast('البيانات محدّثة في الوقت الفعلي ✓', 'success', 'fa-check-circle');
   });
   window.addEventListener('beforeunload', (e) => {
-  e.preventDefault();
-  e.returnValue = '';
-});
+    e.preventDefault();
+    e.returnValue = '';
+  });
 </script>
 
 <script>
 window.bookings = [];
+window.creditsData = {};
+window.retreatsData = [];
+
 let classes = [
   {id:1,name:'Power Yoga',location:'Royal Hills Clubhouse',schedule:'الأحد والأربعاء — 11 صباحاً',price1:400,price4:1500,price8:2800,capacity:6,enrolled:5,color:'#3D8C6A',icon:'fa-fire'},
   {id:2,name:'Yoga for Diabetes',location:'Royal Hills',schedule:'الاثنين والأربعاء — 7:30 مساءً',price1:400,price4:1500,price8:null,capacity:6,enrolled:4,color:'#C8956C',icon:'fa-heart-pulse'},
   {id:3,name:'Gentle Yoga',location:'Pyramids Heights',schedule:'يتم تحديد الموعد قريباً',price1:350,price4:null,price8:null,capacity:8,enrolled:2,color:'#5B8FF9',icon:'fa-leaf'},
 ];
 
-const programMap = {power:'Power Yoga',diabetes:'Yoga for Diabetes',gentle:'Gentle Yoga'};
+const programMap = {power:'Power Yoga',diabetes:'Yoga for Diabetes',gentle:'Gentle Yoga',retreats:'الريتريتس'};
 const levelMap = {beginner:'مبتدئة',some:'ممارست قليلاً',intermediate:'متوسطة',advanced:'متقدمة'};
 const statusMap = {new:'جديد',confirmed:'مؤكد',done:'مكتمل',cancelled:'ملغي'};
 const statusBadge = {new:'blue',confirmed:'green',done:'green',cancelled:'red'};
@@ -464,6 +596,11 @@ window.onBookingsLoaded = function() {
   else if (currentPage === 'students') renderStudents(buildStudents());
   else if (currentPage === 'stats') renderStats();
   updateDashStats();
+};
+
+window.onCreditsLoaded = function() {
+  const currentPage = document.querySelector('.page.active')?.id?.replace('page-','');
+  if (currentPage === 'students') renderStudents(buildStudents());
 };
 
 function updateDashStats() {
@@ -479,7 +616,7 @@ function updateBadge() {
   document.getElementById('newBadge').textContent = n > 0 ? n : '';
 }
 
-// LOGIN
+// ── LOGIN ──
 function doLogin() {
   const u = document.getElementById('loginUser').value.trim();
   const p = document.getElementById('loginPass').value.trim();
@@ -500,8 +637,8 @@ function logout() {
   document.getElementById('appLayout').style.display = 'none';
 }
 
-// NAV
-const pageTitles = {dashboard:'نظرة عامة',bookings:'الحجوزات',classes:'الكلاسات',students:'المتدربات',stats:'الإحصائيات'};
+// ── NAV ──
+const pageTitles = {dashboard:'نظرة عامة',bookings:'الحجوزات',classes:'الكلاسات',retreats:'الريتريتس',students:'المتدربات والرصيد',stats:'الإحصائيات'};
 function goPage(id, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
@@ -512,23 +649,26 @@ function goPage(id, el) {
   if (id === 'dashboard') { renderDashboard(); updateDashStats(); }
   else if (id === 'bookings') renderBookings(window.bookings);
   else if (id === 'classes') renderClasses();
+  else if (id === 'retreats') renderRetreats();
   else if (id === 'students') renderStudents(buildStudents());
   else if (id === 'stats') renderStats();
 }
 function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('active')}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('active')}
 
-// DASHBOARD
+// ── DASHBOARD ──
 function renderDashboard() {
   const b = window.bookings;
   const recent = b.slice(0, 5);
   const tb = document.getElementById('dashBookings');
   if (!recent.length) {
-    tb.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--text-muted);padding:24px">لا توجد حجوزات بعد</td></tr>';
+    tb.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:24px">لا توجد حجوزات بعد</td></tr>';
   } else {
     tb.innerHTML = recent.map(b => `<tr>
       <td><strong>${b.fname} ${b.lname}</strong></td>
       <td style="font-size:.8rem">${programMap[b.program]||b.program}</td>
+      <td style="font-size:.75rem;color:var(--text-muted)">${b.sessionDate||b.date||'—'}</td>
+      <td>${b.paymentStatus==='paid'?`<span class="pay-paid"><i class="fa-solid fa-check-circle"></i>مدفوع</span>`:`<span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span>`}</td>
       <td><span class="badge ${statusBadge[b.status]||'blue'}">${statusMap[b.status]||b.status}</span></td>
       <td><div class="action-btns">
         <button class="act-btn view" onclick="quickStatus('${b._key}','confirmed')" title="تأكيد"><i class="fa-solid fa-check"></i></button>
@@ -537,20 +677,20 @@ function renderDashboard() {
     </tr>`).join('');
   }
 
-  const counts = {power:0,diabetes:0,gentle:0};
+  const counts = {power:0,diabetes:0,gentle:0,retreats:0};
   b.forEach(x => { if(counts[x.program]!==undefined) counts[x.program]++; });
   const total = b.length || 1;
-  document.getElementById('classDistMetrics').innerHTML = Object.entries(counts).map(([k,v]) => `
+  document.getElementById('classDistMetrics').innerHTML = Object.entries(counts).filter(([,v])=>v>0).map(([k,v]) => `
     <div class="metric-item">
-      <span class="m-label"><i class="fa-solid fa-circle" style="color:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':'var(--blue)'}"></i>${programMap[k]}</span>
+      <span class="m-label"><i class="fa-solid fa-circle" style="color:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':k==='retreats'?'var(--purple)':'var(--blue)'}"></i>${programMap[k]}</span>
       <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:60px;height:5px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':'var(--blue)'};width:${Math.round(v/total*100)}%;border-radius:6px"></div></div>
+        <div style="width:60px;height:5px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':k==='retreats'?'var(--purple)':'var(--blue)'};width:${Math.round(v/total*100)}%;border-radius:6px"></div></div>
         <span class="m-val">${v}</span>
       </div>
-    </div>`).join('');
+    </div>`).join('') || '<div style="text-align:center;color:var(--text-muted);padding:12px">لا توجد بيانات</div>';
 }
 
-// BOOKINGS
+// ── BOOKINGS ──
 function renderBookings(list) {
   const tb = document.getElementById('bookingsTable');
   const empty = document.getElementById('bookEmpty');
@@ -561,12 +701,17 @@ function renderBookings(list) {
     <td><strong style="font-size:.85rem">${b.fname} ${b.lname}</strong></td>
     <td dir="ltr" style="color:var(--text-muted);font-size:.78rem">${b.phone}</td>
     <td style="font-size:.78rem">${programMap[b.program]||b.program}</td>
+    <td style="font-size:.75rem;color:var(--text-muted)">${b.sessionDate||b.date||'—'}</td>
+    <td>
+      ${b.paymentStatus==='paid'
+        ? `<span class="pay-paid"><i class="fa-solid fa-check-circle"></i>مدفوع</span>`
+        : `<button class="btn" style="font-size:.7rem;padding:3px 8px;background:rgba(240,180,41,.1);color:var(--yellow);border:1px solid rgba(240,180,41,.3)" onclick="openPaymentModal('${b._key}','${b.fname} ${b.lname}')"><i class="fa-solid fa-mobile-screen"></i> InstaPay</button>`}
+    </td>
     <td>
       <select onchange="changeStatus('${b._key}',this.value)" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:3px 6px;font-size:.75rem;outline:none;font-family:inherit">
         ${['new','confirmed','done','cancelled'].map(s=>`<option value="${s}"${b.status===s?' selected':''}>${statusMap[s]}</option>`).join('')}
       </select>
     </td>
-    <td style="font-size:.75rem;color:var(--text-muted)">${b.date||'—'}</td>
     <td><div class="action-btns">
       <button class="act-btn view" onclick="viewBooking('${b._key}')" title="عرض"><i class="fa-solid fa-eye"></i></button>
       <button class="act-btn wa" onclick="waContact('${b.phone}','${b.fname}')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
@@ -579,9 +724,11 @@ function filterBookings() {
   const q = (document.getElementById('bookSearch').value||'').toLowerCase();
   const prog = document.getElementById('bookFilter').value;
   const stat = document.getElementById('statusFilter').value;
+  const pay = document.getElementById('payFilter').value;
   renderBookings(window.bookings.filter(b => {
     const name = (b.fname+' '+b.lname+b.phone).toLowerCase();
-    return (!q||name.includes(q))&&(!prog||b.program===prog)&&(!stat||b.status===stat);
+    const matchPay = !pay || (pay === 'paid' ? b.paymentStatus === 'paid' : b.paymentStatus !== 'paid');
+    return (!q||name.includes(q))&&(!prog||b.program===prog)&&(!stat||b.status===stat)&&matchPay;
   }));
 }
 
@@ -610,12 +757,16 @@ function viewBooking(key) {
   openModal('viewBooking', b);
 }
 
+function openPaymentModal(key, name) {
+  openModal('confirmPayment', { _key: key, displayName: name });
+}
+
 function waContact(phone, name) {
   const msg = encodeURIComponent(`مرحباً ${name}! أنا إنجي من Align by Enjy. بخصوص حجزكِ...`);
   window.open(`https://wa.me/2${phone}?text=${msg}`, '_blank');
 }
 
-// CLASSES
+// ── CLASSES ──
 function renderClasses() {
   document.getElementById('classesGrid').innerHTML = classes.map(c => `
     <div class="class-card">
@@ -638,37 +789,117 @@ function renderClasses() {
 
 function editClass(id) { openModal('editClass', classes.find(x => x.id===id)); }
 
-// STUDENTS
+// ── RETREATS ──
+function renderRetreats() {
+  const grid = document.getElementById('retreatsGrid');
+  if (!window.retreatsData.length) {
+    grid.innerHTML = `<div class="empty-state"><i class="fa-solid fa-mountain-sun"></i><p>لا توجد ريتريتس بعد. أضيفي أول ريتريت!</p></div>`;
+    return;
+  }
+  grid.innerHTML = window.retreatsData.map(r => `
+    <div class="class-card">
+      <div class="cc-top">
+        <div class="cc-icon" style="background:rgba(167,139,250,.15);color:var(--purple)"><i class="fa-solid fa-mountain-sun"></i></div>
+        <div class="action-btns">
+          <button class="act-btn edit" onclick="editRetreat('${r._key}')" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+          <button class="act-btn del" onclick="deleteRetreat('${r._key}')" title="حذف"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="cc-name">${r.name||'—'}</div>
+      <div class="cc-loc"><i class="fa-solid fa-location-dot"></i>${r.location||'—'}</div>
+      <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:6px"><i class="fa-regular fa-calendar" style="margin-left:4px"></i>${r.dateRange||'—'}</div>
+      ${r.description?`<div style="font-size:.78rem;color:var(--text-muted);margin-bottom:10px">${r.description}</div>`:''}
+      <div class="cc-row">
+        <div class="cc-stat"><div class="val">${r.price||'—'} ج</div><div class="lbl">سعر الريتريت</div></div>
+        <div class="cc-stat"><div class="val">${r.capacity||'—'}</div><div class="lbl">أماكن متاحة</div></div>
+        <div class="cc-stat"><div class="val">${r.duration||'—'}</div><div class="lbl">المدة</div></div>
+      </div>
+    </div>`).join('');
+}
+
+async function deleteRetreat(key) {
+  if (!confirm('حذف الريتريت؟')) return;
+  try { await window.fbDeleteRetreat(key); showToast('تم الحذف', 'error', 'fa-trash'); }
+  catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
+}
+
+function editRetreat(key) {
+  const r = window.retreatsData.find(x => x._key === key);
+  if (r) openModal('editRetreat', r);
+}
+
+// ── STUDENTS + CREDITS ──
 function buildStudents() {
   const map = {};
   window.bookings.forEach(b => {
     const k = b.phone;
-    if (!map[k]) map[k] = {name:b.fname+' '+b.lname, phone:b.phone, classes:[], sessions:0, lastDate:b.date||''};
+    if (!map[k]) map[k] = {name:b.fname+' '+b.lname, phone:b.phone, classes:[], sessions:0, lastDate:b.sessionDate||b.date||''};
     if (!map[k].classes.includes(programMap[b.program])) map[k].classes.push(programMap[b.program]);
     map[k].sessions++;
-    if ((b.date||'') > map[k].lastDate) map[k].lastDate = b.date;
+    const bDate = b.sessionDate || b.date || '';
+    if (bDate > map[k].lastDate) map[k].lastDate = bDate;
   });
   return Object.values(map);
 }
 
 function renderStudents(list) {
   const tb = document.getElementById('studentsTable');
-  if (!list.length) { tb.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:40px">لا توجد بيانات بعد</td></tr>'; return; }
-  tb.innerHTML = list.map((s,i) => `<tr>
-    <td style="color:var(--text-muted)">${i+1}</td>
-    <td><strong style="font-size:.85rem">${s.name}</strong></td>
-    <td dir="ltr" style="font-size:.78rem;color:var(--text-muted)">${s.phone}</td>
-    <td>${s.classes.map(c=>`<span class="badge blue" style="margin-left:3px;font-size:.65rem">${c}</span>`).join('')}</td>
-    <td style="text-align:center"><strong>${s.sessions}</strong></td>
-    <td><div class="action-btns"><button class="act-btn wa" onclick="waContact('${s.phone}','${s.name.split(' ')[0]}')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button></div></td>
-  </tr>`).join('');
+  if (!list.length) { tb.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:40px">لا توجد بيانات بعد</td></tr>'; return; }
+  const today = new Date().toISOString().slice(0,10);
+  tb.innerHTML = list.map((s,i) => {
+    const key = s.phone.replace(/[^0-9]/g,'');
+    const cr = window.creditsData[key] || {};
+    const credits = cr.credits !== undefined ? cr.credits : '—';
+    const expiry = cr.expiry || '—';
+    const attended = cr.totalAttended || 0;
+    let expiryClass = '';
+    if (cr.expiry) {
+      const diff = (new Date(cr.expiry) - new Date(today)) / (1000*60*60*24);
+      if (diff < 0) expiryClass = 'style="color:var(--red)"';
+      else if (diff <= 14) expiryClass = 'style="color:var(--yellow)"';
+    }
+    return `<tr>
+      <td style="color:var(--text-muted)">${i+1}</td>
+      <td><strong style="font-size:.85rem">${s.name}</strong></td>
+      <td dir="ltr" style="font-size:.78rem;color:var(--text-muted)">${s.phone}</td>
+      <td>${s.classes.map(c=>`<span class="badge blue" style="margin-left:3px;font-size:.65rem">${c}</span>`).join('')}</td>
+      <td style="text-align:center">
+        ${typeof credits === 'number'
+          ? `<strong style="color:${credits>0?'var(--green)':'var(--red)'};font-size:1rem">${credits}</strong>`
+          : `<span style="color:var(--text-faint)">—</span>`}
+      </td>
+      <td ${expiryClass} style="font-size:.78rem;text-align:center">${expiry}</td>
+      <td style="text-align:center"><strong>${attended}</strong></td>
+      <td>
+        <div class="action-btns">
+          <button class="act-btn credit" onclick="openCreditsModal('${s.phone}','${s.name}')" title="إدارة الرصيد"><i class="fa-solid fa-coins"></i></button>
+          ${typeof credits === 'number' && credits > 0
+            ? `<button class="act-btn view" onclick="markAttendance('${s.phone}','${s.name.split(' ')[0]}')" title="تسجيل حضور"><i class="fa-solid fa-user-check"></i></button>`
+            : ''}
+          <button class="act-btn wa" onclick="waContact('${s.phone}','${s.name.split(' ')[0]}')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
 }
 
 function filterStudents(q) {
   renderStudents(buildStudents().filter(s => (s.name+s.phone).toLowerCase().includes(q.toLowerCase())));
 }
 
-// STATS
+function openCreditsModal(phone, name) {
+  openModal('manageCredits', { phone, name });
+}
+
+async function markAttendance(phone, firstName) {
+  try {
+    const ok = await window.fbMarkAttendance(phone);
+    if (ok) showToast(`✓ تم تسجيل حضور ${firstName}، تم خصم جلسة من رصيدها`, 'success', 'fa-user-check');
+    else showToast(`رصيد ${firstName} صفر، لا يمكن تسجيل الحضور`, 'error', 'fa-triangle-exclamation');
+  } catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
+}
+
+// ── STATS ──
 function renderStats() {
   const b = window.bookings;
   const uniquePhones = new Set(b.map(x => x.phone)).size;
@@ -676,29 +907,29 @@ function renderStats() {
   document.getElementById('st2').textContent = b.length;
   document.getElementById('st3').textContent = b.filter(x=>x.status==='new').length;
   document.getElementById('st4').textContent = b.filter(x=>x.status==='confirmed').length;
-  const counts = {power:0,diabetes:0,gentle:0};
+  const counts = {power:0,diabetes:0,gentle:0,retreats:0};
   b.forEach(x => { if(counts[x.program]!==undefined) counts[x.program]++; });
   const total = b.length || 1;
   document.getElementById('statsDistList').innerHTML = Object.entries(counts).map(([k,v]) => `
     <div class="metric-item">
-      <span class="m-label"><i class="fa-solid fa-circle" style="color:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':'var(--blue)'}"></i>${programMap[k]}</span>
+      <span class="m-label"><i class="fa-solid fa-circle" style="color:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':k==='retreats'?'var(--purple)':'var(--blue)'}"></i>${programMap[k]}</span>
       <div style="display:flex;align-items:center;gap:10px">
-        <div style="width:100px;height:7px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':'var(--blue)'};width:${Math.round(v/total*100)}%;border-radius:6px"></div></div>
+        <div style="width:100px;height:7px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:${k==='power'?'var(--green)':k==='diabetes'?'var(--accent)':k==='retreats'?'var(--purple)':'var(--blue)'};width:${Math.round(v/total*100)}%;border-radius:6px"></div></div>
         <span class="m-val">${v} (${Math.round(v/total*100)}%)</span>
       </div>
     </div>`).join('');
 }
 
-// EXPORT
+// ── EXPORT ──
 function exportCSV() {
-  const rows = [['#','الاسم','الجوال','الإيميل','الكلاس','المستوى','الحالة','التاريخ'],
-    ...window.bookings.map((b,i) => [i+1,`${b.fname} ${b.lname}`,b.phone,b.email||'',programMap[b.program]||b.program,levelMap[b.level]||b.level||'',statusMap[b.status]||b.status,b.date||''])];
+  const rows = [['#','الاسم','الجوال','الإيميل','الكلاس','المستوى','تاريخ الجلسة','الدفع','الحالة'],
+    ...window.bookings.map((b,i) => [i+1,`${b.fname} ${b.lname}`,b.phone,b.email||'',programMap[b.program]||b.program,levelMap[b.level]||b.level||'',b.sessionDate||b.date||'',b.paymentStatus==='paid'?'مدفوع':'معلق',statusMap[b.status]||b.status])];
   const csv = rows.map(r => r.join(',')).join('\n');
   const a = document.createElement('a'); a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv); a.download='bookings.csv'; a.click();
   showToast('تم تصدير البيانات','success','fa-file-export');
 }
 
-// MODALS
+// ── MODALS ──
 function openModal(type, data) {
   const title = document.getElementById('modalTitle');
   const body = document.getElementById('modalBody');
@@ -710,9 +941,31 @@ function openModal(type, data) {
       <div class="form-row2"><div class="form-group"><label>الاسم الأول</label><input id="mfname" type="text" placeholder="نورة"></div><div class="form-group"><label>الاسم الأخير</label><input id="mlname" type="text" placeholder="العتيبي"></div></div>
       <div class="form-row2"><div class="form-group"><label>الجوال</label><input id="mphone" type="tel" dir="ltr" placeholder="01XXXXXXXXX"></div><div class="form-group"><label>الإيميل</label><input id="memail" type="email" dir="ltr" placeholder="email@example.com"></div></div>
       <div class="form-row2">
-        <div class="form-group"><label>الكلاس</label><select id="mprogram"><option value="power">Power Yoga</option><option value="diabetes">Yoga for Diabetes</option><option value="gentle">Gentle Yoga</option></select></div>
-        <div class="form-group"><label>المستوى</label><select id="mlevel"><option value="beginner">مبتدئة</option><option value="some">ممارست قليلاً</option><option value="intermediate">متوسطة</option><option value="advanced">متقدمة</option></select></div>
+        <div class="form-group"><label>الكلاس</label><select id="mprogram">
+          <option value="power">Power Yoga</option>
+          <option value="diabetes">Yoga for Diabetes</option>
+          <option value="gentle">Gentle Yoga</option>
+          <option value="retreats">الريتريتس</option>
+        </select></div>
+        <div class="form-group"><label>المستوى</label><select id="mlevel">
+          <option value="beginner">مبتدئة</option>
+          <option value="some">ممارست قليلاً</option>
+          <option value="intermediate">متوسطة</option>
+          <option value="advanced">متقدمة</option>
+        </select></div>
       </div>
+      <div class="form-row2">
+        <div class="form-group"><label>تاريخ الجلسة</label><input id="msessiondate" type="date"></div>
+        <div class="form-group"><label>طريقة الدفع</label><select id="mpaymethod">
+          <option value="instapay">InstaPay</option>
+          <option value="cash">كاش</option>
+          <option value="other">أخرى</option>
+        </select></div>
+      </div>
+      <div class="form-group"><label>حالة الدفع</label><select id="mpaystatus">
+        <option value="pending">معلق (لم يدفع بعد)</option>
+        <option value="paid">مدفوع ✓</option>
+      </select></div>
       <div class="form-group"><label>ملاحظات</label><textarea id="mnotes" placeholder="أي ملاحظات..."></textarea></div>`;
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveAddBooking()"><i class="fa-solid fa-plus"></i> إضافة</button>`;
   }
@@ -725,11 +978,51 @@ function openModal(type, data) {
         <div class="metric-item"><span class="m-label"><i class="fa-solid fa-envelope"></i> الإيميل</span><span class="m-val" dir="ltr">${data.email||'—'}</span></div>
         <div class="metric-item"><span class="m-label"><i class="fa-solid fa-dumbbell"></i> الكلاس</span><span class="m-val">${programMap[data.program]||data.program}</span></div>
         <div class="metric-item"><span class="m-label"><i class="fa-solid fa-signal"></i> المستوى</span><span class="m-val">${levelMap[data.level]||data.level||'—'}</span></div>
+        <div class="metric-item"><span class="m-label"><i class="fa-regular fa-calendar"></i> تاريخ الجلسة</span><span class="m-val">${data.sessionDate||data.date||'—'}</span></div>
+        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-mobile-screen"></i> طريقة الدفع</span><span class="m-val">${data.paymentMethod==='instapay'?'InstaPay':data.paymentMethod==='cash'?'كاش':data.paymentMethod||'—'}</span></div>
+        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-circle-dollar-to-slot"></i> حالة الدفع</span><span class="m-val">${data.paymentStatus==='paid'?`<span class="pay-paid"><i class="fa-solid fa-check-circle"></i>مدفوع</span>`:`<span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span>`}</span></div>
+        ${data.paymentRef?`<div class="metric-item"><span class="m-label"><i class="fa-solid fa-hashtag"></i> مرجع الدفع</span><span class="m-val" dir="ltr">${data.paymentRef}</span></div>`:''}
         <div class="metric-item"><span class="m-label"><i class="fa-solid fa-info-circle"></i> الحالة</span><span class="m-val"><span class="badge ${statusBadge[data.status]}">${statusMap[data.status]}</span></span></div>
-        <div class="metric-item"><span class="m-label"><i class="fa-solid fa-calendar"></i> التاريخ</span><span class="m-val">${data.date||'—'}</span></div>
         ${data.notes?`<div class="metric-item"><span class="m-label"><i class="fa-solid fa-note-sticky"></i> ملاحظات</span><span class="m-val">${data.notes}</span></div>`:''}
       </div>`;
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إغلاق</button><button class="btn btn-primary" onclick="waContact('${data.phone}','${data.fname}');closeModal()"><i class="fa-brands fa-whatsapp"></i> تواصل</button>`;
+  }
+  else if (type === 'confirmPayment' && data) {
+    title.textContent = 'تأكيد دفع InstaPay';
+    body.innerHTML = `
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">تأكيد استلام مدفوعات <strong>${data.displayName}</strong> عبر InstaPay</p>
+      <div class="form-group"><label>رقم مرجع التحويل (اختياري)</label><input id="payRef" type="text" dir="ltr" placeholder="مثال: 12345678"></div>
+      <div class="instapay-info"><i class="fa-solid fa-circle-info"></i><div>بعد التأكيد سيتغير وضع الدفع إلى "مدفوع" ولن يظهر زر InstaPay مرة أخرى.</div></div>`;
+    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="confirmPayment('${data._key}')"><i class="fa-solid fa-check"></i> تأكيد الاستلام</button>`;
+  }
+  else if (type === 'manageCredits' && data) {
+    const key = data.phone.replace(/[^0-9]/g,'');
+    const cr = window.creditsData[key] || {};
+    const today = new Date().toISOString().slice(0,10);
+    title.textContent = `رصيد: ${data.name}`;
+    body.innerHTML = `
+      ${cr.credits !== undefined ? `
+        <div class="credits-box">
+          <div class="cb-head">
+            <div><div class="cb-num">${cr.credits}</div><div class="cb-lbl">كلاسات متبقية</div></div>
+            <div style="text-align:left">
+              <div style="font-size:.78rem;color:var(--text-muted)">إجمالي الحضور</div>
+              <div style="font-size:1.4rem;font-weight:800;color:var(--accent)">${cr.totalAttended||0}</div>
+            </div>
+          </div>
+          <div class="cb-expiry ${cr.expiry && cr.expiry < today ? 'expired' : cr.expiry && (new Date(cr.expiry)-new Date(today))/(1000*60*60*24)<=14 ? 'soon' : ''}">
+            <i class="fa-regular fa-calendar"></i> انتهاء الصلاحية: ${cr.expiry||'—'}
+            ${cr.expiry && cr.expiry < today ? ' (منتهي!)' : ''}
+          </div>
+        </div>` : `<p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">لا يوجد رصيد مسجل لهذه المتدربة. أضيفي رصيد جديد:</p>`}
+      <div class="form-row2">
+        <div class="form-group"><label>عدد الكلاسات (الرصيد الجديد)</label><input id="crCredits" type="number" placeholder="4" min="1" max="50"></div>
+        <div class="form-group"><label>تاريخ انتهاء الصلاحية</label><input id="crExpiry" type="date" value="${cr.expiry||''}"></div>
+      </div>
+      <p class="form-hint">* سيتم استبدال الرصيد الحالي بالرصيد الجديد. إذا أردتِ الإضافة، اجمعي الأرقام يدوياً.</p>`;
+    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button>
+      ${cr.credits > 0 ? `<button class="attend-btn" onclick="markAttendance('${data.phone}','${data.name.split(' ')[0]}');closeModal()"><i class="fa-solid fa-user-check"></i> تسجيل حضور الآن</button>` : ''}
+      <button class="btn btn-primary" onclick="saveCredits('${data.phone}')"><i class="fa-solid fa-floppy-disk"></i> حفظ الرصيد</button>`;
   }
   else if (type === 'editClass' && data) {
     title.textContent = 'تعديل: ' + data.name;
@@ -763,6 +1056,41 @@ function openModal(type, data) {
       </div>`;
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveNewClass()"><i class="fa-solid fa-plus"></i> إضافة</button>`;
   }
+  else if (type === 'addRetreat') {
+    title.textContent = 'إضافة ريتريت جديد';
+    body.innerHTML = `
+      <div class="form-group"><label>اسم الريتريت</label><input id="rtname" type="text" placeholder="Bali Yoga Retreat 2026"></div>
+      <div class="form-group"><label>الموقع</label><input id="rtloc" type="text" placeholder="بالي — إندونيسيا"></div>
+      <div class="form-row2">
+        <div class="form-group"><label>تاريخ البدء</label><input id="rtstart" type="date"></div>
+        <div class="form-group"><label>تاريخ الانتهاء</label><input id="rtend" type="date"></div>
+      </div>
+      <div class="form-row2">
+        <div class="form-group"><label>السعر (جنيه)</label><input id="rtprice" type="number" placeholder="15000"></div>
+        <div class="form-group"><label>عدد الأماكن</label><input id="rtcap" type="number" placeholder="10"></div>
+      </div>
+      <div class="form-group"><label>المدة</label><input id="rtdur" type="text" placeholder="7 أيام"></div>
+      <div class="form-group"><label>الوصف</label><textarea id="rtdesc" placeholder="وصف مختصر عن الريتريت..."></textarea></div>`;
+    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveNewRetreat()"><i class="fa-solid fa-plus"></i> إضافة</button>`;
+  }
+  else if (type === 'editRetreat' && data) {
+    title.textContent = 'تعديل: ' + (data.name||'الريتريت');
+    const [startDate, endDate] = (data.dateRange||'').split(' — ');
+    body.innerHTML = `
+      <div class="form-group"><label>اسم الريتريت</label><input id="rtname" type="text" value="${data.name||''}"></div>
+      <div class="form-group"><label>الموقع</label><input id="rtloc" type="text" value="${data.location||''}"></div>
+      <div class="form-row2">
+        <div class="form-group"><label>تاريخ البدء</label><input id="rtstart" type="date" value="${startDate||''}"></div>
+        <div class="form-group"><label>تاريخ الانتهاء</label><input id="rtend" type="date" value="${endDate||''}"></div>
+      </div>
+      <div class="form-row2">
+        <div class="form-group"><label>السعر (جنيه)</label><input id="rtprice" type="number" value="${data.price||''}"></div>
+        <div class="form-group"><label>عدد الأماكن</label><input id="rtcap" type="number" value="${data.capacity||''}"></div>
+      </div>
+      <div class="form-group"><label>المدة</label><input id="rtdur" type="text" value="${data.duration||''}"></div>
+      <div class="form-group"><label>الوصف</label><textarea id="rtdesc">${data.description||''}</textarea></div>`;
+    foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveEditRetreat('${data._key}')"><i class="fa-solid fa-floppy-disk"></i> حفظ</button>`;
+  }
 
   document.getElementById('modalOverlay').classList.add('open');
 }
@@ -775,10 +1103,44 @@ async function saveAddBooking() {
   const ph=document.getElementById('mphone').value.trim();
   if(!fn||!ph){showToast('يرجى ملء الاسم والجوال','error','fa-triangle-exclamation');return;}
   try {
-    await window.fbAddBooking({fname:fn,lname:document.getElementById('mlname').value.trim(),phone:ph,email:document.getElementById('memail').value.trim(),program:document.getElementById('mprogram').value,level:document.getElementById('mlevel').value,notes:document.getElementById('mnotes').value.trim(),date:new Date().toISOString().slice(0,10),status:'new'});
+    await window.fbAddBooking({
+      fname:fn,
+      lname:document.getElementById('mlname').value.trim(),
+      phone:ph,
+      email:document.getElementById('memail').value.trim(),
+      program:document.getElementById('mprogram').value,
+      level:document.getElementById('mlevel').value,
+      notes:document.getElementById('mnotes').value.trim(),
+      sessionDate:document.getElementById('msessiondate').value||new Date().toISOString().slice(0,10),
+      date:new Date().toISOString().slice(0,10),
+      paymentMethod:document.getElementById('mpaymethod').value,
+      paymentStatus:document.getElementById('mpaystatus').value,
+      status:'new'
+    });
     closeModal();
     showToast(`تم إضافة حجز ${fn} بنجاح`,'success','fa-check-circle');
   } catch(e) { showToast('حدث خطأ','error','fa-triangle-exclamation'); }
+}
+
+async function confirmPayment(key) {
+  const ref = document.getElementById('payRef')?.value?.trim() || '';
+  try {
+    await window.fbUpdatePayment(key, 'paid', ref);
+    closeModal();
+    showToast('تم تأكيد استلام الدفع ✓', 'success', 'fa-check-circle');
+  } catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
+}
+
+async function saveCredits(phone) {
+  const credits = document.getElementById('crCredits').value;
+  const expiry = document.getElementById('crExpiry').value;
+  if (!credits) { showToast('يرجى إدخال عدد الكلاسات', 'error', 'fa-triangle-exclamation'); return; }
+  if (!expiry) { showToast('يرجى إدخال تاريخ انتهاء الصلاحية', 'error', 'fa-triangle-exclamation'); return; }
+  try {
+    await window.fbSetCredits(phone, credits, expiry);
+    closeModal();
+    showToast('تم حفظ الرصيد بنجاح ✓', 'success', 'fa-coins');
+  } catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
 }
 
 function saveEditClass(id) {
@@ -800,13 +1162,139 @@ function saveNewClass() {
   closeModal();renderClasses();showToast('تم إضافة الكلاس','success','fa-plus');
 }
 
+async function saveNewRetreat() {
+  const name = document.getElementById('rtname').value.trim();
+  if (!name) { showToast('يرجى كتابة اسم الريتريت','error','fa-triangle-exclamation'); return; }
+  const start = document.getElementById('rtstart').value;
+  const end = document.getElementById('rtend').value;
+  try {
+    await window.fbAddRetreat({
+      name,
+      location: document.getElementById('rtloc').value,
+      dateRange: start && end ? `${start} — ${end}` : start||end||'يتم تحديده قريباً',
+      price: +document.getElementById('rtprice').value || 0,
+      capacity: +document.getElementById('rtcap').value || 10,
+      duration: document.getElementById('rtdur').value,
+      description: document.getElementById('rtdesc').value
+    });
+    closeModal();
+    showToast('تم إضافة الريتريت بنجاح','success','fa-mountain-sun');
+  } catch(e) { showToast('حدث خطأ','error','fa-triangle-exclamation'); }
+}
+
+async function saveEditRetreat(key) {
+  const name = document.getElementById('rtname').value.trim();
+  if (!name) { showToast('يرجى كتابة اسم الريتريت','error','fa-triangle-exclamation'); return; }
+  const start = document.getElementById('rtstart').value;
+  const end = document.getElementById('rtend').value;
+  try {
+    await window.fbUpdateRetreat(key, {
+      name,
+      location: document.getElementById('rtloc').value,
+      dateRange: start && end ? `${start} — ${end}` : start||end||'يتم تحديده قريباً',
+      price: +document.getElementById('rtprice').value || 0,
+      capacity: +document.getElementById('rtcap').value || 10,
+      duration: document.getElementById('rtdur').value,
+      description: document.getElementById('rtdesc').value
+    });
+    closeModal();
+    showToast('تم تحديث الريتريت','success','fa-check-circle');
+  } catch(e) { showToast('حدث خطأ','error','fa-triangle-exclamation'); }
+}
+
 function showToast(msg, type='info', icon='fa-info-circle') {
   const c=document.getElementById('toastContainer');
   const t=document.createElement('div');
   t.className=`toast ${type}`;
   t.innerHTML=`<i class="fa-solid ${icon}"></i> ${msg}`;
-  c.appendChild(t);setTimeout(()=>t.remove(),3200);
+  c.appendChild(t);setTimeout(()=>t.remove(),3500);
 }
 </script>
-</body>
-</html>
+<script src="./Align by Enjy — لوحة الإدارة_files/replit-pill.global.js.download" data-repl-id="9fee56cd-cff5-4cf0-ba6e-faa37abd1609"></script>
+
+<div id="replit-pill-host"><template shadowrootmode="closed"><style>
+        #replit-pill {
+          position: fixed;
+          bottom: 48px;
+          right: 48px;
+          border-radius: 120px;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+          font-size: 12px;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          z-index: 1000000;
+          white-space: nowrap;
+          cursor: pointer;
+          overflow: hidden;
+          background-color: rgba(0, 0, 0, 0.4);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          color: #f0f2f6;
+          box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.05), 1px 1px 1px 0px rgba(255, 255, 255, 0.1);
+          transition: transform 0.2s ease;
+        }
+        #replit-pill:hover {
+          transform: scale(1.05);
+        }
+        #replit-pill .shimmer {
+          position: absolute;
+          inset: 0;
+          transform: translateX(-100%);
+          transition: transform 0.7s ease-in-out;
+          background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+          pointer-events: none;
+        }
+        #replit-pill:hover .shimmer {
+          transform: translateX(100%);
+        }
+        #replit-pill .badge-content {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        #replit-pill .replit-logo {
+          color: #f0f2f6;
+        }
+        #replit-pill .replit-text {
+          font-weight: 500;
+          line-height: 20px;
+          color: #f0f2f6;
+        }
+        #replit-pill .close-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2px;
+          flex: 0 0 auto;
+          border-radius: 64px;
+          width: 12px;
+          height: 12px;
+          min-width: 0;
+          cursor: pointer;
+          border: none;
+          box-sizing: border-box;
+          background-color: transparent;
+          transition: background-color 0.2s ease;
+        }
+        #replit-pill .close-button:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        #replit-pill .close-button:focus-visible {
+          outline: 1px solid #e6e9ef;
+          outline-offset: 1px;
+        }
+        #replit-pill .close-icon {
+          width: 8px;
+          height: 8px;
+          color: #e6e9ef;
+        }
+      </style><div id="replit-pill"><div class="shimmer"></div><div class="badge-content"><svg width="10.67" height="16" viewBox="0 0 50 75" fill="none" class="replit-logo">
+        <path d="M25 19.995C25 20.0375 25 20.0575 25 20.085C25.015 21.34 25.5475 22.6275 26.425 23.525C26.445 23.545 26.4475 23.5475 26.45 23.55C26.485 23.585 26.5025 23.6025 26.54 23.6375C27.4225 24.485 28.6775 25.005 29.9025 25.03C29.9525 25.03 29.9975 25.03 30.0825 25.03H42C44.8 25.03 46.2 25.03 47.27 25.575C48.21 26.055 48.975 26.82 49.455 27.76C50 28.83 50 30.23 50 33.03V42.03C50 44.83 50 46.23 49.455 47.3C48.975 48.24 48.21 49.005 47.27 49.485C46.2 50.03 44.8 50.03 42 50.03H29.9275C28.6425 50.0325 27.3225 50.58 26.4125 51.485C26.4075 51.49 26.4775 51.42 26.45 51.4475C26.445 51.4525 26.4425 51.4525 26.4225 51.475C25.545 52.3725 25.0125 53.6575 24.9975 54.9125C24.9975 54.94 24.9975 54.9625 24.9975 55.0025V67.0575C24.9975 69.8575 24.9975 71.2575 24.4525 72.3275C23.9725 73.2675 23.2075 74.0325 22.2675 74.5125C21.1975 75.0575 19.7975 75.0575 16.9975 75.0575H7.9975C5.1975 75.0575 3.7975 75.0575 2.7275 74.5125C1.7875 74.0325 1.0225 73.2675 0.542498 72.3275C-0.00250244 71.2575 -0.00250244 69.8575 -0.00250244 67.0575V58.0575C-0.00250244 55.2575 -0.00250244 53.8575 0.542498 52.7875C1.0225 51.8475 1.7875 51.0825 2.7275 50.6025C3.7975 50.0575 5.1975 50.0575 7.9975 50.0575H19.7225C19.9 50.0575 19.9875 50.0575 20.08 50.055C21.2475 50.0125 22.4375 49.52 23.295 48.7225C23.3625 48.66 23.4125 48.61 23.5125 48.51C23.55 48.4725 23.5675 48.455 23.6025 48.42C24.455 47.5325 24.9725 46.2825 24.9975 45.0525C24.9975 45.0025 24.9975 44.96 24.9975 44.875V30.12C24.9975 30.0325 24.9975 29.99 24.9975 29.94C24.9725 28.71 24.455 27.46 23.6025 26.575C23.5675 26.54 23.55 26.52 23.5125 26.4825C23.475 26.445 23.4575 26.4275 23.42 26.3925C22.5325 25.54 21.2825 25.0225 20.0525 24.9975C20.0025 24.9975 19.96 24.9975 19.875 24.9975H7.9975C5.1975 24.9975 3.7975 24.9975 2.7275 24.4525C1.7875 23.9725 1.0225 23.2075 0.542498 22.2675C-0.00250244 21.1975 -0.00250244 19.7975 -0.00250244 16.9975V7.9975C-2.44146e-06 5.2 -2.44379e-06 3.8 0.544998 2.73C1.025 1.79 1.79 1.025 2.73 0.545C3.8 0 5.2 0 8 0H17C19.8 0 21.2 0 22.27 0.545C23.21 1.025 23.975 1.79 24.455 2.73C25 3.8 25 5.2 25 8V19.995Z" fill="currentColor"></path>
+      </svg><div class="replit-text">Made with Replit</div></div><button class="close-button" aria-label="Close"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="close-icon">
+        <path d="M18 6 6 18"></path>
+        <path d="m6 6 12 12"></path>
+      </svg></button></div></template></div></body></html>
