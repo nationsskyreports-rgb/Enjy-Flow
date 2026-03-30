@@ -204,25 +204,46 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 }
 @media(max-width:560px){.stats-row{grid-template-columns:1fr}.content{padding:20px 16px}}
 
-/* ── MOBILE FIX ── */
-@media(max-width:768px){
-  #dashGrid{ display:block !important; }
-  #dashGrid > div{ margin-bottom:20px; }
-  .stats-row{grid-template-columns:1fr 1fr!important;gap:10px}
-  .stat-card{padding:16px 14px}
-  .stat-card h3{font-size:1.4rem}
-  .content{padding:16px 12px}
-  .topbar{padding:0 16px;height:56px}
-  .table-wrap{overflow-x:auto}
-  table{min-width:500px}
-  .classes-grid{grid-template-columns:1fr!important}
-  .editor-grid{grid-template-columns:1fr!important}
-  #page-dashboard > div:last-child{display:flex;flex-wrap:wrap;gap:8px}
-  .btn{font-size:.8rem;padding:8px 14px}
-}
-@media(max-width:380px){
-  .stats-row{grid-template-columns:1fr!important}
-}
+/* ── FIX FOR MOBILE ── */
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(100%);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--sidebar-w);
+    z-index: 100;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main {
+    margin-right: 0;
+    flex: 1;
+  }
+
+  .mob-toggle {
+    display: flex;
+  }
+
+  #sidebarOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+  }
+
+  #sidebarOverlay.active {
+    opacity: 1;
+    visibility:
+
 </style>
 </head>
 <body>
