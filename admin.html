@@ -223,7 +223,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 
 <div id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-<div class="layout" id="appLayout">
+<div class="layout" id="appLayout" style="display:none">
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-head">
       <div class="sidebar-logo"><i class="fa-solid fa-spa"></i><div><span class="name">Align by Enjy</span><span class="sub">Admin Dashboard</span></div></div>
@@ -460,6 +460,7 @@ function doLogin() {
   const err = document.getElementById('loginErr');
   if (u === 'admin' && p === 'align2026') {
     document.getElementById('loginScreen').classList.add('hidden');
+       document.getElementById('appLayout').style.display = 'flex';
     renderClasses();
   } else {
     err.textContent = 'اسم المستخدم أو كلمة المرور غلط';
