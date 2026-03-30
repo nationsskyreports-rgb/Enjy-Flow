@@ -1,12 +1,23 @@
-const CACHE = 'align-v1';
-const FILES = ['/Enjy-Flow/index.html', '/Enjy-Flow/manifest.json', '/Enjy-Flow/icon-192.png', '/Enjy-Flow/icon-512.png'];
+const CACHE = 'align-v2';
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
+  self.skipWaiting();
+  e.waitUntil(
+    caches.open(CACHE).then(c => c.addAll(['/Enjy-Flow/index.html']))
+  );
+});
+
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+    )
+  );
+  self.clients.claim();
 });
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
+    fetch(e.request).catch(() => caches.match(e.request))
   );
 });
