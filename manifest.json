@@ -2,7 +2,7 @@
   "name": "Align by Enjy",
   "short_name": "Align",
   "description": "يوجا متخصصة — Balance. Heal. Transform.",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#FAF6F0",
   "theme_color": "#2D4A3E",
