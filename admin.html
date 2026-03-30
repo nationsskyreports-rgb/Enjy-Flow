@@ -3,10 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="manifest" href="manifest-admin.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Align Admin">
-<link rel="apple-touch-icon" href="icon-192.png">
 <title>Align by Enjy — لوحة الإدارة</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -207,6 +203,44 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
   .editor-grid{grid-template-columns:1fr}
 }
 @media(max-width:560px){.stats-row{grid-template-columns:1fr}.content{padding:20px 16px}}
+
+/* ── MOBILE FIX ── */
+@media(max-width:768px){
+  .stats-row{grid-template-columns:1fr 1fr!important;gap:10px}
+  .stat-card{padding:16px 14px}
+  .stat-card h3{font-size:1.4rem}
+  .content{padding:16px 12px}
+  .topbar{padding:0 16px;height:56px}
+  
+  /* Dashboard grid */
+  #page-dashboard > div[style*="grid-template-columns:1.4fr"]{
+    display:block!important
+  }
+  #page-dashboard > div[style*="grid-template-columns:1.4fr"] > div{
+    margin-bottom:20px
+  }
+  
+  /* Table scroll */
+  .table-wrap{overflow-x:auto}
+  table{min-width:500px}
+  
+  /* Classes grid */
+  .classes-grid{grid-template-columns:1fr!important}
+  
+  /* Editor grid */
+  .editor-grid{grid-template-columns:1fr!important}
+
+  /* Quick actions */
+  #page-dashboard > div:last-child{
+    display:flex;flex-wrap:wrap;gap:8px
+  }
+  .btn{font-size:.8rem;padding:8px 14px}
+}
+
+@media(max-width:380px){
+  .stats-row{grid-template-columns:1fr!important}
+}
+
 </style>
 </head>
 <body>
