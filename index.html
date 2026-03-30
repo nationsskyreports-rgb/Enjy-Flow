@@ -471,5 +471,39 @@
     navigator.serviceWorker.register('sw.js');
   }
 </script>
+<!-- PWA Install Banner -->
+<div id="installBanner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:#2D4A3E;color:#fff;padding:16px 24px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.3);display:flex;align-items:center;gap:16px;max-width:340px;width:90%">
+  <img src="icon-192.png" style="width:48px;height:48px;border-radius:10px">
+  <div style="flex:1">
+    <div style="font-weight:700;font-size:.95rem">Align by Enjy</div>
+    <div style="font-size:.78rem;opacity:.8">حمّلي التطبيق على هاتفك!</div>
+  </div>
+  <button id="installBtn" style="background:#C8956C;color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:700;cursor:pointer;font-size:.85rem">تحميل</button>
+  <button id="closeBanner" style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;opacity:.7">✕</button>
+</div>
+
+<script>
+  let deferredPrompt;
+  const banner = document.getElementById('installBanner');
+  const installBtn = document.getElementById('installBtn');
+  const closeBanner = document.getElementById('closeBanner');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(() => { banner.style.display = 'flex'; }, 3000);
+  });
+
+  installBtn.addEventListener('click', async () => {
+    banner.style.display = 'none';
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  });
+
+  closeBanner.addEventListener('click', () => {
+    banner.style.display = 'none';
+  });
+</script>
 </body>
 </html>
