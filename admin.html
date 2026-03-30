@@ -206,45 +206,26 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 
 /* ── MOBILE FIX ── */
 @media(max-width:768px){
+  #dashGrid{ display:block !important; }
+  #dashGrid > div{ margin-bottom:20px; }
   .stats-row{grid-template-columns:1fr 1fr!important;gap:10px}
   .stat-card{padding:16px 14px}
   .stat-card h3{font-size:1.4rem}
   .content{padding:16px 12px}
   .topbar{padding:0 16px;height:56px}
-  
-  /* Dashboard grid */
-  #page-dashboard > div[style*="grid-template-columns:1.4fr"]{
-    display:block!important
-  }
-  #page-dashboard > div[style*="grid-template-columns:1.4fr"] > div{
-    margin-bottom:20px
-  }
-  
-  /* Table scroll */
   .table-wrap{overflow-x:auto}
   table{min-width:500px}
-  
-  /* Classes grid */
   .classes-grid{grid-template-columns:1fr!important}
-  
-  /* Editor grid */
   .editor-grid{grid-template-columns:1fr!important}
-
-  /* Quick actions */
-  #page-dashboard > div:last-child{
-    display:flex;flex-wrap:wrap;gap:8px
-  }
+  #page-dashboard > div:last-child{display:flex;flex-wrap:wrap;gap:8px}
   .btn{font-size:.8rem;padding:8px 14px}
 }
-
 @media(max-width:380px){
   .stats-row{grid-template-columns:1fr!important}
 }
-
 </style>
 </head>
 <body>
-
 <!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
@@ -323,7 +304,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
             <h3>4.9</h3><p>متوسط التقييم</p>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:20px;margin-bottom:24px">
+        <div id="dashGrid" style="display:grid;grid-template-columns:1.4fr 1fr;gap:20px;margin-bottom:24px">
           <div>
             <div class="section-head"><div><h2>آخر الحجوزات</h2><p>الحجوزات الواردة من الموقع</p></div><button class="btn btn-ghost" onclick="goPage('bookings',null)"><i class="fa-solid fa-arrow-left"></i> كل الحجوزات</button></div>
             <div class="table-wrap"><table><thead><tr><th>الاسم</th><th>الكلاس</th><th>الحالة</th><th></th></tr></thead><tbody id="dashBookings"><tr class="loading-row"><td colspan="4"><div class="spinner"></div><br>جاري التحميل...</td></tr></tbody></table></div>
