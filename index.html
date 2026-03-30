@@ -148,6 +148,7 @@
     .session-spots .spots-label{font-size:.72rem;color:var(--fg-muted)}
     .btn-book-sm{background:var(--primary);color:#fff;padding:10px 20px;border-radius:var(--radius-sm);font-size:.82rem;font-weight:600;transition:all .3s;white-space:nowrap}
     .btn-book-sm:hover{background:var(--primary-dark);transform:translateY(-1px)}
+    .btn-book-sm.booked{background:var(--bg-deep);color:var(--success);pointer-events:none}
 
     /* === آراء === */
     .testimonials{padding:100px 0}
@@ -288,93 +289,99 @@
     .badge-green{background:rgba(39,174,96,.08);color:var(--success)}
 
     .admin-filters{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
-    .admin-filters input,.admin-filters select{padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.84rem;outline:none}
+    .admin-filters input,.admin-filters select{padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.84rem;background:var(--card);outline:none;transition:border-color .3s}
+    .admin-filters input:focus,.admin-filters select:focus{border-color:var(--primary)}
 
-    .prices-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-    .price-item{background:var(--bg);padding:16px;border-radius:var(--radius-md);border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-    .price-item label{font-size:.88rem;font-weight:600}
-    .price-input-wrap{display:flex;align-items:center;gap:8px}
-    .price-input-wrap input{width:80px;padding:8px;border:1.5px solid var(--border);border-radius:var(--radius-sm);text-align:center;font-weight:600}
+    .prices-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+    .price-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px}
+    .price-card h4{font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:600;margin-bottom:12px;color:var(--fg)}
+    .price-card input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:1rem;outline:none;text-align:center}
+    .price-card input:focus{border-color:var(--primary)}
+    .price-card small{display:block;text-align:center;margin-top:6px;font-size:.75rem;color:var(--fg-muted)}
 
-    @media (max-width:992px){
-      .hero-inner,.about-grid,.booking-grid{grid-template-columns:1fr;gap:48px;text-align:center}
-      .hero-content{display:flex;flex-direction:column;align-items:center}
-      .hero-text{margin-left:auto;margin-right:auto}
-      .hero-stats{justify-content:center}
-      .hero-visual{max-width:500px;margin:0 auto}
-      .about-certs{justify-content:center}
-      .nav-links,.nav-cta{display:none}
-      .hamburger{display:flex}
-    }
-    @media (max-width:600px){
-      .session-item{grid-template-columns:auto 1fr;gap:16px}
-      .session-spots,.btn-book-sm{grid-column:span 2;text-align:right}
-      .btn-book-sm{width:100%;text-align:center}
-      .form-row{grid-template-columns:1fr}
+    .empty-state{text-align:center;padding:60px 20px;color:var(--fg-muted)}
+    .empty-state i{font-size:3rem;opacity:.2;margin-bottom:16px;display:block}
+    .empty-state p{font-size:.92rem}
+
+    .admin-table-wrap.table-scroll{max-height:500px;overflow-y:auto}
+
+    @media(max-width:968px){
+      .nav-links,.nav-cta{display:none}.hamburger{display:flex}
+      .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+      .hero-text{margin:0 auto 36px}.hero-actions{justify-content:center}.hero-stats{justify-content:center}
+      .hero-visual{max-width:400px;margin:0 auto}
+      .hero-float-card.card-1{left:-10px}.hero-float-card.card-2{right:-10px}
+      .session-item{grid-template-columns:auto 1fr auto;gap:16px}.session-spots{display:none}
+      .booking-grid,.about-grid{grid-template-columns:1fr;gap:40px}
+      .about-img{max-width:400px;margin:0 auto}
       .admin-header{flex-direction:column;align-items:flex-start}
-      .admin-header-actions{width:100%}.btn-admin{flex:1;justify-content:center}
     }
+    @media(max-width:480px){
+      .hero-stats{gap:20px}.form-row{grid-template-columns:1fr}
+      .session-item{padding:16px;gap:12px}.admin-stats{grid-template-columns:1fr 1fr}
+    }
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
 
-<div class="bg-orbs"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+<div class="bg-orbs" aria-hidden="true"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
 
+<!-- التنقل -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#" class="logo">
-      <img src="https://i.ibb.co/v6mX59f6/Screenshot-2025-03-30-132452.png" alt="Align by Enjy Logo">
+    <a href="#hero" class="logo">
+      <img src="https://z-cdn-media.chatglm.cn/files/00c33989-bcee-4fca-b378-a315d582d8da.jpeg?auth_key=1874817591-0c1739b8548c43d5b4dd5229579f6af8-0-4c982b6faa5bd604c7ffccc55ca9eb6c" alt="Align by Enjy Logo">
       <div class="logo-text">Align by Enjy<span>Balance. Heal. Transform.</span></div>
     </a>
     <ul class="nav-links">
       <li><a href="#programs">البرامج</a></li>
       <li><a href="#sessions">الجلسات</a></li>
-      <li><a href="#about">عن إنجي</a></li>
-      <li><a href="#testimonials">آراء</a></li>
-      <li><a href="#contact">تواصل</a></li>
+      <li><a href="#about">عنّي</a></li>
+      <li><a href="#testimonials">الآراء</a></li>
+      <li><a href="#booking">حجز</a></li>
     </ul>
-    <a href="#booking" class="nav-cta">احجزي الآن</a>
-    <button class="hamburger" id="hamburger" aria-label="القائمة"><span></span><span></span><span></span></button>
+    <a href="#booking" class="nav-cta">احجز جلسة</a>
+    <button class="hamburger" id="hamburger" aria-label="القائمة" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
 <div class="mobile-overlay" id="mobileOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#programs" onclick="toggleMenu()">البرامج</a>
-  <a href="#sessions" onclick="toggleMenu()">الجلسات</a>
-  <a href="#about" onclick="toggleMenu()">عن إنجي</a>
-  <a href="#testimonials" onclick="toggleMenu()">آراء</a>
-  <a href="#contact" onclick="toggleMenu()">تواصل</a>
-  <a href="#booking" class="btn-submit" style="margin-top:20px" onclick="toggleMenu()">احجزي الآن</a>
+<div class="mobile-menu" id="mobileMenu" role="dialog">
+  <a href="#hero">الرئيسية</a><a href="#programs">البرامج</a><a href="#sessions">الجلسات</a>
+  <a href="#about">عنّي</a><a href="#testimonials">الآراء</a><a href="#booking">حجز جلسة</a>
 </div>
 
-<section class="hero">
+<!-- هيرو -->
+<section class="hero" id="hero">
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-slogan">استعيدي توازنكِ الداخلي</div>
-      <h1>رحلة نحو <span class="highlight">الشفاء</span> والتحول المتكامل</h1>
-      <p class="hero-text">يوجا مصممة خصيصاً للمرأة العصرية، تجمع بين القوة الجسدية والسكينة النفسية في بيئة آمنة وداعمة.</p>
+      <div class="hero-slogan">Balance. Heal. Transform.</div>
+      <h1>اكتشفي <span class="highlight">توازنك</span> الداخلي مع اليوجا</h1>
+      <p class="hero-text">رحلة تحوّلية نحو التوازن الجسدي والذهني. جلسات يوجا مخصصة تناسب مستواكِ وأهدافكِ في مساحة آمنة وداعمة.</p>
       <div class="hero-actions">
-        <a href="#sessions" class="btn-primary">استكشفي الجلسات <i class="fa-solid fa-arrow-left"></i></a>
-        <a href="#about" class="btn-outline">تعرفي على إنجي</a>
+        <a href="#booking" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> ابدأي رحلتك</a>
+        <a href="#programs" class="btn-outline"><i class="fa-solid fa-play"></i> تعرفي على البرامج</a>
       </div>
       <div class="hero-stats">
-        <div class="stat-item"><h3>+500</h3><p>متدربة سعيدة</p></div>
-        <div class="stat-item"><h3>+8</h3><p>سنوات خبرة</p></div>
-        <div class="stat-item"><h3>+1.2k</h3><p>جلسة مكتملة</p></div>
+        <div class="stat-item"><h3 id="statStudents">0</h3><p>متدربة سعيدة</p></div>
+        <div class="stat-item"><h3 id="statYears">0</h3><p>سنوات خبرة</p></div>
+        <div class="stat-item"><h3 id="statSessions">0</h3><p>جلسة مكتملة</p></div>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-img-wrapper">
-        <img src="https://i.ibb.co/6R5GfL5q/Screenshot-2025-03-30-132512.png" alt="Enjy practicing Yoga">
+        <img src="https://z-cdn-media.chatglm.cn/files/54e36417-be32-4b0a-8981-4c55c64ce97e.jpeg?auth_key=1874817591-8217fcd0b4d748a6a98515b49ba1ac84-0-655ef217e6f610b1670cb5353ed0426f" alt="إنجي في وضع التأمل">
       </div>
       <div class="hero-float-card card-1">
-        <div class="float-card-icon"><i class="fa-solid fa-heart"></i></div>
-        <div class="float-card-text"><strong>صحة نفسية</strong>تقليل التوتر والقلق</div>
+        <div class="float-card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <div class="float-card-text"><strong>مرونة أفضل</strong>تحسّن ملحوظ خلال 4 أسابيع</div>
       </div>
       <div class="hero-float-card card-2">
-        <div class="float-card-icon"><i class="fa-solid fa-bolt"></i></div>
-        <div class="float-card-text"><strong>طاقة حيوية</strong>زيادة المرونة والنشاط</div>
+        <div class="float-card-icon"><i class="fa-solid fa-leaf"></i></div>
+        <div class="float-card-text"><strong>تأمل يومي</strong>15 دقيقة توازن ذهني</div>
       </div>
     </div>
   </div>
@@ -383,20 +390,14 @@
 <!-- البرامج -->
 <section class="programs" id="programs">
   <div class="container">
-    <div class="reveal"><span class="section-label">برامجنا</span><h2 class="section-title">اختاري ما يناسب احتياجكِ</h2><p class="section-desc">نقدم مجموعة متنوعة من البرامج التي تستهدف جوانب مختلفة من الصحة الجسدية والنفسية.</p></div>
-    <div class="programs-grid reveal">
-      <div class="program-card">
-        <div class="program-card-img"><img src="https://picsum.photos/seed/yoga1/600/400" alt="Hatha Yoga"><span class="program-level">للمبتدئات</span></div>
-        <div class="program-card-body"><h3>هاثا يوجا — الأساسيات</h3><p>تركيز على الوضعيات الأساسية وتقنيات التنفس لبناء قاعدة قوية ومرونة تدريجية.</p><div class="program-meta"><span><i class="fa-solid fa-clock"></i> 60 دقيقة</span><span><i class="fa-solid fa-signal"></i> مستوى 1</span></div></div>
-      </div>
-      <div class="program-card">
-        <div class="program-card-img"><img src="https://picsum.photos/seed/yoga2/600/400" alt="Vinyasa Flow"><span class="program-level">متوسط</span></div>
-        <div class="program-card-body"><h3>فينياسا فلو — الانسياب</h3><p>ربط الحركة بالتنفس في تسلسل انسيابي يزيد من قوة القلب وحرق السعرات وتصفية الذهن.</p><div class="program-meta"><span><i class="fa-solid fa-clock"></i> 75 دقيقة</span><span><i class="fa-solid fa-signal"></i> مستوى 2</span></div></div>
-      </div>
-      <div class="program-card">
-        <div class="program-card-img"><img src="https://picsum.photos/seed/yoga3/600/400" alt="Yin Yoga"><span class="program-level">الكل</span></div>
-        <div class="program-card-body"><h3>يين واسترورا — الاستشفاء</h3><p>وضعيات هادئة لفترات طويلة تستهدف الأنسجة العميقة والمفاصل، مثالية للاسترخاء العميق.</p><div class="program-meta"><span><i class="fa-solid fa-clock"></i> 90 دقيقة</span><span><i class="fa-solid fa-signal"></i> استشفائي</span></div></div>
-      </div>
+    <div class="reveal"><span class="section-label">البرامج</span><h2 class="section-title">برامج مصممة لكل مرحلة</h2><p class="section-desc">اختاري البرنامج المناسب لمستواكِ. كل برنامج مصمم بعناية ليأخذكِ خطوة بخطوة.</p></div>
+    <div class="programs-grid">
+      <div class="program-card reveal"><div class="program-card-img"><img src="https://picsum.photos/seed/hathayoga2/500/350.jpg" alt="هاثا يوجا" loading="lazy"><span class="program-level">مبتدئة</span></div><div class="program-card-body"><h3>هاثا يوجا</h3><p>أساسيات اليوجا مع تركيز على الوضعيات الصحيحة والتنفس. مثالية لمن تبدأ رحلتها.</p><div class="program-meta"><span><i class="fa-solid fa-clock"></i> 60 دقيقة</span><span><i class="fa-solid fa-fire"></i> 8 جلسات</span><span><i class="fa-solid fa-users"></i> مجموعة</span></div></div></div>
+      <div class="program-card reveal"><div class="program-card-img"><img src="https://picsum.photos/seed/vinyasayoga2/500/350.jpg" alt="فينياسا" loading="lazy"><span class="program-level">متوسطة</span></div><div class="program-card-body"><h3>فينياسا فلو</h3><p>تدفق سلس بين الوضعيات مع التنفس. تبني قوة ومرونة واستدامة في الحركة.</p><div class="program-meta"><span><i class="fa-solid fa-clock"></i> 75 دقيقة</span><span><i class="fa-solid fa-fire"></i> 12 جلسة</span><span><i class="fa-solid fa-users"></i> مجموعة</span></div></div></div>
+      <div class="program-card reveal"><div class="program-card-img"><img src="https://picsum.photos/seed/yinrestor2/500/350.jpg" alt="يين" loading="lazy"><span class="program-level">جميع المستويات</span></div><div class="program-card-body"><h3>يين واسترورا</h3><p>تمدد عميق واسترخاء شامل مع دعائم. مثالية لتخفيف التوتر وتجديد الطاقة.</p><div class="program-meta"><span><i class="fa-solid fa-clock"></i> 90 دقيقة</span><span><i class="fa-solid fa-fire"></i> 6 جلسات</span><span><i class="fa-solid fa-user"></i> فردية</span></div></div></div>
+      <div class="program-card reveal"><div class="program-card-img"><img src="https://picsum.photos/seed/meditation24/500/350.jpg" alt="تأمل" loading="lazy"><span class="program-level">جميع المستويات</span></div><div class="program-card-body"><h3>تأمل وبراناياما</h3><p>تقنيات تنفس متقدمة وتأمل موجّه للصفاء الذهني والهدوء الداخلي العميق.</p><div class="program-meta"><span><i class="fa-solid fa-clock"></i> 45 دقيقة</span><span><i class="fa-solid fa-fire"></i> 10 جلسات</span><span><i class="fa-solid fa-user"></i> فردية</span></div></div></div>
+      <div class="program-card reveal"><div class="program-card-img"><img src="https://picsum.photos/seed/prenatal24/500/350.jpg" alt="ما قبل الولادة" loading="lazy"><span class="program-level">متخصصة</span></div><div class="program-card-body"><h3>يوجا ما قبل الولادة</h3><p>تمارين آمنة ومخصصة لدعم الأم الحامل في كل مرحلة من مراحل الحمل.</p><div class="program-meta"><span><i class="fa-solid fa-clock"></i> 60 دقيقة</span><span><i class="fa-solid fa-fire"></i> 16 جلسة</span><span><i class="fa-solid fa-user"></i> فردية</span></div></div></div>
+      <div class="program-card reveal"><div class="program-card-img"><img src="https://picsum.photos/seed/powerflow2/500/350.jpg" alt="باور" loading="lazy"><span class="program-level">متقدمة</span></div><div class="program-card-body"><h3>باور يوجا</h3><p>تحدي جسدي مكثف يجمع بين القوة والمرونة. لبناء جسم قوي وذهن صافٍ.</p><div class="program-meta"><span><i class="fa-solid fa-clock"></i> 60 دقيقة</span><span><i class="fa-solid fa-fire"></i> 10 جلسات</span><span><i class="fa-solid fa-users"></i> مجموعة</span></div></div></div>
     </div>
   </div>
 </section>
@@ -404,15 +405,25 @@
 <!-- الجلسات -->
 <section class="sessions" id="sessions">
   <div class="container">
-    <div class="reveal"><span class="section-label">الجدول الأسبوعي</span><h2 class="section-title">احجزي مكانكِ الآن</h2><p class="section-desc">اختاري الوقت المناسب لكِ من جدول الجلسات المتاحة. المقاعد محدودة لضمان الجودة.</p></div>
+    <div class="reveal"><span class="section-label">الجدول الأسبوعي</span><h2 class="section-title">جلسات الأسبوع القادم</h2><p class="section-desc">اختاري الجلسة المناسبة لمواعيدكِ. الأماكن محدودة لضمان جودة التجربة.</p></div>
     <div class="sessions-tabs reveal">
       <button class="session-tab active" data-filter="all">الكل</button>
-      <button class="session-tab" data-filter="morning">صباحية</button>
-      <button class="session-tab" data-filter="evening">مسائية</button>
+      <button class="session-tab" data-filter="morning">صباحي</button>
+      <button class="session-tab" data-filter="evening">مسائي</button>
       <button class="session-tab" data-filter="private">فردية</button>
     </div>
-    <div class="sessions-list reveal" id="sessionsList">
-      <!-- يتم التحميل عبر JS -->
+    <div class="sessions-list reveal" id="sessionsList"></div>
+  </div>
+</section>
+
+<!-- آراء -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="reveal"><span class="section-label">تجارب حقيقية</span><h2 class="section-title">ماذا تقول متدرباتنا</h2><p class="section-desc">قصص تحوّل حقيقية من متدربات غيّرت اليوجا حياتهن.</p></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal"><div class="testimonial-quote">"</div><div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>بعد 3 أشهر فقط، اختفى ألم الظهر المزمن اللي عانيت منه لسنوات. التوجيهات الدقيقة والاهتمام الشخصي جعل الفرق كبير جداً.</p><div class="testimonial-author"><img src="https://picsum.photos/seed/nora23/100/100.jpg" alt="نورة" class="testimonial-avatar"><div><div class="testimonial-name">نورة العتيبي</div><div class="testimonial-role">موظفة — هاثا يوجا</div></div></div></div>
+      <div class="testimonial-card reveal"><div class="testimonial-quote">"</div><div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>كنت أعاني من قلق شديد وأرق. جلست التأمل والبراناياما مع إنجي غيّرت نمط نومي بالكامل وأصبحت أتعامل مع الضغط بهدوء.</p><div class="testimonial-author"><img src="https://picsum.photos/seed/sara89/100/100.jpg" alt="سارة" class="testimonial-avatar"><div><div class="testimonial-name">سارة المحمد</div><div class="testimonial-role">مصممة — تأمل وبراناياما</div></div></div></div>
+      <div class="testimonial-card reveal"><div class="testimonial-quote">"</div><div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>خلال حملي كانت جلسات اليوجا المخصصة أمان حقيقي. شعرت بالرابط مع جسدي وببيبي وأستعد للولادة بثقة وسلام.</p><div class="testimonial-author"><img src="https://picsum.photos/seed/layla56/100/100.jpg" alt="ليلى" class="testimonial-avatar"><div><div class="testimonial-name">ليلى الشمري</div><div class="testimonial-role">معلمة — يوجا ما قبل الولادة</div></div></div></div>
     </div>
   </div>
 </section>
@@ -422,47 +433,20 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-img reveal">
-        <img src="https://i.ibb.co/6R5GfL5q/Screenshot-2025-03-30-132512.png" alt="Enjy - Yoga Instructor">
-        <div class="about-exp"><div class="num">+8</div><div class="label">سنوات خبرة</div></div>
+        <img src="https://picsum.photos/seed/yogateacher24/600/800.jpg" alt="إنجي">
+        <div class="about-exp"><div class="num">8+</div><div class="label">سنوات خبرة</div></div>
       </div>
       <div class="about-content reveal">
-        <span class="section-label">عن إنجي</span>
-        <h2 class="section-title">شغف باليوجا، التزام بالشفاء</h2>
-        <p class="section-desc">أؤمن أن اليوجا ليست مجرد تمارين جسدية، بل هي أداة قوية لتحقيق التوازن بين العقل والجسد والروح. رحلتي بدأت منذ أكثر من 8 سنوات، وكرست حياتي لمساعدة النساء على اكتشاف قوتهن الداخلية.</p>
+        <span class="section-label">عنّي</span>
+        <h2 class="section-title">إنجي حسن</h2>
+        <p>بدأت رحلتي مع اليوجا عام 2016 في ريشيكيش بالهند، حيث حصلت على شهادة RYT-500 من Yoga Alliance. منذ ذلك الحين، درّبت أكثر من 500 متدربة في السعودية والخليج. أؤمن أن اليوجا ليست مجرد تمارين جسدية، بل هي أسلوب حياة يغيّر العلاقة مع الجسد والذهن.</p>
         <div class="about-certs">
-          <div class="cert-badge"><i class="fa-solid fa-certificate"></i> RYT-500 مدربة معتمدة</div>
-          <div class="cert-badge"><i class="fa-solid fa-certificate"></i> براناياما متقدم</div>
-          <div class="cert-badge"><i class="fa-solid fa-certificate"></i> يوجا طبية</div>
-          <div class="cert-badge"><i class="fa-solid fa-certificate"></i> ميوفاسيل ريليز</div>
+          <span class="cert-badge"><i class="fa-solid fa-certificate"></i> RYT-500</span>
+          <span class="cert-badge"><i class="fa-solid fa-certificate"></i> براناياما متقدم</span>
+          <span class="cert-badge"><i class="fa-solid fa-certificate"></i> يوجا ما قبل الولادة</span>
+          <span class="cert-badge"><i class="fa-solid fa-certificate"></i> ميوفاسيل</span>
         </div>
-        <a href="#contact" class="btn-primary">تحدثي معي مباشرة</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- آراء -->
-<section class="testimonials" id="testimonials">
-  <div class="container">
-    <div class="reveal" style="text-align:center"><span class="section-label">آراء المتدربات</span><h2 class="section-title">قصص نجاح ملهمة</h2><p class="section-desc" style="margin:0 auto 48px">ماذا تقول المتدربات عن تجربتهن مع Align by Enjy.</p></div>
-    <div class="testimonials-grid reveal">
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p>تجربة غيرت حياتي! كنت أعاني من آلام مزمنة في الظهر، وبعد شهرين من اليوجا المنتظمة مع إنجي، اختفت الآلام تماماً وأصبحت أكثر نشاطاً.</p>
-        <div class="testimonial-author"><img src="https://i.pravatar.cc/100?u=1" alt="Client" class="testimonial-avatar"><div class="testimonial-info"><div class="testimonial-name">نورة العتيبي</div><div class="testimonial-role">متدربة هاثا يوجا</div></div></div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p>إنجي مدربة رائعة وصبورة جداً. الجلسات الافتراضية مريحة جداً وتجعلني أشعر وكأنني في الاستوديو تماماً. شكراً لكِ!</p>
-        <div class="testimonial-author"><img src="https://i.pravatar.cc/100?u=2" alt="Client" class="testimonial-avatar"><div class="testimonial-info"><div class="testimonial-name">سارة أحمد</div><div class="testimonial-role">متدربة فينياسا فلو</div></div></div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p>كنت أبحث عن مكان آمن للبدء في اليوجا كمبتدئة، ووجدت في Align كل ما أحتاجه. البيئة داعمة جداً والنتائج مذهلة.</p>
-        <div class="testimonial-author"><img src="https://i.pravatar.cc/100?u=3" alt="Client" class="testimonial-avatar"><div class="testimonial-info"><div class="testimonial-name">ليلى حسن</div><div class="testimonial-role">متدربة مبتدئة</div></div></div>
+        <a href="#booking" class="btn-primary"><i class="fa-solid fa-hand-holding-heart"></i> احجزي معي جلسة تجريبية</a>
       </div>
     </div>
   </div>
@@ -485,7 +469,7 @@
       </div>
       <form class="booking-form" id="bookingForm" novalidate>
         <div class="form-row"><div class="form-group"><label for="fname">الاسم الأول</label><input type="text" id="fname" placeholder="مثال: نورة" required></div><div class="form-group"><label for="lname">الاسم الأخير</label><input type="text" id="lname" placeholder="مثال: العتيبي" required></div></div>
-        <div class="form-row"><div class="form-group"><label for="phone">رقم الجوال</label><input type="tel" id="phone" placeholder="01063751653" required dir="ltr"></div><div class="form-group"><label for="email">البريد الإلكتروني</label><input type="email" id="email" placeholder="Enjyabdelmonem@gmail.com" required dir="ltr"></div></div>
+        <div class="form-row"><div class="form-group"><label for="phone">رقم الجوال</label><input type="tel" id="phone" placeholder="05XXXXXXXX" required dir="ltr"></div><div class="form-group"><label for="email">البريد الإلكتروني</label><input type="email" id="email" placeholder="name@example.com" required dir="ltr"></div></div>
         <div class="form-group"><label for="program">البرنامج المفضل</label><select id="program" required><option value="" disabled selected>اختاري البرنامج</option><option value="hatha">هاثا يوجا</option><option value="vinyasa">فينياسا فلو</option><option value="yin">يين واسترورا</option><option value="meditation">تأمل وبراناياما</option><option value="prenatal">يوجا ما قبل الولادة</option><option value="power">باور يوجا</option></select></div>
         <div class="form-group"><label for="level">مستواكِ الحالي</label><select id="level" required><option value="" disabled selected>اختاري المستوى</option><option value="beginner">مبتدئة تماماً</option><option value="some">تمارستها قليلاً</option><option value="intermediate">متوسطة</option><option value="advanced">متقدمة</option></select></div>
         <div class="form-group"><label for="notes">ملاحظات (اختياري)</label><textarea id="notes" placeholder="إصابات أو ظروف صحية..."></textarea></div>
@@ -500,19 +484,19 @@
   <div class="container">
     <div class="reveal" style="text-align:center"><span class="section-label">تواصلي معنا</span><h2 class="section-title">نحن هنا لمساعدتكِ</h2><p class="section-desc" style="margin:0 auto 48px">لا تترددي في التواصل لأي استفسار.</p></div>
     <div class="contact-grid reveal">
-      <div class="contact-item"><i class="fa-solid fa-phone"></i><h4>اتصال</h4><p dir="ltr">01063751653</p></div>
-      <div class="contact-item"><i class="fa-brands fa-whatsapp"></i><h4>واتساب</h4><p dir="ltr">01063751653</p></div>
-      <div class="contact-item"><i class="fa-solid fa-envelope"></i><h4>بريد إلكتروني</h4><p dir="ltr">Enjyabdelmonem@gmail.com</p></div>
-      <div class="contact-item"><i class="fa-solid fa-location-dot"></i><h4>الموقع</h4><p>Pyramids heights / UFC / Royal hills</p></div>
+      <div class="contact-item"><i class="fa-solid fa-phone"></i><h4>اتصال</h4><p dir="ltr">+966 55 123 4567</p></div>
+      <div class="contact-item"><i class="fa-brands fa-whatsapp"></i><h4>واتساب</h4><p dir="ltr">+966 55 123 4567</p></div>
+      <div class="contact-item"><i class="fa-solid fa-envelope"></i><h4>بريد إلكتروني</h4><p dir="ltr">hello@alignbyenjy.com</p></div>
+      <div class="contact-item"><i class="fa-solid fa-location-dot"></i><h4>الموقع</h4><p>الرياض، حي الملقا</p></div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="social-links">
-    <a href="https://www.instagram.com/yoga_together_forlife?igsh=bXVodDM5dmRya3Bx&utm_source=qr" target="_blank" aria-label="إنستغرام الشخصي"><i class="fa-brands fa-instagram"></i></a>
-    <a href="https://www.instagram.com/the.flowretreats?igsh=cHIxYnRtaWFmMXBp&utm_source=qr" target="_blank" aria-label="إنستغرام الريريت"><i class="fa-solid fa-spa"></i></a>
+    <a href="#" aria-label="إنستغرام"><i class="fa-brands fa-instagram"></i></a>
     <a href="#" aria-label="تيك توك"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="#" aria-label="يوتيوب"><i class="fa-brands fa-youtube"></i></a>
   </div>
   <p>جميع الحقوق محفوظة لـ Align by Enjy &copy; 2025</p>
   <a href="#admin" class="admin-link" style="display:inline-block;margin-top:8px;font-size:.7rem"><i class="fa-solid fa-lock"></i> Admin</a>
@@ -700,236 +684,421 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
   const email = document.getElementById('email').value.trim();
   const program = document.getElementById('program').value;
   const level = document.getElementById('level').value;
+  const notes = document.getElementById('notes').value.trim();
 
   if (!fname || !lname || !phone || !email || !program || !level) {
-    showToast('يرجى إكمال جميع الحقول المطلوبة', 'error', 'fa-circle-exclamation');
+    showToast('يرجى ملء جميع الحقول المطلوبة', 'error', 'fa-triangle-exclamation');
+    return;
+  }
+  if (!/^\d{10,11}$/.test(phone.replace(/\s/g, ''))) {
+    showToast('رقم الجوال غير صحيح', 'error', 'fa-triangle-exclamation');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showToast('البريد الإلكتروني غير صحيح', 'error', 'fa-triangle-exclamation');
     return;
   }
 
-  const prices = getPrices();
-  const booking = {
-    id: Date.now(),
-    name: `${fname} ${lname}`,
-    phone,
-    email,
-    program,
-    level,
-    price: prices[program] || 0,
-    date: new Date().toISOString()
-  };
-
+  // حفظ في localStorage
+  const booking = { id: Date.now(), fname, lname, phone, email, program, level, notes, date: new Date().toISOString() };
   const bookings = getBookings();
   bookings.push(booking);
   saveBookings(bookings);
 
+  showToast(`شكراً ${fname}! تم إرسال طلبك بنجاح`, 'success', 'fa-circle-check');
   this.reset();
-  showToast('تم إرسال طلبك بنجاح! سنتواصل معكِ قريباً.', 'success', 'fa-circle-check');
 });
 
-// === شريط التنقل وتأثيرات الظهور ===
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  nav.classList.toggle('scrolled', window.scrollY > 50);
+// === التنقل ===
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
 
-  document.querySelectorAll('.reveal').forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.85) el.classList.add('visible');
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileOverlay = document.getElementById('mobileOverlay');
+function toggleMobile() {
+  const open = mobileMenu.classList.contains('open');
+  hamburger.classList.toggle('active'); mobileMenu.classList.toggle('open'); mobileOverlay.classList.toggle('active');
+  hamburger.setAttribute('aria-expanded', !open);
+  document.body.style.overflow = open ? '' : 'hidden';
+}
+hamburger.addEventListener('click', toggleMobile);
+mobileOverlay.addEventListener('click', toggleMobile);
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if (mobileMenu.classList.contains('open')) toggleMobile(); }));
+
+// === Scroll Reveal ===
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// === عداد الأرقام ===
+function animateCounter(el, target, dur=2000) {
+  let start = 0; const t0 = performance.now();
+  function update(now) {
+    const p = Math.min((now - t0) / dur, 1);
+    el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target) + '+';
+    if (p < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCounter(document.getElementById('statStudents'), 500);
+      animateCounter(document.getElementById('statYears'), 8);
+      animateCounter(document.getElementById('statSessions'), 1200);
+      statsObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+statsObs.observe(document.querySelector('.hero-stats'));
+
+// === Smooth Scroll ===
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    if (this.getAttribute('href') === '#admin') return;
+    const t = document.querySelector(this.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
 
-function toggleMenu() {
-  document.getElementById('hamburger').classList.toggle('active');
-  document.getElementById('mobileMenu').classList.toggle('open');
-  document.getElementById('mobileOverlay').classList.toggle('active');
+// === تأثير الماوس ===
+if (window.matchMedia('(pointer: fine)').matches) {
+  const hv = document.querySelector('.hero-visual');
+  document.addEventListener('mousemove', e => {
+    if (hv) hv.style.transform = `translate(${(e.clientX/window.innerWidth-.5)*10}px,${(e.clientY/window.innerHeight-.5)*10}px)`;
+  });
 }
-document.getElementById('hamburger').onclick = toggleMenu;
-document.getElementById('mobileOverlay').onclick = toggleMenu;
 
-// === لوحة التحكم ===
-function adminLogin() {
-  const pass = document.getElementById('adminPassInput').value;
-  if (pass === 'align2025') {
-    document.getElementById('adminLogin').style.display = 'none';
-    document.getElementById('adminDash').classList.add('active');
-    renderAdmin();
-  } else {
-    const err = document.getElementById('adminError');
-    err.style.display = 'block';
-    setTimeout(() => err.style.display = 'none', 3000);
+// ==============================
+// لوحة تحكم الأدمن
+// ==============================
+const ADMIN_PASS = 'align2025'; // غيّريها هنا
+
+function openAdmin() {
+  const hash = window.location.hash;
+  if (hash === '#admin') {
+    document.getElementById('adminOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // لو مسجل دخول قبل كده
+    if (sessionStorage.getItem('align_admin') === 'true') {
+      showDashboard();
+    } else {
+      document.getElementById('adminLogin').style.display = 'flex';
+      document.getElementById('adminDash').classList.remove('active');
+    }
   }
 }
-
-window.addEventListener('hashchange', () => {
-  if (location.hash === '#admin') document.getElementById('adminOverlay').classList.add('active');
-});
-if (location.hash === '#admin') document.getElementById('adminOverlay').classList.add('active');
 
 function closeAdmin() {
   document.getElementById('adminOverlay').classList.remove('active');
-  location.hash = '';
+  document.body.style.overflow = '';
+  window.location.hash = '';
+  document.getElementById('adminPassInput').value = '';
+  document.getElementById('adminError').style.display = 'none';
 }
 
-function switchAdminTab(tab, btn) {
-  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(`panel-${tab}`).classList.add('active');
-  if (tab === 'revenue') renderRevenue();
-  if (tab === 'prices') renderPricesTab();
-}
-
-function renderAdmin() {
-  const bookings = getBookings();
-  const prices = getPrices();
-  
-  // إحصائيات
-  document.getElementById('aTotal').innerText = bookings.length;
-  const revenue = bookings.reduce((sum, b) => sum + (b.price || 0), 0);
-  document.getElementById('aRevenue').innerText = revenue.toLocaleString();
-  
-  const todayStr = new Date().toISOString().split('T')[0];
-  const todayCount = bookings.filter(b => b.date.startsWith(todayStr)).length;
-  document.getElementById('aToday').innerText = todayCount;
-
-  const counts = {};
-  bookings.forEach(b => counts[b.program] = (counts[b.program] || 0) + 1);
-  let top = '—';
-  let max = 0;
-  for (let p in counts) if (counts[p] > max) { max = counts[p]; top = programNames[p]; }
-  document.getElementById('aTop').innerText = top;
-
-  // الجدول
-  const body = document.getElementById('bookingsTableBody');
-  if (bookings.length === 0) {
-    document.getElementById('emptyBookings').style.display = 'block';
-    body.innerHTML = '';
+function adminLogin() {
+  const pass = document.getElementById('adminPassInput').value;
+  if (pass === ADMIN_PASS) {
+    sessionStorage.setItem('align_admin', 'true');
+    showDashboard();
   } else {
-    document.getElementById('emptyBookings').style.display = 'none';
-    body.innerHTML = bookings.sort((a,b) => b.id - a.id).map((b, i) => `
-      <tr>
-        <td>${bookings.length - i}</td>
-        <td><strong>${b.name}</strong></td>
-        <td dir="ltr">${b.phone}</td>
-        <td><span class="badge badge-purple">${programNames[b.program]}</span></td>
-        <td>${levelNames[b.level]}</td>
-        <td>${new Date(b.date).toLocaleDateString('ar-EG')}</td>
-        <td>${b.price} ر.س</td>
-        <td><button onclick="deleteBooking(${b.id})" style="color:var(--danger)"><i class="fa-solid fa-trash-can"></i></button></td>
-      </tr>
-    `).join('');
+    document.getElementById('adminError').style.display = 'block';
+    document.getElementById('adminPassInput').value = '';
   }
 }
 
+// Enter للدخول
+document.getElementById('adminPassInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') adminLogin();
+});
+
+function showDashboard() {
+  document.getElementById('adminLogin').style.display = 'none';
+  document.getElementById('adminDash').classList.add('active');
+  renderAdminStats();
+  renderBookingsTable();
+  renderRevenue();
+  renderPricesForm();
+}
+
+function renderAdminStats() {
+  const bookings = getBookings();
+  const prices = getPrices();
+  const today = new Date().toDateString();
+  const todayCount = bookings.filter(b => new Date(b.date).toDateString() === today).length;
+  const totalRev = bookings.reduce((sum, b) => sum + (prices[b.program] || 0), 0);
+
+  // الأكثر طلباً
+  const counts = {};
+  bookings.forEach(b => { counts[b.program] = (counts[b.program] || 0) + 1; });
+  let topProgram = '—';
+  let topCount = 0;
+  Object.entries(counts).forEach(([k, v]) => { if (v > topCount) { topCount = v; topProgram = programNames[k] || k; } });
+
+  document.getElementById('aTotal').textContent = bookings.length;
+  document.getElementById('aRevenue').textContent = totalRev.toLocaleString();
+  document.getElementById('aToday').textContent = todayCount;
+  document.getElementById('aTop').textContent = topProgram;
+}
+
+function renderBookingsTable(filtered = null) {
+  const bookings = filtered || getBookings();
+  const prices = getPrices();
+  const tbody = document.getElementById('bookingsTableBody');
+  const empty = document.getElementById('emptyBookings');
+
+  if (bookings.length === 0) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // ترتيب من الأحدث للأقدم
+  const sorted = [...bookings].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  tbody.innerHTML = sorted.map((b, i) => {
+    const d = new Date(b.date);
+    const dateStr = d.toLocaleDateString('ar-EG', { year:'numeric', month:'short', day:'numeric' });
+    const timeStr = d.toLocaleTimeString('ar-EG', { hour:'2-digit', minute:'2-digit' });
+    const price = prices[b.program] || 0;
+    return `<tr>
+      <td>${i + 1}</td>
+      <td style="color:var(--fg);font-weight:500">${b.fname} ${b.lname}</td>
+      <td dir="ltr" style="text-align:right">${b.phone}</td>
+      <td><span class="badge badge-purple">${programNames[b.program] || b.program}</span></td>
+      <td><span class="badge badge-gold">${levelNames[b.level] || b.level}</span></td>
+      <td>${dateStr}<br><small style="opacity:.6">${timeStr}</small></td>
+      <td style="font-weight:600;color:var(--accent)">${price} ر.س</td>
+      <td><button onclick="deleteBooking(${b.id})" style="color:var(--danger);font-size:.9rem;transition:opacity .3s" onmouseover="this.style.opacity='.6'" onmouseout="this.style.opacity='1'"><i class="fa-solid fa-trash-can"></i></button></td>
+    </tr>`;
+  }).join('');
+}
+
 function deleteBooking(id) {
-  if (!confirm('هل أنتِ متأكدة من حذف هذا الحجز؟')) return;
-  let b = getBookings().filter(x => x.id !== id);
-  saveBookings(b);
-  renderAdmin();
-  showToast('تم حذف الحجز');
+  let bookings = getBookings();
+  bookings = bookings.filter(b => b.id !== id);
+  saveBookings(bookings);
+  renderAdminStats();
+  renderBookingsTable();
+  renderRevenue();
+  showToast('تم حذف الحجز', 'info', 'fa-trash-can');
 }
 
 function clearAllBookings() {
-  if (!confirm('سيتم مسح جميع الحجوزات نهائياً. هل أنتِ متأكدة؟')) return;
-  saveBookings([]);
-  renderAdmin();
+  if (getBookings().length === 0) { showToast('لا توجد حجوزات للحذف', 'info', 'fa-circle-info'); return; }
+  // تأكيد مخصص
+  const existing = document.querySelector('.confirm-modal');
+  if (existing) existing.remove();
+  const modal = document.createElement('div');
+  modal.className = 'confirm-modal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:4000;display:flex;align-items:center;justify-content:center;padding:24px';
+  modal.innerHTML = `<div style="background:var(--card);border-radius:var(--radius-md);padding:32px;max-width:360px;width:100%;text-align:center;box-shadow:var(--shadow-lg)">
+    <i class="fa-solid fa-triangle-exclamation" style="font-size:2rem;color:var(--danger);margin-bottom:16px;display:block"></i>
+    <h3 style="font-size:1.2rem;margin-bottom:8px">تأكيد الحذف</h3>
+    <p style="font-size:.88rem;color:var(--fg-muted);margin-bottom:24px">هل أنت متأكد من حذف جميع الحجوزات؟ لا يمكن التراجع.</p>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button onclick="this.closest('.confirm-modal').remove()" class="btn-admin outline">إلغاء</button>
+      <button onclick="confirmClearAll(this)" class="btn-admin danger">حذف الكل</button>
+    </div>
+  </div>`;
+  document.body.appendChild(modal);
 }
 
-function renderPricesTab() {
+function confirmClearAll(btn) {
+  saveBookings([]);
+  btn.closest('.confirm-modal').remove();
+  renderAdminStats();
+  renderBookingsTable();
+  renderRevenue();
+  showToast('تم حذف جميع الحجوزات', 'info', 'fa-trash-can');
+}
+
+function filterBookings() {
+  let bookings = getBookings();
+  const from = document.getElementById('filterDateFrom').value;
+  const to = document.getElementById('filterDateTo').value;
+  const prog = document.getElementById('filterProgram').value;
+
+  if (from) bookings = bookings.filter(b => new Date(b.date) >= new Date(from));
+  if (to) { const toEnd = new Date(to); toEnd.setHours(23,59,59); bookings = bookings.filter(b => new Date(b.date) <= toEnd); }
+  if (prog) bookings = bookings.filter(b => b.program === prog);
+
+  renderBookingsTable(bookings);
+}
+
+function resetFilters() {
+  document.getElementById('filterDateFrom').value = '';
+  document.getElementById('filterDateTo').value = '';
+  document.getElementById('filterProgram').value = '';
+  renderBookingsTable();
+}
+
+// === الإيرادات ===
+function renderRevenue() {
+  const period = document.getElementById('revPeriod')?.value || 'month';
+  let bookings = getBookings();
+  const now = new Date();
+
+  if (period === 'week') {
+    const weekAgo = new Date(now); weekAgo.setDate(weekAgo.getDate() - 7);
+    bookings = bookings.filter(b => new Date(b.date) >= weekAgo);
+  } else if (period === 'month') {
+    bookings = bookings.filter(b => { const d = new Date(b.date); return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear(); });
+  } else if (period === 'year') {
+    bookings = bookings.filter(b => new Date(b.date).getFullYear() === now.getFullYear());
+  }
+
+  const prices = getPrices();
+  const counts = {};
+  let total = 0;
+  bookings.forEach(b => {
+    counts[b.program] = (counts[b.program] || 0) + 1;
+    total += (prices[b.program] || 0);
+  });
+
+  // كروت ملخصة
+  const statsDiv = document.getElementById('revenueStats');
+  const avgPerBooking = bookings.length > 0 ? Math.round(total / bookings.length) : 0;
+  statsDiv.innerHTML = `
+    <div class="admin-stat-card"><div class="stat-icon gold"><i class="fa-solid fa-coins"></i></div><h3>${total.toLocaleString()}</h3><p>إجمالي الإيرادات (ر.س)</p></div>
+    <div class="admin-stat-card"><div class="stat-icon purple"><i class="fa-solid fa-receipt"></i></div><h3>${bookings.length}</h3><p>عدد الحجوزات</p></div>
+    <div class="admin-stat-card"><div class="stat-icon green"><i class="fa-solid fa-chart-bar"></i></div><h3>${avgPerBooking}</h3><p>متوسط القيمة لكل حجز</p></div>
+  `;
+
+  // جدول الإيرادات
+  const tbody = document.getElementById('revenueTableBody');
+  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  if (entries.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--fg-muted)">لا توجد بيانات في هذه الفترة</td></tr>';
+    return;
+  }
+  tbody.innerHTML = entries.map(([prog, count]) => {
+    const price = prices[prog] || 0;
+    const subtotal = price * count;
+    const pct = total > 0 ? ((subtotal / total) * 100).toFixed(1) : 0;
+    return `<tr>
+      <td style="color:var(--fg);font-weight:500">${programNames[prog] || prog}</td>
+      <td>${count}</td>
+      <td>${price} ر.س</td>
+      <td style="font-weight:600;color:var(--accent)">${subtotal.toLocaleString()} ر.س</td>
+      <td><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;max-width:80px;height:6px;background:var(--bg-deep);border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:var(--accent);border-radius:3px"></div></div><span style="font-size:.75rem">${pct}%</span></div></td>
+    </tr>`;
+  }).join('');
+}
+
+// === الأسعار ===
+function renderPricesForm() {
   const prices = getPrices();
   const grid = document.getElementById('pricesGrid');
-  grid.innerHTML = Object.entries(programNames).map(([key, name]) => `
-    <div class="price-item">
-      <label>${name}</label>
-      <div class="price-input-wrap">
-        <input type="number" id="price-${key}" value="${prices[key] || 0}">
-        <span>ر.س</span>
-      </div>
+  grid.innerHTML = Object.entries(prices).map(([key, val]) => `
+    <div class="price-card">
+      <h4>${programNames[key] || key}</h4>
+      <input type="number" id="price_${key}" value="${val}" min="0" step="10">
+      <small>ريال سعودي / جلسة</small>
     </div>
   `).join('');
 }
 
 function savePrices() {
-  const prices = {};
-  Object.keys(programNames).forEach(key => {
-    prices[key] = parseInt(document.getElementById(`price-${key}`).value) || 0;
+  const prices = getPrices();
+  Object.keys(prices).forEach(key => {
+    const input = document.getElementById('price_' + key);
+    if (input) prices[key] = Math.max(0, parseInt(input.value) || 0);
   });
   savePricesToStorage(prices);
-  showToast('تم حفظ الأسعار الجديدة بنجاح', 'success');
+  renderAdminStats();
+  renderBookingsTable();
+  renderRevenue();
+  showToast('تم حفظ الأسعار بنجاح', 'success', 'fa-check');
 }
 
-function renderRevenue() {
-  const bookings = getBookings();
-  const period = document.getElementById('revPeriod').value;
-  const now = new Date();
-  
-  let filtered = bookings;
-  if (period === 'week') {
-    const weekAgo = new Date(now.setDate(now.getDate() - 7));
-    filtered = bookings.filter(b => new Date(b.date) > weekAgo);
-  } else if (period === 'month') {
-    filtered = bookings.filter(b => new Date(b.date).getMonth() === now.getMonth() && new Date(b.date).getFullYear() === now.getFullYear());
-  } else if (period === 'year') {
-    filtered = bookings.filter(b => new Date(b.date).getFullYear() === now.getFullYear());
-  }
-
-  const stats = {};
-  Object.keys(programNames).forEach(p => stats[p] = { count:0, total:0 });
-  filtered.forEach(b => {
-    if (stats[b.program]) {
-      stats[b.program].count++;
-      stats[b.program].total += (b.price || 0);
-    }
-  });
-
-  const totalRev = filtered.reduce((s, b) => s + (b.price || 0), 0);
-  const body = document.getElementById('revenueTableBody');
-  body.innerHTML = Object.entries(stats).map(([key, data]) => `
-    <tr>
-      <td>${programNames[key]}</td>
-      <td>${data.count}</td>
-      <td>${(data.total / (data.count || 1)).toFixed(0)} ر.س</td>
-      <td><strong>${data.total} ر.س</strong></td>
-      <td>${totalRev ? ((data.total / totalRev) * 100).toFixed(1) : 0}%</td>
-    </tr>
-  `).join('');
-}
-
+// === تصدير CSV ===
 function exportCSV() {
   const bookings = getBookings();
-  if (bookings.length === 0) return showToast('لا توجد بيانات للتصدير');
-  
-  let csv = "\ufeff#;الاسم;الجوال;البرنامج;المستوى;التاريخ;السعر\n";
-  bookings.forEach((b, i) => {
-    csv += `${i+1};${b.name};${b.phone};${programNames[b.program]};${levelNames[b.level]};${new Date(b.date).toLocaleDateString('ar-EG')};${b.price}\n`;
+  if (bookings.length === 0) { showToast('لا توجد بيانات للتصدير', 'info', 'fa-circle-info'); return; }
+  const prices = getPrices();
+  const headers = ['الاسم الأول', 'الاسم الأخير', 'الجوال', 'البريد', 'البرنامج', 'المستوى', 'التاريخ', 'الوقت', 'السعر (ر.س)', 'ملاحظات'];
+  const rows = bookings.map(b => {
+    const d = new Date(b.date);
+    return [
+      b.fname, b.lname, b.phone, b.email,
+      programNames[b.program] || b.program,
+      levelNames[b.level] || b.level,
+      d.toLocaleDateString('ar-EG'), d.toLocaleTimeString('ar-EG'),
+      prices[b.program] || 0,
+      (b.notes || '').replace(/,/g, '،')
+    ];
   });
-  
+  // BOM for Arabic Excel
+  const bom = '\uFEFF';
+  const csv = bom + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.setAttribute("download", `Align_Bookings_${new Date().toISOString().split('T')[0]}.csv`);
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `align_bookings_${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('تم تصدير الملف بنجاح', 'success', 'fa-file-csv');
 }
 
-// === PWA Install ===
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  setTimeout(() => document.getElementById('installBanner').classList.add('show'), 3000);
-});
+// === تبويبات الأدمن ===
+function switchAdminTab(panel, btn) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + panel).classList.add('active');
+  if (panel === 'revenue') renderRevenue();
+}
 
-document.getElementById('installBtn').onclick = async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  if (outcome === 'accepted') document.getElementById('installBanner').classList.remove('show');
-  deferredPrompt = null;
+// === مراقبة الهاش ===
+window.addEventListener('hashchange', openAdmin);
+// فتح عند التحميل لو الهاش admin
+if (window.location.hash === '#admin') openAdmin();
+
+// === PWA Manifest ===
+const manifest = {
+  name: 'Align by Enjy', short_name: 'Align',
+  description: 'Balance. Heal. Transform. — رحلتك نحو التوازن مع يوجا متخصصة',
+  start_url: '.', display: 'standalone',
+  background_color: '#FAF7F2', theme_color: '#6B5B7B',
+  dir: 'rtl', lang: 'ar', orientation: 'portrait-primary',
+  icons: [
+    { src: 'https://z-cdn-media.chatglm.cn/files/00c33989-bcee-4fca-b378-a315d582d8da.jpeg?auth_key=1874817591-0c1739b8548c43d5b4dd5229579f6af8-0-4c982b6faa5bd604c7ffccc55ca9eb6c', sizes: '512x512', type: 'image/jpeg', purpose: 'any maskable' }
+  ]
 };
+const mBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+const mLink = document.createElement('link'); mLink.rel = 'manifest'; mLink.href = URL.createObjectURL(mBlob);
+document.head.appendChild(mLink);
 
-document.getElementById('installClose').onclick = () => document.getElementById('installBanner').classList.remove('show');
+// Service Worker
+if ('serviceWorker' in navigator) {
+  const swCode = `
+    const CACHE_NAME='align-v1';
+    self.addEventListener('install',e=>{self.skipWaiting()});
+    self.addEventListener('activate',e=>{self.clients.claim()});
+    self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)))});
+  `;
+  const swBlob = new Blob([swCode], { type: 'application/javascript' });
+  navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
+}
 
+// Install Banner
+let deferredPrompt = null;
+const installBanner = document.getElementById('installBanner');
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; if (!localStorage.getItem('installDismissed')) setTimeout(() => installBanner.classList.add('show'), 3000); });
+document.getElementById('installBtn').addEventListener('click', () => {
+  if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; } else {
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) showToast('اضغطي على المشاركة ثم "إضافة للشاشة الرئيسية"', 'info', 'fa-circle-info');
+    else showToast('من قائمة المتصفح اختر "تثبيت التطبيق"', 'info', 'fa-circle-info');
+  }
+  installBanner.classList.remove('show');
+});
+document.getElementById('installClose').addEventListener('click', () => { installBanner.classList.remove('show'); localStorage.setItem('installDismissed', 'true'); });
 </script>
-
 </body>
 </html>
