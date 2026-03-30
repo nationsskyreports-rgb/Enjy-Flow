@@ -437,6 +437,10 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
   document.getElementById('syncBtn').addEventListener('click', () => {
     showToast('البيانات محدّثة في الوقت الفعلي ✓', 'success', 'fa-check-circle');
   });
+  window.addEventListener('beforeunload', (e) => {
+  e.preventDefault();
+  e.returnValue = '';
+});
 </script>
 
 <script>
