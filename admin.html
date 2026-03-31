@@ -550,18 +550,21 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
   };
 
   // ── Credits functions ──
-  window.fbSetCredits = async (phone, credits, expiry) => {
-    const key = phone.replace(/[^0-9]/g, '');
-    const existing = window.creditsData[key] || { totalAttended: 0 };
-    await update(ref(db, `credits/${key}`), {
-      credits: Number(credits),
-      expiry: expiry,
-      totalAttended: existing.totalAttended || 0,
-      phone: phone
-    });
-  };
+window.fbSetCredits = async (phone, credits, expiry) => {
+  const rawPhone = phone.replace(/[^0-9]/g,'');
+  const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
+  
+  const existing = window.creditsData[key] || { totalAttended: 0 };
+  await update(ref(db, `credits/${key}`), {
+    credits: Number(credits),
+    expiry: expiry,
+    lastUpdate: new Date().toISOString(),
+    phone: phone 
+  });
+};
   window.fbMarkAttendance = async (phone) => {
-    const key = phone.replace(/[^0-9]/g, '');
+const rawPhone = phone.replace(/[^0-9]/g,'');
+const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
     const existing = window.creditsData[key] || { credits: 0, totalAttended: 0 };
     if ((existing.credits || 0) <= 0) return false;
     await update(ref(db, `credits/${key}`), {
@@ -794,7 +797,10 @@ function renderClasses() {
     <div class="class-card">
       <div class="cc-top">
         <div class="cc-icon" style="background:${c.color}22;color:${c.color}"><i class="fa-solid ${c.icon}"></i></div>
-        <button class="btn btn-ghost" style="font-size:.75rem;padding:5px 10px" onclick="editClass(${c.id})"><i class="fa-solid fa-pen"></i> تعديل</button>
+        <div style="display:flex;gap:5px">
+          <button class="btn btn-ghost" style="font-size:.75rem;padding:5px 10px" onclick="editClass(${c.id})"><i class="fa-solid fa-pen"></i> تعديل</button>
+          <button class="btn btn-danger" style="font-size:.75rem;padding:5px 10px" onclick="deleteClass(${c.id})"><i class="fa-solid fa-trash"></i></button>
+        </div>
       </div>
       <div class="cc-name">${c.name}</div>
       <div class="cc-loc"><i class="fa-solid fa-location-dot"></i>${c.location}</div>
@@ -810,6 +816,19 @@ function renderClasses() {
 }
 
 function editClass(id) { openModal('editClass', classes.find(x => x.id===id)); }
+
+function deleteClass(id) {
+  if (!confirm("هل أنتِ متأكدة من حذف هذا الكلاس؟ سيتم حذفه من القائمة نهائياً.")) {
+    return;
+  }
+  
+  const idx = classes.findIndex(x => x.id === id);
+  if (idx > -1) {
+    classes.splice(idx, 1);
+    renderClasses();
+    showToast('تم حذف الكلاس بنجاح', 'success', 'fa-trash-can');
+  }
+}
 
 // ── RETREATS ──
 function renderRetreats() {
@@ -840,9 +859,16 @@ function renderRetreats() {
 }
 
 async function deleteRetreat(key) {
-  if (!confirm('حذف الريتريت؟')) return;
-  try { await window.fbDeleteRetreat(key); showToast('تم الحذف', 'error', 'fa-trash'); }
-  catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
+  if (!confirm("هل أنتِ متأكدة من حذف هذا الريتريت؟ لا يمكن التراجع عن هذه الخطوة.")) {
+    return;
+  }
+
+  try {
+    await window.fbDeleteRetreat(key);
+    showToast('تم حذف الريتريت بنجاح', 'success', 'fa-trash-can');
+  } catch(e) { 
+    showToast('حدث خطأ أثناء الحذف', 'error', 'fa-triangle-exclamation'); 
+  }
 }
 
 function editRetreat(key) {
@@ -866,36 +892,56 @@ function buildStudents() {
 
 function renderStudents(list) {
   const tb = document.getElementById('studentsTable');
-  if (!list.length) { tb.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:40px">لا توجد بيانات بعد</td></tr>'; return; }
+  if (!list || !list.length) { 
+    tb.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:40px">لا توجد بيانات بعد</td></tr>'; 
+    return; 
+  }
+  
   const today = new Date().toISOString().slice(0,10);
-  tb.innerHTML = list.map((s,i) => {
-    const key = s.phone.replace(/[^0-9]/g,'');
+  
+  tb.innerHTML = list.map((s, i) => {
+    const rawPhone = s.phone.replace(/[^0-9]/g,'');
+    const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
+    
     const cr = window.creditsData[key] || {};
-    const credits = cr.credits !== undefined ? cr.credits : '—';
+    const credits = cr.credits !== undefined ? Number(cr.credits) : '—';
     const expiry = cr.expiry || '—';
     const attended = cr.totalAttended || 0;
-    let expiryClass = '';
+    
+    let expiryHTML = `<span style="color:var(--text-faint)">—</span>`;
+    let rowWarning = false;
+    
     if (cr.expiry) {
       const diff = (new Date(cr.expiry) - new Date(today)) / (1000*60*60*24);
-      if (diff < 0) expiryClass = 'style="color:var(--red)"';
-      else if (diff <= 14) expiryClass = 'style="color:var(--yellow)"';
+      if (diff < 0) {
+        expiryHTML = `<span class="badge red" style="font-size:.7rem">${expiry} (منتهي!)</span>`;
+        rowWarning = true;
+      } else if (diff <= 7) {
+        expiryHTML = `<span class="badge yellow" style="font-size:.7rem">${expiry} (قريباً)</span>`;
+      } else {
+        expiryHTML = `<span class="badge green" style="font-size:.7rem">${expiry}</span>`;
+      }
     }
+
+    const isNoCredits = typeof credits === 'number' && credits <= 0;
+    const creditsColor = (isNoCredits || rowWarning) ? 'var(--red)' : 'var(--green)';
+
     return `<tr>
       <td style="color:var(--text-muted)">${i+1}</td>
       <td><strong style="font-size:.85rem">${s.name}</strong></td>
       <td dir="ltr" style="font-size:.78rem;color:var(--text-muted)">${s.phone}</td>
-      <td>${s.classes.map(c=>`<span class="badge blue" style="margin-left:3px;font-size:.65rem">${c}</span>`).join('')}</td>
+      <td>${s.classes.map(c => `<span class="badge blue" style="margin-left:3px;font-size:.65rem">${c}</span>`).join('')}</td>
       <td style="text-align:center">
         ${typeof credits === 'number'
-          ? `<strong style="color:${credits>0?'var(--green)':'var(--red)'};font-size:1rem">${credits}</strong>`
+          ? `<strong style="color:${creditsColor}; font-size:1.1rem">${credits}</strong>`
           : `<span style="color:var(--text-faint)">—</span>`}
       </td>
-      <td ${expiryClass} style="font-size:.78rem;text-align:center">${expiry}</td>
+      <td style="text-align:center">${expiryHTML}</td>
       <td style="text-align:center"><strong>${attended}</strong></td>
       <td>
         <div class="action-btns">
           <button class="act-btn credit" onclick="openCreditsModal('${s.phone}','${s.name}')" title="إدارة الرصيد"><i class="fa-solid fa-coins"></i></button>
-          ${typeof credits === 'number' && credits > 0
+          ${(typeof credits === 'number' && credits > 0 && !rowWarning)
             ? `<button class="act-btn view" onclick="markAttendance('${s.phone}','${s.name.split(' ')[0]}')" title="تسجيل حضور"><i class="fa-solid fa-user-check"></i></button>`
             : ''}
           <button class="act-btn wa" onclick="waContact('${s.phone}','${s.name.split(' ')[0]}')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
@@ -1018,7 +1064,8 @@ function openModal(type, data) {
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="confirmPayment('${data._key}')"><i class="fa-solid fa-check"></i> تأكيد الاستلام</button>`;
   }
   else if (type === 'manageCredits' && data) {
-    const key = data.phone.replace(/[^0-9]/g,'');
+const rawPhone = data.phone.replace(/[^0-9]/g,'');
+const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
     const cr = window.creditsData[key] || {};
     const today = new Date().toISOString().slice(0,10);
     title.textContent = `رصيد: ${data.name}`;
