@@ -1154,15 +1154,33 @@ async function confirmPayment(key) {
 }
 
 async function saveCredits(phone) {
-  const credits = document.getElementById('crCredits').value;
+  const newCreditsInput = document.getElementById('crCredits').value;
   const expiry = document.getElementById('crExpiry').value;
-  if (!credits) { showToast('يرجى إدخال عدد الكلاسات', 'error', 'fa-triangle-exclamation'); return; }
-  if (!expiry) { showToast('يرجى إدخال تاريخ انتهاء الصلاحية', 'error', 'fa-triangle-exclamation'); return; }
+  
+  if (!newCreditsInput) { 
+    showToast('يرجى إدخال عدد الكلاسات', 'error', 'fa-triangle-exclamation'); 
+    return; 
+  }
+  if (!expiry) { 
+    showToast('يرجى إدخال تاريخ انتهاء الصلاحية', 'error', 'fa-triangle-exclamation'); 
+    return; 
+  }
+
+  const key = phone.replace(/[^0-9]/g,'');
+  const existing = window.creditsData[key] || { credits: 0 };
+  const currentCredits = Number(existing.credits) || 0;
+  
+  // هنا نقوم بجمع الرصيد الجديد مع القديم
+  const totalCredits = currentCredits + Number(newCreditsInput);
+
   try {
-    await window.fbSetCredits(phone, credits, expiry);
+    await window.fbSetCredits(phone, totalCredits, expiry);
     closeModal();
-    showToast('تم حفظ الرصيد بنجاح ✓', 'success', 'fa-coins');
-  } catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
+    showToast(`تمت إضافة ${newCreditsInput} حصص بنجاح. الرصيد الإجمالي: ${totalCredits} ✓`, 'success', 'fa-coins');
+  } catch(e) { 
+    console.error(e);
+    showToast('حدث خطأ أثناء حفظ الرصيد', 'error', 'fa-triangle-exclamation'); 
+  }
 }
 
 function saveEditClass(id) {
