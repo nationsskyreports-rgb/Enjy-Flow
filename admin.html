@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Align Admin">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com/">
-<link href="./Align by Enjy — لوحة الإدارة_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
@@ -66,6 +66,7 @@ input,select,textarea{font-family:inherit}
 .nav-item.active::before{content:'';position:absolute;right:0;top:20%;bottom:20%;width:3px;background:var(--primary-light);border-radius:3px}
 .nav-item i{width:20px;text-align:center;font-size:.9rem}
 .nav-badge{margin-right:auto;background:var(--accent);color:#fff;font-size:.65rem;padding:2px 7px;border-radius:50px;font-weight:700}
+.nav-badge.green-badge{background:var(--green)}
 .sidebar-foot{padding:16px 16px 24px;border-top:1px solid var(--border)}
 .admin-profile{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px}
 .ap-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;color:#fff;flex-shrink:0}
@@ -191,7 +192,6 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 .empty-state{text-align:center;padding:40px 20px;color:var(--text-muted)}
 .empty-state i{font-size:2.5rem;margin-bottom:12px;opacity:.3;display:block}
 
-/* ── CREDITS BOX ── */
 .credits-box{background:var(--bg3);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--border);margin-bottom:12px}
 .credits-box .cb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .credits-box .cb-num{font-size:1.8rem;font-weight:800;color:var(--primary-light);line-height:1}
@@ -202,13 +202,19 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 .attend-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--radius-sm);font-size:.78rem;font-weight:700;background:rgba(76,175,125,.15);color:var(--green);border:1px solid rgba(76,175,125,.3);cursor:pointer;transition:all .2s}
 .attend-btn:hover{background:rgba(76,175,125,.25)}
 
-/* ── PAYMENT BADGE ── */
 .pay-paid{color:var(--green);font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;gap:4px}
 .pay-pending{color:var(--yellow);font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;gap:4px}
 
-/* ── INSTAPAY INFO ── */
 .instapay-info{background:rgba(91,143,249,.08);border:1px solid rgba(91,143,249,.2);border-radius:var(--radius-sm);padding:12px 14px;font-size:.82rem;color:var(--text-muted);margin-top:8px;display:flex;align-items:flex-start;gap:10px}
 .instapay-info i{color:var(--blue);margin-top:2px;flex-shrink:0}
+
+/* ── CHECKIN LINKS BOX ── */
+.checkin-links-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:16px}
+.checkin-links-box h4{font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:700;color:var(--text-muted);margin-bottom:10px}
+.checkin-link-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
+.checkin-link-row:last-child{border-bottom:none}
+.cl-name{font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:8px}
+.cl-actions{display:flex;gap:6px}
 
 @media(min-width:900px){
   .sidebar{transform:translateX(0)}
@@ -249,18 +255,20 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     <nav class="sidebar-nav">
       <div class="nav-section">
         <div class="nav-section-label">الرئيسية</div>
-        <div class="nav-item active" onclick="goPage(&#39;dashboard&#39;,this)"><i class="fa-solid fa-chart-pie"></i> نظرة عامة</div>
+        <div class="nav-item active" onclick="goPage('dashboard',this)"><i class="fa-solid fa-chart-pie"></i> نظرة عامة</div>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">إدارة</div>
-        <div class="nav-item" onclick="goPage(&#39;bookings&#39;,this)"><i class="fa-solid fa-calendar-check"></i> الحجوزات<span class="nav-badge" id="newBadge">3</span></div>
-        <div class="nav-item" onclick="goPage(&#39;classes&#39;,this)"><i class="fa-solid fa-dumbbell"></i> الكلاسات والأسعار</div>
-        <div class="nav-item" onclick="goPage(&#39;retreats&#39;,this)"><i class="fa-solid fa-mountain-sun"></i> الريتريتس</div>
-        <div class="nav-item" onclick="goPage(&#39;students&#39;,this)"><i class="fa-solid fa-users"></i> المتدربات والرصيد</div>
+        <div class="nav-item" onclick="goPage('bookings',this)"><i class="fa-solid fa-calendar-check"></i> الحجوزات<span class="nav-badge" id="newBadge">3</span></div>
+        <div class="nav-item" onclick="goPage('classes',this)"><i class="fa-solid fa-dumbbell"></i> الكلاسات والأسعار</div>
+        <div class="nav-item" onclick="goPage('retreats',this)"><i class="fa-solid fa-mountain-sun"></i> الريتريتس</div>
+        <div class="nav-item" onclick="goPage('students',this)"><i class="fa-solid fa-users"></i> المتدربات والرصيد</div>
+        <div class="nav-item" onclick="goPage('attendance',this)"><i class="fa-solid fa-user-check"></i> سجل الحضور<span class="nav-badge green-badge" id="todayBadge">0</span></div>
+        <div class="nav-item" onclick="goPage('locations',this)"><i class="fa-solid fa-location-dot"></i> مواقع الكلاسات</div>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">تقارير</div>
-        <div class="nav-item" onclick="goPage(&#39;stats&#39;,this)"><i class="fa-solid fa-chart-line"></i> الإحصائيات</div>
+        <div class="nav-item" onclick="goPage('stats',this)"><i class="fa-solid fa-chart-line"></i> الإحصائيات</div>
       </div>
     </nav>
     <div class="sidebar-foot">
@@ -309,68 +317,25 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
           <div>
             <div class="section-head">
               <div><h2>آخر الحجوزات</h2><p>الحجوزات الواردة من الموقع</p></div>
-              <button class="btn btn-ghost" onclick="goPage(&#39;bookings&#39;,null)"><i class="fa-solid fa-arrow-left"></i> الكل</button>
+              <button class="btn btn-ghost" onclick="goPage('bookings',null)"><i class="fa-solid fa-arrow-left"></i> الكل</button>
             </div>
             <div class="table-wrap">
               <table><thead><tr><th>الاسم</th><th>الكلاس</th><th>تاريخ الجلسة</th><th>الدفع</th><th>الحالة</th><th></th></tr></thead>
-              <tbody id="dashBookings"><tr>
-      <td><strong>Hayam Gebril</strong></td>
-      <td style="font-size:.8rem">Gentle Yoga</td>
-      <td style="font-size:.75rem;color:var(--text-muted)">2026-03-30</td>
-      <td><span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span></td>
-      <td><span class="badge blue">جديد</span></td>
-      <td><div class="action-btns">
-        <button class="act-btn view" onclick="quickStatus(&#39;-OozzEqek4SAJ7p-KHAD&#39;,&#39;confirmed&#39;)" title="تأكيد"><i class="fa-solid fa-check"></i></button>
-        <button class="act-btn wa" onclick="waContact(&#39;01017698881&#39;,&#39;Hayam&#39;)" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-      </div></td>
-    </tr><tr>
-      <td><strong>Hoda Elsorogy</strong></td>
-      <td style="font-size:.8rem">Gentle Yoga</td>
-      <td style="font-size:.75rem;color:var(--text-muted)">2026-03-30</td>
-      <td><span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span></td>
-      <td><span class="badge blue">جديد</span></td>
-      <td><div class="action-btns">
-        <button class="act-btn view" onclick="quickStatus(&#39;-Oozm95YF-0RW9cGUR2l&#39;,&#39;confirmed&#39;)" title="تأكيد"><i class="fa-solid fa-check"></i></button>
-        <button class="act-btn wa" onclick="waContact(&#39;01006067700&#39;,&#39;Hoda&#39;)" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-      </div></td>
-    </tr><tr>
-      <td><strong>Enjy Gebril</strong></td>
-      <td style="font-size:.8rem">Power Yoga</td>
-      <td style="font-size:.75rem;color:var(--text-muted)">2026-03-30</td>
-      <td><span class="pay-pending"><i class="fa-solid fa-clock"></i>معلق</span></td>
-      <td><span class="badge blue">جديد</span></td>
-      <td><div class="action-btns">
-        <button class="act-btn view" onclick="quickStatus(&#39;-Oozaw01qLuv6lkx1mrb&#39;,&#39;confirmed&#39;)" title="تأكيد"><i class="fa-solid fa-check"></i></button>
-        <button class="act-btn wa" onclick="waContact(&#39;01063751653&#39;,&#39;Enjy&#39;)" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-      </div></td>
-    </tr></tbody></table>
+              <tbody id="dashBookings"></tbody></table>
             </div>
           </div>
           <div>
             <div class="section-head"><div><h2>توزيع الكلاسات</h2></div></div>
-            <div class="chart-card"><div class="metric-list" id="classDistMetrics">
-    <div class="metric-item">
-      <span class="m-label"><i class="fa-solid fa-circle" style="color:var(--green)"></i>Power Yoga</span>
-      <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:60px;height:5px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:var(--green);width:33%;border-radius:6px"></div></div>
-        <span class="m-val">1</span>
-      </div>
-    </div>
-    <div class="metric-item">
-      <span class="m-label"><i class="fa-solid fa-circle" style="color:var(--blue)"></i>Gentle Yoga</span>
-      <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:60px;height:5px;background:var(--bg);border-radius:6px;overflow:hidden"><div style="height:100%;background:var(--blue);width:67%;border-radius:6px"></div></div>
-        <span class="m-val">2</span>
-      </div>
-    </div></div></div>
+            <div class="chart-card"><div class="metric-list" id="classDistMetrics"></div></div>
           </div>
         </div>
 
         <div class="section-head"><div><h2>إجراءات سريعة</h2></div></div>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="openModal(&#39;addBooking&#39;)"><i class="fa-solid fa-plus"></i> إضافة حجز</button>
-          <button class="btn btn-ghost" onclick="goPage(&#39;classes&#39;,null)"><i class="fa-solid fa-dumbbell"></i> الكلاسات</button>
+          <button class="btn btn-primary" onclick="openModal('addBooking')"><i class="fa-solid fa-plus"></i> إضافة حجز</button>
+          <button class="btn btn-ghost" onclick="goPage('classes',null)"><i class="fa-solid fa-dumbbell"></i> الكلاسات</button>
           <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i> تصدير</button>
+          <button class="btn btn-ghost" onclick="goPage('attendance',null)"><i class="fa-solid fa-user-check"></i> سجل الحضور</button>
         </div>
       </div>
 
@@ -397,7 +362,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
             <option value="paid">مدفوع</option>
             <option value="pending">معلق</option>
           </select>
-          <button class="btn btn-primary" onclick="openModal(&#39;addBooking&#39;)"><i class="fa-solid fa-plus"></i></button>
+          <button class="btn btn-primary" onclick="openModal('addBooking')"><i class="fa-solid fa-plus"></i></button>
           <button class="btn btn-ghost" onclick="exportCSV()"><i class="fa-solid fa-file-export"></i></button>
         </div>
         <div class="table-wrap">
@@ -411,7 +376,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
       <div class="page" id="page-classes">
         <div class="section-head">
           <div><h2>إدارة الكلاسات والأسعار</h2></div>
-          <button class="btn btn-primary" onclick="openModal(&#39;addClass&#39;)"><i class="fa-solid fa-plus"></i> جديد</button>
+          <button class="btn btn-primary" onclick="openModal('addClass')"><i class="fa-solid fa-plus"></i> جديد</button>
         </div>
         <div class="classes-grid" id="classesGrid"></div>
       </div>
@@ -420,7 +385,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
       <div class="page" id="page-retreats">
         <div class="section-head">
           <div><h2>إدارة الريتريتس</h2><p>رحلات اليوجا والتأمل</p></div>
-          <button class="btn btn-primary" onclick="openModal(&#39;addRetreat&#39;)"><i class="fa-solid fa-plus"></i> إضافة ريتريت</button>
+          <button class="btn btn-primary" onclick="openModal('addRetreat')"><i class="fa-solid fa-plus"></i> إضافة ريتريت</button>
         </div>
         <div class="classes-grid" id="retreatsGrid"></div>
       </div>
@@ -434,6 +399,147 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
         <div class="table-wrap">
           <table><thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاسات</th><th>الرصيد المتبقي</th><th>انتهاء الصلاحية</th><th>عدد الحضور</th><th></th></tr></thead>
           <tbody id="studentsTable"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══ ATTENDANCE ══ -->
+      <div class="page" id="page-attendance">
+        <div class="section-head" style="flex-wrap:wrap;gap:12px">
+          <div>
+            <h2>سجل الحضور اليومي</h2>
+            <p id="attendDateLabel" style="font-size:.78rem;color:var(--text-muted)"></p>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input type="date" id="attendDatePicker" onchange="loadAttendance(this.value)"
+              style="padding:7px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:.82rem;outline:none;color-scheme:dark">
+          </div>
+        </div>
+
+        <!-- Check-in links -->
+        <div class="checkin-links-box">
+          <h4><i class="fa-solid fa-link" style="color:var(--accent);margin-left:6px"></i>روابط Check-in — أرسليها للمتدربات</h4>
+          <div class="checkin-link-row">
+            <span class="cl-name"><i class="fa-solid fa-fire" style="color:var(--green)"></i> Power Yoga</span>
+            <div class="cl-actions">
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="copyCheckinLink('power')"><i class="fa-solid fa-copy"></i> نسخ</button>
+              <a href="checkin.html?class=power" target="_blank" class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px"><i class="fa-solid fa-arrow-up-right-from-square"></i> فتح</a>
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="shareCheckinWA('power','Power Yoga')"><i class="fa-brands fa-whatsapp"></i> واتساب</button>
+            </div>
+          </div>
+          <div class="checkin-link-row">
+            <span class="cl-name"><i class="fa-solid fa-heart-pulse" style="color:var(--accent)"></i> Yoga for Diabetes</span>
+            <div class="cl-actions">
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="copyCheckinLink('diabetes')"><i class="fa-solid fa-copy"></i> نسخ</button>
+              <a href="checkin.html?class=diabetes" target="_blank" class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px"><i class="fa-solid fa-arrow-up-right-from-square"></i> فتح</a>
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="shareCheckinWA('diabetes','Yoga for Diabetes')"><i class="fa-brands fa-whatsapp"></i> واتساب</button>
+            </div>
+          </div>
+          <div class="checkin-link-row">
+            <span class="cl-name"><i class="fa-solid fa-leaf" style="color:var(--blue)"></i> Gentle Yoga</span>
+            <div class="cl-actions">
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="copyCheckinLink('gentle')"><i class="fa-solid fa-copy"></i> نسخ</button>
+              <a href="checkin.html?class=gentle" target="_blank" class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px"><i class="fa-solid fa-arrow-up-right-from-square"></i> فتح</a>
+              <button class="btn btn-ghost" style="font-size:.72rem;padding:5px 10px" onclick="shareCheckinWA('gentle','Gentle Yoga')"><i class="fa-brands fa-whatsapp"></i> واتساب</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary stats -->
+        <div class="stats-row" style="margin-bottom:20px">
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(76,175,125,.15);color:var(--green)"><i class="fa-solid fa-user-check"></i></div>
+            <h3 id="att1">0</h3><p>حضروا</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(61,140,106,.15);color:var(--primary-light)"><i class="fa-solid fa-fire"></i></div>
+            <h3 id="att2">0</h3><p>Power Yoga</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(200,149,108,.15);color:var(--accent)"><i class="fa-solid fa-heart-pulse"></i></div>
+            <h3 id="att3">0</h3><p>Yoga for Diabetes</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(91,143,249,.15);color:var(--blue)"><i class="fa-solid fa-leaf"></i></div>
+            <h3 id="att4">0</h3><p>Gentle Yoga</p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>الاسم</th><th>الجوال</th><th>الكلاس</th><th>وقت التسجيل</th><th>الرصيد المتبقي</th><th></th></tr></thead>
+            <tbody id="attendanceTable"><tr class="loading-row"><td colspan="7">اختاري يوم لعرض الحضور</td></tr></tbody>
+          </table>
+        </div>
+        <div id="attendEmpty" class="empty-state" style="display:none">
+          <i class="fa-solid fa-user-clock"></i><p>لا يوجد حضور مسجل لهذا اليوم</p>
+        </div>
+      </div>
+
+      <!-- ══ LOCATIONS ══ -->
+      <div class="page" id="page-locations">
+        <div class="section-head">
+          <div><h2>مواقع الكلاسات</h2><p style="font-size:.78rem;color:var(--text-muted)">تحديد النطاق الجغرافي لكل كلاس — يُستخدم في تسجيل الحضور</p></div>
+        </div>
+
+        <div class="instapay-info" style="margin-bottom:20px">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <strong style="color:var(--text);display:block;margin-bottom:4px">كيف تحصلي على الإحداثيات من Google Maps؟</strong>
+            افتحي Google Maps ← اذهبي للموقع ← اضغطي كليك يمين على المكان بالظبط ← ستظهر الأرقام في الأعلى ← اضغطي عليها لنسخها.
+            مثال: <span dir="ltr" style="font-family:monospace;color:var(--blue)">29.9719, 30.9424</span>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+
+          <!-- Power Yoga -->
+          <div class="chart-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <div style="width:36px;height:36px;background:rgba(76,175,125,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--green)"><i class="fa-solid fa-fire"></i></div>
+              <div><div style="font-weight:700">Power Yoga</div><div style="font-size:.72rem;color:var(--text-muted)">Royal Hills Clubhouse</div></div>
+              <span class="badge green" id="locStatus-power" style="margin-right:auto">لم يُحدَّد بعد</span>
+            </div>
+            <div class="form-row2">
+              <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-power" step="0.0001" placeholder="29.9719" dir="ltr"></div>
+              <div class="form-group"><label>خط الطول Longitude</label><input type="number" id="lng-power" step="0.0001" placeholder="30.9424" dir="ltr"></div>
+            </div>
+            <div class="form-group"><label>نطاق التحقق بالمتر (افتراضي: 400)</label><input type="number" id="radius-power" placeholder="400" dir="ltr"></div>
+            <button class="btn btn-primary" onclick="saveLocation('power')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Power Yoga</button>
+            <div id="locHint-power" class="form-hint" style="margin-top:8px"></div>
+          </div>
+
+          <!-- Yoga for Diabetes -->
+          <div class="chart-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <div style="width:36px;height:36px;background:rgba(200,149,108,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--accent)"><i class="fa-solid fa-heart-pulse"></i></div>
+              <div><div style="font-weight:700">Yoga for Diabetes</div><div style="font-size:.72rem;color:var(--text-muted)">Royal Hills</div></div>
+              <span class="badge green" id="locStatus-diabetes" style="margin-right:auto">لم يُحدَّد بعد</span>
+            </div>
+            <div class="form-row2">
+              <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-diabetes" step="0.0001" placeholder="29.9719" dir="ltr"></div>
+              <div class="form-group"><label>خط الطول Longitude</label><input type="number" id="lng-diabetes" step="0.0001" placeholder="30.9424" dir="ltr"></div>
+            </div>
+            <div class="form-group"><label>نطاق التحقق بالمتر</label><input type="number" id="radius-diabetes" placeholder="400" dir="ltr"></div>
+            <button class="btn btn-primary" onclick="saveLocation('diabetes')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Yoga for Diabetes</button>
+            <div id="locHint-diabetes" class="form-hint" style="margin-top:8px"></div>
+          </div>
+
+          <!-- Gentle Yoga -->
+          <div class="chart-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <div style="width:36px;height:36px;background:rgba(91,143,249,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--blue)"><i class="fa-solid fa-leaf"></i></div>
+              <div><div style="font-weight:700">Gentle Yoga</div><div style="font-size:.72rem;color:var(--text-muted)">Pyramids Heights</div></div>
+              <span class="badge green" id="locStatus-gentle" style="margin-right:auto">لم يُحدَّد بعد</span>
+            </div>
+            <div class="form-row2">
+              <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-gentle" step="0.0001" placeholder="29.8636" dir="ltr"></div>
+              <div class="form-group"><label>خط الطول Longitude</label><input type="number" id="lng-gentle" step="0.0001" placeholder="31.0117" dir="ltr"></div>
+            </div>
+            <div class="form-group"><label>نطاق التحقق بالمتر</label><input type="number" id="radius-gentle" placeholder="400" dir="ltr"></div>
+            <button class="btn btn-primary" onclick="saveLocation('gentle')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Gentle Yoga</button>
+            <div id="locHint-gentle" class="form-hint" style="margin-top:8px"></div>
+          </div>
+
         </div>
       </div>
 
@@ -451,9 +557,9 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
         </div>
       </div>
 
-    </div>
-  </div>
-</div>
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /layout -->
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
@@ -497,12 +603,8 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     }
   });
 
-  window.fbSignIn = async (email, password) => {
-    await signInWithEmailAndPassword(auth, email, password);
-  };
-  window.fbSignOut = async () => {
-    await signOut(auth);
-  };
+  window.fbSignIn = async (email, password) => { await signInWithEmailAndPassword(auth, email, password); };
+  window.fbSignOut = async () => { await signOut(auth); };
 
   // ── Bookings ──
   window._fbRef = ref(db, 'bookings');
@@ -510,9 +612,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     const data = snapshot.val();
     window.bookings = [];
     if (data) {
-      Object.entries(data).forEach(([key, val]) => {
-        window.bookings.push({ ...val, _key: key });
-      });
+      Object.entries(data).forEach(([key, val]) => { window.bookings.push({ ...val, _key: key }); });
       window.bookings.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
     }
     window.onBookingsLoaded();
@@ -528,76 +628,69 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
   onValue(ref(db, 'retreats'), (snapshot) => {
     window.retreatsData = [];
     const data = snapshot.val();
-    if (data) {
-      Object.entries(data).forEach(([key, val]) => {
-        window.retreatsData.push({ ...val, _key: key });
-      });
-    }
+    if (data) { Object.entries(data).forEach(([key, val]) => { window.retreatsData.push({ ...val, _key: key }); }); }
     if (document.querySelector('#page-retreats.active')) renderRetreats();
   });
 
-  window.fbAddBooking = async (data) => {
-    await push(ref(db, 'bookings'), { ...data, createdAt: serverTimestamp() });
-  };
-  window.fbUpdateStatus = async (key, status) => {
-    await update(ref(db, `bookings/${key}`), { status });
-  };
-  window.fbUpdatePayment = async (key, paymentStatus, paymentRef) => {
-    await update(ref(db, `bookings/${key}`), { paymentStatus, paymentRef: paymentRef || '' });
-  };
-  window.fbDeleteBooking = async (key) => {
-    await remove(ref(db, `bookings/${key}`));
-  };
-
-  // ── Credits functions ──
-window.fbSetCredits = async (phone, credits, expiry) => {
-  const rawPhone = phone.replace(/[^0-9]/g,'');
-  const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
-  
-  const existing = window.creditsData[key] || { totalAttended: 0 };
-  await update(ref(db, `credits/${key}`), {
-    credits: Number(credits),
-    expiry: expiry,
-    lastUpdate: new Date().toISOString(),
-    phone: phone 
+  // ── Attendance (NEW) ──
+  onValue(ref(db, 'attendance'), (snapshot) => {
+    window.attendanceData = snapshot.val() || {};
+    const today = new Date().toISOString().slice(0, 10);
+    const todayData = window.attendanceData[today] || {};
+    const count = Object.keys(todayData).length;
+    const badge = document.getElementById('todayBadge');
+    if (badge) badge.textContent = count;
+    if (document.querySelector('#page-attendance.active')) {
+      const dp = document.getElementById('attendDatePicker');
+      loadAttendance(dp?.value || today);
+    }
   });
-};
+
+  // ── Class Locations (NEW) ──
+  onValue(ref(db, 'classLocations'), (snapshot) => {
+    window.savedLocations = snapshot.val() || {};
+    if (document.querySelector('#page-locations.active')) renderSavedLocations();
+  });
+
+  window.fbAddBooking = async (data) => { await push(ref(db, 'bookings'), { ...data, createdAt: serverTimestamp() }); };
+  window.fbUpdateStatus = async (key, status) => { await update(ref(db, `bookings/${key}`), { status }); };
+  window.fbUpdatePayment = async (key, paymentStatus, paymentRef) => { await update(ref(db, `bookings/${key}`), { paymentStatus, paymentRef: paymentRef || '' }); };
+  window.fbDeleteBooking = async (key) => { await remove(ref(db, `bookings/${key}`)); };
+
+  window.fbSetCredits = async (phone, credits, expiry) => {
+    const rawPhone = phone.replace(/[^0-9]/g,'');
+    const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
+    await update(ref(db, `credits/${key}`), { credits: Number(credits), expiry, lastUpdate: new Date().toISOString(), phone });
+  };
   window.fbMarkAttendance = async (phone) => {
-const rawPhone = phone.replace(/[^0-9]/g,'');
-const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
+    const rawPhone = phone.replace(/[^0-9]/g,'');
+    const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
     const existing = window.creditsData[key] || { credits: 0, totalAttended: 0 };
     if ((existing.credits || 0) <= 0) return false;
-    await update(ref(db, `credits/${key}`), {
-      credits: (existing.credits || 0) - 1,
-      totalAttended: (existing.totalAttended || 0) + 1
-    });
+    await update(ref(db, `credits/${key}`), { credits: (existing.credits || 0) - 1, totalAttended: (existing.totalAttended || 0) + 1 });
     return true;
   };
+  window.fbAddRetreat = async (data) => { await push(ref(db, 'retreats'), { ...data, createdAt: serverTimestamp() }); };
+  window.fbUpdateRetreat = async (key, data) => { await update(ref(db, `retreats/${key}`), data); };
+  window.fbDeleteRetreat = async (key) => { await remove(ref(db, `retreats/${key}`)); };
 
-  // ── Retreats functions ──
-  window.fbAddRetreat = async (data) => {
-    await push(ref(db, 'retreats'), { ...data, createdAt: serverTimestamp() });
-  };
-  window.fbUpdateRetreat = async (key, data) => {
-    await update(ref(db, `retreats/${key}`), data);
-  };
-  window.fbDeleteRetreat = async (key) => {
-    await remove(ref(db, `retreats/${key}`));
+  // ── Save class location (NEW) ──
+  window.fbSaveLocation = async (classId, lat, lng, radius) => {
+    await update(ref(db, `classLocations/${classId}`), { lat, lng, radius, updatedAt: new Date().toISOString().slice(0,10) });
   };
 
   document.getElementById('syncBtn').addEventListener('click', () => {
     showToast('البيانات محدّثة في الوقت الفعلي ✓', 'success', 'fa-check-circle');
   });
-  window.addEventListener('beforeunload', (e) => {
-    e.preventDefault();
-    e.returnValue = '';
-  });
+  window.addEventListener('beforeunload', (e) => { e.preventDefault(); e.returnValue = ''; });
 </script>
 
 <script>
 window.bookings = [];
 window.creditsData = {};
 window.retreatsData = [];
+window.attendanceData = {};
+window.savedLocations = {};
 
 let classes = [
   {id:1,name:'Power Yoga',location:'Royal Hills Clubhouse',schedule:'الأحد والأربعاء — 11 صباحاً',price1:400,price4:1500,price8:2800,capacity:6,enrolled:5,color:'#3D8C6A',icon:'fa-fire'},
@@ -658,12 +751,15 @@ async function doLogin() {
 }
 document.getElementById('loginPass').addEventListener('keydown', e => e.key === 'Enter' && doLogin());
 document.getElementById('loginUser').addEventListener('keydown', e => e.key === 'Enter' && doLogin());
-async function logout() {
-  await window.fbSignOut();
-}
+async function logout() { await window.fbSignOut(); }
 
 // ── NAV ──
-const pageTitles = {dashboard:'نظرة عامة',bookings:'الحجوزات',classes:'الكلاسات',retreats:'الريتريتس',students:'المتدربات والرصيد',stats:'الإحصائيات'};
+const pageTitles = {
+  dashboard:'نظرة عامة', bookings:'الحجوزات', classes:'الكلاسات',
+  retreats:'الريتريتس', students:'المتدربات والرصيد', stats:'الإحصائيات',
+  attendance:'سجل الحضور', locations:'مواقع الكلاسات'
+};
+
 function goPage(id, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
@@ -677,6 +773,12 @@ function goPage(id, el) {
   else if (id === 'retreats') renderRetreats();
   else if (id === 'students') renderStudents(buildStudents());
   else if (id === 'stats') renderStats();
+  else if (id === 'attendance') {
+    const today = new Date().toISOString().slice(0,10);
+    document.getElementById('attendDatePicker').value = today;
+    loadAttendance(today);
+  }
+  else if (id === 'locations') renderSavedLocations();
 }
 function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('active')}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('active')}
@@ -701,7 +803,6 @@ function renderDashboard() {
       </div></td>
     </tr>`).join('');
   }
-
   const counts = {power:0,diabetes:0,gentle:0,retreats:0};
   b.forEach(x => { if(counts[x.program]!==undefined) counts[x.program]++; });
   const total = b.length || 1;
@@ -764,28 +865,14 @@ async function changeStatus(key, val) {
     showToast(`تم تحديث حالة ${b?.fname||''}`, 'success', 'fa-check-circle');
   } catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
 }
-
-async function quickStatus(key, val) {
-  await window.fbUpdateStatus(key, val);
-  showToast('تم التأكيد', 'success', 'fa-check-circle');
-}
-
+async function quickStatus(key, val) { await window.fbUpdateStatus(key, val); showToast('تم التأكيد', 'success', 'fa-check-circle'); }
 async function deleteBooking(key) {
   if (!confirm('هل أنت متأكدة من حذف هذا الحجز؟')) return;
   try { await window.fbDeleteBooking(key); showToast('تم حذف الحجز', 'error', 'fa-trash'); }
   catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
 }
-
-function viewBooking(key) {
-  const b = window.bookings.find(x => x._key === key);
-  if (!b) return;
-  openModal('viewBooking', b);
-}
-
-function openPaymentModal(key, name) {
-  openModal('confirmPayment', { _key: key, displayName: name });
-}
-
+function viewBooking(key) { const b = window.bookings.find(x => x._key === key); if (!b) return; openModal('viewBooking', b); }
+function openPaymentModal(key, name) { openModal('confirmPayment', { _key: key, displayName: name }); }
 function waContact(phone, name) {
   const msg = encodeURIComponent(`مرحباً ${name}! أنا إنجي من Align by Enjy. بخصوص حجزكِ...`);
   window.open(`https://wa.me/2${phone}?text=${msg}`, '_blank');
@@ -814,20 +901,11 @@ function renderClasses() {
       </div>
     </div>`).join('');
 }
-
 function editClass(id) { openModal('editClass', classes.find(x => x.id===id)); }
-
 function deleteClass(id) {
-  if (!confirm("هل أنتِ متأكدة من حذف هذا الكلاس؟ سيتم حذفه من القائمة نهائياً.")) {
-    return;
-  }
-  
+  if (!confirm("هل أنتِ متأكدة من حذف هذا الكلاس؟")) return;
   const idx = classes.findIndex(x => x.id === id);
-  if (idx > -1) {
-    classes.splice(idx, 1);
-    renderClasses();
-    showToast('تم حذف الكلاس بنجاح', 'success', 'fa-trash-can');
-  }
+  if (idx > -1) { classes.splice(idx, 1); renderClasses(); showToast('تم حذف الكلاس بنجاح', 'success', 'fa-trash-can'); }
 }
 
 // ── RETREATS ──
@@ -857,24 +935,12 @@ function renderRetreats() {
       </div>
     </div>`).join('');
 }
-
 async function deleteRetreat(key) {
-  if (!confirm("هل أنتِ متأكدة من حذف هذا الريتريت؟ لا يمكن التراجع عن هذه الخطوة.")) {
-    return;
-  }
-
-  try {
-    await window.fbDeleteRetreat(key);
-    showToast('تم حذف الريتريت بنجاح', 'success', 'fa-trash-can');
-  } catch(e) { 
-    showToast('حدث خطأ أثناء الحذف', 'error', 'fa-triangle-exclamation'); 
-  }
+  if (!confirm("هل أنتِ متأكدة من حذف هذا الريتريت؟")) return;
+  try { await window.fbDeleteRetreat(key); showToast('تم حذف الريتريت بنجاح', 'success', 'fa-trash-can'); }
+  catch(e) { showToast('حدث خطأ أثناء الحذف', 'error', 'fa-triangle-exclamation'); }
 }
-
-function editRetreat(key) {
-  const r = window.retreatsData.find(x => x._key === key);
-  if (r) openModal('editRetreat', r);
-}
+function editRetreat(key) { const r = window.retreatsData.find(x => x._key === key); if (r) openModal('editRetreat', r); }
 
 // ── STUDENTS + CREDITS ──
 function buildStudents() {
@@ -892,73 +958,44 @@ function buildStudents() {
 
 function renderStudents(list) {
   const tb = document.getElementById('studentsTable');
-  if (!list || !list.length) { 
-    tb.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:40px">لا توجد بيانات بعد</td></tr>'; 
-    return; 
-  }
-  
+  if (!list || !list.length) { tb.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:40px">لا توجد بيانات بعد</td></tr>'; return; }
   const today = new Date().toISOString().slice(0,10);
-  
   tb.innerHTML = list.map((s, i) => {
     const rawPhone = s.phone.replace(/[^0-9]/g,'');
     const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
-    
     const cr = window.creditsData[key] || {};
     const credits = cr.credits !== undefined ? Number(cr.credits) : '—';
     const expiry = cr.expiry || '—';
     const attended = cr.totalAttended || 0;
-    
     let expiryHTML = `<span style="color:var(--text-faint)">—</span>`;
     let rowWarning = false;
-    
     if (cr.expiry) {
       const diff = (new Date(cr.expiry) - new Date(today)) / (1000*60*60*24);
-      if (diff < 0) {
-        expiryHTML = `<span class="badge red" style="font-size:.7rem">${expiry} (منتهي!)</span>`;
-        rowWarning = true;
-      } else if (diff <= 7) {
-        expiryHTML = `<span class="badge yellow" style="font-size:.7rem">${expiry} (قريباً)</span>`;
-      } else {
-        expiryHTML = `<span class="badge green" style="font-size:.7rem">${expiry}</span>`;
-      }
+      if (diff < 0) { expiryHTML = `<span class="badge red" style="font-size:.7rem">${expiry} (منتهي!)</span>`; rowWarning = true; }
+      else if (diff <= 7) expiryHTML = `<span class="badge yellow" style="font-size:.7rem">${expiry} (قريباً)</span>`;
+      else expiryHTML = `<span class="badge green" style="font-size:.7rem">${expiry}</span>`;
     }
-
     const isNoCredits = typeof credits === 'number' && credits <= 0;
     const creditsColor = (isNoCredits || rowWarning) ? 'var(--red)' : 'var(--green)';
-
     return `<tr>
       <td style="color:var(--text-muted)">${i+1}</td>
       <td><strong style="font-size:.85rem">${s.name}</strong></td>
       <td dir="ltr" style="font-size:.78rem;color:var(--text-muted)">${s.phone}</td>
       <td>${s.classes.map(c => `<span class="badge blue" style="margin-left:3px;font-size:.65rem">${c}</span>`).join('')}</td>
-      <td style="text-align:center">
-        ${typeof credits === 'number'
-          ? `<strong style="color:${creditsColor}; font-size:1.1rem">${credits}</strong>`
-          : `<span style="color:var(--text-faint)">—</span>`}
-      </td>
+      <td style="text-align:center">${typeof credits === 'number' ? `<strong style="color:${creditsColor};font-size:1.1rem">${credits}</strong>` : `<span style="color:var(--text-faint)">—</span>`}</td>
       <td style="text-align:center">${expiryHTML}</td>
       <td style="text-align:center"><strong>${attended}</strong></td>
-      <td>
-        <div class="action-btns">
-          <button class="act-btn credit" onclick="openCreditsModal('${s.phone}','${s.name}')" title="إدارة الرصيد"><i class="fa-solid fa-coins"></i></button>
-          ${(typeof credits === 'number' && credits > 0 && !rowWarning)
-            ? `<button class="act-btn view" onclick="markAttendance('${s.phone}','${s.name.split(' ')[0]}')" title="تسجيل حضور"><i class="fa-solid fa-user-check"></i></button>`
-            : ''}
-          <button class="act-btn wa" onclick="waContact('${s.phone}','${s.name.split(' ')[0]}')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-        </div>
-      </td>
+      <td><div class="action-btns">
+        <button class="act-btn credit" onclick="openCreditsModal('${s.phone}','${s.name}')" title="إدارة الرصيد"><i class="fa-solid fa-coins"></i></button>
+        ${(typeof credits === 'number' && credits > 0 && !rowWarning) ? `<button class="act-btn view" onclick="markAttendance('${s.phone}','${s.name.split(' ')[0]}')" title="تسجيل حضور"><i class="fa-solid fa-user-check"></i></button>` : ''}
+        <button class="act-btn wa" onclick="waContact('${s.phone}','${s.name.split(' ')[0]}')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
+        <button class="act-btn view" onclick="window.open('attendance.html?phone=${key}','_blank')" title="صفحة رصيد المتدربة" style=""><i class="fa-solid fa-id-card"></i></button>
+      </div></td>
     </tr>`;
   }).join('');
 }
-
-function filterStudents(q) {
-  renderStudents(buildStudents().filter(s => (s.name+s.phone).toLowerCase().includes(q.toLowerCase())));
-}
-
-function openCreditsModal(phone, name) {
-  openModal('manageCredits', { phone, name });
-}
-
+function filterStudents(q) { renderStudents(buildStudents().filter(s => (s.name+s.phone).toLowerCase().includes(q.toLowerCase()))); }
+function openCreditsModal(phone, name) { openModal('manageCredits', { phone, name }); }
 async function markAttendance(phone, firstName) {
   try {
     const ok = await window.fbMarkAttendance(phone);
@@ -988,6 +1025,100 @@ function renderStats() {
     </div>`).join('');
 }
 
+// ── ATTENDANCE (NEW) ──
+function loadAttendance(date) {
+  if (!date) return;
+  document.getElementById('attendDateLabel').textContent = `يوم: ${date}`;
+  const dayData = window.attendanceData[date] || {};
+  const entries = Object.values(dayData);
+  const tb = document.getElementById('attendanceTable');
+  const empty = document.getElementById('attendEmpty');
+
+  const counts = {power:0, diabetes:0, gentle:0};
+  entries.forEach(e => {
+    const cls = (e.className||'').toLowerCase();
+    if (cls.includes('power')) counts.power++;
+    else if (cls.includes('diabetes')) counts.diabetes++;
+    else if (cls.includes('gentle')) counts.gentle++;
+  });
+  document.getElementById('att1').textContent = entries.length;
+  document.getElementById('att2').textContent = counts.power;
+  document.getElementById('att3').textContent = counts.diabetes;
+  document.getElementById('att4').textContent = counts.gentle;
+
+  if (!entries.length) { if(tb) tb.innerHTML=''; if(empty) empty.style.display='block'; return; }
+  if(empty) empty.style.display='none';
+  entries.sort((a,b) => (a.time||'').localeCompare(b.time||''));
+  if(tb) tb.innerHTML = entries.map((e,i) => {
+    const raw = (e.phone||'').replace(/[^0-9]/g,'');
+    const key = raw.length >= 10 ? raw.slice(-10) : raw;
+    const cr = window.creditsData[key];
+    const remaining = cr ? Number(cr.credits) : '—';
+    const credStyle = typeof remaining==='number' ? remaining===0?'color:var(--red)':remaining<=2?'color:var(--yellow)':'color:var(--green)' : 'color:var(--text-muted)';
+    return `<tr>
+      <td style="color:var(--text-muted)">${i+1}</td>
+      <td><strong style="font-size:.85rem">${e.name||'—'}</strong></td>
+      <td dir="ltr" style="font-size:.78rem;color:var(--text-muted)">${e.phone||'—'}</td>
+      <td style="font-size:.8rem">${e.className||'—'}</td>
+      <td style="font-size:.78rem;color:var(--text-muted)">${e.time||'—'}</td>
+      <td style="text-align:center"><strong style="${credStyle}">${remaining}</strong></td>
+      <td><div class="action-btns">
+        <button class="act-btn wa" onclick="waContact('${e.phone}','${(e.name||'').split(' ')[0]}')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
+        <button class="act-btn view" onclick="window.open('attendance.html?phone=${key}','_blank')" title="رصيد المتدربة"><i class="fa-solid fa-coins"></i></button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+function copyCheckinLink(cls) {
+  const url = window.location.origin + window.location.pathname.replace('admin.html','') + `checkin.html?class=${cls}`;
+  navigator.clipboard.writeText(url).then(() => showToast('تم نسخ الرابط ✓','success','fa-copy'));
+}
+function shareCheckinWA(cls, name) {
+  const url = window.location.origin + window.location.pathname.replace('admin.html','') + `checkin.html?class=${cls}`;
+  const msg = encodeURIComponent(`🧘‍♀️ Align by Enjy\nسجّلي حضورك في كلاس ${name} من هنا:\n${url}`);
+  window.open(`https://wa.me/?text=${msg}`, '_blank');
+}
+
+// ── LOCATIONS (NEW) ──
+function renderSavedLocations() {
+  const locs = window.savedLocations || {};
+  ['power','diabetes','gentle'].forEach(cls => {
+    const data = locs[cls];
+    if (data) {
+      const latEl = document.getElementById(`lat-${cls}`);
+      const lngEl = document.getElementById(`lng-${cls}`);
+      const radEl = document.getElementById(`radius-${cls}`);
+      if (latEl) latEl.value = data.lat || '';
+      if (lngEl) lngEl.value = data.lng || '';
+      if (radEl) radEl.value = data.radius || 400;
+      const badge = document.getElementById(`locStatus-${cls}`);
+      if (badge) { badge.textContent = 'محدد ✓'; badge.className = 'badge green'; }
+      const hint = document.getElementById(`locHint-${cls}`);
+      if (hint) hint.innerHTML = `<i class="fa-solid fa-check-circle" style="color:var(--green)"></i> آخر تحديث: ${data.updatedAt||'—'}`;
+    } else {
+      const badge = document.getElementById(`locStatus-${cls}`);
+      if (badge) { badge.textContent = 'لم يُحدَّد بعد'; badge.className = 'badge yellow'; }
+    }
+  });
+}
+
+async function saveLocation(classId) {
+  const lat = parseFloat(document.getElementById(`lat-${classId}`).value);
+  const lng = parseFloat(document.getElementById(`lng-${classId}`).value);
+  const radius = parseInt(document.getElementById(`radius-${classId}`).value) || 400;
+  if (!lat || !lng || isNaN(lat) || isNaN(lng)) { showToast('يرجى إدخال إحداثيات صحيحة', 'error', 'fa-triangle-exclamation'); return; }
+  if (lat < 20 || lat > 35 || lng < 24 || lng > 40) { showToast('الإحداثيات خارج نطاق مصر، تأكدي من الأرقام', 'error', 'fa-triangle-exclamation'); return; }
+  try {
+    await window.fbSaveLocation(classId, lat, lng, radius);
+    const hint = document.getElementById(`locHint-${classId}`);
+    if (hint) hint.innerHTML = `<i class="fa-solid fa-check-circle" style="color:var(--green)"></i> تم الحفظ بنجاح ✓`;
+    const badge = document.getElementById(`locStatus-${classId}`);
+    if (badge) { badge.textContent = 'محدد ✓'; badge.className = 'badge green'; }
+    showToast('تم حفظ موقع الكلاس بنجاح', 'success', 'fa-location-dot');
+  } catch(e) { showToast('حدث خطأ أثناء الحفظ', 'error', 'fa-triangle-exclamation'); }
+}
+
 // ── EXPORT ──
 function exportCSV() {
   const rows = [['#','الاسم','الجوال','الإيميل','الكلاس','المستوى','تاريخ الجلسة','الدفع','الحالة'],
@@ -1009,31 +1140,14 @@ function openModal(type, data) {
       <div class="form-row2"><div class="form-group"><label>الاسم الأول</label><input id="mfname" type="text" placeholder="نورة"></div><div class="form-group"><label>الاسم الأخير</label><input id="mlname" type="text" placeholder="العتيبي"></div></div>
       <div class="form-row2"><div class="form-group"><label>الجوال</label><input id="mphone" type="tel" dir="ltr" placeholder="01XXXXXXXXX"></div><div class="form-group"><label>الإيميل</label><input id="memail" type="email" dir="ltr" placeholder="email@example.com"></div></div>
       <div class="form-row2">
-        <div class="form-group"><label>الكلاس</label><select id="mprogram">
-          <option value="power">Power Yoga</option>
-          <option value="diabetes">Yoga for Diabetes</option>
-          <option value="gentle">Gentle Yoga</option>
-          <option value="retreats">الريتريتس</option>
-        </select></div>
-        <div class="form-group"><label>المستوى</label><select id="mlevel">
-          <option value="beginner">مبتدئة</option>
-          <option value="some">ممارست قليلاً</option>
-          <option value="intermediate">متوسطة</option>
-          <option value="advanced">متقدمة</option>
-        </select></div>
+        <div class="form-group"><label>الكلاس</label><select id="mprogram"><option value="power">Power Yoga</option><option value="diabetes">Yoga for Diabetes</option><option value="gentle">Gentle Yoga</option><option value="retreats">الريتريتس</option></select></div>
+        <div class="form-group"><label>المستوى</label><select id="mlevel"><option value="beginner">مبتدئة</option><option value="some">ممارست قليلاً</option><option value="intermediate">متوسطة</option><option value="advanced">متقدمة</option></select></div>
       </div>
       <div class="form-row2">
         <div class="form-group"><label>تاريخ الجلسة</label><input id="msessiondate" type="date"></div>
-        <div class="form-group"><label>طريقة الدفع</label><select id="mpaymethod">
-          <option value="instapay">InstaPay</option>
-          <option value="cash">كاش</option>
-          <option value="other">أخرى</option>
-        </select></div>
+        <div class="form-group"><label>طريقة الدفع</label><select id="mpaymethod"><option value="instapay">InstaPay</option><option value="cash">كاش</option><option value="other">أخرى</option></select></div>
       </div>
-      <div class="form-group"><label>حالة الدفع</label><select id="mpaystatus">
-        <option value="pending">معلق (لم يدفع بعد)</option>
-        <option value="paid">مدفوع ✓</option>
-      </select></div>
+      <div class="form-group"><label>حالة الدفع</label><select id="mpaystatus"><option value="pending">معلق</option><option value="paid">مدفوع ✓</option></select></div>
       <div class="form-group"><label>ملاحظات</label><textarea id="mnotes" placeholder="أي ملاحظات..."></textarea></div>`;
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveAddBooking()"><i class="fa-solid fa-plus"></i> إضافة</button>`;
   }
@@ -1060,12 +1174,12 @@ function openModal(type, data) {
     body.innerHTML = `
       <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">تأكيد استلام مدفوعات <strong>${data.displayName}</strong> عبر InstaPay</p>
       <div class="form-group"><label>رقم مرجع التحويل (اختياري)</label><input id="payRef" type="text" dir="ltr" placeholder="مثال: 12345678"></div>
-      <div class="instapay-info"><i class="fa-solid fa-circle-info"></i><div>بعد التأكيد سيتغير وضع الدفع إلى "مدفوع" ولن يظهر زر InstaPay مرة أخرى.</div></div>`;
+      <div class="instapay-info"><i class="fa-solid fa-circle-info"></i><div>بعد التأكيد سيتغير وضع الدفع إلى "مدفوع".</div></div>`;
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="confirmPayment('${data._key}')"><i class="fa-solid fa-check"></i> تأكيد الاستلام</button>`;
   }
   else if (type === 'manageCredits' && data) {
-const rawPhone = data.phone.replace(/[^0-9]/g,'');
-const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
+    const rawPhone = data.phone.replace(/[^0-9]/g,'');
+    const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
     const cr = window.creditsData[key] || {};
     const today = new Date().toISOString().slice(0,10);
     title.textContent = `رصيد: ${data.name}`;
@@ -1074,21 +1188,17 @@ const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
         <div class="credits-box">
           <div class="cb-head">
             <div><div class="cb-num">${cr.credits}</div><div class="cb-lbl">كلاسات متبقية</div></div>
-            <div style="text-align:left">
-              <div style="font-size:.78rem;color:var(--text-muted)">إجمالي الحضور</div>
-              <div style="font-size:1.4rem;font-weight:800;color:var(--accent)">${cr.totalAttended||0}</div>
-            </div>
+            <div style="text-align:left"><div style="font-size:.78rem;color:var(--text-muted)">إجمالي الحضور</div><div style="font-size:1.4rem;font-weight:800;color:var(--accent)">${cr.totalAttended||0}</div></div>
           </div>
           <div class="cb-expiry ${cr.expiry && cr.expiry < today ? 'expired' : cr.expiry && (new Date(cr.expiry)-new Date(today))/(1000*60*60*24)<=14 ? 'soon' : ''}">
-            <i class="fa-regular fa-calendar"></i> انتهاء الصلاحية: ${cr.expiry||'—'}
-            ${cr.expiry && cr.expiry < today ? ' (منتهي!)' : ''}
+            <i class="fa-regular fa-calendar"></i> انتهاء الصلاحية: ${cr.expiry||'—'}${cr.expiry && cr.expiry < today ? ' (منتهي!)' : ''}
           </div>
         </div>` : `<p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">لا يوجد رصيد مسجل لهذه المتدربة. أضيفي رصيد جديد:</p>`}
       <div class="form-row2">
-        <div class="form-group"><label>عدد الكلاسات (الرصيد الجديد)</label><input id="crCredits" type="number" placeholder="4" min="1" max="50"></div>
+        <div class="form-group"><label>عدد الكلاسات المضافة</label><input id="crCredits" type="number" placeholder="4" min="1" max="50"></div>
         <div class="form-group"><label>تاريخ انتهاء الصلاحية</label><input id="crExpiry" type="date" value="${cr.expiry||''}"></div>
       </div>
-      <p class="form-hint">* سيتم استبدال الرصيد الحالي بالرصيد الجديد. إذا أردتِ الإضافة، اجمعي الأرقام يدوياً.</p>`;
+      <p class="form-hint">* سيتم إضافة الرصيد الجديد على الرصيد الحالي تلقائياً.</p>`;
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button>
       ${cr.credits > 0 ? `<button class="attend-btn" onclick="markAttendance('${data.phone}','${data.name.split(' ')[0]}');closeModal()"><i class="fa-solid fa-user-check"></i> تسجيل حضور الآن</button>` : ''}
       <button class="btn btn-primary" onclick="saveCredits('${data.phone}')"><i class="fa-solid fa-floppy-disk"></i> حفظ الرصيد</button>`;
@@ -1099,14 +1209,8 @@ const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
       <div class="form-group"><label>اسم الكلاس</label><input id="ecname" type="text" value="${data.name}"></div>
       <div class="form-group"><label>الموقع</label><input id="ecloc" type="text" value="${data.location}"></div>
       <div class="form-group"><label>المواعيد</label><input id="ecsched" type="text" value="${data.schedule}"></div>
-      <div class="form-row2">
-        <div class="form-group"><label>سعر الجلسة</label><input id="ecp1" type="number" value="${data.price1}"></div>
-        <div class="form-group"><label>سعر 4 كلاسات</label><input id="ecp4" type="number" value="${data.price4||''}"></div>
-      </div>
-      <div class="form-row2">
-        <div class="form-group"><label>سعر 8 كلاسات</label><input id="ecp8" type="number" value="${data.price8||''}"></div>
-        <div class="form-group"><label>السعة القصوى</label><input id="eccap" type="number" value="${data.capacity}"></div>
-      </div>`;
+      <div class="form-row2"><div class="form-group"><label>سعر الجلسة</label><input id="ecp1" type="number" value="${data.price1}"></div><div class="form-group"><label>سعر 4 كلاسات</label><input id="ecp4" type="number" value="${data.price4||''}"></div></div>
+      <div class="form-row2"><div class="form-group"><label>سعر 8 كلاسات</label><input id="ecp8" type="number" value="${data.price8||''}"></div><div class="form-group"><label>السعة القصوى</label><input id="eccap" type="number" value="${data.capacity}"></div></div>`;
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveEditClass(${data.id})"><i class="fa-solid fa-floppy-disk"></i> حفظ</button>`;
   }
   else if (type === 'addClass') {
@@ -1115,14 +1219,8 @@ const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
       <div class="form-group"><label>اسم الكلاس</label><input id="ecname" type="text" placeholder="Morning Flow"></div>
       <div class="form-group"><label>الموقع</label><input id="ecloc" type="text"></div>
       <div class="form-group"><label>المواعيد</label><input id="ecsched" type="text"></div>
-      <div class="form-row2">
-        <div class="form-group"><label>سعر الجلسة</label><input id="ecp1" type="number" placeholder="400"></div>
-        <div class="form-group"><label>سعر 4 كلاسات</label><input id="ecp4" type="number"></div>
-      </div>
-      <div class="form-row2">
-        <div class="form-group"><label>سعر 8 كلاسات</label><input id="ecp8" type="number"></div>
-        <div class="form-group"><label>السعة القصوى</label><input id="eccap" type="number" placeholder="6"></div>
-      </div>`;
+      <div class="form-row2"><div class="form-group"><label>سعر الجلسة</label><input id="ecp1" type="number" placeholder="400"></div><div class="form-group"><label>سعر 4 كلاسات</label><input id="ecp4" type="number"></div></div>
+      <div class="form-row2"><div class="form-group"><label>سعر 8 كلاسات</label><input id="ecp8" type="number"></div><div class="form-group"><label>السعة القصوى</label><input id="eccap" type="number" placeholder="6"></div></div>`;
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveNewClass()"><i class="fa-solid fa-plus"></i> إضافة</button>`;
   }
   else if (type === 'addRetreat') {
@@ -1130,16 +1228,10 @@ const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
     body.innerHTML = `
       <div class="form-group"><label>اسم الريتريت</label><input id="rtname" type="text" placeholder="Bali Yoga Retreat 2026"></div>
       <div class="form-group"><label>الموقع</label><input id="rtloc" type="text" placeholder="بالي — إندونيسيا"></div>
-      <div class="form-row2">
-        <div class="form-group"><label>تاريخ البدء</label><input id="rtstart" type="date"></div>
-        <div class="form-group"><label>تاريخ الانتهاء</label><input id="rtend" type="date"></div>
-      </div>
-      <div class="form-row2">
-        <div class="form-group"><label>السعر (جنيه)</label><input id="rtprice" type="number" placeholder="15000"></div>
-        <div class="form-group"><label>عدد الأماكن</label><input id="rtcap" type="number" placeholder="10"></div>
-      </div>
+      <div class="form-row2"><div class="form-group"><label>تاريخ البدء</label><input id="rtstart" type="date"></div><div class="form-group"><label>تاريخ الانتهاء</label><input id="rtend" type="date"></div></div>
+      <div class="form-row2"><div class="form-group"><label>السعر (جنيه)</label><input id="rtprice" type="number" placeholder="15000"></div><div class="form-group"><label>عدد الأماكن</label><input id="rtcap" type="number" placeholder="10"></div></div>
       <div class="form-group"><label>المدة</label><input id="rtdur" type="text" placeholder="7 أيام"></div>
-      <div class="form-group"><label>الوصف</label><textarea id="rtdesc" placeholder="وصف مختصر عن الريتريت..."></textarea></div>`;
+      <div class="form-group"><label>الوصف</label><textarea id="rtdesc" placeholder="وصف مختصر..."></textarea></div>`;
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveNewRetreat()"><i class="fa-solid fa-plus"></i> إضافة</button>`;
   }
   else if (type === 'editRetreat' && data) {
@@ -1148,14 +1240,8 @@ const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
     body.innerHTML = `
       <div class="form-group"><label>اسم الريتريت</label><input id="rtname" type="text" value="${data.name||''}"></div>
       <div class="form-group"><label>الموقع</label><input id="rtloc" type="text" value="${data.location||''}"></div>
-      <div class="form-row2">
-        <div class="form-group"><label>تاريخ البدء</label><input id="rtstart" type="date" value="${startDate||''}"></div>
-        <div class="form-group"><label>تاريخ الانتهاء</label><input id="rtend" type="date" value="${endDate||''}"></div>
-      </div>
-      <div class="form-row2">
-        <div class="form-group"><label>السعر (جنيه)</label><input id="rtprice" type="number" value="${data.price||''}"></div>
-        <div class="form-group"><label>عدد الأماكن</label><input id="rtcap" type="number" value="${data.capacity||''}"></div>
-      </div>
+      <div class="form-row2"><div class="form-group"><label>تاريخ البدء</label><input id="rtstart" type="date" value="${startDate||''}"></div><div class="form-group"><label>تاريخ الانتهاء</label><input id="rtend" type="date" value="${endDate||''}"></div></div>
+      <div class="form-row2"><div class="form-group"><label>السعر (جنيه)</label><input id="rtprice" type="number" value="${data.price||''}"></div><div class="form-group"><label>عدد الأماكن</label><input id="rtcap" type="number" value="${data.capacity||''}"></div></div>
       <div class="form-group"><label>المدة</label><input id="rtdur" type="text" value="${data.duration||''}"></div>
       <div class="form-group"><label>الوصف</label><textarea id="rtdesc">${data.description||''}</textarea></div>`;
     foot.innerHTML = `<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button><button class="btn btn-primary" onclick="saveEditRetreat('${data._key}')"><i class="fa-solid fa-floppy-disk"></i> حفظ</button>`;
@@ -1172,62 +1258,31 @@ async function saveAddBooking() {
   const ph=document.getElementById('mphone').value.trim();
   if(!fn||!ph){showToast('يرجى ملء الاسم والجوال','error','fa-triangle-exclamation');return;}
   try {
-    await window.fbAddBooking({
-      fname:fn,
-      lname:document.getElementById('mlname').value.trim(),
-      phone:ph,
-      email:document.getElementById('memail').value.trim(),
-      program:document.getElementById('mprogram').value,
-      level:document.getElementById('mlevel').value,
-      notes:document.getElementById('mnotes').value.trim(),
-      sessionDate:document.getElementById('msessiondate').value||new Date().toISOString().slice(0,10),
-      date:new Date().toISOString().slice(0,10),
-      paymentMethod:document.getElementById('mpaymethod').value,
-      paymentStatus:document.getElementById('mpaystatus').value,
-      status:'new'
-    });
-    closeModal();
-    showToast(`تم إضافة حجز ${fn} بنجاح`,'success','fa-check-circle');
+    await window.fbAddBooking({fname:fn,lname:document.getElementById('mlname').value.trim(),phone:ph,email:document.getElementById('memail').value.trim(),program:document.getElementById('mprogram').value,level:document.getElementById('mlevel').value,notes:document.getElementById('mnotes').value.trim(),sessionDate:document.getElementById('msessiondate').value||new Date().toISOString().slice(0,10),date:new Date().toISOString().slice(0,10),paymentMethod:document.getElementById('mpaymethod').value,paymentStatus:document.getElementById('mpaystatus').value,status:'new'});
+    closeModal(); showToast(`تم إضافة حجز ${fn} بنجاح`,'success','fa-check-circle');
   } catch(e) { showToast('حدث خطأ','error','fa-triangle-exclamation'); }
 }
 
 async function confirmPayment(key) {
   const ref = document.getElementById('payRef')?.value?.trim() || '';
-  try {
-    await window.fbUpdatePayment(key, 'paid', ref);
-    closeModal();
-    showToast('تم تأكيد استلام الدفع ✓', 'success', 'fa-check-circle');
-  } catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
+  try { await window.fbUpdatePayment(key, 'paid', ref); closeModal(); showToast('تم تأكيد استلام الدفع ✓', 'success', 'fa-check-circle'); }
+  catch(e) { showToast('حدث خطأ', 'error', 'fa-triangle-exclamation'); }
 }
 
 async function saveCredits(phone) {
   const newCreditsInput = document.getElementById('crCredits').value;
   const expiry = document.getElementById('crExpiry').value;
-  
-  if (!newCreditsInput) { 
-    showToast('يرجى إدخال عدد الكلاسات', 'error', 'fa-triangle-exclamation'); 
-    return; 
-  }
-  if (!expiry) { 
-    showToast('يرجى إدخال تاريخ انتهاء الصلاحية', 'error', 'fa-triangle-exclamation'); 
-    return; 
-  }
-
-  const key = phone.replace(/[^0-9]/g,'');
+  if (!newCreditsInput) { showToast('يرجى إدخال عدد الكلاسات', 'error', 'fa-triangle-exclamation'); return; }
+  if (!expiry) { showToast('يرجى إدخال تاريخ انتهاء الصلاحية', 'error', 'fa-triangle-exclamation'); return; }
+  const rawPhone = phone.replace(/[^0-9]/g,'');
+  const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
   const existing = window.creditsData[key] || { credits: 0 };
   const currentCredits = Number(existing.credits) || 0;
-  
-  // هنا نقوم بجمع الرصيد الجديد مع القديم
   const totalCredits = currentCredits + Number(newCreditsInput);
-
   try {
     await window.fbSetCredits(phone, totalCredits, expiry);
-    closeModal();
-    showToast(`تمت إضافة ${newCreditsInput} حصص بنجاح. الرصيد الإجمالي: ${totalCredits} ✓`, 'success', 'fa-coins');
-  } catch(e) { 
-    console.error(e);
-    showToast('حدث خطأ أثناء حفظ الرصيد', 'error', 'fa-triangle-exclamation'); 
-  }
+    closeModal(); showToast(`تمت إضافة ${newCreditsInput} حصص. الرصيد الإجمالي: ${totalCredits} ✓`, 'success', 'fa-coins');
+  } catch(e) { showToast('حدث خطأ أثناء حفظ الرصيد', 'error', 'fa-triangle-exclamation'); }
 }
 
 function saveEditClass(id) {
@@ -1255,17 +1310,8 @@ async function saveNewRetreat() {
   const start = document.getElementById('rtstart').value;
   const end = document.getElementById('rtend').value;
   try {
-    await window.fbAddRetreat({
-      name,
-      location: document.getElementById('rtloc').value,
-      dateRange: start && end ? `${start} — ${end}` : start||end||'يتم تحديده قريباً',
-      price: +document.getElementById('rtprice').value || 0,
-      capacity: +document.getElementById('rtcap').value || 10,
-      duration: document.getElementById('rtdur').value,
-      description: document.getElementById('rtdesc').value
-    });
-    closeModal();
-    showToast('تم إضافة الريتريت بنجاح','success','fa-mountain-sun');
+    await window.fbAddRetreat({name,location:document.getElementById('rtloc').value,dateRange:start&&end?`${start} — ${end}`:start||end||'يتم تحديده قريباً',price:+document.getElementById('rtprice').value||0,capacity:+document.getElementById('rtcap').value||10,duration:document.getElementById('rtdur').value,description:document.getElementById('rtdesc').value});
+    closeModal(); showToast('تم إضافة الريتريت بنجاح','success','fa-mountain-sun');
   } catch(e) { showToast('حدث خطأ','error','fa-triangle-exclamation'); }
 }
 
@@ -1275,17 +1321,8 @@ async function saveEditRetreat(key) {
   const start = document.getElementById('rtstart').value;
   const end = document.getElementById('rtend').value;
   try {
-    await window.fbUpdateRetreat(key, {
-      name,
-      location: document.getElementById('rtloc').value,
-      dateRange: start && end ? `${start} — ${end}` : start||end||'يتم تحديده قريباً',
-      price: +document.getElementById('rtprice').value || 0,
-      capacity: +document.getElementById('rtcap').value || 10,
-      duration: document.getElementById('rtdur').value,
-      description: document.getElementById('rtdesc').value
-    });
-    closeModal();
-    showToast('تم تحديث الريتريت','success','fa-check-circle');
+    await window.fbUpdateRetreat(key,{name,location:document.getElementById('rtloc').value,dateRange:start&&end?`${start} — ${end}`:start||end||'يتم تحديده قريباً',price:+document.getElementById('rtprice').value||0,capacity:+document.getElementById('rtcap').value||10,duration:document.getElementById('rtdur').value,description:document.getElementById('rtdesc').value});
+    closeModal(); showToast('تم تحديث الريتريت','success','fa-check-circle');
   } catch(e) { showToast('حدث خطأ','error','fa-triangle-exclamation'); }
 }
 
