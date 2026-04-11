@@ -547,7 +547,12 @@
         showToast('يرجى إدخال بريد إلكتروني صحيح', 'fa-triangle-exclamation', true);
         return;
       }
-
+      
+      if (sessionDate && sessionDate < new Date().toISOString().slice(0,10)) {
+      showToast('يرجى اختيار تاريخ مستقبلي', 'fa-triangle-exclamation', true);
+      return;
+      } 
+      
       const btn = document.getElementById('submitBtn');
       btn.disabled = true;
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال...';
