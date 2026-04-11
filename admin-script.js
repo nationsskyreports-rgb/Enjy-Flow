@@ -608,9 +608,12 @@ async function loadAttendance(dateVal) {
   const date = new Date(dateVal);
   document.getElementById('attendDateLabel').textContent =
     date.toLocaleDateString('ar-EG', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-
-const allData = window.attendanceData || {}; if (!Object.keys(allData).length) {   // Firebase لسه مجاش — استنى   setTimeout(() => loadAttendance(dateVal), 800);   return; }
-  const dayData = allData[dateVal] || {};
+   const allData = window.attendanceData || {};
+if (!Object.keys(allData).length) {
+  setTimeout(() => loadAttendance(dateVal), 800);
+  return;
+}
+   const dayData = allData[dateVal] || {};
   const rows    = Object.values(dayData);
 
   // stats
