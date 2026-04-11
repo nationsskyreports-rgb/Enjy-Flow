@@ -635,6 +635,10 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
   // ── Attendance (NEW) ──
   onValue(ref(db, 'attendance'), (snapshot) => {
     window.attendanceData = snapshot.val() || {};
+if (document.querySelector('#page-attendance.active')) {
+    const dp = document.getElementById('attendDatePicker');
+    if (dp?.value) loadAttendance(dp.value);
+  }
     const today = new Date().toISOString().slice(0, 10);
     const todayData = window.attendanceData[today] || {};
     const count = Object.keys(todayData).length;
