@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-
-<html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="ar" dir="rtl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Align by Enjy — لوحة الإدارة</title>
 <link rel="manifest" href="manifest-admin.json">
@@ -49,7 +49,6 @@ input,select,textarea{font-family:inherit}
 .login-err{color:var(--red);font-size:.82rem;margin-top:10px;text-align:center;min-height:20px}
 
 .layout{display:flex;min-height:100vh}
-
 .sidebar{width:var(--sidebar-w);background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;z-index:200;transition:transform .35s cubic-bezier(.4,0,.2,1);transform:translateX(100%)}
 .sidebar.open{transform:translateX(0)}
 .sidebar-head{padding:24px 20px 18px;border-bottom:1px solid var(--border)}
@@ -196,9 +195,6 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 .credits-box .cb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .credits-box .cb-num{font-size:1.8rem;font-weight:800;color:var(--primary-light);line-height:1}
 .credits-box .cb-lbl{font-size:.72rem;color:var(--text-muted);margin-top:2px}
-.credits-box .cb-expiry{font-size:.72rem;color:var(--text-faint)}
-.credits-box .cb-expiry.expired{color:var(--red)}
-.credits-box .cb-expiry.soon{color:var(--yellow)}
 .attend-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--radius-sm);font-size:.78rem;font-weight:700;background:rgba(76,175,125,.15);color:var(--green);border:1px solid rgba(76,175,125,.3);cursor:pointer;transition:all .2s}
 .attend-btn:hover{background:rgba(76,175,125,.25)}
 
@@ -208,7 +204,6 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 .instapay-info{background:rgba(91,143,249,.08);border:1px solid rgba(91,143,249,.2);border-radius:var(--radius-sm);padding:12px 14px;font-size:.82rem;color:var(--text-muted);margin-top:8px;display:flex;align-items:flex-start;gap:10px}
 .instapay-info i{color:var(--blue);margin-top:2px;flex-shrink:0}
 
-/* ── CHECKIN LINKS BOX ── */
 .checkin-links-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:16px}
 .checkin-links-box h4{font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:700;color:var(--text-muted);margin-bottom:10px}
 .checkin-link-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
@@ -259,7 +254,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
       </div>
       <div class="nav-section">
         <div class="nav-section-label">إدارة</div>
-        <div class="nav-item" onclick="goPage('bookings',this)"><i class="fa-solid fa-calendar-check"></i> الحجوزات<span class="nav-badge" id="newBadge">3</span></div>
+        <div class="nav-item" onclick="goPage('bookings',this)"><i class="fa-solid fa-calendar-check"></i> الحجوزات<span class="nav-badge" id="newBadge">0</span></div>
         <div class="nav-item" onclick="goPage('classes',this)"><i class="fa-solid fa-dumbbell"></i> الكلاسات والأسعار</div>
         <div class="nav-item" onclick="goPage('retreats',this)"><i class="fa-solid fa-mountain-sun"></i> الريتريتس</div>
         <div class="nav-item" onclick="goPage('students',this)"><i class="fa-solid fa-users"></i> المتدربات والرصيد</div>
@@ -297,15 +292,15 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
         <div class="stats-row">
           <div class="stat-card">
             <div class="stat-icon" style="background:rgba(61,140,106,.15);color:var(--green)"><i class="fa-solid fa-users"></i></div>
-            <h3 id="sc1">3</h3><p>متدربة فريدة</p>
+            <h3 id="sc1">—</h3><p>متدربة فريدة</p>
           </div>
           <div class="stat-card">
             <div class="stat-icon" style="background:rgba(200,149,108,.15);color:var(--accent)"><i class="fa-solid fa-calendar-check"></i></div>
-            <h3 id="sc2">3</h3><p>إجمالي الحجوزات</p>
+            <h3 id="sc2">—</h3><p>إجمالي الحجوزات</p>
           </div>
           <div class="stat-card">
             <div class="stat-icon" style="background:rgba(91,143,249,.15);color:var(--blue)"><i class="fa-solid fa-clock-rotate-left"></i></div>
-            <h3 id="sc3">3</h3><p>حجوزات جديدة</p>
+            <h3 id="sc3">—</h3><p>حجوزات جديدة</p>
           </div>
           <div class="stat-card">
             <div class="stat-icon" style="background:rgba(240,180,41,.12);color:var(--yellow)"><i class="fa-solid fa-star"></i></div>
@@ -321,7 +316,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
             </div>
             <div class="table-wrap">
               <table><thead><tr><th>الاسم</th><th>الكلاس</th><th>تاريخ الجلسة</th><th>الدفع</th><th>الحالة</th><th></th></tr></thead>
-              <tbody id="dashBookings"></tbody></table>
+              <tbody id="dashBookings"><tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text-muted)"><div class="spinner"></div></td></tr></tbody></table>
             </div>
           </div>
           <div>
@@ -402,7 +397,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
         </div>
       </div>
 
-      <!-- ══ ATTENDANCE ══ -->
+      <!-- ATTENDANCE -->
       <div class="page" id="page-attendance">
         <div class="section-head" style="flex-wrap:wrap;gap:12px">
           <div>
@@ -415,7 +410,6 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
           </div>
         </div>
 
-        <!-- Check-in links -->
         <div class="checkin-links-box">
           <h4><i class="fa-solid fa-link" style="color:var(--accent);margin-left:6px"></i>روابط Check-in — أرسليها للمتدربات</h4>
           <div class="checkin-link-row">
@@ -444,24 +438,11 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
           </div>
         </div>
 
-        <!-- Summary stats -->
         <div class="stats-row" style="margin-bottom:20px">
-          <div class="stat-card">
-            <div class="stat-icon" style="background:rgba(76,175,125,.15);color:var(--green)"><i class="fa-solid fa-user-check"></i></div>
-            <h3 id="att1">0</h3><p>حضروا</p>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:rgba(61,140,106,.15);color:var(--primary-light)"><i class="fa-solid fa-fire"></i></div>
-            <h3 id="att2">0</h3><p>Power Yoga</p>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:rgba(200,149,108,.15);color:var(--accent)"><i class="fa-solid fa-heart-pulse"></i></div>
-            <h3 id="att3">0</h3><p>Yoga for Diabetes</p>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background:rgba(91,143,249,.15);color:var(--blue)"><i class="fa-solid fa-leaf"></i></div>
-            <h3 id="att4">0</h3><p>Gentle Yoga</p>
-          </div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(76,175,125,.15);color:var(--green)"><i class="fa-solid fa-user-check"></i></div><h3 id="att1">0</h3><p>حضروا</p></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(61,140,106,.15);color:var(--primary-light)"><i class="fa-solid fa-fire"></i></div><h3 id="att2">0</h3><p>Power Yoga</p></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(200,149,108,.15);color:var(--accent)"><i class="fa-solid fa-heart-pulse"></i></div><h3 id="att3">0</h3><p>Yoga for Diabetes</p></div>
+          <div class="stat-card"><div class="stat-icon" style="background:rgba(91,143,249,.15);color:var(--blue)"><i class="fa-solid fa-leaf"></i></div><h3 id="att4">0</h3><p>Gentle Yoga</p></div>
         </div>
 
         <div class="table-wrap">
@@ -475,29 +456,25 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
         </div>
       </div>
 
-      <!-- ══ LOCATIONS ══ -->
+      <!-- LOCATIONS -->
       <div class="page" id="page-locations">
         <div class="section-head">
-          <div><h2>مواقع الكلاسات</h2><p style="font-size:.78rem;color:var(--text-muted)">تحديد النطاق الجغرافي لكل كلاس — يُستخدم في تسجيل الحضور</p></div>
+          <div><h2>مواقع الكلاسات</h2><p style="font-size:.78rem;color:var(--text-muted)">تحديد النطاق الجغرافي لكل كلاس</p></div>
         </div>
-
         <div class="instapay-info" style="margin-bottom:20px">
           <i class="fa-solid fa-circle-info"></i>
           <div>
             <strong style="color:var(--text);display:block;margin-bottom:4px">كيف تحصلي على الإحداثيات من Google Maps؟</strong>
-            افتحي Google Maps ← اذهبي للموقع ← اضغطي كليك يمين على المكان بالظبط ← ستظهر الأرقام في الأعلى ← اضغطي عليها لنسخها.
+            افتحي Google Maps ← اذهبي للموقع ← اضغطي كليك يمين ← انسخي الأرقام.
             مثال: <span dir="ltr" style="font-family:monospace;color:var(--blue)">29.9719, 30.9424</span>
           </div>
         </div>
-
         <div style="display:flex;flex-direction:column;gap:16px">
-
-          <!-- Power Yoga -->
           <div class="chart-card">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
               <div style="width:36px;height:36px;background:rgba(76,175,125,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--green)"><i class="fa-solid fa-fire"></i></div>
               <div><div style="font-weight:700">Power Yoga</div><div style="font-size:.72rem;color:var(--text-muted)">Royal Hills Clubhouse</div></div>
-              <span class="badge green" id="locStatus-power" style="margin-right:auto">لم يُحدَّد بعد</span>
+              <span class="badge yellow" id="locStatus-power" style="margin-right:auto">لم يُحدَّد بعد</span>
             </div>
             <div class="form-row2">
               <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-power" step="0.0001" placeholder="29.9719" dir="ltr"></div>
@@ -507,13 +484,11 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
             <button class="btn btn-primary" onclick="saveLocation('power')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Power Yoga</button>
             <div id="locHint-power" class="form-hint" style="margin-top:8px"></div>
           </div>
-
-          <!-- Yoga for Diabetes -->
           <div class="chart-card">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
               <div style="width:36px;height:36px;background:rgba(200,149,108,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--accent)"><i class="fa-solid fa-heart-pulse"></i></div>
               <div><div style="font-weight:700">Yoga for Diabetes</div><div style="font-size:.72rem;color:var(--text-muted)">Royal Hills</div></div>
-              <span class="badge green" id="locStatus-diabetes" style="margin-right:auto">لم يُحدَّد بعد</span>
+              <span class="badge yellow" id="locStatus-diabetes" style="margin-right:auto">لم يُحدَّد بعد</span>
             </div>
             <div class="form-row2">
               <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-diabetes" step="0.0001" placeholder="29.9719" dir="ltr"></div>
@@ -523,13 +498,11 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
             <button class="btn btn-primary" onclick="saveLocation('diabetes')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Yoga for Diabetes</button>
             <div id="locHint-diabetes" class="form-hint" style="margin-top:8px"></div>
           </div>
-
-          <!-- Gentle Yoga -->
           <div class="chart-card">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
               <div style="width:36px;height:36px;background:rgba(91,143,249,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--blue)"><i class="fa-solid fa-leaf"></i></div>
               <div><div style="font-weight:700">Gentle Yoga</div><div style="font-size:.72rem;color:var(--text-muted)">Pyramids Heights</div></div>
-              <span class="badge green" id="locStatus-gentle" style="margin-right:auto">لم يُحدَّد بعد</span>
+              <span class="badge yellow" id="locStatus-gentle" style="margin-right:auto">لم يُحدَّد بعد</span>
             </div>
             <div class="form-row2">
               <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-gentle" step="0.0001" placeholder="29.8636" dir="ltr"></div>
@@ -539,7 +512,6 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
             <button class="btn btn-primary" onclick="saveLocation('gentle')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Gentle Yoga</button>
             <div id="locHint-gentle" class="form-hint" style="margin-top:8px"></div>
           </div>
-
         </div>
       </div>
 
@@ -557,9 +529,9 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
         </div>
       </div>
 
-    </div><!-- /content -->
-  </div><!-- /main -->
-</div><!-- /layout -->
+    </div>
+  </div>
+</div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
@@ -571,6 +543,9 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 </div>
 
 <div class="toast-container" id="toastContainer"></div>
+
+<!-- admin-script أولاً قبل Firebase -->
+<script src="admin-script.js"></script>
 
 <!-- Firebase SDK -->
 <script type="module">
@@ -588,76 +563,85 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     appId: "1:355777857468:web:20b15a19f526db02578db9"
   };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+  const app  = initializeApp(firebaseConfig);
+  const db   = getDatabase(app);
   const auth = getAuth(app);
+
+  function safeCall(fnName, ...args) {
+    if (typeof window[fnName] === 'function') {
+      window[fnName](...args);
+    } else {
+      const interval = setInterval(() => {
+        if (typeof window[fnName] === 'function') {
+          clearInterval(interval);
+          window[fnName](...args);
+        }
+      }, 50);
+      setTimeout(() => clearInterval(interval), 5000);
+    }
+  }
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       document.getElementById('loginScreen').classList.add('hidden');
       document.getElementById('appLayout').style.display = 'flex';
-      renderClasses();
+      safeCall('renderClasses');
     } else {
       document.getElementById('loginScreen').classList.remove('hidden');
       document.getElementById('appLayout').style.display = 'none';
     }
   });
 
-  window.fbSignIn = async (email, password) => { await signInWithEmailAndPassword(auth, email, password); };
+  window.fbSignIn  = async (email, password) => { await signInWithEmailAndPassword(auth, email, password); };
   window.fbSignOut = async () => { await signOut(auth); };
 
-  // ── Bookings ──
-  window._fbRef = ref(db, 'bookings');
-  onValue(window._fbRef, (snapshot) => {
+  // Bookings
+  onValue(ref(db, 'bookings'), (snapshot) => {
     const data = snapshot.val();
     window.bookings = [];
     if (data) {
       Object.entries(data).forEach(([key, val]) => { window.bookings.push({ ...val, _key: key }); });
       window.bookings.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
     }
-    window.onBookingsLoaded();
+    safeCall('onBookingsLoaded');
   });
 
-  // ── Credits ──
+  // Credits
   onValue(ref(db, 'credits'), (snapshot) => {
     window.creditsData = snapshot.val() || {};
-    window.onCreditsLoaded && window.onCreditsLoaded();
+    safeCall('onCreditsLoaded');
   });
 
-  // ── Retreats ──
+  // Retreats
   onValue(ref(db, 'retreats'), (snapshot) => {
     window.retreatsData = [];
     const data = snapshot.val();
     if (data) { Object.entries(data).forEach(([key, val]) => { window.retreatsData.push({ ...val, _key: key }); }); }
-    if (document.querySelector('#page-retreats.active')) renderRetreats();
+    if (document.querySelector('#page-retreats.active')) safeCall('renderRetreats');
   });
 
-  // ── Attendance (NEW) ──
+  // Attendance
   onValue(ref(db, 'attendance'), (snapshot) => {
     window.attendanceData = snapshot.val() || {};
-if (document.querySelector('#page-attendance.active')) {
-    const dp = document.getElementById('attendDatePicker');
-    if (dp?.value) loadAttendance(dp.value);
-  }
-    const today = new Date().toISOString().slice(0, 10);
+    const today   = new Date().toISOString().slice(0, 10);
     const todayData = window.attendanceData[today] || {};
-    const count = Object.keys(todayData).length;
-    const badge = document.getElementById('todayBadge');
+    const count   = Object.keys(todayData).length;
+    const badge   = document.getElementById('todayBadge');
     if (badge) badge.textContent = count;
     if (document.querySelector('#page-attendance.active')) {
       const dp = document.getElementById('attendDatePicker');
-      loadAttendance(dp?.value || today);
+      safeCall('loadAttendance', dp?.value || today);
     }
   });
 
-  // ── Class Locations (NEW) ──
+  // Locations
   onValue(ref(db, 'classLocations'), (snapshot) => {
     window.savedLocations = snapshot.val() || {};
-    if (document.querySelector('#page-locations.active')) renderSavedLocations();
+    if (document.querySelector('#page-locations.active')) safeCall('renderSavedLocations');
   });
 
-  window.fbAddBooking = async (data) => { await push(ref(db, 'bookings'), { ...data, createdAt: serverTimestamp() }); };
-  window.fbUpdateStatus = async (key, status) => { await update(ref(db, `bookings/${key}`), { status }); };
+  window.fbAddBooking    = async (data) => { await push(ref(db, 'bookings'), { ...data, createdAt: serverTimestamp() }); };
+  window.fbUpdateStatus  = async (key, status) => { await update(ref(db, `bookings/${key}`), { status }); };
   window.fbUpdatePayment = async (key, paymentStatus, paymentRef) => { await update(ref(db, `bookings/${key}`), { paymentStatus, paymentRef: paymentRef || '' }); };
   window.fbDeleteBooking = async (key) => { await remove(ref(db, `bookings/${key}`)); };
 
@@ -666,26 +650,17 @@ if (document.querySelector('#page-attendance.active')) {
     const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
     await update(ref(db, `credits/${key}`), { credits: Number(credits), expiry, lastUpdate: new Date().toISOString(), phone });
   };
-  window.fbMarkAttendance = async (phone) => {
-    const rawPhone = phone.replace(/[^0-9]/g,'');
-    const key = rawPhone.length >= 10 ? rawPhone.slice(-10) : rawPhone;
-    const existing = window.creditsData[key] || { credits: 0, totalAttended: 0 };
-    if ((existing.credits || 0) <= 0) return false;
-    await update(ref(db, `credits/${key}`), { credits: (existing.credits || 0) - 1, totalAttended: (existing.totalAttended || 0) + 1 });
-    return true;
-  };
-  window.fbAddRetreat = async (data) => { await push(ref(db, 'retreats'), { ...data, createdAt: serverTimestamp() }); };
+
+  window.fbAddRetreat    = async (data) => { await push(ref(db, 'retreats'), { ...data, createdAt: serverTimestamp() }); };
   window.fbUpdateRetreat = async (key, data) => { await update(ref(db, `retreats/${key}`), data); };
   window.fbDeleteRetreat = async (key) => { await remove(ref(db, `retreats/${key}`)); };
-
-  // ── Save class location (NEW) ──
-  window.fbSaveLocation = async (classId, lat, lng, radius) => {
+  window.fbSaveLocation  = async (classId, lat, lng, radius) => {
     await update(ref(db, `classLocations/${classId}`), { lat, lng, radius, updatedAt: new Date().toISOString().slice(0,10) });
   };
 
   document.getElementById('syncBtn').addEventListener('click', () => {
-    showToast('البيانات محدّثة في الوقت الفعلي ✓', 'success', 'fa-check-circle');
+    safeCall('showToast', 'البيانات محدّثة في الوقت الفعلي ✓', 'success', 'fa-check-circle');
   });
 </script>
-<script src="admin-script.js"></script>
-</body></html>
+</body>
+</html>
