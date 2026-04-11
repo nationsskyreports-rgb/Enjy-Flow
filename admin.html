@@ -686,7 +686,6 @@ if (document.querySelector('#page-attendance.active')) {
   document.getElementById('syncBtn').addEventListener('click', () => {
     showToast('البيانات محدّثة في الوقت الفعلي ✓', 'success', 'fa-check-circle');
   });
-  window.addEventListener('beforeunload', (e) => { e.preventDefault(); e.returnValue = ''; });
 </script>
 <script src="admin-script.js"></script>
 </body></html>
