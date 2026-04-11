@@ -541,8 +541,18 @@ async function doCheckin(){
     btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن'; return;
   }
 
-  const loc=window.classLocs[selectedCls];
-  if(loc){ const d=dist(coords.lat,coords.lng,loc.lat,loc.lng); if(d>loc.radius){ showCiRes('fail','مش في موقع الكلاس',`أنتِ على بُعد ${Math.round(d)} متر. تأكدي أنك في المكان الصح وحاولي مرة أخرى.`); btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن'; return; } }
+  const loc = window.classLocs?.[selectedCls];
+if (!loc) {
+  // لو Firebase لسه مجاش — اعمل checkin من غير location check
+  console.warn('Location not loaded yet, skipping check');
+} else {
+  const d = dist(coords.lat, coords.lng, loc.lat, loc.lng);
+  if (d > loc.radius) {
+    showCiRes('fail','مش في موقع الكلاس',`أنتِ على بُعد ${Math.round(d)} متر.`);
+    btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
+    return;
+  }
+}
 
   try{
     const{data:cr,key}=await window.fb.getCredits(phone);
