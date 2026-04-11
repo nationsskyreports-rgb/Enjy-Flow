@@ -136,7 +136,10 @@ window.onBookingsLoaded = function() {
 
 window.onCreditsLoaded = function() {
   creditsData = window.creditsData || {};
-  if (document.querySelector('#page-students.active')) renderStudents();
+  const activePage = document.querySelector('.page.active');
+  if (!activePage) return;
+  if (activePage.id === 'page-students')  renderStudents();
+  if (activePage.id === 'page-dashboard') renderDashboard();
 };
 
 function updateNewBadge() {
@@ -606,7 +609,7 @@ async function loadAttendance(dateVal) {
   document.getElementById('attendDateLabel').textContent =
     date.toLocaleDateString('ar-EG', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
 
-  const allData = window.attendanceData || {};
+const allData = window.attendanceData || {}; if (!Object.keys(allData).length) {   // Firebase لسه مجاش — استنى   setTimeout(() => loadAttendance(dateVal), 800);   return; }
   const dayData = allData[dateVal] || {};
   const rows    = Object.values(dayData);
 
