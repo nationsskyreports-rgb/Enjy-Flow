@@ -217,7 +217,7 @@ function renderBookingsTable(list) {
          <button class="act-btn view"  onclick="openModal('viewBooking', bookings[${i}])" title="عرض"><i class="fa-solid fa-eye"></i></button>
          <button class="act-btn edit"  onclick="openModal('editBooking', bookings[${i}])" title="تعديل"><i class="fa-solid fa-pen"></i></button>
          <button class="act-btn wa"    onclick="window.open('https://wa.me/2${(b.phone||'').replace(/^0/,'')}','_blank')" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
-         <button class="act-btn del"   onclick="deleteBooking('${b._key.replace(/'/g, &quot;\\\'&quot;)}')" title="حذف"><i class="fa-solid fa-trash"></i></button>
+         <button class="act-btn del" onclick="deleteBooking('${b._key}')" title="حذف"><i class="fa-solid fa-trash"></i></button>
         </div>
       </td>
     </tr>`).join('');
