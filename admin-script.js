@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════════════ */
 
 /* ─── GLOBAL STATE ─── */
-let bookings     = window.bookings     || [];
+let bookings = [];
 let creditsData  = window.creditsData  || {};
 let retreatsData = window.retreatsData || [];
 
@@ -126,10 +126,12 @@ function closeModalOutside(e) {
 window.onBookingsLoaded = function() {
   bookings = window.bookings || [];
   updateNewBadge();
-  renderDashboard();
-  if (document.querySelector('#page-bookings.active')) renderBookingsTable(bookings);
-  if (document.querySelector('#page-students.active')) renderStudents();
-  if (document.querySelector('#page-stats.active'))    renderStats();
+  const activePage = document.querySelector('.page.active');
+  if (!activePage) return;
+  if (activePage.id === 'page-dashboard') renderDashboard();
+  if (activePage.id === 'page-bookings')  renderBookingsTable(bookings);
+  if (activePage.id === 'page-students')  renderStudents();
+  if (activePage.id === 'page-stats')     renderStats();
 };
 
 window.onCreditsLoaded = function() {
