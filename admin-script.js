@@ -147,6 +147,10 @@ window.onCreditsLoaded = function() {
 
 window.onClassesLoaded = function() {
   classesData = window.classesData || {};
+  // لو مفيش كلاسات خالص — seed الافتراضيين
+  if (Object.keys(classesData).length === 0 && typeof window.fbSeedDefaultClasses === 'function') {
+    window.fbSeedDefaultClasses();
+  }
   const activePage = document.querySelector('.page.active');
   if (!activePage) return;
   if (activePage.id === 'page-classes')   renderClasses();
