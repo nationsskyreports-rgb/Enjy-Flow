@@ -59,7 +59,7 @@ async function doLogin() {
 
 /* ─── LOGOUT ─── */
 function logout() {
-  if (confirm('هل تريدين تسجيل الخروج؟')) {
+  if (confirm('Are you sure you want to log out?')) {
     window.fbSignOut();
   }
 }
@@ -147,7 +147,7 @@ window.onCreditsLoaded = function() {
 
 window.onClassesLoaded = function() {
   classesData = window.classesData || {};
-  // لو مفيش كلاسات خالص — seed الافتراضيين
+  // no classes found — seed defaults
   if (Object.keys(classesData).length === 0 && typeof window.fbSeedDefaultClasses === 'function') {
     window.fbSeedDefaultClasses();
   }
@@ -256,7 +256,7 @@ function filterBookings() {
 }
 
 async function deleteBooking(key) {
-  if (!confirm('هل تريدين حذف هذا الحجز نهائياً؟')) return;
+  if (!confirm('Delete this booking permanently?')) return;
   try {
     await window.fbDeleteBooking(key);
     showToast('تم الحذف بنجاح', 'success', 'fa-trash');
@@ -332,7 +332,7 @@ async function submitAddBooking() {
     notes:         document.getElementById('m-notes').value.trim(),
     date: new Date().toISOString().slice(0,10),
   };
-  if (!data.fname || !data.phone) { alert('يرجى إدخال الاسم والجوال'); return; }
+  if (!data.fname || !data.phone) { alert('Please enter name and phone number'); return; }
   try {
     await window.fbAddBooking(data);
     closeModal();
@@ -512,7 +512,7 @@ function renderEditClassModal(title, body, foot, c) {
 
 async function submitAddClass() {
   const data = getClassFormData();
-  if (!data.name) { alert('يرجى إدخال اسم الكلاس'); return; }
+  if (!data.name) { alert('Please enter a class name'); return; }
   const id = data.name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'') + '-' + Date.now().toString(36);
   try { await window.fbSetClass(id, data); closeModal(); showToast('تم إضافة الكلاس بنجاح','success','fa-circle-check'); }
   catch(e) { showToast('فشل الإضافة','error','fa-triangle-exclamation'); }
@@ -520,13 +520,13 @@ async function submitAddClass() {
 
 async function submitEditClass(key) {
   const data = getClassFormData();
-  if (!data.name) { alert('يرجى إدخال اسم الكلاس'); return; }
+  if (!data.name) { alert('Please enter a class name'); return; }
   try { await window.fbSetClass(key, data); closeModal(); showToast('تم التعديل بنجاح','success','fa-circle-check'); }
   catch(e) { showToast('فشل التعديل','error','fa-triangle-exclamation'); }
 }
 
 async function deleteClass(key) {
-  if (!confirm('هل تريدين حذف هذا الكلاس نهائياً؟ سيختفي من الموقع فوراً.')) return;
+  if (!confirm('Delete this class permanently? It will disappear from the site immediately.')) return;
   try { await window.fbDeleteClass(key); showToast('تم الحذف','success','fa-trash'); }
   catch(e) { showToast('فشل الحذف','error','fa-triangle-exclamation'); }
 }
@@ -605,7 +605,7 @@ function getRetreatFormData() {
 
 async function submitAddRetreat() {
   const data = getRetreatFormData();
-  if (!data.name) { alert('أدخلي اسم الريتريت'); return; }
+  if (!data.name) { alert('Please enter a retreat name'); return; }
   try { await window.fbAddRetreat(data); closeModal(); showToast('تم إضافة الريتريت','success','fa-circle-check'); }
   catch(e) { showToast('فشل الإضافة','error','fa-triangle-exclamation'); }
 }
@@ -617,7 +617,7 @@ async function submitEditRetreat(key) {
 }
 
 async function deleteRetreat(key) {
-  if (!confirm('حذف هذا الريتريت؟')) return;
+  if (!confirm('Delete this retreat?')) return;
   try { await window.fbDeleteRetreat(key); showToast('تم الحذف','success','fa-trash'); }
   catch(e) { showToast('فشل الحذف','error','fa-triangle-exclamation'); }
 }
@@ -697,7 +697,7 @@ function renderEditCreditsModal(title, body, foot, data) {
 async function submitEditCredits(phone) {
   const num    = document.getElementById('cr-num').value;
   const expiry = document.getElementById('cr-exp').value;
-  if (!expiry) { alert('يرجى تحديد تاريخ الانتهاء'); return; }
+  if (!expiry) { alert('Please set an expiry date'); return; }
   try {
     await window.fbSetCredits(phone, num, expiry);
     closeModal();
@@ -808,7 +808,7 @@ async function saveLocation(cls) {
   const lat    = parseFloat(document.getElementById(`lat-${cls}`).value);
   const lng    = parseFloat(document.getElementById(`lng-${cls}`).value);
   const radius = parseInt(document.getElementById(`radius-${cls}`).value) || 400;
-  if (!lat || !lng) { alert('يرجى إدخال خط العرض وخط الطول'); return; }
+  if (!lat || !lng) { alert('Please enter latitude and longitude'); return; }
   try {
     await window.fbSaveLocation(cls, lat, lng, radius);
     showToast('تم حفظ الموقع بنجاح','success','fa-location-dot');
