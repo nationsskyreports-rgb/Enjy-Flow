@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Align by Enjy — تسجيل الحضور</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --bg:#0D1F18; --card:#162B1F; --border:rgba(255,255,255,0.08);
+  --primary:#3D8C6A; --primary-light:#4EAD84;
+  --accent:#C8956C; --green:#4CAF7D; --red:#E05A5A; --yellow:#F0B429;
+  --text:#EEE8DF; --text-muted:#7A9485; --text-faint:#3D5A4A;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;overflow-x:hidden}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px)}
+.orb1{width:400px;height:400px;background:rgba(61,140,106,.12);top:-150px;right:-150px}
+.orb2{width:300px;height:300px;background:rgba(200,149,108,.08);bottom:-100px;left:-100px}
+
+.wrap{width:100%;max-width:400px;position:relative;z-index:1}
+
+.logo-block{text-align:center;margin-bottom:24px;animation:fadeUp .5s ease both}
+.logo-icon{width:62px;height:62px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;margin:0 auto 10px;box-shadow:0 12px 32px rgba(61,140,106,.3)}
+.logo-block h1{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;margin-bottom:2px}
+.logo-block p{font-size:.75rem;color:var(--text-muted)}
+
+/* class banner */
+.class-banner{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:16px;animation:fadeUp .5s .05s ease both}
+.cb-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.cb-name{font-size:.95rem;font-weight:800;color:var(--text);margin-bottom:2px}
+.cb-loc{font-size:.72rem;color:var(--text-muted);display:flex;align-items:center;gap:5px}
+
+/* card */
+.card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:26px 22px;box-shadow:0 20px 60px rgba(0,0,0,.4);animation:fadeUp .5s .1s ease both}
+.card h2{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;margin-bottom:4px}
+.card .sub{font-size:.78rem;color:var(--text-muted);margin-bottom:20px;line-height:1.6}
+
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.75rem;font-weight:700;color:var(--text-muted);margin-bottom:5px;letter-spacing:.5px}
+.fg input{width:100%;padding:12px 15px;background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:12px;color:var(--text);font-family:'Cairo',sans-serif;font-size:.92rem;outline:none;transition:border-color .3s,box-shadow .3s}
+.fg input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(61,140,106,.12)}
+.fg input::placeholder{color:var(--text-faint)}
+
+/* location row */
+.loc-row{display:flex;align-items:center;gap:9px;padding:10px 13px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:11px;margin-bottom:14px;font-size:.8rem}
+.loc-dot{width:8px;height:8px;border-radius:50%;background:var(--text-faint);flex-shrink:0;transition:background .3s}
+.loc-dot.getting{background:var(--yellow);animation:pulse 1s infinite}
+.loc-dot.got{background:var(--green)}
+.loc-dot.err{background:var(--red)}
+.loc-info{flex:1}
+.loc-info strong{display:block;color:var(--text);font-size:.76rem;margin-bottom:1px}
+.loc-info span{color:var(--text-muted);font-size:.7rem}
+
+.btn-main{width:100%;padding:13px;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;border:none;border-radius:13px;font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:800;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 8px 24px rgba(61,140,106,.25)}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(61,140,106,.35)}
+.btn-main:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+.err-msg{color:var(--red);font-size:.78rem;text-align:center;margin-top:10px;min-height:18px}
+
+/* result */
+.result{display:none;text-align:center;padding:8px 0;animation:fadeUp .4s ease both}
+.result.show{display:block}
+.res-icon{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px}
+.res-icon.ok{background:rgba(76,175,125,.15);color:var(--green);box-shadow:0 0 0 8px rgba(76,175,125,.08)}
+.res-icon.fail{background:rgba(224,90,90,.15);color:var(--red);box-shadow:0 0 0 8px rgba(224,90,90,.08)}
+.res-icon.warn{background:rgba(240,180,41,.15);color:var(--yellow);box-shadow:0 0 0 8px rgba(240,180,41,.08)}
+.res-title{font-family:'Cairo',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:8px}
+.res-sub{font-size:.83rem;color:var(--text-muted);margin-bottom:20px;line-height:1.7}
+.btn-back{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;color:var(--text-muted);font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-back:hover{border-color:var(--primary);color:var(--primary-light)}
+
+/* invalid class */
+.invalid-cls{text-align:center;padding:32px 20px}
+.invalid-cls i{font-size:2.5rem;color:var(--text-faint);opacity:.4;display:block;margin-bottom:16px}
+.invalid-cls h3{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;margin-bottom:6px}
+.invalid-cls p{font-size:.82rem;color:var(--text-muted)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fa-spin{animation:spin .8s linear infinite}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="wrap">
+  <div class="logo-block">
+    <div class="logo-icon"><i class="fa-solid fa-spa"></i></div>
+    <h1>Align by Enjy</h1>
+    <p>رابط تسجيل الحضور</p>
+  </div>
+
+  <!-- class banner -->
+  <div class="class-banner" id="classBanner" style="display:none">
+    <div class="cb-icon" id="clsIcon"></div>
+    <div>
+      <div class="cb-name" id="clsName">—</div>
+      <div class="cb-loc"><i class="fa-solid fa-location-dot"></i><span id="clsLoc">—</span></div>
+    </div>
+  </div>
+
+  <!-- invalid class message -->
+  <div class="card" id="invalidCard" style="display:none">
+    <div class="invalid-cls">
+      <i class="fa-solid fa-link-slash"></i>
+      <h3>رابط غير صالح</h3>
+      <p>هذا الرابط لا ينتمي لأي كلاس معروف. تأكدي من الرابط أو تواصلي مع إنجي.</p>
+    </div>
+  </div>
+
+  <!-- main form card -->
+  <div class="card" id="mainCard" style="display:none">
+    <h2>تسجيل الحضور 🌿</h2>
+    <p class="sub">أدخلي رقم موبايلك عشان نسجل حضورك ونخصم حصة من رصيدك.</p>
+
+    <div id="ciForm">
+      <div class="fg">
+        <label>رقم الموبايل</label>
+        <input type="tel" id="phoneInput" placeholder="01XXXXXXXXX" dir="ltr" inputmode="numeric">
+      </div>
+      <div class="loc-row">
+        <div class="loc-dot" id="locDot"></div>
+        <div class="loc-info">
+          <strong id="locTitle">الموقع الجغرافي</strong>
+          <span id="locDesc">سيتم طلب إذن الموقع عند الضغط</span>
+        </div>
+      </div>
+      <button class="btn-main" id="ciBtn" onclick="doCheckin()">
+        <i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن
+      </button>
+      <div class="err-msg" id="errMsg"></div>
+    </div>
+
+    <div class="result" id="ciResult">
+      <div class="res-icon" id="resIcon"><i class="fa-solid fa-circle-check" id="resIco"></i></div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-sub" id="resSub"></div>
+      <button class="btn-back" onclick="resetForm()"><i class="fa-solid fa-rotate-right"></i> حضور آخر</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, onValue, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const cfg = {
+  apiKey:"AIzaSyB7xZSiGqTh4ncnHcvFBx8ufwPudpEEl50",
+  authDomain:"align-by-enjy.firebaseapp.com",
+  databaseURL:"https://align-by-enjy-default-rtdb.firebaseio.com",
+  projectId:"align-by-enjy",
+  storageBucket:"align-by-enjy.firebasestorage.app",
+  messagingSenderId:"355777857468",
+  appId:"1:355777857468:web:20b15a19f526db02578db9"
+};
+const db = getDatabase(initializeApp(cfg));
+const pKey = p => { const r=p.replace(/[^0-9]/g,''); return r.length>=10?r.slice(-10):r; };
+
+// Classes — loaded from Firebase
+let classesFromFB = {};
+let clsInfoLoaded = false;
+onValue(ref(db,'classes'), s => {
+  classesFromFB = s.val() || {};
+  clsInfoLoaded = true;
+  initCheckinPage();
+});
+
+
+window.fb = {
+  async checkBooking(phone) {
+    const k=pKey(phone), snap=await get(ref(db,'bookings')), data=snap.val();
+    if (!data) return null;
+    const pm={power:'Power Yoga',diabetes:'Yoga for Diabetes',gentle:'Gentle Yoga'};
+    const m=Object.values(data).filter(b=>pKey(b.phone||'')===k);
+    if (!m.length) return null;
+    return { name:`${m[0].fname} ${m[0].lname}`, phone:m[0].phone };
+  },
+  async getCredits(phone) {
+    const k=pKey(phone), snap=await get(ref(db,`credits/${k}`));
+    return { data:snap.val(), key:k };
+  },
+  async deductCredit(key,cur,att) {
+    await update(ref(db,`credits/${key}`),{credits:cur-1,totalAttended:att+1});
+  },
+  async logAttendance(phone,cls,name) {
+    const k=pKey(phone),today=new Date().toISOString().slice(0,10),
+          time=new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});
+    await update(ref(db,`attendance/${today}/${k}`),{phone,name,className:cls,time,date:today,checkedIn:true,timestamp:Date.now()});
+  }
+};
+</script>
+
+<!-- App Logic -->
+<script>
+const clsParam = new URLSearchParams(window.location.search).get('class');
+let clsInfo    = null;   // set once Firebase loads
+
+function initCheckinPage() {
+  if (!clsParam || !classesFromFB[clsParam]) {
+    document.getElementById('invalidCard').style.display = 'block';
+    document.getElementById('mainCard').style.display    = 'none';
+    document.getElementById('classBanner').style.display = 'none';
+    return;
+  }
+  const raw = classesFromFB[clsParam];
+  clsInfo = { name: raw.name||clsParam, loc: raw.loc||'', icon: raw.icon||'fa-dumbbell', color: raw.color||'green' };
+
+  const colorText = { green:'#4CAF7D', accent:'#C8956C', blue:'#5B8FF9', purple:'#A78BFA', yellow:'#F0B429' };
+  const colorBg   = { green:'rgba(76,175,125,.15)', accent:'rgba(200,149,108,.15)', blue:'rgba(91,143,249,.15)', purple:'rgba(167,139,250,.15)', yellow:'rgba(240,180,41,.15)' };
+
+  document.getElementById('classBanner').style.display = 'flex';
+  document.getElementById('clsName').textContent  = clsInfo.name;
+  document.getElementById('clsLoc').textContent   = clsInfo.loc;
+  const icon = document.getElementById('clsIcon');
+  icon.style.background = colorBg[clsInfo.color]   || colorBg.green;
+  icon.style.color      = colorText[clsInfo.color]  || colorText.green;
+  icon.innerHTML = `<i class="fa-solid ${clsInfo.icon}"></i>`;
+
+  document.getElementById('mainCard').style.display    = 'block';
+  document.getElementById('invalidCard').style.display = 'none';
+}
+
+// Show loading until Firebase responds
+document.getElementById('mainCard').style.display    = 'none';
+document.getElementById('invalidCard').style.display = 'none';
+document.getElementById('classBanner').style.display = 'none';
+
+// Phone input enter
+document.addEventListener('DOMContentLoaded', () => {
+  const inp = document.getElementById('phoneInput');
+  if (inp) inp.addEventListener('keydown', e => e.key === 'Enter' && doCheckin());
+});
+
+function setLoc(state, title, desc) {
+  const d = document.getElementById('locDot');
+  d.className = 'loc-dot' + (state === 'getting' ? ' getting' : state === 'got' ? ' got' : state === 'err' ? ' err' : '');
+  document.getElementById('locTitle').textContent = title;
+  document.getElementById('locDesc').textContent  = desc;
+}
+
+function showResult(type, title, sub) {
+  document.getElementById('ciForm').style.display = 'none';
+  const res = document.getElementById('ciResult');
+  res.classList.add('show');
+  document.getElementById('resIcon').className = `res-icon ${type}`;
+  document.getElementById('resIco').className  = `fa-solid ${type==='ok'?'fa-circle-check':type==='warn'?'fa-coins':'fa-location-xmark'}`;
+  document.getElementById('resTitle').textContent = title;
+  document.getElementById('resSub').textContent   = sub;
+}
+
+function resetForm() {
+  document.getElementById('ciForm').style.display = 'block';
+  document.getElementById('ciResult').classList.remove('show');
+  document.getElementById('phoneInput').value = '';
+  document.getElementById('errMsg').textContent = '';
+  setLoc('', 'الموقع الجغرافي', 'سيتم طلب إذن الموقع عند الضغط');
+  const btn = document.getElementById('ciBtn');
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
+}
+
+function dist(a,b,c,d){const R=6371e3,f1=a*Math.PI/180,f2=c*Math.PI/180,df=(c-a)*Math.PI/180,dl=(d-b)*Math.PI/180,x=Math.sin(df/2)**2+Math.cos(f1)*Math.cos(f2)*Math.sin(dl/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));}
+
+async function waitForClassLoc(clsId, maxMs=5000, interval=300) {
+  const start = Date.now();
+  while (Date.now() - start < maxMs) {
+    const loc = window.classLocs?.[clsId];
+    if (loc?.lat && loc?.lng) return loc;
+    await new Promise(r => setTimeout(r, interval));
+  }
+  return null;
+}
+
+async function doCheckin() {
+  if (!clsInfo) return;
+  const phone = document.getElementById('phoneInput').value.trim();
+  const btn   = document.getElementById('ciBtn');
+  const errEl = document.getElementById('errMsg');
+  errEl.textContent = '';
+
+  if (!phone || !/^\d{10,11}$/.test(phone.replace(/\s/g,''))) {
+    errEl.textContent = 'يرجى إدخال رقم موبايل صحيح (10 أو 11 رقم)';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التحقق...';
+
+  // 1. Check booking
+  let student;
+  try {
+    student = await window.fb.checkBooking(phone);
+    if (!student) {
+      errEl.textContent = 'هذا الرقم غير مسجل لدينا. تأكدي من الرقم أو تواصلي مع إنجي.';
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
+      return;
+    }
+  } catch(e) {
+    errEl.textContent = 'حدث خطأ في الاتصال، حاولي مرة أخرى.';
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
+    return;
+  }
+
+  // 2. GPS
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري تحديد موقعك...';
+  setLoc('getting', 'جاري تحديد موقعك...', 'يرجى السماح بالوصول للموقع');
+
+  let coords;
+  try {
+    const pos = await new Promise((res, rej) =>
+      navigator.geolocation.getCurrentPosition(res, rej, {enableHighAccuracy:true,timeout:12000,maximumAge:0})
+    );
+    coords = { lat:pos.coords.latitude, lng:pos.coords.longitude };
+    setLoc('got', 'تم تحديد موقعك ✓', `الدقة: ${Math.round(pos.coords.accuracy)} متر`);
+  } catch(e) {
+    setLoc('err', 'تعذر تحديد الموقع', e.code===1?'اسمح للمتصفح بالوصول للموقع':'تأكد من تشغيل GPS');
+    showResult('fail', 'تعذر تحديد الموقع', e.code===1?'يرجى السماح للمتصفح بالوصول لموقعك من إعدادات الهاتف.':'تأكدي من تشغيل GPS وحاولي مرة أخرى.');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
+    return;
+  }
+
+  // 3. Geofencing — retry
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التحقق من الموقع...';
+  setLoc('getting', 'جاري تحميل بيانات الموقع...', 'يرجى الانتظار لحظة');
+
+  const loc = await waitForClassLoc(clsParam);
+  if (!loc) {
+    setLoc('err', 'تعذر تحميل بيانات الموقع', 'تأكدي من الاتصال بالإنترنت وحاولي مرة أخرى.');
+    showResult('fail', 'تعذر تحميل بيانات الموقع', 'يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
+    return;
+  }
+  const d = dist(coords.lat, coords.lng, loc.lat, loc.lng);
+  if (d > (loc.radius || 400)) {
+    showResult('fail', 'مش في موقع الكلاس', `أنتِ على بُعد ${Math.round(d)} متر من الموقع. تأكدي من وجودك في ${clsInfo.loc}.`);
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
+    return;
+  }
+
+  // 4. Credits check
+  try {
+    const { data:cr, key } = await window.fb.getCredits(phone);
+    if (!cr || Number(cr.credits) <= 0) {
+      showResult('warn', 'رصيدك صفر', 'لا توجد حصص متبقية. تواصلي مع إنجي لتجديد اشتراكك.');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
+      return;
+    }
+    const today = new Date().toISOString().slice(0,10);
+    if (cr.expiry && cr.expiry < today) {
+      showResult('warn', 'انتهت صلاحية حصصك', `انتهت الصلاحية بتاريخ ${cr.expiry}. تواصلي مع إنجي للتجديد.`);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
+      return;
+    }
+    const cred = Number(cr.credits);
+    await window.fb.deductCredit(key, cred, cr.totalAttended || 0);
+    await window.fb.logAttendance(phone, clsInfo.name, student.name);
+    const rem = cred - 1;
+    showResult('ok',
+      'تم تسجيل حضورك! ✨',
+      `أهلاً ${student.name.split(' ')[0]}! تم تسجيلك في ${clsInfo.name}.\nالحصص المتبقية: ${rem} حصة.`
+    );
+  } catch(e) {
+    showResult('fail', 'حدث خطأ', 'تعذر الاتصال بقاعدة البيانات. تأكدي من الإنترنت وحاولي مرة أخرى.');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
+  }
+}
+</script>
+</body>
+</html>
