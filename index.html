@@ -348,7 +348,7 @@
       <div class="programs-grid" id="programsGrid">
         <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--fg-muted)">
           <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem;margin-bottom:12px;display:block"></i>
-          جاري تحميل الكلاسات...
+          Loading classes...
         </div>
       </div>
     </div>
@@ -626,11 +626,20 @@
     });
 
     // Classes — loaded from Firebase
+    // Show "coming soon" fallback if no data after 5 seconds
+    const classesTimeout = setTimeout(() => {
+      const grid = document.getElementById('programsGrid');
+      if (grid && grid.querySelector('.fa-spinner')) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--fg-muted)"><i class="fa-solid fa-dumbbell" style="font-size:2rem;margin-bottom:12px;display:block;opacity:.3"></i>Classes coming soon!</div>';
+      }
+    }, 5000);
+
     onValue(ref(db, 'classes'), (snapshot) => {
+      clearTimeout(classesTimeout);
       const data = snapshot.val();
       const grid = document.getElementById('programsGrid');
       if (!data) {
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--fg-muted)"><i class="fa-solid fa-dumbbell" style="font-size:2rem;margin-bottom:12px;display:block;opacity:.3"></i><span data-ar="الكلاسات ستُعلَن قريباً!" data-en="Classes coming soon!">الكلاسات ستُعلَن قريباً!</span></div>';
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--fg-muted)"><i class="fa-solid fa-dumbbell" style="font-size:2rem;margin-bottom:12px;display:block;opacity:.3"></i>Classes coming soon!</div>';
         return;
       }
       const classes = Object.entries(data).map(([k,v]) => ({...v, _key:k}));
@@ -728,7 +737,7 @@
       btn.disabled = true;
       btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${lang === 'ar' ? 'جاري التحقق...' : 'Checking...'}`;
 
-      // منع الحجز المكرر بنفس الرقم
+      // prevent duplicate booking by same phone number
       try {
         const snap = await get(ref(db, 'bookings'));
         const existing = snap.val();
@@ -840,7 +849,7 @@
 
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', function(e) { const t = document.querySelector(this.getAttribute('href')); if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
+      a.addEventListener('click', function(e) { const href = this.getAttribute('href'); if (!href || href === '#') return; const t = document.querySelector(href); if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
     });
 
     // PWA
