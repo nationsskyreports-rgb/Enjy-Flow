@@ -267,15 +267,15 @@ async function deleteBooking(key) {
 
 /* ─── MODALS: BOOKING ─── */
 function renderAddBookingModal(title, body, foot) {
-  title.textContent = 'إضافة حجز جديد';
+  title.textContent = 'Add New Booking';
   body.innerHTML = `
     <div class="form-row2">
-      <div class="form-group"><label>الاسم الأول</label><input id="m-fname" class="form-input" placeholder="نورة"></div>
-      <div class="form-group"><label>الاسم الأخير</label><input id="m-lname" class="form-input" placeholder="العتيبي"></div>
+      <div class="form-group"><label>First Name</label><input id="m-fname" class="form-input" placeholder="Enjy"></div>
+      <div class="form-group"><label>Last Name</label><input id="m-lname" class="form-input" placeholder="Abdel Monem"></div>
     </div>
     <div class="form-row2">
-      <div class="form-group"><label>الجوال</label><input id="m-phone" class="form-input" placeholder="01XXXXXXXXX" dir="ltr"></div>
-      <div class="form-group"><label>البريد</label><input id="m-email" class="form-input" type="email" placeholder="email@example.com" dir="ltr"></div>
+      <div class="form-group"><label>Phone</label><input id="m-phone" class="form-input" placeholder="01XXXXXXXXX" dir="ltr"></div>
+      <div class="form-group"><label>Email</label><input id="m-email" class="form-input" type="email" placeholder="email@example.com" dir="ltr"></div>
     </div>
     <div class="form-row2">
       <div class="form-group"><label>الكلاس</label>
@@ -348,7 +348,7 @@ function renderViewBookingModal(title, body, foot, b) {
   body.innerHTML = `
     <div class="metric-list">
       <div class="metric-item"><span class="m-label"><i class="fa-solid fa-user"></i>الاسم</span><span class="m-val">${b.fname} ${b.lname}</span></div>
-      <div class="metric-item"><span class="m-label"><i class="fa-solid fa-phone"></i>الجوال</span><span class="m-val" dir="ltr">${b.phone}</span></div>
+      <div class="metric-item"><span class="m-label"><i class="fa-solid fa-phone"></i>الموبايل</span><span class="m-val" dir="ltr">${b.phone}</span></div>
       <div class="metric-item"><span class="m-label"><i class="fa-solid fa-envelope"></i>البريد</span><span class="m-val" dir="ltr">${b.email || '—'}</span></div>
       <div class="metric-item"><span class="m-label"><i class="fa-solid fa-dumbbell"></i>الكلاس</span><span class="m-val">${CLASS_NAMES[b.program] || b.program}</span></div>
       <div class="metric-item"><span class="m-label"><i class="fa-solid fa-calendar"></i>تاريخ الجلسة</span><span class="m-val">${b.sessionDate || '—'}</span></div>
@@ -842,7 +842,7 @@ function renderStats() {
 
 /* ─── EXPORT CSV ─── */
 function exportCSV() {
-  const headers = ['الاسم','الجوال','البريد','الكلاس','تاريخ الجلسة','الدفع','الحالة','ملاحظات'];
+  const headers = ['الاسم','الموبايل','البريد','الكلاس','تاريخ الجلسة','الدفع','الحالة','ملاحظات'];
   const rows = bookings.map(b => [
     `${b.fname} ${b.lname}`, b.phone, b.email, CLASS_NAMES[b.program]||b.program,
     b.sessionDate||b.date, b.paymentStatus==='paid'?'مدفوع':'معلق',
