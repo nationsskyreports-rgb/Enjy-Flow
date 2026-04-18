@@ -469,49 +469,8 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
             مثال: <span dir="ltr" style="font-family:monospace;color:var(--blue)">29.9719, 30.9424</span>
           </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:16px">
-          <div class="chart-card">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-              <div style="width:36px;height:36px;background:rgba(76,175,125,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--green)"><i class="fa-solid fa-fire"></i></div>
-              <div><div style="font-weight:700">Power Yoga</div><div style="font-size:.72rem;color:var(--text-muted)">Royal Hills Clubhouse</div></div>
-              <span class="badge yellow" id="locStatus-power" style="margin-right:auto">لم يُحدَّد بعد</span>
-            </div>
-            <div class="form-row2">
-              <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-power" step="0.0001" placeholder="29.9719" dir="ltr"></div>
-              <div class="form-group"><label>خط الطول Longitude</label><input type="number" id="lng-power" step="0.0001" placeholder="30.9424" dir="ltr"></div>
-            </div>
-            <div class="form-group"><label>نطاق التحقق بالمتر (افتراضي: 400)</label><input type="number" id="radius-power" placeholder="400" dir="ltr"></div>
-            <button class="btn btn-primary" onclick="saveLocation('power')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Power Yoga</button>
-            <div id="locHint-power" class="form-hint" style="margin-top:8px"></div>
-          </div>
-          <div class="chart-card">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-              <div style="width:36px;height:36px;background:rgba(200,149,108,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--accent)"><i class="fa-solid fa-heart-pulse"></i></div>
-              <div><div style="font-weight:700">Yoga for Diabetes</div><div style="font-size:.72rem;color:var(--text-muted)">Royal Hills</div></div>
-              <span class="badge yellow" id="locStatus-diabetes" style="margin-right:auto">لم يُحدَّد بعد</span>
-            </div>
-            <div class="form-row2">
-              <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-diabetes" step="0.0001" placeholder="29.9719" dir="ltr"></div>
-              <div class="form-group"><label>خط الطول Longitude</label><input type="number" id="lng-diabetes" step="0.0001" placeholder="30.9424" dir="ltr"></div>
-            </div>
-            <div class="form-group"><label>نطاق التحقق بالمتر</label><input type="number" id="radius-diabetes" placeholder="400" dir="ltr"></div>
-            <button class="btn btn-primary" onclick="saveLocation('diabetes')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Yoga for Diabetes</button>
-            <div id="locHint-diabetes" class="form-hint" style="margin-top:8px"></div>
-          </div>
-          <div class="chart-card">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-              <div style="width:36px;height:36px;background:rgba(91,143,249,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--blue)"><i class="fa-solid fa-leaf"></i></div>
-              <div><div style="font-weight:700">Gentle Yoga</div><div style="font-size:.72rem;color:var(--text-muted)">Pyramids Heights</div></div>
-              <span class="badge yellow" id="locStatus-gentle" style="margin-right:auto">لم يُحدَّد بعد</span>
-            </div>
-            <div class="form-row2">
-              <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-gentle" step="0.0001" placeholder="29.8636" dir="ltr"></div>
-              <div class="form-group"><label>خط الطول Longitude</label><input type="number" id="lng-gentle" step="0.0001" placeholder="31.0117" dir="ltr"></div>
-            </div>
-            <div class="form-group"><label>نطاق التحقق بالمتر</label><input type="number" id="radius-gentle" placeholder="400" dir="ltr"></div>
-            <button class="btn btn-primary" onclick="saveLocation('gentle')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع Gentle Yoga</button>
-            <div id="locHint-gentle" class="form-hint" style="margin-top:8px"></div>
-          </div>
+        <div style="display:flex;flex-direction:column;gap:16px" id="locationsContainer">
+          <div class="empty-state"><div class="spinner"></div><p>جاري تحميل الكلاسات...</p></div>
         </div>
       </div>
 
@@ -640,9 +599,21 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     if (document.querySelector('#page-locations.active')) safeCall('renderSavedLocations');
   });
 
+  // Classes
+  onValue(ref(db, 'classes'), (snapshot) => {
+    window.classesData = {};
+    const data = snapshot.val();
+    if (data) Object.entries(data).forEach(([key, val]) => { window.classesData[key] = { ...val, _key: key }; });
+    safeCall('onClassesLoaded');
+  });
+
+  window.fbSetClass    = async (id, data) => { await update(ref(db, `classes/${id}`), data); };
+  window.fbDeleteClass = async (id) => { await remove(ref(db, `classes/${id}`)); };
+
   window.fbAddBooking    = async (data) => { await push(ref(db, 'bookings'), { ...data, createdAt: serverTimestamp() }); };
   window.fbUpdateStatus  = async (key, status) => { await update(ref(db, `bookings/${key}`), { status }); };
   window.fbUpdatePayment = async (key, paymentStatus, paymentRef) => { await update(ref(db, `bookings/${key}`), { paymentStatus, paymentRef: paymentRef || '' }); };
+  window.fbUpdateSessionDate = async (key, sessionDate) => { await update(ref(db, `bookings/${key}`), { sessionDate }); };
   window.fbDeleteBooking = async (key) => { await remove(ref(db, `bookings/${key}`)); };
 
   window.fbSetCredits = async (phone, credits, expiry) => {
