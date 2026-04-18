@@ -4,9 +4,10 @@
    ═══════════════════════════════════════════════════ */
 
 /* ─── GLOBAL STATE ─── */
-let bookings = [];
+let bookings     = [];
 let creditsData  = window.creditsData  || {};
 let retreatsData = window.retreatsData || [];
+let classesData  = {};
 
 const PAGE_TITLES = {
   dashboard:  'نظرة عامة',
@@ -110,6 +111,7 @@ function openModal(type, data) {
   if (type === 'viewBooking')  { renderViewBookingModal(title, body, foot, data); }
   if (type === 'editCredits')  { renderEditCreditsModal(title, body, foot, data); }
   if (type === 'addClass')     { renderAddClassModal(title, body, foot); }
+  if (type === 'editClass')    { renderEditClassModal(title, body, foot, data); }
   if (type === 'addRetreat')   { renderAddRetreatModal(title, body, foot); }
   if (type === 'editRetreat')  { renderEditRetreatModal(title, body, foot, data); }
 }
@@ -130,6 +132,7 @@ window.onBookingsLoaded = function() {
   if (!activePage) return;
   if (activePage.id === 'page-dashboard') renderDashboard();
   if (activePage.id === 'page-bookings')  renderBookingsTable(bookings);
+  if (activePage.id === 'page-classes')   renderClasses();
   if (activePage.id === 'page-students')  renderStudents();
   if (activePage.id === 'page-stats')     renderStats();
 };
@@ -140,6 +143,14 @@ window.onCreditsLoaded = function() {
   if (!activePage) return;
   if (activePage.id === 'page-students')  renderStudents();
   if (activePage.id === 'page-dashboard') renderDashboard();
+};
+
+window.onClassesLoaded = function() {
+  classesData = window.classesData || {};
+  const activePage = document.querySelector('.page.active');
+  if (!activePage) return;
+  if (activePage.id === 'page-classes')   renderClasses();
+  if (activePage.id === 'page-locations') renderSavedLocations();
 };
 
 function updateNewBadge() {
@@ -371,13 +382,14 @@ function renderEditBookingModal(title, body, foot, b) {
 }
 
 async function submitEditBooking(key) {
-  const status       = document.getElementById('e-status').value;
-  const paymentStatus= document.getElementById('e-payment').value;
-  const paymentRef   = document.getElementById('e-payref').value.trim();
-  const sessionDate  = document.getElementById('e-date').value;
+  const status        = document.getElementById('e-status').value;
+  const paymentStatus = document.getElementById('e-payment').value;
+  const paymentRef    = document.getElementById('e-payref').value.trim();
+  const sessionDate   = document.getElementById('e-date').value;
   try {
     await window.fbUpdateStatus(key, status);
     await window.fbUpdatePayment(key, paymentStatus, paymentRef);
+    if (sessionDate) await window.fbUpdateSessionDate(key, sessionDate);
     closeModal();
     showToast('تم التعديل بنجاح', 'success', 'fa-circle-check');
   } catch(e) {
@@ -386,44 +398,133 @@ async function submitEditBooking(key) {
 }
 
 /* ─── CLASSES ─── */
-const defaultClasses = [
-  { id:'power',    name:'Power Yoga',        loc:'Royal Hills Clubhouse', schedule:'الأحد والأربعاء — 11 صباحاً', icon:'fa-fire',       color:'green',  prices:['جلسة: 400 ج','4 كلاسات: 1,500','8 كلاسات: 2,800'] },
-  { id:'diabetes', name:'Yoga for Diabetes', loc:'Royal Hills',           schedule:'الاثنين والأربعاء — 7:30 م',  icon:'fa-heart-pulse',color:'accent', prices:['جلسة: 400 ج','4 كلاسات: 1,500'] },
-  { id:'gentle',   name:'Gentle Yoga',       loc:'Pyramids Heights',      schedule:'سيتم التحديد قريباً',         icon:'fa-leaf',       color:'blue',   prices:['جلسة: 350 ج'] },
-];
+const CLS_COLORS = {
+  green:  { text:'var(--green)',  bg:'rgba(76,175,125,.12)'  },
+  accent: { text:'var(--accent)', bg:'rgba(200,149,108,.12)' },
+  blue:   { text:'var(--blue)',   bg:'rgba(91,143,249,.12)'  },
+  purple: { text:'var(--purple)', bg:'rgba(167,139,250,.12)' },
+  yellow: { text:'var(--yellow)', bg:'rgba(240,180,41,.12)'  },
+};
 
 function renderClasses() {
-  const grid = document.getElementById('classesGrid');
-  grid.innerHTML = defaultClasses.map(cls => `
+  const grid    = document.getElementById('classesGrid');
+  const classes = Object.values(window.classesData || {});
+
+  if (!classes.length) {
+    grid.innerHTML = '<div class="empty-state"><i class="fa-solid fa-dumbbell"></i><p>لا توجد كلاسات بعد — اضغطي "جديد" لإضافة أول كلاس</p></div>';
+    return;
+  }
+
+  grid.innerHTML = classes.map(cls => {
+    const c      = CLS_COLORS[cls.color] || CLS_COLORS.green;
+    const booked = (window.bookings||[]).filter(b => b.program === cls._key);
+    const prices = [];
+    if (cls.price1) prices.push(`جلسة: ${Number(cls.price1).toLocaleString()} ج`);
+    if (cls.price4) prices.push(`4 كلاسات: ${Number(cls.price4).toLocaleString()}`);
+    if (cls.price8) prices.push(`8 كلاسات: ${Number(cls.price8).toLocaleString()}`);
+    return `
     <div class="class-card">
       <div class="cc-top">
-        <div class="cc-icon" style="background:rgba(var(--${cls.color}-rgb,61,140,106),.12);color:var(--${cls.color==='green'?'green':cls.color==='blue'?'blue':'accent'})"><i class="fa-solid ${cls.icon}"></i></div>
-        <span class="badge green">نشط</span>
+        <div class="cc-icon" style="background:${c.bg};color:${c.text}"><i class="fa-solid ${cls.icon||'fa-dumbbell'}"></i></div>
+        <div class="action-btns">
+          <button class="act-btn edit" onclick="openModal('editClass', window.classesData['${cls._key}'])" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+          <button class="act-btn del"  onclick="deleteClass('${cls._key}')" title="حذف"><i class="fa-solid fa-trash"></i></button>
+        </div>
       </div>
-      <div class="cc-name">${cls.name}</div>
-      <div class="cc-loc"><i class="fa-solid fa-location-dot"></i>${cls.loc}</div>
-      <div style="font-size:.78rem;color:var(--text-muted);margin-bottom:10px;"><i class="fa-regular fa-calendar" style="margin-left:5px"></i>${cls.schedule}</div>
-      <div style="display:flex;flex-direction:column;gap:4px">
-        ${cls.prices.map(p => `<div style="font-size:.8rem;display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-tag" style="color:var(--accent);font-size:.7rem"></i>${p}</div>`).join('')}
-      </div>
+      <div class="cc-name">${cls.name||'كلاس'}</div>
+      ${cls.loc      ? `<div class="cc-loc"><i class="fa-solid fa-location-dot"></i>${cls.loc}</div>` : ''}
+      ${cls.schedule ? `<div style="font-size:.78rem;color:var(--text-muted);margin-bottom:10px"><i class="fa-regular fa-calendar" style="margin-left:5px"></i>${cls.schedule}</div>` : ''}
+      ${prices.length ? `<div style="display:flex;flex-direction:column;gap:4px">${prices.map(p=>`<div style="font-size:.8rem;display:flex;align-items:center;gap:6px"><i class="fa-solid fa-tag" style="color:var(--accent);font-size:.7rem"></i>${p}</div>`).join('')}</div>` : ''}
       <div class="cc-row">
-        <div class="cc-stat"><div class="val">${bookings.filter(b=>b.program===cls.id).length}</div><div class="lbl">حجز</div></div>
-        <div class="cc-stat"><div class="val">${bookings.filter(b=>b.program===cls.id&&b.status==='confirmed').length}</div><div class="lbl">مؤكد</div></div>
-        <div class="cc-stat"><div class="val">${bookings.filter(b=>b.program===cls.id&&b.paymentStatus==='paid').length}</div><div class="lbl">مدفوع</div></div>
+        <div class="cc-stat"><div class="val">${booked.length}</div><div class="lbl">حجز</div></div>
+        <div class="cc-stat"><div class="val">${booked.filter(b=>b.status==='confirmed').length}</div><div class="lbl">مؤكد</div></div>
+        <div class="cc-stat"><div class="val">${booked.filter(b=>b.paymentStatus==='paid').length}</div><div class="lbl">مدفوع</div></div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+}
+
+/* Class Form */
+function classFormHTML(c = {}) {
+  const icons  = [['fa-fire','🔥 Fire'],['fa-heart-pulse','❤️ Heart Pulse'],['fa-leaf','🌿 Leaf'],['fa-dumbbell','🏋️ Dumbbell'],['fa-spa','🧘 Spa'],['fa-person-walking','🚶 Walking'],['fa-wind','💨 Wind'],['fa-yin-yang','☯️ Yin Yang']];
+  const colors = [['green','أخضر 🟢'],['accent','برتقالي 🟠'],['blue','أزرق 🔵'],['purple','بنفسجي 🟣'],['yellow','أصفر 🟡']];
+  return `
+    <div class="form-row2">
+      <div class="form-group"><label>اسم الكلاس</label><input id="cf-name" class="form-input" value="${c.name||''}" placeholder="مثال: Morning Flow"></div>
+      <div class="form-group"><label>الموقع</label><input id="cf-loc" class="form-input" value="${c.loc||''}" placeholder="مثال: Royal Hills"></div>
+    </div>
+    <div class="form-group"><label>المواعيد</label><input id="cf-sched" class="form-input" value="${c.schedule||''}" placeholder="مثال: الأحد والأربعاء — 11 صباحاً"></div>
+    <div class="form-group"><label>بادج المستوى (اختياري)</label><input id="cf-level" class="form-input" value="${c.level||''}" placeholder="مثال: Ladies Only"></div>
+    <div class="form-row2">
+      <div class="form-group"><label>سعر الجلسة (ج.م)</label><input id="cf-p1" type="number" class="form-input" value="${c.price1||''}"></div>
+      <div class="form-group"><label>سعر 4 كلاسات (اختياري)</label><input id="cf-p4" type="number" class="form-input" value="${c.price4||''}"></div>
+    </div>
+    <div class="form-group"><label>سعر 8 كلاسات (اختياري)</label><input id="cf-p8" type="number" class="form-input" value="${c.price8||''}"></div>
+    <div class="form-row2">
+      <div class="form-group"><label>الأيقونة</label>
+        <select id="cf-icon" class="form-input">
+          ${icons.map(([v,l])=>`<option value="${v}"${c.icon===v?' selected':''}>${l}</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-group"><label>اللون</label>
+        <select id="cf-color" class="form-input">
+          ${colors.map(([v,l])=>`<option value="${v}"${c.color===v?' selected':''}>${l}</option>`).join('')}
+        </select>
+      </div>
+    </div>`;
+}
+
+function getClassFormData() {
+  return {
+    name:     document.getElementById('cf-name').value.trim(),
+    loc:      document.getElementById('cf-loc').value.trim(),
+    schedule: document.getElementById('cf-sched').value.trim(),
+    level:    document.getElementById('cf-level').value.trim(),
+    price1:   document.getElementById('cf-p1').value  || '',
+    price4:   document.getElementById('cf-p4').value  || '',
+    price8:   document.getElementById('cf-p8').value  || '',
+    icon:     document.getElementById('cf-icon').value,
+    color:    document.getElementById('cf-color').value,
+    active:   true,
+  };
 }
 
 function renderAddClassModal(title, body, foot) {
   title.textContent = 'إضافة كلاس جديد';
-  body.innerHTML = `
-    <div class="form-group"><label>اسم الكلاس</label><input id="ac-name" class="form-input" placeholder="مثال: Morning Flow"></div>
-    <div class="form-group"><label>الموقع</label><input id="ac-loc" class="form-input" placeholder="المكان"></div>
-    <div class="form-group"><label>المواعيد</label><input id="ac-sched" class="form-input" placeholder="مثال: الثلاثاء والخميس"></div>
-    <div class="form-group"><label>الوصف</label><textarea id="ac-desc" class="form-input"></textarea></div>`;
-  foot.innerHTML = `
+  body.innerHTML    = classFormHTML();
+  foot.innerHTML    = `
     <button class="btn btn-ghost" onclick="closeModal()">إلغاء</button>
-    <button class="btn btn-primary" onclick="closeModal();showToast('تم إضافة الكلاس','success','fa-circle-check')"><i class="fa-solid fa-plus"></i> إضافة</button>`;
+    <button class="btn btn-primary" onclick="submitAddClass()"><i class="fa-solid fa-plus"></i> إضافة</button>`;
+}
+
+function renderEditClassModal(title, body, foot, c) {
+  if (!c) return;
+  title.textContent = 'تعديل: ' + (c.name||'كلاس');
+  body.innerHTML    = classFormHTML(c);
+  foot.innerHTML    = `
+    <button class="btn btn-ghost" onclick="closeModal()">إلغاء</button>
+    <button class="btn btn-primary" onclick="submitEditClass('${c._key}')"><i class="fa-solid fa-floppy-disk"></i> حفظ</button>`;
+}
+
+async function submitAddClass() {
+  const data = getClassFormData();
+  if (!data.name) { alert('يرجى إدخال اسم الكلاس'); return; }
+  const id = data.name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'') + '-' + Date.now().toString(36);
+  try { await window.fbSetClass(id, data); closeModal(); showToast('تم إضافة الكلاس بنجاح','success','fa-circle-check'); }
+  catch(e) { showToast('فشل الإضافة','error','fa-triangle-exclamation'); }
+}
+
+async function submitEditClass(key) {
+  const data = getClassFormData();
+  if (!data.name) { alert('يرجى إدخال اسم الكلاس'); return; }
+  try { await window.fbSetClass(key, data); closeModal(); showToast('تم التعديل بنجاح','success','fa-circle-check'); }
+  catch(e) { showToast('فشل التعديل','error','fa-triangle-exclamation'); }
+}
+
+async function deleteClass(key) {
+  if (!confirm('هل تريدين حذف هذا الكلاس نهائياً؟ سيختفي من الموقع فوراً.')) return;
+  try { await window.fbDeleteClass(key); showToast('تم الحذف','success','fa-trash'); }
+  catch(e) { showToast('فشل الحذف','error','fa-triangle-exclamation'); }
 }
 
 /* ─── RETREATS ─── */
@@ -664,24 +765,39 @@ function shareCheckinWA(cls, name) {
 
 /* ─── LOCATIONS ─── */
 function renderSavedLocations() {
-  const locs = window.savedLocations || {};
-  ['power','diabetes','gentle'].forEach(cls => {
-    const loc = locs[cls];
-    const badge = document.getElementById(`locStatus-${cls}`);
-    const hint  = document.getElementById(`locHint-${cls}`);
-    if (loc) {
-      if (badge) { badge.textContent = '✅ محدد'; badge.className = 'badge green'; }
-      if (hint)  hint.textContent = `خط العرض: ${loc.lat} | خط الطول: ${loc.lng} | النطاق: ${loc.radius||400}م`;
-      const latEl = document.getElementById(`lat-${cls}`);
-      const lngEl = document.getElementById(`lng-${cls}`);
-      const radEl = document.getElementById(`radius-${cls}`);
-      if (latEl) latEl.value = loc.lat;
-      if (lngEl) lngEl.value = loc.lng;
-      if (radEl) radEl.value = loc.radius || 400;
-    } else {
-      if (badge) { badge.textContent = 'لم يُحدَّد بعد'; badge.className = 'badge yellow'; }
-    }
-  });
+  const locs    = window.savedLocations || {};
+  const classes = Object.values(window.classesData || {});
+  const container = document.getElementById('locationsContainer');
+
+  if (!classes.length) {
+    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-location-dot"></i><p>لا توجد كلاسات — أضيفي كلاس أولاً من صفحة الكلاسات</p></div>';
+    return;
+  }
+
+  container.innerHTML = classes.map(cls => {
+    const loc = locs[cls._key];
+    const c   = CLS_COLORS[cls.color] || CLS_COLORS.green;
+    return `
+    <div class="chart-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <div style="width:36px;height:36px;background:${c.bg};border-radius:10px;display:flex;align-items:center;justify-content:center;color:${c.text}">
+          <i class="fa-solid ${cls.icon||'fa-dumbbell'}"></i>
+        </div>
+        <div>
+          <div style="font-weight:700">${cls.name}</div>
+          <div style="font-size:.72rem;color:var(--text-muted)">${cls.loc||''}</div>
+        </div>
+        <span class="badge ${loc?'green':'yellow'}" id="locStatus-${cls._key}" style="margin-right:auto">${loc?'✅ محدد':'لم يُحدَّد بعد'}</span>
+      </div>
+      <div class="form-row2">
+        <div class="form-group"><label>خط العرض Latitude</label><input type="number" id="lat-${cls._key}" step="0.0001" value="${loc?.lat||''}" placeholder="29.9719" dir="ltr"></div>
+        <div class="form-group"><label>خط الطول Longitude</label><input type="number" id="lng-${cls._key}" step="0.0001" value="${loc?.lng||''}" placeholder="30.9424" dir="ltr"></div>
+      </div>
+      <div class="form-group"><label>نطاق التحقق بالمتر (افتراضي: 400)</label><input type="number" id="radius-${cls._key}" value="${loc?.radius||400}" placeholder="400" dir="ltr"></div>
+      <button class="btn btn-primary" onclick="saveLocation('${cls._key}')"><i class="fa-solid fa-floppy-disk"></i> حفظ موقع ${cls.name}</button>
+      <div id="locHint-${cls._key}" class="form-hint" style="margin-top:8px">${loc?`خط العرض: ${loc.lat} | خط الطول: ${loc.lng} | النطاق: ${loc.radius||400}م`:''}</div>
+    </div>`;
+  }).join('');
 }
 
 async function saveLocation(cls) {
