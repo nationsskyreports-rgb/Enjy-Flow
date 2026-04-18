@@ -610,6 +610,38 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
   window.fbSetClass    = async (id, data) => { await update(ref(db, `classes/${id}`), data); };
   window.fbDeleteClass = async (id) => { await remove(ref(db, `classes/${id}`)); };
 
+  window.fbSeedDefaultClasses = async () => {
+    const defaults = {
+      'power-yoga': {
+        name:'Power Yoga', loc:'Royal Hills Clubhouse',
+        schedule:'الأحد والأربعاء — 11 صباحاً', scheduleEn:'Sun & Wed — 11:00 AM',
+        level:'Ladies Only', icon:'fa-fire', color:'green', active:true,
+        price1:400, price4:1500, price8:2800,
+        descAr:'باور يوجا هي ممارسة تعتمد على اللياقة البدنية، أكثر كثافة من اليوجا التقليدية. تركز على القوة والمرونة والتحمل، وترفع معدل ضربات القلب من خلال تدفق سريع بين الوضعيات مع تنفس منتظم.',
+        descEn:'Power yoga is a medium to fast pace class focusing on activating all body muscles, raising heart rate and increasing stability, strength, flexibility, and stamina. Challenging but with a strong impact on body and mind.',
+      },
+      'yoga-therapy': {
+        name:'Yoga Therapy for Blood Sugar Management',
+        loc:'Royal Hills', schedule:'الاثنين والأربعاء — 7:30 مساءً', scheduleEn:'Mon & Wed — 7:30 PM',
+        level:'Specialized', icon:'fa-heart-pulse', color:'accent', active:true,
+        price1:400, price4:1500,
+        descAr:'نهج قائم على الأدلة يستخدم وضعيات جسدية محددة وتقنيات التنفس والاسترخاء لدعم التمثيل الغذائي. يركز على تحسين حساسية الأنسولين وتقليل هرمونات التوتر وتحفيز الجهاز اللمفاوي.',
+        descEn:'An evidence-based approach using specific postures, breathing techniques, and relaxation to support metabolic functions. Focuses on improving insulin sensitivity, reducing cortisol, and stimulating lymphatic drainage.',
+      },
+      'gentle-yoga': {
+        name:'Gentle Yoga', loc:'Pyramids Heights',
+        schedule:'قريباً', scheduleEn:'Coming Soon',
+        level:'All Levels', icon:'fa-leaf', color:'blue', active:true, coming_soon:true,
+        price1:350,
+        descAr:'يوجا ناعمة ولطيفة مثالية للمبتدئات. تركز على الاسترخاء والمرونة البسيطة في بيئة داعمة وهادئة.',
+        descEn:'Soft and gentle yoga ideal for beginners. Focuses on relaxation and basic flexibility in a supportive, calm environment.',
+      },
+    };
+    for (const [id, cls] of Object.entries(defaults)) {
+      await update(ref(db, `classes/${id}`), cls);
+    }
+  };
+
   window.fbAddBooking    = async (data) => { await push(ref(db, 'bookings'), { ...data, createdAt: serverTimestamp() }); };
   window.fbUpdateStatus  = async (key, status) => { await update(ref(db, `bookings/${key}`), { status }); };
   window.fbUpdatePayment = async (key, paymentStatus, paymentRef) => { await update(ref(db, `bookings/${key}`), { paymentStatus, paymentRef: paymentRef || '' }); };
