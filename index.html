@@ -235,7 +235,35 @@
       html[dir="ltr"] .hero-float-card.card-1{left:auto;right:16px}
       html[dir="ltr"] .hero-float-card.card-2{right:auto;left:16px}
     }
-    @media(max-width:480px){.hero-stats{gap:24px}.form-row{grid-template-columns:1fr}}
+    /* WhatsApp Float */
+    .wa-float{position:fixed;bottom:28px;left:28px;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,.45);z-index:999;transition:all .3s;text-decoration:none}
+    .wa-float:hover{transform:scale(1.12);box-shadow:0 8px 32px rgba(37,211,102,.55)}
+    html[dir="rtl"] .wa-float{left:auto;right:28px}
+
+    /* Video Section */
+    .videos-section{padding:100px 0;background:var(--bg-deep)}
+    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:40px}
+    .video-card{background:var(--card);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);transition:all .3s}
+    .video-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+    .video-thumb{position:relative;aspect-ratio:9/16;background:#111;overflow:hidden;max-height:500px}
+    .video-thumb iframe{width:100%;height:100%;border:none}
+    .ig-link-card{display:flex;align-items:center;gap:14px;padding:16px 20px;text-decoration:none;color:var(--fg);transition:background .2s}
+    .ig-link-card:hover{background:var(--bg-deep)}
+    .ig-link-icon{width:42px;height:42px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;flex-shrink:0}
+    .ig-link-text strong{display:block;font-size:.9rem;font-weight:700;margin-bottom:2px}
+    .ig-link-text span{font-size:.75rem;color:var(--fg-muted)}
+
+    /* Retreat Videos */
+    .retreat-videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:32px}
+    .rv-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);overflow:hidden;transition:all .3s}
+    .rv-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)}
+    .rv-thumb{aspect-ratio:9/16;max-height:420px;overflow:hidden;position:relative}
+    .rv-thumb iframe{width:100%;height:100%;border:none}
+    .rv-info{padding:14px 16px}
+    .rv-info strong{display:block;font-size:.88rem;font-weight:700;color:#fff;margin-bottom:4px}
+    .rv-info span{font-size:.75rem;color:rgba(255,255,255,.55)}
+
+    @media(max-width:968px){.video-thumb,.rv-thumb{aspect-ratio:4/5;max-height:360px}}
   </style>
 </head>
 <body>
@@ -315,43 +343,54 @@
         <h2 class="section-title" data-ar="اختاري كلاسكِ المناسب" data-en="Choose Your Class">اختاري كلاسكِ المناسب</h2>
         <p class="section-desc" data-ar="كل كلاس مصمم بعناية ليناسب احتياجاتكِ المختلفة." data-en="Each class is carefully designed to suit your different needs.">كل كلاس مصمم بعناية ليناسب احتياجاتكِ المختلفة.</p>
       </div>
-      <div class="programs-grid">
-        <div class="program-card reveal">
-          <div class="program-card-img"><img src="https://picsum.photos/seed/powerclass/500/350" alt="Power Yoga"><span class="program-level">Ladies Only</span></div>
-          <div class="program-card-body">
-            <h3>Power Yoga</h3>
-            <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot"></i> Royal Hills Clubhouse</p>
-            <p data-ar="تحدي جسدي مكثف يبني القوة والمرونة. تدفق سريع بين الوضعيات مع تنفس متزامن." data-en="An intense physical challenge that builds strength and flexibility with synchronized breathing.">تحدي جسدي مكثف يبني القوة والمرونة.</p>
-            <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar"></i> <span data-ar="الأحد والأربعاء — 11 صباحاً" data-en="Sun & Wed — 11:00 AM">الأحد والأربعاء — 11 صباحاً</span></div>
-            <div class="program-meta">
-              <span><i class="fa-solid fa-ticket"></i> <span data-ar="جلسة: 400 ج.م" data-en="Session: 400 EGP">جلسة: 400 ج.م</span></span>
-              <span><i class="fa-solid fa-layer-group"></i> <span data-ar="4 كلاسات: 1,500" data-en="4 Classes: 1,500 EGP">4 كلاسات: 1,500</span></span>
-              <span><i class="fa-solid fa-boxes-stacked"></i> <span data-ar="8 كلاسات: 2,800" data-en="8 Classes: 2,800 EGP">8 كلاسات: 2,800</span></span>
-            </div>
-          </div>
+      <div class="programs-grid" id="programsGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--fg-muted)">
+          <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem;margin-bottom:12px;display:block"></i>
+          جاري تحميل الكلاسات...
         </div>
-        <div class="program-card reveal">
-          <div class="program-card-img"><img src="https://picsum.photos/seed/diabetesclass/500/350" alt="Yoga for Diabetes"><span class="program-level" data-ar="متخصصة" data-en="Specialized">متخصصة</span></div>
-          <div class="program-card-body">
-            <h3>Yoga for Diabetes</h3>
-            <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot"></i> Royal Hills</p>
-            <p data-ar="تمارين يوجا متخصصة تساعد في تنظيم السكر والغدة الدرقية. جلسات هادئة مع تنفس موجّه." data-en="Specialized yoga exercises that help regulate blood sugar and thyroid. Calm sessions with guided breathing.">تمارين يوجا متخصصة تساعد في تنظيم السكر.</p>
-            <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar"></i> <span data-ar="الاثنين والأربعاء — 7:30 مساءً" data-en="Mon & Wed — 7:30 PM">الاثنين والأربعاء — 7:30 مساءً</span></div>
-            <div class="program-meta">
-              <span><i class="fa-solid fa-ticket"></i> <span data-ar="جلسة: 400 ج.م" data-en="Session: 400 EGP">جلسة: 400 ج.م</span></span>
-              <span><i class="fa-solid fa-layer-group"></i> <span data-ar="4 كلاسات: 1,500" data-en="4 Classes: 1,500 EGP">4 كلاسات: 1,500</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/201063751653" class="wa-float" target="_blank" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- VIDEO SECTION -->
+  <section class="videos-section" id="videos">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label" data-ar="شاهدي" data-en="Watch">شاهدي</span>
+        <h2 class="section-title" data-ar="إنجي في العمل" data-en="Enjy in Action">إنجي في العمل</h2>
+        <p class="section-desc" data-ar="اكتشفي أسلوب إنجي في التدريس من خلال هذه اللقطات." data-en="Discover Enjy's teaching style through these sessions.">اكتشفي أسلوب إنجي في التدريس.</p>
+      </div>
+      <div class="video-grid reveal">
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.instagram.com/reel/DSDs_OlDgAK/embed/captioned/" allowfullscreen scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+          </div>
+          <a href="https://www.instagram.com/reel/DSDs_OlDgAK/" target="_blank" class="ig-link-card">
+            <div class="ig-link-icon"><i class="fa-brands fa-instagram"></i></div>
+            <div class="ig-link-text">
+              <strong data-ar="كلاس اليوجا" data-en="Yoga Class">كلاس اليوجا</strong>
+              <span data-ar="شاهدي على انستجرام" data-en="Watch on Instagram">شاهدي على انستجرام</span>
             </div>
-          </div>
+            <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--fg-muted);font-size:.75rem;margin-right:auto"></i>
+          </a>
         </div>
-        <div class="program-card reveal">
-          <div class="program-card-img"><img src="https://picsum.photos/seed/gentleclass/500/350" alt="Gentle Yoga"><span class="program-level" data-ar="جميع المستويات" data-en="All Levels">جميع المستويات</span></div>
-          <div class="program-card-body">
-            <h3>Gentle Yoga</h3>
-            <p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot"></i> Pyramids Heights</p>
-            <p data-ar="يوجا ناعمة ولطيفة مثالية للمبتدئات. تركيز على الاسترخاء والمرونة البسيطة." data-en="Soft and gentle yoga ideal for beginners. Focus on relaxation and basic flexibility.">يوجا ناعمة ولطيفة مثالية للمبتدئات.</p>
-            <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar"></i> <span data-ar="الموعد سيتم تحديده قريباً" data-en="Schedule coming soon">الموعد سيتم تحديده قريباً</span></div>
-            <div class="program-meta"><span><i class="fa-solid fa-ticket"></i> <span data-ar="جلسة: 350 ج.م" data-en="Session: 350 EGP">جلسة: 350 ج.م</span></span></div>
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.instagram.com/reel/DUBSBOxDJtG/embed/captioned/" allowfullscreen scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
           </div>
+          <a href="https://www.instagram.com/reel/DUBSBOxDJtG/" target="_blank" class="ig-link-card">
+            <div class="ig-link-icon"><i class="fa-brands fa-instagram"></i></div>
+            <div class="ig-link-text">
+              <strong data-ar="Align by Enjy" data-en="Align by Enjy">Align by Enjy</strong>
+              <span data-ar="شاهدي على انستجرام" data-en="Watch on Instagram">شاهدي على انستجرام</span>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--fg-muted);font-size:.75rem;margin-right:auto"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -370,6 +409,32 @@
           <i class="fa-solid fa-mountain-sun"></i>
           <p data-ar="رحلات الريتريت القادمة ستُعلَن قريباً!" data-en="Upcoming retreat trips will be announced soon!">رحلات الريتريت القادمة ستُعلَن قريباً!</p>
           <a href="#booking" class="btn-retreat" style="display:inline-flex;margin-top:20px"><i class="fa-solid fa-bell"></i> <span data-ar="أبلغيني عند الإطلاق" data-en="Notify Me">أبلغيني عند الإطلاق</span></a>
+        </div>
+      </div>
+
+      <!-- Retreat Videos -->
+      <div class="reveal" style="margin-top:60px;text-align:center">
+        <span class="section-label" style="color:var(--accent-light)" data-ar="من ريتريتسنا" data-en="From Our Retreats">من ريتريتسنا</span>
+        <h3 style="color:#fff;font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:8px" data-ar="لقطات من رحلاتنا" data-en="Moments from Our Journeys">لقطات من رحلاتنا</h3>
+      </div>
+      <div class="retreat-videos reveal">
+        <div class="rv-card">
+          <div class="rv-thumb">
+            <iframe src="https://www.instagram.com/reel/DXKhPhiju72/embed/captioned/" allowfullscreen scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+          </div>
+          <div class="rv-info">
+            <strong data-ar="ريتريت أسوان 🏛️" data-en="Aswan Retreat 🏛️">ريتريت أسوان 🏛️</strong>
+            <span data-ar="يوجا وتأمل على ضفاف النيل" data-en="Yoga & meditation on the Nile">يوجا وتأمل على ضفاف النيل</span>
+          </div>
+        </div>
+        <div class="rv-card">
+          <div class="rv-thumb">
+            <iframe src="https://www.instagram.com/reel/DUBSBOxDJtG/embed/captioned/" allowfullscreen scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+          </div>
+          <div class="rv-info">
+            <strong data-ar="The Flow Retreats 🌊" data-en="The Flow Retreats 🌊">The Flow Retreats 🌊</strong>
+            <span data-ar="تجربة روحانية لا تُنسى" data-en="An unforgettable spiritual experience">تجربة روحانية لا تُنسى</span>
+          </div>
         </div>
       </div>
     </div>
@@ -395,18 +460,31 @@
   <section class="about" id="about">
     <div class="container">
       <div class="about-grid">
-        <div class="about-img reveal"><img src="about.jpg" alt="Enjy Abdel Monem"><div class="about-exp"><div class="num">8+</div><div class="label" data-ar="سنوات خبرة" data-en="Years Experience">سنوات خبرة</div></div></div>
+        <div class="about-img reveal"><img src="about.jpg" alt="Enjy Abdel Monem"><div class="about-exp"><div class="num">3K+</div><div class="label" data-ar="ساعة تدريب" data-en="Teaching Hours">ساعة تدريب</div></div></div>
         <div class="about-content reveal">
           <span class="section-label" data-ar="عنّي" data-en="About Me">عنّي</span>
           <h2 class="section-title">Enjy Abdel Monem</h2>
-          <p data-ar="بدأت رحلتي مع اليوجا عام 2016 في ريشيكيش بالهند، حيث حصلت على شهادة RYT-500 من Yoga Alliance. منذ ذلك الحين، درّبت أكثر من 500 متدربة." data-en="I began my yoga journey in 2016 in Rishikesh, India, where I received my RYT-500 certification from Yoga Alliance. Since then, I have trained more than 500 students.">بدأت رحلتي مع اليوجا عام 2016 في ريشيكيش بالهند.</p>
-          <div class="about-certs">
-            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> RYT-500</span>
-            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> <span data-ar="براناياما متقدم" data-en="Advanced Pranayama">براناياما متقدم</span></span>
-            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> <span data-ar="يوجا طبية" data-en="Medical Yoga">يوجا طبية</span></span>
-            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> <span data-ar="ميوفاسيل" data-en="Myofascial">ميوفاسيل</span></span>
+          <p data-ar="معالجة يوجا ومدرّبة يوجا متعددة الأساليب RYT-500 معتمدة من Yoga Alliance. شغوفة بتعليم تقنيات مختلفة للاستفادة القصوى من كلاس اليوجا — من تقنيات التنفس إلى استعادة أفضل محاذاة للجسم، لبناء جسم مرن وعقل منفتح." data-en="A yoga therapist and 500 RYT multi-style yoga teacher who is passionate about teaching different techniques to get the best out of every yoga class — learning breathing techniques and restoring best body alignment that creates not only a flexible body but also expands the mind.">معالجة يوجا ومدرّبة يوجا متعددة الأساليب RYT-500.</p>
+
+          <!-- Cert images -->
+          <div style="display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap;align-items:center">
+            <img src="ryt500.jpg" alt="RYT-500 Yoga Alliance" style="width:80px;height:80px;object-fit:contain;border-radius:50%;border:2px solid var(--border)" onerror="this.style.display='none'">
+            <img src="yacep.jpg" alt="YACEP Yoga Alliance" style="width:80px;height:80px;object-fit:contain;border-radius:50%;border:2px solid var(--border)" onerror="this.style.display='none'">
           </div>
-          <a href="#booking" class="btn-primary"><i class="fa-solid fa-hand-holding-heart"></i> <span data-ar="احجزي معي جلسة تجريبية" data-en="Book a Trial Session">احجزي معي جلسة تجريبية</span></a>
+
+          <div class="about-certs">
+            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> RYT-500 Yoga Alliance</span>
+            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> YACEP — Continuing Education</span>
+            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> <span data-ar="دبلوم 860 ساعة — يوجا علاجية" data-en="860 hrs Diploma — Yoga Therapy">دبلوم 860 ساعة — يوجا علاجية</span></span>
+            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> <span data-ar="100 ساعة — Yin Yoga" data-en="100 hrs — Yin Yoga Certified">100 ساعة — Yin Yoga</span></span>
+            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> <span data-ar="100 ساعة — Vinyasa" data-en="100 hrs — Vinyasa">100 ساعة — Vinyasa</span></span>
+            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> <span data-ar="لياقة جماعية — IFPA" data-en="Group Fitness — IFPA">لياقة جماعية — IFPA</span></span>
+            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> <span data-ar="تغذية رياضية — IFPA" data-en="Sports Nutrition — IFPA">تغذية رياضية — IFPA</span></span>
+            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> <span data-ar="Pranic Healing" data-en="Pranic Healing">Pranic Healing</span></span>
+            <span class="cert-badge"><i class="fa-solid fa-certificate"></i> <span data-ar="تدليك تايلاندي" data-en="Thai Massage">تدليك تايلاندي</span></span>
+            <span class="cert-badge"><i class="fa-solid fa-star"></i> <span data-ar="4 دورات تدريب مدرّبين 200 ساعة" data-en="4 × 200 hrs Teacher Training Courses">4 دورات تدريب مدرّبين</span></span>
+          </div>
+          <a href="#booking" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> <span data-ar="احجزي جلستك الآن" data-en="Book Your Session">احجزي جلستك الآن</span></a>
         </div>
       </div>
     </div>
@@ -427,18 +505,17 @@
           <div class="booking-perks">
             <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-user-check"></i></div><div class="perk-text"><h4 data-ar="اهتمام شخصي" data-en="Personal Attention">اهتمام شخصي</h4><p data-ar="جلسات فردية أو مجموعات صغيرة لا تتجاوز 6 متدربات" data-en="Individual sessions or small groups of up to 6 students">جلسات فردية أو مجموعات صغيرة</p></div></div>
             <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-shield-heart"></i></div><div class="perk-text"><h4 data-ar="أمان ومرونة" data-en="Safety & Flexibility">أمان ومرونة</h4><p data-ar="تعديل الوضعيات حسب قدراتكِ الجسدية بأمان تام" data-en="Pose modifications according to your physical abilities">تعديل الوضعيات حسب قدراتكِ</p></div></div>
-            <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-gift"></i></div><div class="perk-text"><h4 data-ar="جلسة تجريبية مجانية" data-en="Free Trial Session">جلسة تجريبية مجانية</h4><p data-ar="أول جلسة مجانية لتقييم مستواكِ" data-en="First session free to assess your level">أول جلسة مجانية</p></div></div>
             <div class="perk-item"><div class="perk-icon"><i class="fa-solid fa-mobile-screen"></i></div><div class="perk-text"><h4 data-ar="دفع سهل عبر InstaPay" data-en="Easy Payment via InstaPay">دفع سهل عبر InstaPay</h4><p data-ar="سددي رسوم الكلاسات بكل سهولة عبر InstaPay" data-en="Pay your class fees easily via InstaPay">سددي رسوم الكلاسات بسهولة</p></div></div>
           </div>
         </div>
         <div class="booking-form">
           <div id="bookingFormSection">
             <div class="form-row">
-              <div class="form-group"><label data-ar="الاسم الأول" data-en="First Name">الاسم الأول</label><input type="text" id="fname" placeholder="نورة" required></div>
-              <div class="form-group"><label data-ar="الاسم الأخير" data-en="Last Name">الاسم الأخير</label><input type="text" id="lname" placeholder="العتيبي" required></div>
+              <div class="form-group"><label data-ar="الاسم الأول" data-en="First Name">الاسم الأول</label><input type="text" id="fname" placeholder="إنجي" data-ar="إنجي" data-en="Enjy" required></div>
+              <div class="form-group"><label data-ar="الاسم الأخير" data-en="Last Name">الاسم الأخير</label><input type="text" id="lname" placeholder="عبد المنعم" data-ar="عبد المنعم" data-en="Abdel Monem" required></div>
             </div>
             <div class="form-row">
-              <div class="form-group"><label data-ar="رقم الجوال" data-en="Phone Number">رقم الجوال</label><input type="tel" id="phone" placeholder="01XXXXXXXX" required dir="ltr"></div>
+              <div class="form-group"><label data-ar="رقم الموبايل" data-en="Phone Number">رقم الموبايل</label><input type="tel" id="phone" placeholder="01XXXXXXXX" required dir="ltr"></div>
               <div class="form-group"><label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label><input type="email" id="email" placeholder="name@example.com" required dir="ltr"></div>
             </div>
             <div class="form-group">
@@ -507,7 +584,7 @@
   </section>
 
   <footer>
-    <div class="social-links"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-tiktok"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a></div>
+    <div class="social-links"><a href="https://www.instagram.com/reel/DUBSBOxDJtG/?igsh=MnVpOWRuMG1ueHZ3" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/201063751653" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a></div>
     <p data-ar="جميع الحقوق محفوظة لـ Align by Enjy © 2026" data-en="All rights reserved — Align by Enjy © 2026">جميع الحقوق محفوظة لـ Align by Enjy © 2026</p>
   </footer>
 
@@ -516,7 +593,7 @@
   <!-- Firebase -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, push, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+    import { getDatabase, ref, push, onValue, update, get, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyB7xZSiGqTh4ncnHcvFBx8ufwPudpEEl50",
@@ -537,6 +614,78 @@
       const retreats = Object.entries(data).map(([k, v]) => ({ ...v, _key: k }));
       if (retreats.length > 0) renderRetreats(retreats);
     });
+
+    // Classes — loaded from Firebase, auto-seed if empty
+    onValue(ref(db, 'classes'), async (snapshot) => {
+      const data = snapshot.val();
+      if (!data) { await seedDefaultClasses(); return; }
+      const classes = Object.entries(data).map(([k,v]) => ({...v, _key:k}));
+      renderPrograms(classes);
+    });
+
+    async function seedDefaultClasses() {
+      const defaults = {
+        'power-yoga': {
+          name:'Power Yoga', loc:'Royal Hills Clubhouse',
+          schedule:'الأحد والأربعاء — 11 صباحاً', scheduleEn:'Sun & Wed — 11:00 AM',
+          level:'Ladies Only', icon:'fa-fire', color:'green', active:true,
+          price1:400, price4:1500, price8:2800,
+          descAr:'باور يوجا هي ممارسة تعتمد على اللياقة البدنية، أكثر كثافة من اليوجا التقليدية. تركز على القوة والمرونة والتحمل، وترفع معدل ضربات القلب من خلال تدفق سريع بين الوضعيات مع تنفس منتظم.',
+          descEn:'Power yoga is a medium to fast pace class focusing on activating all body muscles, raising heart rate and increasing stability, strength, flexibility, and stamina. Challenging but with a strong impact on body and mind.',
+        },
+        'yoga-therapy': {
+          name:'Yoga Therapy for Blood Sugar Management',
+          loc:'Royal Hills', schedule:'الاثنين والأربعاء — 7:30 مساءً', scheduleEn:'Mon & Wed — 7:30 PM',
+          level:'Specialized', icon:'fa-heart-pulse', color:'accent', active:true,
+          price1:400, price4:1500,
+          descAr:'نهج قائم على الأدلة يستخدم وضعيات جسدية محددة وتقنيات التنفس والاسترخاء لدعم التمثيل الغذائي. يركز على تحسين حساسية الأنسولين وتقليل هرمونات التوتر وتحفيز الجهاز اللمفاوي.',
+          descEn:'An evidence-based approach using specific postures, breathing techniques, and relaxation to support metabolic functions. Focuses on improving insulin sensitivity, reducing cortisol, and stimulating lymphatic drainage.',
+        },
+        'gentle-yoga': {
+          name:'Gentle Yoga', loc:'Pyramids Heights',
+          schedule:'قريباً', scheduleEn:'Coming Soon',
+          level:'All Levels', icon:'fa-leaf', color:'blue', active:true, coming_soon:true,
+          price1:350,
+          descAr:'يوجا ناعمة ولطيفة مثالية للمبتدئات. تركز على الاسترخاء والمرونة البسيطة في بيئة داعمة وهادئة.',
+          descEn:'Soft and gentle yoga ideal for beginners. Focuses on relaxation and basic flexibility in a supportive, calm environment.',
+        },
+      };
+      for (const [id, cls] of Object.entries(defaults)) {
+        await update(ref(db, `classes/${id}`), cls);
+      }
+    }
+
+    function renderPrograms(list) {
+      const grid = document.getElementById('programsGrid');
+      const lang = document.getElementById('html-root').getAttribute('lang');
+      if (!list.length) return;
+      grid.innerHTML = list.map(cls => {
+        const desc = lang === 'en' ? (cls.descEn||cls.descAr||'') : (cls.descAr||cls.descEn||'');
+        const sched = lang === 'en' ? (cls.scheduleEn||cls.schedule||'') : (cls.schedule||'');
+        const isSoon = cls.coming_soon;
+        return `
+        <div class="program-card reveal" style="${isSoon?'opacity:.75':''}">
+          <div class="program-card-img">
+            <img src="https://picsum.photos/seed/${cls._key}/500/350" alt="${cls.name}" onerror="this.src='https://picsum.photos/seed/yoga${cls._key}/500/350'">
+            ${isSoon
+              ? `<span class="program-level" style="background:rgba(240,180,41,.9);color:#1a1a1a">${lang==='en'?'Coming Soon':'قريباً'}</span>`
+              : (cls.level ? `<span class="program-level">${cls.level}</span>` : '')
+            }
+          </div>
+          <div class="program-card-body">
+            <h3>${cls.name}</h3>
+            ${cls.loc ? `<p style="display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:.82rem;color:var(--accent)"><i class="fa-solid fa-location-dot"></i>${cls.loc}</p>` : ''}
+            ${desc ? `<p style="font-size:.88rem;color:var(--fg-muted);margin-bottom:12px;line-height:1.6">${desc}</p>` : ''}
+            ${sched ? `<div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--fg-muted);margin-bottom:16px"><i class="fa-regular fa-calendar"></i>${sched}</div>` : ''}
+            <a href="#booking" class="btn-primary" style="font-size:.82rem;padding:10px 20px;display:inline-flex">
+              <i class="fa-solid fa-calendar-check"></i>
+              <span>${lang==='en'?'Book Now':'احجزي الآن'}</span>
+            </a>
+          </div>
+        </div>`;
+      }).join('');
+      grid.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
+    }
 
     function renderRetreats(list) {
       const el   = document.getElementById('retreatsList');
@@ -595,6 +744,25 @@
 
       const btn = document.getElementById('submitBtn');
       btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${lang === 'ar' ? 'جاري التحقق...' : 'Checking...'}`;
+
+      // منع الحجز المكرر بنفس الرقم
+      try {
+        const snap = await get(ref(db, 'bookings'));
+        const existing = snap.val();
+        if (existing) {
+          const dup = Object.values(existing).find(b =>
+            b.phone?.replace(/\D/g,'') === phone.replace(/\D/g,'')
+          );
+          if (dup) {
+            showToast(lang === 'ar' ? 'هذا الرقم مسجل بالفعل! تواصلي معنا للاستفسار.' : 'This number is already registered! Contact us for details.', 'fa-triangle-exclamation', true);
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> ${lang === 'ar' ? 'إرسال طلب الحجز' : 'Send Booking Request'}`;
+            return;
+          }
+        }
+      } catch(e) { /* continue if check fails */ }
+
       btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${lang === 'ar' ? 'جاري الإرسال...' : 'Sending...'}`;
 
       try {
