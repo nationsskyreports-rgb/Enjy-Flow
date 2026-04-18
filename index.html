@@ -242,28 +242,30 @@
 
     /* Video Section */
     .videos-section{padding:100px 0;background:var(--bg-deep)}
-    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:40px}
-    .video-card{background:var(--card);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);transition:all .3s}
-    .video-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
-    .video-thumb{position:relative;aspect-ratio:9/16;background:#111;overflow:hidden;max-height:500px}
-    .video-thumb iframe{width:100%;height:100%;border:none}
-    .ig-link-card{display:flex;align-items:center;gap:14px;padding:16px 20px;text-decoration:none;color:var(--fg);transition:background .2s}
-    .ig-link-card:hover{background:var(--bg-deep)}
-    .ig-link-icon{width:42px;height:42px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;flex-shrink:0}
-    .ig-link-text strong{display:block;font-size:.9rem;font-weight:700;margin-bottom:2px}
-    .ig-link-text span{font-size:.75rem;color:var(--fg-muted)}
+    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:40px}
+
+    /* Clean Video Preview Cards */
+    .video-preview-card{display:block;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);text-decoration:none;color:var(--fg);transition:all .4s cubic-bezier(.4,0,.2,1);background:var(--card)}
+    .video-preview-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:transparent}
+    .video-preview-card.dark{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
+    .video-preview-card.dark:hover{background:rgba(255,255,255,.1)}
+    .vp-thumb{position:relative;aspect-ratio:4/5;overflow:hidden;max-height:420px}
+    .vp-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+    .video-preview-card:hover .vp-thumb img{transform:scale(1.06)}
+    .vp-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.55) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:background .3s}
+    .video-preview-card:hover .vp-overlay{background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.65) 100%)}
+    .vp-play{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;transition:all .3s;padding-right:4px}
+    .video-preview-card:hover .vp-play{background:rgba(255,255,255,.25);transform:scale(1.1)}
+    .vp-ig-badge{position:absolute;bottom:14px;left:14px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;padding:5px 12px;border-radius:50px;font-size:.72rem;font-weight:700;display:flex;align-items:center;gap:6px}
+    html[dir="rtl"] .vp-ig-badge{left:auto;right:14px}
+    .vp-info{padding:18px 20px}
+    .vp-info h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:5px}
+    .video-preview-card.dark .vp-info h3{color:#fff}
+    .vp-info p{font-size:.8rem;color:var(--fg-muted)}
+    .video-preview-card.dark .vp-info p{color:rgba(255,255,255,.55)}
 
     /* Retreat Videos */
     .retreat-videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:32px}
-    .rv-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);overflow:hidden;transition:all .3s}
-    .rv-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)}
-    .rv-thumb{aspect-ratio:9/16;max-height:420px;overflow:hidden;position:relative}
-    .rv-thumb iframe{width:100%;height:100%;border:none}
-    .rv-info{padding:14px 16px}
-    .rv-info strong{display:block;font-size:.88rem;font-weight:700;color:#fff;margin-bottom:4px}
-    .rv-info span{font-size:.75rem;color:rgba(255,255,255,.55)}
-
-    @media(max-width:968px){.video-thumb,.rv-thumb{aspect-ratio:4/5;max-height:360px}}
   </style>
 </head>
 <body>
@@ -366,32 +368,32 @@
         <p class="section-desc" data-ar="اكتشفي أسلوب إنجي في التدريس من خلال هذه اللقطات." data-en="Discover Enjy's teaching style through these sessions.">اكتشفي أسلوب إنجي في التدريس.</p>
       </div>
       <div class="video-grid reveal">
-        <div class="video-card">
-          <div class="video-thumb">
-            <iframe src="https://www.instagram.com/reel/DSDs_OlDgAK/embed/captioned/" allowfullscreen scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
-          </div>
-          <a href="https://www.instagram.com/reel/DSDs_OlDgAK/" target="_blank" class="ig-link-card">
-            <div class="ig-link-icon"><i class="fa-brands fa-instagram"></i></div>
-            <div class="ig-link-text">
-              <strong data-ar="كلاس اليوجا" data-en="Yoga Class">كلاس اليوجا</strong>
-              <span data-ar="شاهدي على انستجرام" data-en="Watch on Instagram">شاهدي على انستجرام</span>
+        <a href="https://www.instagram.com/reel/DSDs_OlDgAK/" target="_blank" class="video-preview-card">
+          <div class="vp-thumb" style="background:linear-gradient(135deg,#2D4A3E,#1a2e26)">
+            <img src="https://picsum.photos/seed/yogaclass/600/800" alt="Yoga Class" loading="lazy">
+            <div class="vp-overlay">
+              <div class="vp-play"><i class="fa-solid fa-play"></i></div>
+              <div class="vp-ig-badge"><i class="fa-brands fa-instagram"></i> Instagram Reel</div>
             </div>
-            <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--fg-muted);font-size:.75rem;margin-right:auto"></i>
-          </a>
-        </div>
-        <div class="video-card">
-          <div class="video-thumb">
-            <iframe src="https://www.instagram.com/reel/DUBSBOxDJtG/embed/captioned/" allowfullscreen scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
           </div>
-          <a href="https://www.instagram.com/reel/DUBSBOxDJtG/" target="_blank" class="ig-link-card">
-            <div class="ig-link-icon"><i class="fa-brands fa-instagram"></i></div>
-            <div class="ig-link-text">
-              <strong data-ar="Align by Enjy" data-en="Align by Enjy">Align by Enjy</strong>
-              <span data-ar="شاهدي على انستجرام" data-en="Watch on Instagram">شاهدي على انستجرام</span>
+          <div class="vp-info">
+            <h3 data-ar="كلاس اليوجا" data-en="Yoga Class">كلاس اليوجا</h3>
+            <p data-ar="اضغطي لمشاهدة الفيديو على انستجرام" data-en="Tap to watch on Instagram">اضغطي لمشاهدة الفيديو على انستجرام</p>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/reel/DUBSBOxDJtG/" target="_blank" class="video-preview-card">
+          <div class="vp-thumb" style="background:linear-gradient(135deg,#3D6555,#2D4A3E)">
+            <img src="https://picsum.photos/seed/alignenjy/600/800" alt="Align by Enjy" loading="lazy">
+            <div class="vp-overlay">
+              <div class="vp-play"><i class="fa-solid fa-play"></i></div>
+              <div class="vp-ig-badge"><i class="fa-brands fa-instagram"></i> Instagram Reel</div>
             </div>
-            <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--fg-muted);font-size:.75rem;margin-right:auto"></i>
-          </a>
-        </div>
+          </div>
+          <div class="vp-info">
+            <h3>Align by Enjy</h3>
+            <p data-ar="اضغطي لمشاهدة الفيديو على انستجرام" data-en="Tap to watch on Instagram">اضغطي لمشاهدة الفيديو على انستجرام</p>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -418,24 +420,32 @@
         <h3 style="color:#fff;font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:8px" data-ar="لقطات من رحلاتنا" data-en="Moments from Our Journeys">لقطات من رحلاتنا</h3>
       </div>
       <div class="retreat-videos reveal">
-        <div class="rv-card">
-          <div class="rv-thumb">
-            <iframe src="https://www.instagram.com/reel/DXKhPhiju72/embed/captioned/" allowfullscreen scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+        <a href="https://www.instagram.com/reel/DXKhPhiju72/" target="_blank" class="video-preview-card dark">
+          <div class="vp-thumb">
+            <img src="https://picsum.photos/seed/aswanretreat/600/800" alt="Aswan Retreat" loading="lazy">
+            <div class="vp-overlay">
+              <div class="vp-play"><i class="fa-solid fa-play"></i></div>
+              <div class="vp-ig-badge"><i class="fa-brands fa-instagram"></i> Instagram Reel</div>
+            </div>
           </div>
-          <div class="rv-info">
-            <strong data-ar="ريتريت أسوان 🏛️" data-en="Aswan Retreat 🏛️">ريتريت أسوان 🏛️</strong>
-            <span data-ar="يوجا وتأمل على ضفاف النيل" data-en="Yoga & meditation on the Nile">يوجا وتأمل على ضفاف النيل</span>
+          <div class="vp-info">
+            <h3 data-ar="ريتريت أسوان 🏛️" data-en="Aswan Retreat 🏛️">ريتريت أسوان 🏛️</h3>
+            <p data-ar="يوجا وتأمل على ضفاف النيل" data-en="Yoga & meditation on the Nile">يوجا وتأمل على ضفاف النيل</p>
           </div>
-        </div>
-        <div class="rv-card">
-          <div class="rv-thumb">
-            <iframe src="https://www.instagram.com/reel/DUBSBOxDJtG/embed/captioned/" allowfullscreen scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+        </a>
+        <a href="https://www.instagram.com/reel/DUBSBOxDJtG/" target="_blank" class="video-preview-card dark">
+          <div class="vp-thumb">
+            <img src="https://picsum.photos/seed/flowretreats/600/800" alt="The Flow Retreats" loading="lazy">
+            <div class="vp-overlay">
+              <div class="vp-play"><i class="fa-solid fa-play"></i></div>
+              <div class="vp-ig-badge"><i class="fa-brands fa-instagram"></i> Instagram Reel</div>
+            </div>
           </div>
-          <div class="rv-info">
-            <strong data-ar="The Flow Retreats 🌊" data-en="The Flow Retreats 🌊">The Flow Retreats 🌊</strong>
-            <span data-ar="تجربة روحانية لا تُنسى" data-en="An unforgettable spiritual experience">تجربة روحانية لا تُنسى</span>
+          <div class="vp-info">
+            <h3 data-ar="The Flow Retreats 🌊" data-en="The Flow Retreats 🌊">The Flow Retreats 🌊</h3>
+            <p data-ar="تجربة روحانية لا تُنسى" data-en="An unforgettable spiritual experience">تجربة روحانية لا تُنسى</p>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
