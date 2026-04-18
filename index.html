@@ -615,45 +615,17 @@
       if (retreats.length > 0) renderRetreats(retreats);
     });
 
-    // Classes — loaded from Firebase, auto-seed if empty
-    onValue(ref(db, 'classes'), async (snapshot) => {
+    // Classes — loaded from Firebase
+    onValue(ref(db, 'classes'), (snapshot) => {
       const data = snapshot.val();
-      if (!data) { await seedDefaultClasses(); return; }
+      const grid = document.getElementById('programsGrid');
+      if (!data) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--fg-muted)"><i class="fa-solid fa-dumbbell" style="font-size:2rem;margin-bottom:12px;display:block;opacity:.3"></i><span data-ar="الكلاسات ستُعلَن قريباً!" data-en="Classes coming soon!">الكلاسات ستُعلَن قريباً!</span></div>';
+        return;
+      }
       const classes = Object.entries(data).map(([k,v]) => ({...v, _key:k}));
       renderPrograms(classes);
     });
-
-    async function seedDefaultClasses() {
-      const defaults = {
-        'power-yoga': {
-          name:'Power Yoga', loc:'Royal Hills Clubhouse',
-          schedule:'الأحد والأربعاء — 11 صباحاً', scheduleEn:'Sun & Wed — 11:00 AM',
-          level:'Ladies Only', icon:'fa-fire', color:'green', active:true,
-          price1:400, price4:1500, price8:2800,
-          descAr:'باور يوجا هي ممارسة تعتمد على اللياقة البدنية، أكثر كثافة من اليوجا التقليدية. تركز على القوة والمرونة والتحمل، وترفع معدل ضربات القلب من خلال تدفق سريع بين الوضعيات مع تنفس منتظم.',
-          descEn:'Power yoga is a medium to fast pace class focusing on activating all body muscles, raising heart rate and increasing stability, strength, flexibility, and stamina. Challenging but with a strong impact on body and mind.',
-        },
-        'yoga-therapy': {
-          name:'Yoga Therapy for Blood Sugar Management',
-          loc:'Royal Hills', schedule:'الاثنين والأربعاء — 7:30 مساءً', scheduleEn:'Mon & Wed — 7:30 PM',
-          level:'Specialized', icon:'fa-heart-pulse', color:'accent', active:true,
-          price1:400, price4:1500,
-          descAr:'نهج قائم على الأدلة يستخدم وضعيات جسدية محددة وتقنيات التنفس والاسترخاء لدعم التمثيل الغذائي. يركز على تحسين حساسية الأنسولين وتقليل هرمونات التوتر وتحفيز الجهاز اللمفاوي.',
-          descEn:'An evidence-based approach using specific postures, breathing techniques, and relaxation to support metabolic functions. Focuses on improving insulin sensitivity, reducing cortisol, and stimulating lymphatic drainage.',
-        },
-        'gentle-yoga': {
-          name:'Gentle Yoga', loc:'Pyramids Heights',
-          schedule:'قريباً', scheduleEn:'Coming Soon',
-          level:'All Levels', icon:'fa-leaf', color:'blue', active:true, coming_soon:true,
-          price1:350,
-          descAr:'يوجا ناعمة ولطيفة مثالية للمبتدئات. تركز على الاسترخاء والمرونة البسيطة في بيئة داعمة وهادئة.',
-          descEn:'Soft and gentle yoga ideal for beginners. Focuses on relaxation and basic flexibility in a supportive, calm environment.',
-        },
-      };
-      for (const [id, cls] of Object.entries(defaults)) {
-        await update(ref(db, `classes/${id}`), cls);
-      }
-    }
 
     function renderPrograms(list) {
       const grid = document.getElementById('programsGrid');
