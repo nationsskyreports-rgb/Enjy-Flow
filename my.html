@@ -406,6 +406,15 @@ window.fb = {
 };
 onValue(ref(db,'classLocations'),s=>{ window.classLocs=s.val()||{}; });
 window.classLocs={};
+
+// Classes — loaded from Firebase
+let clsData = {};
+onValue(ref(db,'classes'), s => {
+  clsData = s.val() || {};
+  buildClsInfo();
+  renderClassTabs();
+});
+
 </script>
 
 <!-- ═══ APP ═══ -->
@@ -415,8 +424,28 @@ async function sha256(str){
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
-let phone='', student=null, selectedCls='power', step='phone';
-const clsInfo={power:{name:'Power Yoga',loc:'Royal Hills Clubhouse'},diabetes:{name:'Yoga for Diabetes',loc:'Royal Hills'},gentle:{name:'Gentle Yoga',loc:'Pyramids Heights'}};
+let phone='', student=null, selectedCls='', step='phone';
+let clsInfo = {};
+
+function buildClsInfo() {
+  clsInfo = {};
+  Object.entries(clsData).forEach(([k,v]) => {
+    if (v.active !== false) clsInfo[k] = { name:v.name||k, loc:v.loc||'' };
+  });
+}
+
+function renderClassTabs() {
+  const keys = Object.keys(clsInfo);
+  const tabs  = document.querySelector('.class-tabs');
+  if (!tabs || !keys.length) return;
+  tabs.innerHTML = keys.map((k, i) => {
+    const v = clsData[k];
+    return `<button class="class-tab${i===0?' active':''}" data-class="${k}" onclick="selectCls(this)">
+      <i class="fa-solid ${v.icon||'fa-dumbbell'}"></i>${v.name||k}
+    </button>`;
+  }).join('');
+  if (!selectedCls || !clsInfo[selectedCls]) selectClsById(keys[0]);
+}
 
 function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
 function togglePw(id,btn){ const i=document.getElementById(id),p=i.type==='password'; i.type=p?'text':'password'; btn.innerHTML=p?'<i class="fa-solid fa-eye-slash"></i>':'<i class="fa-solid fa-eye"></i>'; }
@@ -518,12 +547,22 @@ async function loadDash(){
 
 /* ═══ CHECK-IN ═══ */
 function selectCls(btn){ document.querySelectorAll('.class-tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); selectClsById(btn.dataset.class); }
-function selectClsById(id){ selectedCls=id; document.querySelectorAll('.class-tab').forEach(t=>t.classList.toggle('active',t.dataset.class===id)); document.getElementById('cbName').textContent=clsInfo[id].name; document.getElementById('cbLoc').textContent=clsInfo[id].loc; }
+function selectClsById(id){ if(!clsInfo[id]) return; selectedCls=id; document.querySelectorAll('.class-tab').forEach(t=>t.classList.toggle('active',t.dataset.class===id)); document.getElementById('cbName').textContent=clsInfo[id].name; document.getElementById('cbLoc').textContent=clsInfo[id].loc; }
 function setLoc(st,title,desc){ const d=document.getElementById('locDot'); d.className='loc-dot'+(st==='getting'?' getting':st==='got'?' got':st==='err'?' err':''); document.getElementById('locTitle').textContent=title; document.getElementById('locDesc').textContent=desc; }
 function showCiRes(type,title,sub){ document.getElementById('ciForm').style.display='none'; document.getElementById('ciResult').classList.add('show'); document.getElementById('ciIcon').className=`ci-icon ${type}`; document.getElementById('ciIco').className=`fa-solid ${type==='ok'?'fa-circle-check':type==='warn'?'fa-coins':'fa-location-xmark'}`; document.getElementById('ciTitle').textContent=title; document.getElementById('ciSub').textContent=sub; }
 function resetCi(){ document.getElementById('ciForm').style.display='block'; document.getElementById('ciResult').classList.remove('show'); setLoc('','الموقع الجغرافي','سيتم طلب إذن الموقع عند الضغط'); }
 
 function dist(a,b,c,d){ const R=6371e3,f1=a*Math.PI/180,f2=c*Math.PI/180,df=(c-a)*Math.PI/180,dl=(d-b)*Math.PI/180,x=Math.sin(df/2)**2+Math.cos(f1)*Math.cos(f2)*Math.sin(dl/2)**2; return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x)); }
+
+async function waitForClassLoc(cls, maxMs=5000, interval=300) {
+  const start = Date.now();
+  while (Date.now() - start < maxMs) {
+    const loc = window.classLocs?.[cls];
+    if (loc?.lat && loc?.lng) return loc;
+    await new Promise(r => setTimeout(r, interval));
+  }
+  return null;
+}
 
 async function doCheckin(){
   const btn=document.getElementById('ciBtn');
@@ -541,18 +580,17 @@ async function doCheckin(){
     btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن'; return;
   }
 
-  const loc = window.classLocs?.[selectedCls];
-if (!loc) {
-  // لو Firebase لسه مجاش — اعمل checkin من غير location check
-  console.warn('Location not loaded yet, skipping check');
-} else {
-  const d = dist(coords.lat, coords.lng, loc.lat, loc.lng);
-  if (d > loc.radius) {
-    showCiRes('fail','مش في موقع الكلاس',`أنتِ على بُعد ${Math.round(d)} متر.`);
-    btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن';
-    return;
+  const loc = await waitForClassLoc(selectedCls);
+  if (!loc) {
+    setLoc('err','تعذر تحميل بيانات الموقع','تأكدي من الاتصال بالإنترنت وحاولي مرة أخرى.');
+    showCiRes('fail','تعذر تحميل بيانات الموقع','يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.');
+    btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن'; return;
   }
-}
+  const d = dist(coords.lat, coords.lng, loc.lat, loc.lng);
+  if (d > (loc.radius || 400)) {
+    showCiRes('fail','مش في موقع الكلاس',`أنتِ على بُعد ${Math.round(d)} متر من الموقع.`);
+    btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-circle-check"></i> سجّلي حضورك الآن'; return;
+  }
 
   try{
     const{data:cr,key}=await window.fb.getCredits(phone);
@@ -591,8 +629,6 @@ document.getElementById('loginPhone').addEventListener('keydown',e=>e.key==='Ent
 document.getElementById('loginPass').addEventListener('keydown',e=>e.key==='Enter'&&doLogin());
 document.getElementById('newPass').addEventListener('keydown',e=>e.key==='Enter'&&document.getElementById('confirmPass').focus());
 document.getElementById('confirmPass').addEventListener('keydown',e=>e.key==='Enter'&&doSetPass());
-
-selectClsById('power');
 </script>
 </body>
 </html>
